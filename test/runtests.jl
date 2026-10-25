@@ -4,7 +4,9 @@
 
 using LibXcDerivative
 using Test
+using ForwardDiff
 
 @testset "LibXcDerivative.jl" begin
     include("piecewise.jl")
+    include("libxc_names.jl")
 end
