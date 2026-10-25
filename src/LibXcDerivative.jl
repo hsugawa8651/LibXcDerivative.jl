@@ -23,4 +23,16 @@ export xc_log1p, xc_expm1, xc_asinh, xc_atanh, xc_x_minus_log1p, atan2,
        BesselI, br89_x, mbrxc_x
 export LambertW, xc_dilogarithm, xc_E1_scaled, xc_e1_scaled_G
 
+# Which Libxc the expressions came from. The constants it reads are generated
+# and included below; the accessors are here.
+include("source_version.jl")
+export libxc_source_version, libxc_source_commit
+
+const GENERATED_DIR = joinpath(@__DIR__, "generated")
+
+# The two constants src/source_version.jl hands out: which Libxc commit the
+# expressions were generated from, and what those sources call themselves.
+isfile(joinpath(GENERATED_DIR, "source_version.jl")) &&
+    include(joinpath(GENERATED_DIR, "source_version.jl"))
+
 end # module LibXcDerivative
