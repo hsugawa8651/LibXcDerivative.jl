@@ -1,0 +1,33 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_tca.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, zeta_threshold
+const gga_c_tca_energy = function (rs, z, xt, xs0, xs1, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_1 = zeta_threshold - 1
+        cse_tmp_2 = -z
+        (0.897889 - 0.655868 * atan(3.177037 * rs + 4.88827)) * (my_piecewise3(1 - z <= zeta_threshold, cse_tmp_0, xc_expm1((2 // 3) * xc_log1p(my_piecewise3(cse_tmp_2 > cse_tmp_1, cse_tmp_2, cse_tmp_1)))) / 2 + my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_0, xc_expm1((2 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_1, z, cse_tmp_1)))) / 2 + 1) ^ 3 / (rs * (0.12507602928138 * 0.17286359017040734 * NaNMath.pow(xt, 2.3) + 1))
+    end
+end
+export gga_c_tca_energy
+
+const gga_c_tca_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const gga_c_tca_required = ()
+
+function gga_c_tca(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_tca_defaults, gga_c_tca_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_tca_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.zeta_threshold)
+end
+
+function gga_c_tca(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_tca_defaults, gga_c_tca_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_tca_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.zeta_threshold)
+end
+
+export gga_c_tca, gga_c_tca_defaults, gga_c_tca_required

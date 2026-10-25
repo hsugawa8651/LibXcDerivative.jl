@@ -1,0 +1,81 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_ncap.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, params_a_alpha, params_a_beta, params_a_mu, params_a_zeta, zeta_threshold
+const gga_x_ncap_energy = function (rs, z, xt, xs0, xs1, dens_threshold, params_a_alpha, params_a_beta, params_a_mu, params_a_zeta, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = 3.3019272488946267
+        cse_tmp_3 = cse_tmp_2 / (12 * 2.1450293971110255)
+        cse_tmp_4 = cse_tmp_3 * Abs(xs0)
+        cse_tmp_5 = 1 - params_a_zeta
+        cse_tmp_6 = 1.8171205928321397
+        cse_tmp_7 = cse_tmp_6 / (24 * 4.60115111447049)
+        cse_tmp_8 = cse_tmp_7 * xs0 ^ 2
+        cse_tmp_9 = (1374001554691 // 767694223453345284096000) / 924269.1815233742
+        cse_tmp_10 = (119767 // 11557907988480) / 9488.531016070574
+        cse_tmp_11 = (19 // 165888) / 97.40909103400244
+        cse_tmp_12 = (43773164109049 // 722813638082226636718080000) * cse_tmp_6 / 4252702.174637001
+        cse_tmp_13 = (25469419 // 85436055850844160) * cse_tmp_6 / 43658.16505928093
+        cse_tmp_14 = (7 // 2654208) * cse_tmp_6 / 448.1939477706577
+        cse_tmp_15 = (2785843397409609533 // 1319730487937843366759151697920000) * cse_tmp_2 / 19567325.350342114
+        cse_tmp_16 = (5243268913 // 571201059117072384000) * cse_tmp_2 / 200877.81481824708
+        cse_tmp_17 = (156269 // 2407897497600) * cse_tmp_2 / 2062.2080822838902
+        cse_tmp_18 = cse_tmp_2 / (1152 * 21.170591578193033)
+        cse_tmp_19 = NaNMath.sqrt(my_piecewise3(cse_tmp_8 > 1 // 16, cse_tmp_8, 1 // 16))
+        cse_tmp_20 = my_piecewise3(cse_tmp_8 < 1 // 16, -cse_tmp_10 * xs0 ^ 12 + cse_tmp_11 * xs0 ^ 6 - cse_tmp_12 * xs0 ^ 20 + cse_tmp_13 * xs0 ^ 14 - cse_tmp_14 * xs0 ^ 8 + cse_tmp_15 * xs0 ^ 22 - cse_tmp_16 * xs0 ^ 16 + cse_tmp_17 * xs0 ^ 10 - cse_tmp_18 * xs0 ^ 4 + cse_tmp_8 + cse_tmp_9 * xs0 ^ 18, xc_asinh(cse_tmp_19) * tanh(cse_tmp_19))
+        cse_tmp_21 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_22 = zeta_threshold - 1
+        cse_tmp_23 = 1 - z
+        cse_tmp_24 = cse_tmp_23 <= zeta_threshold
+        cse_tmp_25 = -cse_tmp_22
+        cse_tmp_26 = my_piecewise5(cse_tmp_21, cse_tmp_22, cse_tmp_24, cse_tmp_25, z) + 1
+        cse_tmp_27 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_28 = 0.184639691595506 * cse_tmp_6 / (1.4645918875615234 * rs)
+        cse_tmp_29 = cse_tmp_3 * Abs(xs1)
+        cse_tmp_30 = cse_tmp_7 * xs1 ^ 2
+        cse_tmp_31 = NaNMath.sqrt(my_piecewise3(cse_tmp_30 > 1 // 16, cse_tmp_30, 1 // 16))
+        cse_tmp_32 = my_piecewise3(cse_tmp_30 < 1 // 16, -cse_tmp_10 * xs1 ^ 12 + cse_tmp_11 * xs1 ^ 6 - cse_tmp_12 * xs1 ^ 20 + cse_tmp_13 * xs1 ^ 14 - cse_tmp_14 * xs1 ^ 8 + cse_tmp_15 * xs1 ^ 22 - cse_tmp_16 * xs1 ^ 16 + cse_tmp_17 * xs1 ^ 10 - cse_tmp_18 * xs1 ^ 4 + cse_tmp_30 + cse_tmp_9 * xs1 ^ 18, xc_asinh(cse_tmp_31) * tanh(cse_tmp_31))
+        cse_tmp_33 = my_piecewise5(cse_tmp_24, cse_tmp_22, cse_tmp_21, cse_tmp_25, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_28 * (cse_tmp_20 * params_a_mu * (params_a_alpha * (cse_tmp_4 * params_a_zeta + cse_tmp_5 * (-cse_tmp_4 * xc_x_minus_log1p(cse_tmp_4) + cse_tmp_8)) + 1) / (cse_tmp_20 * params_a_beta + 1) + 1) * my_piecewise3(cse_tmp_26 <= zeta_threshold, cse_tmp_27, NaNMath.pow(cse_tmp_26, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_23 <= dens_threshold, 0, -cse_tmp_28 * (cse_tmp_32 * params_a_mu * (params_a_alpha * (cse_tmp_29 * params_a_zeta + cse_tmp_5 * (-cse_tmp_29 * xc_x_minus_log1p(cse_tmp_29) + cse_tmp_30)) + 1) / (cse_tmp_32 * params_a_beta + 1) + 1) * my_piecewise3(cse_tmp_33 <= zeta_threshold, cse_tmp_27, NaNMath.pow(cse_tmp_33, 1.3333333333333333)))
+    end
+end
+export gga_x_ncap_energy
+
+const gga_x_ncap_defaults = (dens_threshold = 1.0e-15, params_a_alpha = 0.3451117169263783, params_a_beta = 0.01808569669, params_a_mu = 0.2195149727645171, params_a_zeta = 0.30412141859531383, zeta_threshold = 2.220446049250313e-16)
+const gga_x_ncap_required = ()
+
+function gga_x_ncap(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_ncap_defaults, gga_x_ncap_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_ncap_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_alpha, p.params_a_beta, p.params_a_mu, p.params_a_zeta, p.zeta_threshold)
+end
+
+function gga_x_ncap(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_ncap_defaults, gga_x_ncap_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_ncap_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_alpha, p.params_a_beta, p.params_a_mu, p.params_a_zeta, p.zeta_threshold)
+end
+
+export gga_x_ncap, gga_x_ncap_defaults, gga_x_ncap_required
+
+const gga_x_ncapr_defaults = (dens_threshold = 1.0e-15, params_a_alpha = 0.3431510377915187, params_a_beta = 0.017982946634292535, params_a_mu = 0.2195149727645171, params_a_zeta = 0.5, zeta_threshold = 2.220446049250313e-16)
+const gga_x_ncapr_required = ()
+
+function gga_x_ncapr(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_ncapr_defaults, gga_x_ncapr_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_ncap_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_alpha, p.params_a_beta, p.params_a_mu, p.params_a_zeta, p.zeta_threshold)
+end
+
+function gga_x_ncapr(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_ncapr_defaults, gga_x_ncapr_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_ncap_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_alpha, p.params_a_beta, p.params_a_mu, p.params_a_zeta, p.zeta_threshold)
+end
+
+export gga_x_ncapr, gga_x_ncapr_defaults, gga_x_ncapr_required

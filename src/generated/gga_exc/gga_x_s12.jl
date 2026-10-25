@@ -1,0 +1,83 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_s12.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, params_a_A, params_a_B, params_a_C, params_a_D, params_a_E, params_a_bx, zeta_threshold
+const gga_x_s12_energy = function (rs, z, xt, xs0, xs1, dens_threshold, params_a_A, params_a_B, params_a_C, params_a_D, params_a_E, params_a_bx, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = xs0 ^ 2
+        cse_tmp_3 = cse_tmp_2 * params_a_C + params_a_D * xs0 ^ 4
+        cse_tmp_4 = cse_tmp_2 * params_a_E
+        cse_tmp_5 = (cse_tmp_4 + 1) ^ (-1)
+        cse_tmp_6 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_7 = zeta_threshold - 1
+        cse_tmp_8 = 1 - z
+        cse_tmp_9 = cse_tmp_8 <= zeta_threshold
+        cse_tmp_10 = -cse_tmp_7
+        cse_tmp_11 = my_piecewise5(cse_tmp_6, cse_tmp_7, cse_tmp_9, cse_tmp_10, z) + 1
+        cse_tmp_12 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_13 = 0.184639691595506 * 1.8171205928321397 * params_a_bx / (1.4645918875615234 * rs)
+        cse_tmp_14 = xs1 ^ 2
+        cse_tmp_15 = cse_tmp_14 * params_a_C + params_a_D * xs1 ^ 4
+        cse_tmp_16 = cse_tmp_14 * params_a_E
+        cse_tmp_17 = (cse_tmp_16 + 1) ^ (-1)
+        cse_tmp_18 = my_piecewise5(cse_tmp_9, cse_tmp_7, cse_tmp_6, cse_tmp_10, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_13 * (cse_tmp_3 * params_a_B * my_piecewise3(cse_tmp_4 <= 1, cse_tmp_4 * cse_tmp_5, 1 - cse_tmp_5) / (cse_tmp_3 + 1) + params_a_A) * my_piecewise3(cse_tmp_11 <= zeta_threshold, cse_tmp_12, NaNMath.pow(cse_tmp_11, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_8 <= dens_threshold, 0, -cse_tmp_13 * (cse_tmp_15 * params_a_B * my_piecewise3(cse_tmp_16 <= 1, cse_tmp_16 * cse_tmp_17, 1 - cse_tmp_17) / (cse_tmp_15 + 1) + params_a_A) * my_piecewise3(cse_tmp_18 <= zeta_threshold, cse_tmp_12, NaNMath.pow(cse_tmp_18, 1.3333333333333333)))
+    end
+end
+export gga_x_s12_energy
+
+const gga_x_s12_defaults = NamedTuple()
+const gga_x_s12_required = (:dens_threshold, :params_a_A, :params_a_B, :params_a_C, :params_a_D, :params_a_E, :params_a_bx, :zeta_threshold)
+
+function gga_x_s12(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_s12_defaults, gga_x_s12_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_s12_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_A, p.params_a_B, p.params_a_C, p.params_a_D, p.params_a_E, p.params_a_bx, p.zeta_threshold)
+end
+
+function gga_x_s12(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_s12_defaults, gga_x_s12_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_s12_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_A, p.params_a_B, p.params_a_C, p.params_a_D, p.params_a_E, p.params_a_bx, p.zeta_threshold)
+end
+
+export gga_x_s12, gga_x_s12_defaults, gga_x_s12_required
+
+const gga_x_s12g_defaults = (dens_threshold = 1.0e-15, params_a_A = 1.03842032, params_a_B = 0.7185796799999999, params_a_C = 0.00403198, params_a_D = 0.00104596, params_a_E = 0.00594635, params_a_bx = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_x_s12g_required = ()
+
+function gga_x_s12g(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_s12g_defaults, gga_x_s12g_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_s12_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_A, p.params_a_B, p.params_a_C, p.params_a_D, p.params_a_E, p.params_a_bx, p.zeta_threshold)
+end
+
+function gga_x_s12g(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_s12g_defaults, gga_x_s12g_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_s12_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_A, p.params_a_B, p.params_a_C, p.params_a_D, p.params_a_E, p.params_a_bx, p.zeta_threshold)
+end
+
+export gga_x_s12g, gga_x_s12g_defaults, gga_x_s12g_required
+
+const hyb_gga_x_s12h_defaults = (dens_threshold = 1.0e-15, params_a_A = 1.02543951, params_a_B = 0.7315604899999999, params_a_C = 0.00761554, params_a_D = 0.00211063, params_a_E = 0.00604672, params_a_bx = 0.75, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_x_s12h_required = ()
+
+function hyb_gga_x_s12h(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_x_s12h_defaults, hyb_gga_x_s12h_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_s12_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_A, p.params_a_B, p.params_a_C, p.params_a_D, p.params_a_E, p.params_a_bx, p.zeta_threshold)
+end
+
+function hyb_gga_x_s12h(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_x_s12h_defaults, hyb_gga_x_s12h_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_s12_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_A, p.params_a_B, p.params_a_C, p.params_a_D, p.params_a_E, p.params_a_bx, p.zeta_threshold)
+end
+
+export hyb_gga_x_s12h, hyb_gga_x_s12h_defaults, hyb_gga_x_s12h_required

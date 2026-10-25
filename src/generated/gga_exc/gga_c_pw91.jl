@@ -1,0 +1,57 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_pw91.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, zeta_threshold
+const gga_c_pw91_energy = function (rs, z, xt, xs0, xs1, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = 1.4645918875615234
+        cse_tmp_1 = rs ^ 2
+        cse_tmp_2 = z + 1 <= zeta_threshold
+        cse_tmp_3 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_4 = zeta_threshold - 1
+        cse_tmp_5 = xc_log1p(my_piecewise3(z > cse_tmp_4, z, cse_tmp_4))
+        cse_tmp_6 = 1 - z <= zeta_threshold
+        cse_tmp_7 = -z
+        cse_tmp_8 = xc_log1p(my_piecewise3(cse_tmp_7 > cse_tmp_4, cse_tmp_7, cse_tmp_4))
+        cse_tmp_9 = my_piecewise3(cse_tmp_2, cse_tmp_3, xc_expm1((2 // 3) * cse_tmp_5)) / 2 + my_piecewise3(cse_tmp_6, cse_tmp_3, xc_expm1((2 // 3) * cse_tmp_8)) / 2 + 1
+        cse_tmp_10 = 1.4422495703074083
+        cse_tmp_11 = xt ^ 2
+        cse_tmp_12 = cse_tmp_9 ^ 2
+        cse_tmp_13 = cse_tmp_11 / rs
+        cse_tmp_14 = 2.080083823051904
+        cse_tmp_15 = 2.1450293971110255
+        cse_tmp_16 = cse_tmp_9 ^ 3
+        cse_tmp_17 = NaNMath.sqrt(rs)
+        cse_tmp_18 = NaNMath.pow(rs, 1.5)
+        cse_tmp_19 = (-0.0132882934 * rs - 0.062182) * xc_log1p((0.03065199508 * cse_tmp_1 + 0.4723158174 * cse_tmp_17 + 0.1018665524 * cse_tmp_18 + 0.2230841432 * rs) ^ (-1))
+        cse_tmp_20 = 0.58482233974552 * (-0.0037573575 * rs - 0.033774) * xc_log1p((0.01677588354 * cse_tmp_1 + 0.349797318 * cse_tmp_17 + 0.02972990124 * cse_tmp_18 + 0.1223665794 * rs) ^ (-1))
+        cse_tmp_21 = 1.2599210498948732
+        cse_tmp_22 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_23 = (my_piecewise3(cse_tmp_2, cse_tmp_22, xc_expm1((4 // 3) * cse_tmp_5)) + my_piecewise3(cse_tmp_6, cse_tmp_22, xc_expm1((4 // 3) * cse_tmp_8))) / (2 * cse_tmp_21 - 2)
+        cse_tmp_24 = cse_tmp_10 * cse_tmp_15
+        cse_tmp_25 = 13.067859477648 * cse_tmp_24 * (cse_tmp_19 - cse_tmp_20 * cse_tmp_23 + cse_tmp_23 * z ^ 4 * (-cse_tmp_19 + cse_tmp_20 + (-0.0063883732 * rs - 0.03109) * xc_log1p((0.0194365353 * cse_tmp_1 + 0.438956601 * cse_tmp_17 + 0.104655158 * cse_tmp_18 + 0.192686493 * rs) ^ (-1)))) / cse_tmp_16
+        cse_tmp_26 = xc_expm1(-cse_tmp_25)
+        0.0255078755555556 * cse_tmp_14 * cse_tmp_16 * xc_log1p(xc_expm1(cse_tmp_25) / (0.0276711924439197 * cse_tmp_0 * cse_tmp_13 * cse_tmp_14 * cse_tmp_21 / (cse_tmp_12 * cse_tmp_26) + 1 + 0.00229708467380532 * 1.5874010519681994 * cse_tmp_24 * xt ^ 4 / (cse_tmp_1 * cse_tmp_26 ^ 2 * cse_tmp_9 ^ 4))) / cse_tmp_15 + 1.8171205928321397 * cse_tmp_13 * cse_tmp_9 * ((0.007389 * cse_tmp_1 + 23.266 * rs + 2.568) / (472.0 * cse_tmp_1 + 8723.0 * rs + 1000) - 0.00185357142857143) * exp(-25 // 3 * cse_tmp_10 * cse_tmp_11 * cse_tmp_12 / 4.60115111447049) / (2 * cse_tmp_0)
+    end
+end
+export gga_c_pw91_energy
+
+const gga_c_pw91_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const gga_c_pw91_required = ()
+
+function gga_c_pw91(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_pw91_defaults, gga_c_pw91_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_pw91_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.zeta_threshold)
+end
+
+function gga_c_pw91(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_pw91_defaults, gga_c_pw91_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_pw91_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.zeta_threshold)
+end
+
+export gga_c_pw91, gga_c_pw91_defaults, gga_c_pw91_required

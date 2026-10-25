@@ -1,0 +1,334 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_pbe.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, params_a_kappa, params_a_mu, zeta_threshold
+const gga_x_pbe_energy = function (rs, z, xt, xs0, xs1, dens_threshold, params_a_kappa, params_a_mu, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = 1.8171205928321397
+        cse_tmp_3 = cse_tmp_2 * params_a_mu / (24 * 4.60115111447049)
+        cse_tmp_4 = cse_tmp_3 * xs0 ^ 2
+        cse_tmp_5 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_6 = zeta_threshold - 1
+        cse_tmp_7 = 1 - z
+        cse_tmp_8 = cse_tmp_7 <= zeta_threshold
+        cse_tmp_9 = -cse_tmp_6
+        cse_tmp_10 = my_piecewise5(cse_tmp_5, cse_tmp_6, cse_tmp_8, cse_tmp_9, z) + 1
+        cse_tmp_11 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_12 = 0.184639691595506 * cse_tmp_2 / (1.4645918875615234 * rs)
+        cse_tmp_13 = cse_tmp_3 * xs1 ^ 2
+        cse_tmp_14 = my_piecewise5(cse_tmp_8, cse_tmp_6, cse_tmp_5, cse_tmp_9, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_12 * (cse_tmp_4 * params_a_kappa / (cse_tmp_4 + params_a_kappa) + 1) * my_piecewise3(cse_tmp_10 <= zeta_threshold, cse_tmp_11, NaNMath.pow(cse_tmp_10, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_7 <= dens_threshold, 0, -cse_tmp_12 * (cse_tmp_13 * params_a_kappa / (cse_tmp_13 + params_a_kappa) + 1) * my_piecewise3(cse_tmp_14 <= zeta_threshold, cse_tmp_11, NaNMath.pow(cse_tmp_14, 1.3333333333333333)))
+    end
+end
+export gga_x_pbe_energy
+
+const gga_x_pbe_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804, params_a_mu = 0.2195149727645171, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_required = ()
+
+function gga_x_pbe(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_defaults, gga_x_pbe_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_defaults, gga_x_pbe_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe, gga_x_pbe_defaults, gga_x_pbe_required
+
+const gga_x_apbe_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804, params_a_mu = 0.26, zeta_threshold = 2.220446049250313e-16)
+const gga_x_apbe_required = ()
+
+function gga_x_apbe(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_apbe_defaults, gga_x_apbe_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_apbe(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_apbe_defaults, gga_x_apbe_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_apbe, gga_x_apbe_defaults, gga_x_apbe_required
+
+const gga_x_bcgp_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804, params_a_mu = 0.249, zeta_threshold = 2.220446049250313e-16)
+const gga_x_bcgp_required = ()
+
+function gga_x_bcgp(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_bcgp_defaults, gga_x_bcgp_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_bcgp(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_bcgp_defaults, gga_x_bcgp_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_bcgp, gga_x_bcgp_defaults, gga_x_bcgp_required
+
+const gga_x_lambda_ch_n_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.7580466650547808, params_a_mu = 0.2195149727645171, zeta_threshold = 2.220446049250313e-16)
+const gga_x_lambda_ch_n_required = ()
+
+function gga_x_lambda_ch_n(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_lambda_ch_n_defaults, gga_x_lambda_ch_n_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_lambda_ch_n(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_lambda_ch_n_defaults, gga_x_lambda_ch_n_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_lambda_ch_n, gga_x_lambda_ch_n_defaults, gga_x_lambda_ch_n_required
+
+const gga_x_lambda_lo_n_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.8040812955618588, params_a_mu = 0.2195149727645171, zeta_threshold = 2.220446049250313e-16)
+const gga_x_lambda_lo_n_required = ()
+
+function gga_x_lambda_lo_n(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_lambda_lo_n_defaults, gga_x_lambda_lo_n_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_lambda_lo_n(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_lambda_lo_n_defaults, gga_x_lambda_lo_n_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_lambda_lo_n, gga_x_lambda_lo_n_defaults, gga_x_lambda_lo_n_required
+
+const gga_x_lambda_oc2_n_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.5874010519681994, params_a_mu = 0.2195149727645171, zeta_threshold = 2.220446049250313e-16)
+const gga_x_lambda_oc2_n_required = ()
+
+function gga_x_lambda_oc2_n(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_lambda_oc2_n_defaults, gga_x_lambda_oc2_n_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_lambda_oc2_n(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_lambda_oc2_n_defaults, gga_x_lambda_oc2_n_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_lambda_oc2_n, gga_x_lambda_oc2_n_defaults, gga_x_lambda_oc2_n_required
+
+const gga_x_pbe_gaussian_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804000423825475, params_a_mu = 0.219510240580611, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_gaussian_required = ()
+
+function gga_x_pbe_gaussian(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_gaussian_defaults, gga_x_pbe_gaussian_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe_gaussian(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_gaussian_defaults, gga_x_pbe_gaussian_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe_gaussian, gga_x_pbe_gaussian_defaults, gga_x_pbe_gaussian_required
+
+const gga_x_pbe_jsjr_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804, params_a_mu = 0.15133393415003682, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_jsjr_required = ()
+
+function gga_x_pbe_jsjr(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_jsjr_defaults, gga_x_pbe_jsjr_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe_jsjr(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_jsjr_defaults, gga_x_pbe_jsjr_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe_jsjr, gga_x_pbe_jsjr_defaults, gga_x_pbe_jsjr_required
+
+const gga_x_pbe_mod_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804, params_a_mu = 0.2195164512208958, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_mod_required = ()
+
+function gga_x_pbe_mod(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_mod_defaults, gga_x_pbe_mod_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe_mod(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_mod_defaults, gga_x_pbe_mod_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe_mod, gga_x_pbe_mod_defaults, gga_x_pbe_mod_required
+
+const gga_x_pbe_mol_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804, params_a_mu = 0.27583, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_mol_required = ()
+
+function gga_x_pbe_mol(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_mol_defaults, gga_x_pbe_mol_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe_mol(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_mol_defaults, gga_x_pbe_mol_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe_mol, gga_x_pbe_mol_defaults, gga_x_pbe_mol_required
+
+const gga_x_pbe_r_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 1.245, params_a_mu = 0.2195149727645171, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_r_required = ()
+
+function gga_x_pbe_r(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_r_defaults, gga_x_pbe_r_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe_r(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_r_defaults, gga_x_pbe_r_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe_r, gga_x_pbe_r_defaults, gga_x_pbe_r_required
+
+const gga_x_pbe_sol_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.804, params_a_mu = 0.12345679012345678, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_sol_required = ()
+
+function gga_x_pbe_sol(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_sol_defaults, gga_x_pbe_sol_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe_sol(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_sol_defaults, gga_x_pbe_sol_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe_sol, gga_x_pbe_sol_defaults, gga_x_pbe_sol_required
+
+const gga_x_pbe_tca_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 1.227, params_a_mu = 0.2195149727645171, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_tca_required = ()
+
+function gga_x_pbe_tca(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_tca_defaults, gga_x_pbe_tca_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbe_tca(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_tca_defaults, gga_x_pbe_tca_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbe_tca, gga_x_pbe_tca_defaults, gga_x_pbe_tca_required
+
+const gga_x_pbefe_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.437, params_a_mu = 0.346, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbefe_required = ()
+
+function gga_x_pbefe(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbefe_defaults, gga_x_pbefe_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbefe(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbefe_defaults, gga_x_pbefe_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbefe, gga_x_pbefe_defaults, gga_x_pbefe_required
+
+const gga_x_pbek1_vdw_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 1.0, params_a_mu = 0.2195149727645171, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbek1_vdw_required = ()
+
+function gga_x_pbek1_vdw(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbek1_vdw_defaults, gga_x_pbek1_vdw_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_pbek1_vdw(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbek1_vdw_defaults, gga_x_pbek1_vdw_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_pbek1_vdw, gga_x_pbek1_vdw_defaults, gga_x_pbek1_vdw_required
+
+const gga_x_t_pbe1_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 3.1666666666666665, params_a_mu = 0.6666666666666666, zeta_threshold = 2.220446049250313e-16)
+const gga_x_t_pbe1_required = ()
+
+function gga_x_t_pbe1(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_t_pbe1_defaults, gga_x_t_pbe1_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_t_pbe1(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_t_pbe1_defaults, gga_x_t_pbe1_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_t_pbe1, gga_x_t_pbe1_defaults, gga_x_t_pbe1_required
+
+const gga_x_t_pbe2_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 12.833333333333334, params_a_mu = 0.3333333333333333, zeta_threshold = 2.220446049250313e-16)
+const gga_x_t_pbe2_required = ()
+
+function gga_x_t_pbe2(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_t_pbe2_defaults, gga_x_t_pbe2_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_t_pbe2(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_t_pbe2_defaults, gga_x_t_pbe2_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_t_pbe2, gga_x_t_pbe2_defaults, gga_x_t_pbe2_required
+
+const gga_x_xpbe_defaults = (dens_threshold = 1.0e-15, params_a_kappa = 0.91954, params_a_mu = 0.23214, zeta_threshold = 2.220446049250313e-16)
+const gga_x_xpbe_required = ()
+
+function gga_x_xpbe(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_xpbe_defaults, gga_x_xpbe_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_xpbe(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_xpbe_defaults, gga_x_xpbe_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_xpbe, gga_x_xpbe_defaults, gga_x_xpbe_required

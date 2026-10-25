@@ -1,0 +1,55 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_zvpbeloc.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, zeta_threshold
+const gga_c_zvpbeloc_energy = function (rs, z, xt, xs0, xs1, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = 9.869604401089358
+        cse_tmp_1 = 1 - NaNMath.log(2)
+        cse_tmp_2 = rs ^ 2
+        cse_tmp_3 = cse_tmp_2 ^ (-1)
+        cse_tmp_4 = z ^ 2
+        cse_tmp_5 = z + 1 <= zeta_threshold
+        cse_tmp_6 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_7 = zeta_threshold - 1
+        cse_tmp_8 = xc_log1p(my_piecewise3(z > cse_tmp_7, z, cse_tmp_7))
+        cse_tmp_9 = 1 - z <= zeta_threshold
+        cse_tmp_10 = -z
+        cse_tmp_11 = xc_log1p(my_piecewise3(cse_tmp_10 > cse_tmp_7, cse_tmp_10, cse_tmp_7))
+        cse_tmp_12 = my_piecewise3(cse_tmp_5, cse_tmp_6, xc_expm1((2 // 3) * cse_tmp_8)) / 2 + my_piecewise3(cse_tmp_9, cse_tmp_6, xc_expm1((2 // 3) * cse_tmp_11)) / 2 + 1
+        cse_tmp_13 = cse_tmp_12 ^ 3
+        cse_tmp_14 = NaNMath.sqrt(rs)
+        cse_tmp_15 = NaNMath.pow(rs, 1.5)
+        cse_tmp_16 = (-0.01328816518 * rs - 0.0621814) * xc_log1p((0.47231125998 * cse_tmp_14 + 0.10186556948 * cse_tmp_15 + 0.030651699316 * cse_tmp_2 + 0.22308199064 * rs) ^ (-1))
+        cse_tmp_17 = 0.5848223622634646207262238663759 * (-0.00375733525 * rs - 0.0337738) * xc_log1p((0.3497952466 * cse_tmp_14 + 0.029729725188 * cse_tmp_15 + 0.016775784198 * cse_tmp_2 + 0.12236585478 * rs) ^ (-1))
+        cse_tmp_18 = 1.2599210498948732
+        cse_tmp_19 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_20 = (my_piecewise3(cse_tmp_5, cse_tmp_19, xc_expm1((4 // 3) * cse_tmp_8)) + my_piecewise3(cse_tmp_9, cse_tmp_19, xc_expm1((4 // 3) * cse_tmp_11))) / (2 * cse_tmp_18 - 2)
+        cse_tmp_21 = cse_tmp_0 / cse_tmp_1
+        cse_tmp_22 = cse_tmp_21 * (cse_tmp_16 - cse_tmp_17 * cse_tmp_20 + cse_tmp_20 * z ^ 4 * (-cse_tmp_16 + cse_tmp_17 + (-0.006388517036 * rs - 0.0310907) * xc_log1p((0.43896648423 * cse_tmp_14 + 0.10465751434 * cse_tmp_15 + 0.019436972919 * cse_tmp_2 + 0.19269083139 * rs) ^ (-1)))) / cse_tmp_13
+        cse_tmp_23 = cse_tmp_18 * xt ^ 2 / (cse_tmp_12 ^ 2 * rs)
+        cse_tmp_24 = cse_tmp_21 * (-0.0025 * cse_tmp_23 * xc_expm1(-cse_tmp_2) + 0.0375) / xc_expm1(-cse_tmp_22)
+        cse_tmp_1 * cse_tmp_13 * exp(-0.00390625 * 1.7320508075688772 * cse_tmp_3 * xt ^ 3 * my_piecewise3(cse_tmp_4 > 1.0e-20, cse_tmp_4, 1.0e-20)) * xc_log1p(xc_expm1(cse_tmp_22) / (cse_tmp_24 * (cse_tmp_23 / 32 + 1.5874010519681994 * cse_tmp_24 * cse_tmp_3 * xt ^ 4 / (1024 * cse_tmp_12 ^ 4)) + 1)) / cse_tmp_0
+    end
+end
+export gga_c_zvpbeloc_energy
+
+const gga_c_zvpbeloc_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const gga_c_zvpbeloc_required = ()
+
+function gga_c_zvpbeloc(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_zvpbeloc_defaults, gga_c_zvpbeloc_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_zvpbeloc_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.zeta_threshold)
+end
+
+function gga_c_zvpbeloc(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_zvpbeloc_defaults, gga_c_zvpbeloc_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_zvpbeloc_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.zeta_threshold)
+end
+
+export gga_c_zvpbeloc, gga_c_zvpbeloc_defaults, gga_c_zvpbeloc_required

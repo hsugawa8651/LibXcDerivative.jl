@@ -1,0 +1,72 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_sogga11.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, params_a_a_0, params_a_a_1, params_a_a_2, params_a_a_3, params_a_a_4, params_a_a_5, params_a_b_0, params_a_b_1, params_a_b_2, params_a_b_3, params_a_b_4, params_a_b_5, params_a_kappa, params_a_mu, zeta_threshold
+const gga_x_sogga11_energy = function (rs, z, xt, xs0, xs1, dens_threshold, params_a_a_0, params_a_a_1, params_a_a_2, params_a_a_3, params_a_a_4, params_a_a_5, params_a_b_0, params_a_b_1, params_a_b_2, params_a_b_3, params_a_b_4, params_a_b_5, params_a_kappa, params_a_mu, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = 1.8171205928321397
+        cse_tmp_3 = cse_tmp_2 * params_a_mu / (24 * 4.60115111447049 * params_a_kappa)
+        cse_tmp_4 = cse_tmp_3 * xs0 ^ 2
+        cse_tmp_5 = xc_expm1(-cse_tmp_4)
+        cse_tmp_6 = cse_tmp_4 + 1
+        cse_tmp_7 = params_a_a_3 * params_a_mu ^ 3 / (2304 * 97.40909103400244 * params_a_kappa ^ 3)
+        cse_tmp_8 = 3.3019272488946267
+        cse_tmp_9 = cse_tmp_8 * params_a_a_2 * params_a_mu ^ 2 / (576 * 21.170591578193033 * params_a_kappa ^ 2)
+        cse_tmp_10 = cse_tmp_2 * params_a_a_4 * params_a_mu ^ 4 / (55296 * 448.1939477706577 * params_a_kappa ^ 4)
+        cse_tmp_11 = cse_tmp_8 * params_a_a_5 * params_a_mu ^ 5 / (1327104 * 2062.2080822838902 * params_a_kappa ^ 5)
+        cse_tmp_12 = params_a_a_0 + params_a_b_0
+        cse_tmp_13 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_14 = zeta_threshold - 1
+        cse_tmp_15 = 1 - z
+        cse_tmp_16 = cse_tmp_15 <= zeta_threshold
+        cse_tmp_17 = -cse_tmp_14
+        cse_tmp_18 = my_piecewise5(cse_tmp_13, cse_tmp_14, cse_tmp_16, cse_tmp_17, z) + 1
+        cse_tmp_19 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_20 = 0.184639691595506 * cse_tmp_2 / (1.4645918875615234 * rs)
+        cse_tmp_21 = cse_tmp_3 * xs1 ^ 2
+        cse_tmp_22 = xc_expm1(-cse_tmp_21)
+        cse_tmp_23 = cse_tmp_21 + 1
+        cse_tmp_24 = my_piecewise5(cse_tmp_16, cse_tmp_14, cse_tmp_13, cse_tmp_17, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_20 * (cse_tmp_10 * xs0 ^ 8 / cse_tmp_6 ^ 4 + cse_tmp_11 * xs0 ^ 10 / cse_tmp_6 ^ 5 + cse_tmp_12 + cse_tmp_4 * params_a_a_1 / cse_tmp_6 - cse_tmp_5 ^ 5 * params_a_b_5 + cse_tmp_5 ^ 4 * params_a_b_4 - cse_tmp_5 ^ 3 * params_a_b_3 + cse_tmp_5 ^ 2 * params_a_b_2 - cse_tmp_5 * params_a_b_1 + cse_tmp_9 * xs0 ^ 4 / cse_tmp_6 ^ 2 + cse_tmp_7 * xs0 ^ 6 / cse_tmp_6 ^ 3) * my_piecewise3(cse_tmp_18 <= zeta_threshold, cse_tmp_19, NaNMath.pow(cse_tmp_18, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_15 <= dens_threshold, 0, -cse_tmp_20 * (cse_tmp_10 * xs1 ^ 8 / cse_tmp_23 ^ 4 + cse_tmp_11 * xs1 ^ 10 / cse_tmp_23 ^ 5 + cse_tmp_12 + cse_tmp_21 * params_a_a_1 / cse_tmp_23 - cse_tmp_22 ^ 5 * params_a_b_5 + cse_tmp_22 ^ 4 * params_a_b_4 - cse_tmp_22 ^ 3 * params_a_b_3 + cse_tmp_22 ^ 2 * params_a_b_2 - cse_tmp_22 * params_a_b_1 + cse_tmp_9 * xs1 ^ 4 / cse_tmp_23 ^ 2 + cse_tmp_7 * xs1 ^ 6 / cse_tmp_23 ^ 3) * my_piecewise3(cse_tmp_24 <= zeta_threshold, cse_tmp_19, NaNMath.pow(cse_tmp_24, 1.3333333333333333)))
+    end
+end
+export gga_x_sogga11_energy
+
+const gga_x_sogga11_defaults = (dens_threshold = 1.0e-15, params_a_a_0 = 0.5, params_a_a_1 = -2.95535, params_a_a_2 = 15.7974, params_a_a_3 = -91.1804, params_a_a_4 = 96.203, params_a_a_5 = 0.18683, params_a_b_0 = 0.5, params_a_b_1 = 3.50743, params_a_b_2 = -12.9523, params_a_b_3 = 49.787, params_a_b_4 = -33.2545, params_a_b_5 = -11.1396, params_a_kappa = 0.552, params_a_mu = 0.12345679012345678, zeta_threshold = 2.220446049250313e-16)
+const gga_x_sogga11_required = ()
+
+function gga_x_sogga11(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_sogga11_defaults, gga_x_sogga11_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_sogga11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function gga_x_sogga11(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_sogga11_defaults, gga_x_sogga11_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_sogga11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export gga_x_sogga11, gga_x_sogga11_defaults, gga_x_sogga11_required
+
+const hyb_gga_x_sogga11_x_defaults = (dens_threshold = 1.0e-15, params_a_a_0 = 0.29925, params_a_a_1 = 3.21638, params_a_a_2 = -3.55605, params_a_a_3 = 7.65852, params_a_a_4 = -11.283, params_a_a_5 = 5.25813, params_a_b_0 = 0.29925, params_a_b_1 = -2.88595, params_a_b_2 = 3.23617, params_a_b_3 = -2.45393, params_a_b_4 = -3.75495, params_a_b_5 = 3.96613, params_a_kappa = 0.552, params_a_mu = 0.12345679012345678, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_x_sogga11_x_required = ()
+
+function hyb_gga_x_sogga11_x(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_x_sogga11_x_defaults, hyb_gga_x_sogga11_x_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_sogga11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+function hyb_gga_x_sogga11_x(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_x_sogga11_x_defaults, hyb_gga_x_sogga11_x_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_sogga11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_kappa, p.params_a_mu, p.zeta_threshold)
+end
+
+export hyb_gga_x_sogga11_x, hyb_gga_x_sogga11_x_defaults, hyb_gga_x_sogga11_x_required

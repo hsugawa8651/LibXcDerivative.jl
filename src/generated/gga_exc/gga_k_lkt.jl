@@ -1,0 +1,66 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_k_lkt.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, params_a_a, zeta_threshold
+const gga_k_lkt_energy = function (rs, z, xt, xs0, xs1, dens_threshold, params_a_a, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_3 = zeta_threshold - 1
+        cse_tmp_4 = 1 - z
+        cse_tmp_5 = cse_tmp_4 <= zeta_threshold
+        cse_tmp_6 = -cse_tmp_3
+        cse_tmp_7 = my_piecewise5(cse_tmp_2, cse_tmp_3, cse_tmp_5, cse_tmp_6, z)
+        cse_tmp_8 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_9 = xs0 ^ 2
+        cse_tmp_10 = 1.8171205928321397
+        cse_tmp_11 = 4.60115111447049
+        cse_tmp_12 = cse_tmp_10 / cse_tmp_11
+        cse_tmp_13 = (5 // 72) * cse_tmp_12
+        cse_tmp_14 = 3.3019272488946267
+        cse_tmp_15 = params_a_a ^ 2
+        cse_tmp_16 = cse_tmp_11 * cse_tmp_14 / (4 * cse_tmp_15)
+        cse_tmp_17 = (238685140977801337 // 268981376987700752658849872216064000) * params_a_a ^ 24 / 90032220.84293328
+        cse_tmp_18 = (2404879675441 // 78304810792241218977792000) * params_a_a ^ 18 / 924269.1815233742
+        cse_tmp_19 = (540553 // 508547951493120) * params_a_a ^ 12 / 9488.531016070574
+        cse_tmp_20 = (61 // 1658880) * params_a_a ^ 6 / 97.40909103400244
+        cse_tmp_21 = (14814847529501 // 28565594977009596683098521600) * cse_tmp_10 * params_a_a ^ 20 / 4252702.174637001
+        cse_tmp_22 = (199360981 // 11106687260609740800) * cse_tmp_10 * params_a_a ^ 14 / 43658.16505928093
+        cse_tmp_23 = (277 // 445906944) * cse_tmp_10 * params_a_a ^ 8 / 448.1939477706577
+        cse_tmp_24 = cse_tmp_12 * cse_tmp_15 / 48
+        cse_tmp_25 = (69348874393137901 // 7918382927627060200554910187520000) * cse_tmp_14 * params_a_a ^ 22 / 19567325.350342114
+        cse_tmp_26 = (3878302429 // 12794903724222421401600) * cse_tmp_14 * params_a_a ^ 16 / 200877.81481824708
+        cse_tmp_27 = (50521 // 4815794995200) * cse_tmp_14 * params_a_a ^ 10 / 2062.2080822838902
+        cse_tmp_28 = (5 // 13824) * cse_tmp_14 * params_a_a ^ 4 / 21.170591578193033
+        cse_tmp_29 = 2.1450293971110255
+        cse_tmp_30 = cse_tmp_14 * params_a_a / cse_tmp_29
+        cse_tmp_31 = cse_tmp_30 * NaNMath.sqrt(my_piecewise3(cse_tmp_9 > cse_tmp_16, cse_tmp_9, cse_tmp_16))
+        cse_tmp_32 = (9 // 80) * 2.2894284851066637 * cse_tmp_29 / rs ^ 2
+        cse_tmp_33 = my_piecewise5(cse_tmp_5, cse_tmp_3, cse_tmp_2, cse_tmp_6, -z)
+        cse_tmp_34 = xs1 ^ 2
+        cse_tmp_35 = cse_tmp_30 * NaNMath.sqrt(my_piecewise3(cse_tmp_34 > cse_tmp_16, cse_tmp_34, cse_tmp_16))
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, cse_tmp_32 * (cse_tmp_13 * cse_tmp_9 + my_piecewise3(cse_tmp_9 < cse_tmp_16, cse_tmp_17 * xs0 ^ 24 - cse_tmp_18 * xs0 ^ 18 + cse_tmp_19 * xs0 ^ 12 - cse_tmp_20 * xs0 ^ 6 + cse_tmp_21 * xs0 ^ 20 - cse_tmp_22 * xs0 ^ 14 + cse_tmp_23 * xs0 ^ 8 - cse_tmp_24 * cse_tmp_9 - cse_tmp_25 * xs0 ^ 22 + cse_tmp_26 * xs0 ^ 16 - cse_tmp_27 * xs0 ^ 10 + cse_tmp_28 * xs0 ^ 4 + 1, 2 * exp(-cse_tmp_31 / 12) / (1 + exp(-cse_tmp_31 / 6)))) * (my_piecewise3(cse_tmp_7 + 1 <= zeta_threshold, cse_tmp_8, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_7 > cse_tmp_3, cse_tmp_7, cse_tmp_3)))) + 1)) + my_piecewise3(cse_tmp_1 * cse_tmp_4 <= dens_threshold, 0, cse_tmp_32 * (cse_tmp_13 * cse_tmp_34 + my_piecewise3(cse_tmp_34 < cse_tmp_16, cse_tmp_17 * xs1 ^ 24 - cse_tmp_18 * xs1 ^ 18 + cse_tmp_19 * xs1 ^ 12 - cse_tmp_20 * xs1 ^ 6 + cse_tmp_21 * xs1 ^ 20 - cse_tmp_22 * xs1 ^ 14 + cse_tmp_23 * xs1 ^ 8 - cse_tmp_24 * cse_tmp_34 - cse_tmp_25 * xs1 ^ 22 + cse_tmp_26 * xs1 ^ 16 - cse_tmp_27 * xs1 ^ 10 + cse_tmp_28 * xs1 ^ 4 + 1, 2 * exp(-cse_tmp_35 / 12) / (1 + exp(-cse_tmp_35 / 6)))) * (my_piecewise3(cse_tmp_33 + 1 <= zeta_threshold, cse_tmp_8, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_33 > cse_tmp_3, cse_tmp_33, cse_tmp_3)))) + 1))
+    end
+end
+export gga_k_lkt_energy
+
+const gga_k_lkt_defaults = (dens_threshold = 1.0e-15, params_a_a = 1.3, zeta_threshold = 2.220446049250313e-16)
+const gga_k_lkt_required = ()
+
+function gga_k_lkt(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_lkt_defaults, gga_k_lkt_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_lkt_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_a, p.zeta_threshold)
+end
+
+function gga_k_lkt(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_lkt_defaults, gga_k_lkt_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_lkt_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_a, p.zeta_threshold)
+end
+
+export gga_k_lkt, gga_k_lkt_defaults, gga_k_lkt_required

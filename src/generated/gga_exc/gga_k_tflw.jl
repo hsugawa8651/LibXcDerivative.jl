@@ -1,0 +1,297 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_k_tflw.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, params_a_gamma, params_a_lambda, zeta_threshold
+const gga_k_tflw_energy = function (rs, z, xt, xs0, xs1, dens_threshold, params_a_gamma, params_a_lambda, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_3 = zeta_threshold - 1
+        cse_tmp_4 = 1 - z
+        cse_tmp_5 = cse_tmp_4 <= zeta_threshold
+        cse_tmp_6 = -cse_tmp_3
+        cse_tmp_7 = my_piecewise5(cse_tmp_2, cse_tmp_3, cse_tmp_5, cse_tmp_6, z)
+        cse_tmp_8 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_9 = (5 // 72) * 1.8171205928321397 * params_a_lambda / 4.60115111447049
+        cse_tmp_10 = (9 // 80) * 2.2894284851066637 * 2.1450293971110255 / rs ^ 2
+        cse_tmp_11 = my_piecewise5(cse_tmp_5, cse_tmp_3, cse_tmp_2, cse_tmp_6, -z)
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, cse_tmp_10 * (cse_tmp_9 * xs0 ^ 2 + params_a_gamma) * (my_piecewise3(cse_tmp_7 + 1 <= zeta_threshold, cse_tmp_8, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_7 > cse_tmp_3, cse_tmp_7, cse_tmp_3)))) + 1)) + my_piecewise3(cse_tmp_1 * cse_tmp_4 <= dens_threshold, 0, cse_tmp_10 * (cse_tmp_9 * xs1 ^ 2 + params_a_gamma) * (my_piecewise3(cse_tmp_11 + 1 <= zeta_threshold, cse_tmp_8, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_11 > cse_tmp_3, cse_tmp_11, cse_tmp_3)))) + 1))
+    end
+end
+export gga_k_tflw_energy
+
+const gga_k_tflw_defaults = NamedTuple()
+const gga_k_tflw_required = (:dens_threshold, :params_a_gamma, :params_a_lambda, :zeta_threshold)
+
+function gga_k_tflw(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_tflw_defaults, gga_k_tflw_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_tflw(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_tflw_defaults, gga_k_tflw_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_tflw, gga_k_tflw_defaults, gga_k_tflw_required
+
+const gga_k_absp1_defaults = (dens_threshold = 1.0e-15, params_a_gamma = -0.4119999999999999, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_absp1_required = ()
+
+function gga_k_absp1(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_absp1_defaults, gga_k_absp1_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_absp1(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_absp1_defaults, gga_k_absp1_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_absp1, gga_k_absp1_defaults, gga_k_absp1_required
+
+const gga_k_absp2_defaults = (dens_threshold = 1.0e-15, params_a_gamma = -0.3320000000000001, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_absp2_required = ()
+
+function gga_k_absp2(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_absp2_defaults, gga_k_absp2_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_absp2(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_absp2_defaults, gga_k_absp2_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_absp2, gga_k_absp2_defaults, gga_k_absp2_required
+
+const gga_k_absp3_defaults = (dens_threshold = 1.0e-15, params_a_gamma = -0.5129999999999999, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_absp3_required = ()
+
+function gga_k_absp3(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_absp3_defaults, gga_k_absp3_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_absp3(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_absp3_defaults, gga_k_absp3_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_absp3, gga_k_absp3_defaults, gga_k_absp3_required
+
+const gga_k_absp4_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 0.42881646655231564, params_a_lambda = 0.42881646655231564, zeta_threshold = 2.220446049250313e-16)
+const gga_k_absp4_required = ()
+
+function gga_k_absp4(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_absp4_defaults, gga_k_absp4_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_absp4(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_absp4_defaults, gga_k_absp4_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_absp4, gga_k_absp4_defaults, gga_k_absp4_required
+
+const gga_k_baltin_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 1.0, params_a_lambda = 0.5555555555555556, zeta_threshold = 2.220446049250313e-16)
+const gga_k_baltin_required = ()
+
+function gga_k_baltin(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_baltin_defaults, gga_k_baltin_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_baltin(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_baltin_defaults, gga_k_baltin_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_baltin, gga_k_baltin_defaults, gga_k_baltin_required
+
+const gga_k_ge2_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 1.0, params_a_lambda = 0.1111111111111111, zeta_threshold = 2.220446049250313e-16)
+const gga_k_ge2_required = ()
+
+function gga_k_ge2(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_ge2_defaults, gga_k_ge2_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_ge2(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_ge2_defaults, gga_k_ge2_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_ge2, gga_k_ge2_defaults, gga_k_ge2_required
+
+const gga_k_golden_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 1.0, params_a_lambda = 0.28888888888888886, zeta_threshold = 2.220446049250313e-16)
+const gga_k_golden_required = ()
+
+function gga_k_golden(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_golden_defaults, gga_k_golden_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_golden(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_golden_defaults, gga_k_golden_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_golden, gga_k_golden_defaults, gga_k_golden_required
+
+const gga_k_gp85_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 0.0, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_gp85_required = ()
+
+function gga_k_gp85(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_gp85_defaults, gga_k_gp85_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_gp85(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_gp85_defaults, gga_k_gp85_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_gp85, gga_k_gp85_defaults, gga_k_gp85_required
+
+const gga_k_gr_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 0.16502535559436077, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_gr_required = ()
+
+function gga_k_gr(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_gr_defaults, gga_k_gr_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_gr(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_gr_defaults, gga_k_gr_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_gr, gga_k_gr_defaults, gga_k_gr_required
+
+const gga_k_lieb_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 1.0, params_a_lambda = 0.185909191, zeta_threshold = 2.220446049250313e-16)
+const gga_k_lieb_required = ()
+
+function gga_k_lieb(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_lieb_defaults, gga_k_lieb_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_lieb(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_lieb_defaults, gga_k_lieb_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_lieb, gga_k_lieb_defaults, gga_k_lieb_required
+
+const gga_k_ludena_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 0.0, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_ludena_required = ()
+
+function gga_k_ludena(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_ludena_defaults, gga_k_ludena_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_ludena(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_ludena_defaults, gga_k_ludena_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_ludena, gga_k_ludena_defaults, gga_k_ludena_required
+
+const gga_k_tfvw_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 1.0, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_tfvw_required = ()
+
+function gga_k_tfvw(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_tfvw_defaults, gga_k_tfvw_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_tfvw(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_tfvw_defaults, gga_k_tfvw_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_tfvw, gga_k_tfvw_defaults, gga_k_tfvw_required
+
+const gga_k_tfvw_opt_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 0.697, params_a_lambda = 0.599, zeta_threshold = 2.220446049250313e-16)
+const gga_k_tfvw_opt_required = ()
+
+function gga_k_tfvw_opt(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_tfvw_opt_defaults, gga_k_tfvw_opt_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_tfvw_opt(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_tfvw_opt_defaults, gga_k_tfvw_opt_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_tfvw_opt, gga_k_tfvw_opt_defaults, gga_k_tfvw_opt_required
+
+const gga_k_vw_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 0.0, params_a_lambda = 1.0, zeta_threshold = 2.220446049250313e-16)
+const gga_k_vw_required = ()
+
+function gga_k_vw(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_vw_defaults, gga_k_vw_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_vw(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_vw_defaults, gga_k_vw_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_vw, gga_k_vw_defaults, gga_k_vw_required
+
+const gga_k_yt65_defaults = (dens_threshold = 1.0e-15, params_a_gamma = 1.0, params_a_lambda = 0.2, zeta_threshold = 2.220446049250313e-16)
+const gga_k_yt65_required = ()
+
+function gga_k_yt65(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_k_yt65_defaults, gga_k_yt65_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+function gga_k_yt65(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_k_yt65_defaults, gga_k_yt65_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_k_tflw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_gamma, p.params_a_lambda, p.zeta_threshold)
+end
+
+export gga_k_yt65, gga_k_yt65_defaults, gga_k_yt65_required

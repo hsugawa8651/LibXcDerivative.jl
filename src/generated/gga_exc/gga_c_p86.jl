@@ -1,0 +1,62 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_p86.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, params_a_aa, params_a_bb, params_a_ftilde, params_a_malpha, params_a_mbeta, params_a_mdelta, params_a_mgamma, zeta_threshold
+const gga_c_p86_energy = function (rs, z, xt, xs0, xs1, params_a_aa, params_a_bb, params_a_ftilde, params_a_malpha, params_a_mbeta, params_a_mdelta, params_a_mgamma, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = rs >= 1
+        cse_tmp_1 = NaNMath.sqrt(rs)
+        cse_tmp_2 = NaNMath.log(rs)
+        cse_tmp_3 = cse_tmp_2 * rs
+        cse_tmp_4 = my_piecewise3(cse_tmp_0, -0.1423 / (1.0529 * cse_tmp_1 + 0.3334 * rs + 1), 0.0311 * cse_tmp_2 + 0.002 * cse_tmp_3 - 0.0116 * rs - 0.048)
+        cse_tmp_5 = z + 1 <= zeta_threshold
+        cse_tmp_6 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_7 = zeta_threshold - 1
+        cse_tmp_8 = xc_log1p(my_piecewise3(z > cse_tmp_7, z, cse_tmp_7))
+        cse_tmp_9 = 1 - z <= zeta_threshold
+        cse_tmp_10 = -z
+        cse_tmp_11 = xc_log1p(my_piecewise3(cse_tmp_10 > cse_tmp_7, cse_tmp_10, cse_tmp_7))
+        cse_tmp_12 = rs ^ 2
+        cse_tmp_13 = params_a_aa + (cse_tmp_12 * params_a_mbeta + params_a_bb + params_a_malpha * rs) / (cse_tmp_12 * params_a_mdelta + 10000.0 * params_a_mbeta * rs ^ 3 + params_a_mgamma * rs + 1)
+        cse_tmp_14 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        1.8171205928321397 * cse_tmp_13 * xt ^ 2 * exp(-1.5874010519681994 * 1.2009369551760027 * params_a_ftilde * (params_a_aa + params_a_bb) * Abs(xt) / (2 * 1.2102032422537643 * cse_tmp_1 * cse_tmp_13)) / (2 * 1.4645918875615234 * rs * NaNMath.sqrt(my_piecewise3(cse_tmp_5, cse_tmp_14, xc_expm1((5 // 3) * cse_tmp_8)) / 2 + my_piecewise3(cse_tmp_9, cse_tmp_14, xc_expm1((5 // 3) * cse_tmp_11)) / 2 + 1)) + cse_tmp_4 + (-cse_tmp_4 + my_piecewise3(cse_tmp_0, -0.0843 / (1.3981 * cse_tmp_1 + 0.2611 * rs + 1), 0.01555 * cse_tmp_2 + 0.0007 * cse_tmp_3 - 0.0048 * rs - 0.0269)) * (my_piecewise3(cse_tmp_5, cse_tmp_6, xc_expm1((4 // 3) * cse_tmp_8)) + my_piecewise3(cse_tmp_9, cse_tmp_6, xc_expm1((4 // 3) * cse_tmp_11))) / (-2 + 2 * 1.2599210498948732)
+    end
+end
+export gga_c_p86_energy
+
+const gga_c_p86_defaults = (params_a_aa = 0.001667, params_a_bb = 0.002568, params_a_ftilde = 0.19195, params_a_malpha = 0.023266, params_a_mbeta = 7.389e-6, params_a_mdelta = 0.472, params_a_mgamma = 8.723, zeta_threshold = 2.220446049250313e-16)
+const gga_c_p86_required = ()
+
+function gga_c_p86(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_p86_defaults, gga_c_p86_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_p86_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+function gga_c_p86(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_p86_defaults, gga_c_p86_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_p86_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+export gga_c_p86, gga_c_p86_defaults, gga_c_p86_required
+
+const gga_c_p86_ft_defaults = (params_a_aa = 0.001667, params_a_bb = 0.002568, params_a_ftilde = 0.19199566167376364, params_a_malpha = 0.023266, params_a_mbeta = 7.389e-6, params_a_mdelta = 0.472, params_a_mgamma = 8.723, zeta_threshold = 2.220446049250313e-16)
+const gga_c_p86_ft_required = ()
+
+function gga_c_p86_ft(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_p86_ft_defaults, gga_c_p86_ft_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_p86_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+function gga_c_p86_ft(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_p86_ft_defaults, gga_c_p86_ft_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_p86_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+export gga_c_p86_ft, gga_c_p86_ft_defaults, gga_c_p86_ft_required

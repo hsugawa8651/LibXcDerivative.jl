@@ -1,0 +1,52 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_beefvdw.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, zeta_threshold
+const gga_x_beefvdw_energy = function (rs, z, xt, xs0, xs1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = xs0 ^ 2
+        cse_tmp_3 = 1.8171205928321397
+        cse_tmp_4 = cse_tmp_3 / 4.60115111447049
+        cse_tmp_5 = cse_tmp_4 / 24
+        cse_tmp_6 = cse_tmp_2 / (cse_tmp_2 * cse_tmp_5 + 4)
+        cse_tmp_7 = 0.0375342510042965 * cse_tmp_4
+        cse_tmp_8 = cse_tmp_4 / 12
+        cse_tmp_9 = cse_tmp_6 * cse_tmp_8 - 1
+        cse_tmp_10 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_11 = zeta_threshold - 1
+        cse_tmp_12 = 1 - z
+        cse_tmp_13 = cse_tmp_12 <= zeta_threshold
+        cse_tmp_14 = -cse_tmp_11
+        cse_tmp_15 = my_piecewise5(cse_tmp_10, cse_tmp_11, cse_tmp_13, cse_tmp_14, z) + 1
+        cse_tmp_16 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_17 = 0.184639691595506 * cse_tmp_3 / (1.4645918875615234 * rs)
+        cse_tmp_18 = xs1 ^ 2
+        cse_tmp_19 = cse_tmp_18 / (cse_tmp_18 * cse_tmp_5 + 4)
+        cse_tmp_20 = cse_tmp_19 * cse_tmp_8 - 1
+        cse_tmp_21 = my_piecewise5(cse_tmp_13, cse_tmp_11, cse_tmp_10, cse_tmp_14, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_17 * (cse_tmp_6 * cse_tmp_7 + 4135.58618801465 * cse_tmp_9 ^ 29 - 5427.77746263719 * cse_tmp_9 ^ 28 - 29150.1930114933 * cse_tmp_9 ^ 27 + 40074.9358544324 * cse_tmp_9 ^ 26 + 90365.6111085228 * cse_tmp_9 ^ 25 - 132044.661821822 * cse_tmp_9 ^ 24 - 161142.153998463 * cse_tmp_9 ^ 23 + 255894.795262353 * cse_tmp_9 ^ 22 + 180782.006708791 * cse_tmp_9 ^ 21 - 323524.031360493 * cse_tmp_9 ^ 20 - 129814.81812795 * cse_tmp_9 ^ 19 + 279670.488563031 * cse_tmp_9 ^ 18 + 56174.0079793727 * cse_tmp_9 ^ 17 - 168370.841390141 * cse_tmp_9 ^ 16 - 10276.4266078638 * cse_tmp_9 ^ 15 + 70504.541869034 * cse_tmp_9 ^ 14 - 2810.24018056846 * cse_tmp_9 ^ 13 - 20148.245175625 * cse_tmp_9 ^ 12 + 2274.89978508165 * cse_tmp_9 ^ 11 + 3783.53964072524 * cse_tmp_9 ^ 10 - 617.547861045286 * cse_tmp_9 ^ 9 - 442.332290184338 * cse_tmp_9 ^ 8 + 86.0057304992796 * cse_tmp_9 ^ 7 + 30.5420349593158 * cse_tmp_9 ^ 6 - 7.29757878937171 * cse_tmp_9 ^ 5 - 0.69459735177639 * cse_tmp_9 ^ 4 + 0.527556201155898 * cse_tmp_9 ^ 3 - 0.389160377791968 * cse_tmp_9 ^ 2 + 1.13135146306212) * my_piecewise3(cse_tmp_15 <= zeta_threshold, cse_tmp_16, NaNMath.pow(cse_tmp_15, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_12 <= dens_threshold, 0, -cse_tmp_17 * (cse_tmp_19 * cse_tmp_7 + 4135.58618801465 * cse_tmp_20 ^ 29 - 5427.77746263719 * cse_tmp_20 ^ 28 - 29150.1930114933 * cse_tmp_20 ^ 27 + 40074.9358544324 * cse_tmp_20 ^ 26 + 90365.6111085228 * cse_tmp_20 ^ 25 - 132044.661821822 * cse_tmp_20 ^ 24 - 161142.153998463 * cse_tmp_20 ^ 23 + 255894.795262353 * cse_tmp_20 ^ 22 + 180782.006708791 * cse_tmp_20 ^ 21 - 323524.031360493 * cse_tmp_20 ^ 20 - 129814.81812795 * cse_tmp_20 ^ 19 + 279670.488563031 * cse_tmp_20 ^ 18 + 56174.0079793727 * cse_tmp_20 ^ 17 - 168370.841390141 * cse_tmp_20 ^ 16 - 10276.4266078638 * cse_tmp_20 ^ 15 + 70504.541869034 * cse_tmp_20 ^ 14 - 2810.24018056846 * cse_tmp_20 ^ 13 - 20148.245175625 * cse_tmp_20 ^ 12 + 2274.89978508165 * cse_tmp_20 ^ 11 + 3783.53964072524 * cse_tmp_20 ^ 10 - 617.547861045286 * cse_tmp_20 ^ 9 - 442.332290184338 * cse_tmp_20 ^ 8 + 86.0057304992796 * cse_tmp_20 ^ 7 + 30.5420349593158 * cse_tmp_20 ^ 6 - 7.29757878937171 * cse_tmp_20 ^ 5 - 0.69459735177639 * cse_tmp_20 ^ 4 + 0.527556201155898 * cse_tmp_20 ^ 3 - 0.389160377791968 * cse_tmp_20 ^ 2 + 1.13135146306212) * my_piecewise3(cse_tmp_21 <= zeta_threshold, cse_tmp_16, NaNMath.pow(cse_tmp_21, 1.3333333333333333)))
+    end
+end
+export gga_x_beefvdw_energy
+
+const gga_x_beefvdw_defaults = (dens_threshold = 1.0e-15, zeta_threshold = 2.220446049250313e-16)
+const gga_x_beefvdw_required = ()
+
+function gga_x_beefvdw(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_beefvdw_defaults, gga_x_beefvdw_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_beefvdw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.zeta_threshold)
+end
+
+function gga_x_beefvdw(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_beefvdw_defaults, gga_x_beefvdw_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_beefvdw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.zeta_threshold)
+end
+
+export gga_x_beefvdw, gga_x_beefvdw_defaults, gga_x_beefvdw_required

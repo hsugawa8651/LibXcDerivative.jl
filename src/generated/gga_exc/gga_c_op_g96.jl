@@ -1,0 +1,45 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_op_g96.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, XC_EPSILON, dens_threshold, zeta_threshold
+const gga_c_op_g96_energy = function (rs, z, xt, xs0, xs1, XC_EPSILON, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 1 / (pi * rs ^ 3)
+        cse_tmp_2 = (3 // 8) * cse_tmp_1
+        cse_tmp_3 = 1 - z
+        cse_tmp_4 = zeta_threshold - 1
+        cse_tmp_5 = -cse_tmp_4
+        cse_tmp_6 = my_piecewise5(cse_tmp_0 <= zeta_threshold, cse_tmp_4, cse_tmp_3 <= zeta_threshold, cse_tmp_5, z)
+        cse_tmp_7 = 1 - cse_tmp_6
+        cse_tmp_8 = cse_tmp_6 + 1
+        cse_tmp_9 = 0.00494156349179202 * 1.5874010519681994
+        cse_tmp_10 = cse_tmp_8 <= zeta_threshold
+        cse_tmp_11 = cse_tmp_7 <= zeta_threshold
+        cse_tmp_12 = 0.225664732791835 * 3.3019272488946267 * 1.4645918875615234 * rs
+        cse_tmp_13 = my_piecewise3(cse_tmp_2 * cse_tmp_7 <= dens_threshold, 0, cse_tmp_12 / ((cse_tmp_9 * NaNMath.pow(xs1, 1.5) + 1) * NaNMath.pow(my_piecewise5(cse_tmp_11, cse_tmp_4, cse_tmp_10, cse_tmp_5, -cse_tmp_6) + 1, 0.3333333333333333))) + my_piecewise3(cse_tmp_2 * cse_tmp_8 <= dens_threshold, 0, cse_tmp_12 / ((cse_tmp_9 * NaNMath.pow(xs0, 1.5) + 1) * NaNMath.pow(my_piecewise5(cse_tmp_10, cse_tmp_4, cse_tmp_11, cse_tmp_5, cse_tmp_6) + 1, 0.3333333333333333)))
+        cse_tmp_14 = my_piecewise3(my_piecewise3(cse_tmp_13 >= 0, cse_tmp_13, -cse_tmp_13) < XC_EPSILON, XC_EPSILON, cse_tmp_13)
+        my_piecewise3(cse_tmp_0 * cse_tmp_2 <= dens_threshold && cse_tmp_2 * cse_tmp_3 <= dens_threshold || 1 - my_piecewise3(z >= 0, z, -z) <= zeta_threshold, 0, -3 // 16 * cse_tmp_1 * cse_tmp_7 * cse_tmp_8 * (0.5764 + 3.59628532 / cse_tmp_14) / (1.778517305052 / cse_tmp_14 ^ 2 + 14.9037398922132 / cse_tmp_14 ^ 3 + 31.2207199195442 / cse_tmp_14 ^ 4))
+    end
+end
+export gga_c_op_g96_energy
+
+const gga_c_op_g96_defaults = (XC_EPSILON = 2.220446049250313e-16, dens_threshold = 1.0e-14, zeta_threshold = 2.220446049250313e-16)
+const gga_c_op_g96_required = ()
+
+function gga_c_op_g96(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_op_g96_defaults, gga_c_op_g96_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_op_g96_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.dens_threshold, p.zeta_threshold)
+end
+
+function gga_c_op_g96(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_op_g96_defaults, gga_c_op_g96_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_op_g96_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.dens_threshold, p.zeta_threshold)
+end
+
+export gga_c_op_g96, gga_c_op_g96_defaults, gga_c_op_g96_required

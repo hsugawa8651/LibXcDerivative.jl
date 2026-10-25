@@ -1,0 +1,59 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_pbe_vwn.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, params_a_BB, params_a_beta, params_a_gamma, zeta_threshold
+const gga_c_pbe_vwn_energy = function (rs, z, xt, xs0, xs1, params_a_BB, params_a_beta, params_a_gamma, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_2 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_3 = zeta_threshold - 1
+        cse_tmp_4 = xc_log1p(my_piecewise3(z > cse_tmp_3, z, cse_tmp_3))
+        cse_tmp_5 = 1 - z
+        cse_tmp_6 = cse_tmp_5 <= zeta_threshold
+        cse_tmp_7 = -z
+        cse_tmp_8 = xc_log1p(my_piecewise3(cse_tmp_7 > cse_tmp_3, cse_tmp_7, cse_tmp_3))
+        cse_tmp_9 = my_piecewise3(cse_tmp_1, cse_tmp_2, xc_expm1((2 // 3) * cse_tmp_4)) / 2 + my_piecewise3(cse_tmp_6, cse_tmp_2, xc_expm1((2 // 3) * cse_tmp_8)) / 2 + 1
+        cse_tmp_10 = cse_tmp_9 ^ 3
+        cse_tmp_11 = params_a_gamma ^ (-1)
+        cse_tmp_12 = NaNMath.sqrt(rs)
+        cse_tmp_13 = 7.06042 * cse_tmp_12 + 18.0578
+        cse_tmp_14 = cse_tmp_13 + rs
+        cse_tmp_15 = cse_tmp_14 ^ (-1)
+        cse_tmp_16 = 2 * cse_tmp_12
+        cse_tmp_17 = 3.72744 * cse_tmp_12 + 12.9352
+        cse_tmp_18 = cse_tmp_17 + rs
+        cse_tmp_19 = cse_tmp_18 ^ (-1)
+        cse_tmp_20 = 0.038783294878113 * atan(6.15199081975908 / (cse_tmp_16 + 3.72744)) + 0.0310907 * xc_log1p(-cse_tmp_17 * cse_tmp_19) + 0.000969022771154437 * xc_log1p(cse_tmp_19 * (-cse_tmp_18 + (cse_tmp_12 + 0.10498) ^ 2))
+        cse_tmp_21 = 1.2599210498948732
+        cse_tmp_22 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_23 = (my_piecewise3(cse_tmp_1, cse_tmp_22, xc_expm1((4 // 3) * cse_tmp_4)) + my_piecewise3(cse_tmp_6, cse_tmp_22, xc_expm1((4 // 3) * cse_tmp_8))) / (2 * cse_tmp_21 - 2)
+        cse_tmp_24 = 1.13107 * cse_tmp_12 + 13.0045
+        cse_tmp_25 = cse_tmp_24 + rs
+        cse_tmp_26 = cse_tmp_25 ^ (-1)
+        cse_tmp_27 = cse_tmp_11 * (-cse_tmp_0 * cse_tmp_23 * cse_tmp_5 * ((9 // 4) * cse_tmp_21 - 9 // 4) * (z ^ 2 + 1) * (0.317708004743942 * atan(7.12310891781812 / (cse_tmp_16 + 1.13107)) + xc_log1p(-cse_tmp_24 * cse_tmp_26) + 0.000414033794282063 * xc_log1p(cse_tmp_26 * (-cse_tmp_25 + (cse_tmp_12 + 0.0047584) ^ 2))) / (6 * 9.869604401089358) + cse_tmp_20 + cse_tmp_23 * z ^ 4 * (-cse_tmp_20 + 0.0524913931697809 * atan(4.73092690956011 / (cse_tmp_16 + 7.06042)) + 0.01554535 * xc_log1p(-cse_tmp_13 * cse_tmp_15) + 0.00224786709554261 * xc_log1p(cse_tmp_15 * (-cse_tmp_14 + (cse_tmp_12 + 0.325) ^ 2)))) / cse_tmp_10
+        cse_tmp_28 = cse_tmp_11 * params_a_beta / xc_expm1(-cse_tmp_27)
+        cse_tmp_10 * params_a_gamma * xc_log1p(xc_expm1(cse_tmp_27) / (cse_tmp_28 * (cse_tmp_21 * xt ^ 2 / (32 * cse_tmp_9 ^ 2 * rs) + 1.5874010519681994 * cse_tmp_28 * params_a_BB * xt ^ 4 / (1024 * cse_tmp_9 ^ 4 * rs ^ 2)) + 1))
+    end
+end
+export gga_c_pbe_vwn_energy
+
+const gga_c_pbe_vwn_defaults = (params_a_BB = 1.0, params_a_beta = 0.06672455060314922, params_a_gamma = 0.031090690869654894, zeta_threshold = 2.220446049250313e-16)
+const gga_c_pbe_vwn_required = ()
+
+function gga_c_pbe_vwn(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_pbe_vwn_defaults, gga_c_pbe_vwn_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_pbe_vwn_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_BB, p.params_a_beta, p.params_a_gamma, p.zeta_threshold)
+end
+
+function gga_c_pbe_vwn(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_pbe_vwn_defaults, gga_c_pbe_vwn_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_pbe_vwn_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_BB, p.params_a_beta, p.params_a_gamma, p.zeta_threshold)
+end
+
+export gga_c_pbe_vwn, gga_c_pbe_vwn_defaults, gga_c_pbe_vwn_required

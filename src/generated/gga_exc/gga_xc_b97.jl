@@ -1,0 +1,519 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_xc_b97.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, params_a_c_ab_0, params_a_c_ab_1, params_a_c_ab_2, params_a_c_ab_3, params_a_c_ab_4, params_a_c_ss_0, params_a_c_ss_1, params_a_c_ss_2, params_a_c_ss_3, params_a_c_ss_4, params_a_c_x_0, params_a_c_x_1, params_a_c_x_2, params_a_c_x_3, params_a_c_x_4, zeta_threshold
+const gga_xc_b97_energy = function (rs, z, xt, xs0, xs1, dens_threshold, params_a_c_ab_0, params_a_c_ab_1, params_a_c_ab_2, params_a_c_ab_3, params_a_c_ab_4, params_a_c_ss_0, params_a_c_ss_1, params_a_c_ss_2, params_a_c_ss_3, params_a_c_ss_4, params_a_c_x_0, params_a_c_x_1, params_a_c_x_2, params_a_c_x_3, params_a_c_x_4, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = xs0 ^ 2
+        cse_tmp_1 = 0.004 * cse_tmp_0
+        cse_tmp_2 = cse_tmp_1 + 1
+        cse_tmp_3 = xs0 ^ 4
+        cse_tmp_4 = 1.6e-5 * params_a_c_x_2
+        cse_tmp_5 = xs0 ^ 6
+        cse_tmp_6 = 6.4e-8 * params_a_c_x_3
+        cse_tmp_7 = xs0 ^ 8
+        cse_tmp_8 = 2.56e-10 * params_a_c_x_4
+        cse_tmp_9 = z + 1
+        cse_tmp_11 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_13 = zeta_threshold - 1
+        cse_tmp_14 = xc_log1p(my_piecewise3(z > cse_tmp_13, z, cse_tmp_13))
+        cse_tmp_15 = my_piecewise3(cse_tmp_9 <= zeta_threshold, cse_tmp_13, xc_expm1(cse_tmp_14)) / 2 + 1 // 2
+        cse_tmp_16 = -1 + NaNMath.pow(zeta_threshold, -0.3333333333333333)
+        cse_tmp_17 = my_piecewise3(cse_tmp_9 <= zeta_threshold, cse_tmp_16, xc_expm1(-cse_tmp_14 / 3)) + 1
+        cse_tmp_18 = 2 <= zeta_threshold
+        cse_tmp_19 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_20 = 1.2599210498948732
+        cse_tmp_21 = 0.184639691595506 * 1.4422495703074083 * my_piecewise3(cse_tmp_18, cse_tmp_19, 2 * cse_tmp_20) / (1.4645918875615234 * rs)
+        cse_tmp_22 = xs1 ^ 2
+        cse_tmp_23 = 0.004 * cse_tmp_22
+        cse_tmp_24 = cse_tmp_23 + 1
+        cse_tmp_25 = xs1 ^ 4
+        cse_tmp_26 = xs1 ^ 6
+        cse_tmp_27 = xs1 ^ 8
+        cse_tmp_28 = 1 - z
+        cse_tmp_31 = -z
+        cse_tmp_32 = xc_log1p(my_piecewise3(cse_tmp_31 > cse_tmp_13, cse_tmp_31, cse_tmp_13))
+        cse_tmp_33 = my_piecewise3(cse_tmp_28 <= zeta_threshold, cse_tmp_13, xc_expm1(cse_tmp_32)) / 2 + 1 // 2
+        cse_tmp_34 = my_piecewise3(cse_tmp_28 <= zeta_threshold, cse_tmp_16, xc_expm1(-cse_tmp_32 / 3)) + 1
+        cse_tmp_35 = 0.2 * cse_tmp_0
+        cse_tmp_36 = cse_tmp_35 + 1
+        cse_tmp_37 = 0.04 * params_a_c_ss_2
+        cse_tmp_38 = 0.008 * params_a_c_ss_3
+        cse_tmp_39 = 0.0016 * params_a_c_ss_4
+        cse_tmp_40 = 0.0132882934 * rs
+        cse_tmp_41 = cse_tmp_17 * cse_tmp_20
+        cse_tmp_42 = 0.2230841432 * rs
+        cse_tmp_43 = NaNMath.sqrt(rs)
+        cse_tmp_44 = 0.4723158174 * cse_tmp_43
+        cse_tmp_45 = 1.122462048309373
+        cse_tmp_46 = NaNMath.sqrt(cse_tmp_17) * cse_tmp_45
+        cse_tmp_47 = NaNMath.pow(rs, 1.5)
+        cse_tmp_48 = 0.1018665524 * cse_tmp_47
+        cse_tmp_49 = 1.4142135623730951
+        cse_tmp_50 = NaNMath.pow(cse_tmp_17, 1.5) * cse_tmp_49
+        cse_tmp_51 = rs ^ 2
+        cse_tmp_52 = 0.03065199508 * cse_tmp_51
+        cse_tmp_53 = 1.5874010519681994
+        cse_tmp_54 = cse_tmp_17 ^ 2 * cse_tmp_53
+        cse_tmp_55 = (-cse_tmp_40 * cse_tmp_41 - 0.062182) * xc_log1p((cse_tmp_41 * cse_tmp_42 + cse_tmp_44 * cse_tmp_46 + cse_tmp_48 * cse_tmp_50 + cse_tmp_52 * cse_tmp_54) ^ (-1))
+        cse_tmp_56 = 0.0037573575 * rs
+        cse_tmp_57 = 0.1223665794 * rs
+        cse_tmp_58 = 0.349797318 * cse_tmp_43
+        cse_tmp_59 = 0.02972990124 * cse_tmp_47
+        cse_tmp_60 = 0.01677588354 * cse_tmp_51
+        cse_tmp_61 = 0.58482233974552 * (-cse_tmp_41 * cse_tmp_56 - 0.033774) * xc_log1p((cse_tmp_41 * cse_tmp_57 + cse_tmp_46 * cse_tmp_58 + cse_tmp_50 * cse_tmp_59 + cse_tmp_54 * cse_tmp_60) ^ (-1))
+        cse_tmp_62 = (2 * cse_tmp_20 - 2) ^ (-1)
+        cse_tmp_63 = cse_tmp_19 - 1
+        cse_tmp_64 = cse_tmp_62 * (cse_tmp_63 + my_piecewise3(cse_tmp_18, cse_tmp_63, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(1 > cse_tmp_13, 1, cse_tmp_13)))))
+        cse_tmp_65 = 0.0063883732 * rs
+        cse_tmp_66 = 0.192686493 * rs
+        cse_tmp_67 = 0.438956601 * cse_tmp_43
+        cse_tmp_68 = 0.104655158 * cse_tmp_47
+        cse_tmp_69 = 0.0194365353 * cse_tmp_51
+        cse_tmp_70 = my_piecewise3(cse_tmp_9 <= zeta_threshold || cse_tmp_11 * cse_tmp_9 <= dens_threshold, 0, cse_tmp_15 * (cse_tmp_55 - cse_tmp_61 * cse_tmp_64 + cse_tmp_64 * (-cse_tmp_55 + cse_tmp_61 + (-cse_tmp_41 * cse_tmp_65 - 0.03109) * xc_log1p((cse_tmp_41 * cse_tmp_66 + cse_tmp_46 * cse_tmp_67 + cse_tmp_50 * cse_tmp_68 + cse_tmp_54 * cse_tmp_69) ^ (-1)))))
+        cse_tmp_71 = 0.2 * cse_tmp_22
+        cse_tmp_72 = cse_tmp_71 + 1
+        cse_tmp_73 = cse_tmp_20 * cse_tmp_34
+        cse_tmp_74 = NaNMath.sqrt(cse_tmp_34) * cse_tmp_45
+        cse_tmp_75 = NaNMath.pow(cse_tmp_34, 1.5) * cse_tmp_49
+        cse_tmp_76 = cse_tmp_34 ^ 2 * cse_tmp_53
+        cse_tmp_77 = (-cse_tmp_40 * cse_tmp_73 - 0.062182) * xc_log1p((cse_tmp_42 * cse_tmp_73 + cse_tmp_44 * cse_tmp_74 + cse_tmp_48 * cse_tmp_75 + cse_tmp_52 * cse_tmp_76) ^ (-1))
+        cse_tmp_78 = 0.58482233974552 * (-cse_tmp_56 * cse_tmp_73 - 0.033774) * xc_log1p((cse_tmp_57 * cse_tmp_73 + cse_tmp_58 * cse_tmp_74 + cse_tmp_59 * cse_tmp_75 + cse_tmp_60 * cse_tmp_76) ^ (-1))
+        cse_tmp_79 = my_piecewise3(cse_tmp_28 <= zeta_threshold || cse_tmp_11 * cse_tmp_28 <= dens_threshold, 0, cse_tmp_33 * (-cse_tmp_64 * cse_tmp_78 + cse_tmp_64 * (-cse_tmp_77 + cse_tmp_78 + (-cse_tmp_65 * cse_tmp_73 - 0.03109) * xc_log1p((cse_tmp_66 * cse_tmp_73 + cse_tmp_67 * cse_tmp_74 + cse_tmp_68 * cse_tmp_75 + cse_tmp_69 * cse_tmp_76) ^ (-1))) + cse_tmp_77))
+        cse_tmp_80 = cse_tmp_0 / 2 + cse_tmp_22 / 2
+        cse_tmp_81 = 0.003 * cse_tmp_0 + 0.003 * cse_tmp_22 + 1
+        cse_tmp_82 = -(-cse_tmp_40 - 0.062182) * xc_log1p((cse_tmp_42 + cse_tmp_44 + cse_tmp_48 + cse_tmp_52) ^ (-1))
+        cse_tmp_83 = 0.58482233974552 * (-cse_tmp_56 - 0.033774) * xc_log1p((cse_tmp_57 + cse_tmp_58 + cse_tmp_59 + cse_tmp_60) ^ (-1))
+        cse_tmp_84 = my_piecewise3(cse_tmp_28 <= zeta_threshold, cse_tmp_63, xc_expm1((4 // 3) * cse_tmp_32)) + my_piecewise3(cse_tmp_9 <= zeta_threshold, cse_tmp_63, xc_expm1((4 // 3) * cse_tmp_14))
+        cse_tmp_70 * (cse_tmp_3 * cse_tmp_37 / cse_tmp_36 ^ 2 + cse_tmp_35 * params_a_c_ss_1 / cse_tmp_36 + params_a_c_ss_0 + cse_tmp_38 * cse_tmp_5 / cse_tmp_36 ^ 3 + cse_tmp_39 * cse_tmp_7 / cse_tmp_36 ^ 4) + cse_tmp_79 * (cse_tmp_25 * cse_tmp_37 / cse_tmp_72 ^ 2 + cse_tmp_26 * cse_tmp_38 / cse_tmp_72 ^ 3 + cse_tmp_27 * cse_tmp_39 / cse_tmp_72 ^ 4 + cse_tmp_71 * params_a_c_ss_1 / cse_tmp_72 + params_a_c_ss_0) + (cse_tmp_1 * params_a_c_x_1 / cse_tmp_2 + params_a_c_x_0 + cse_tmp_3 * cse_tmp_4 / cse_tmp_2 ^ 2 + cse_tmp_5 * cse_tmp_6 / cse_tmp_2 ^ 3 + cse_tmp_7 * cse_tmp_8 / cse_tmp_2 ^ 4) * my_piecewise3(cse_tmp_9 <= zeta_threshold || cse_tmp_11 * cse_tmp_9 <= dens_threshold, 0, cse_tmp_15 * my_piecewise3(cse_tmp_11 / cse_tmp_17 ^ 3 <= dens_threshold, 0, -cse_tmp_21 / cse_tmp_17)) + (cse_tmp_23 * params_a_c_x_1 / cse_tmp_24 + params_a_c_x_0 + cse_tmp_25 * cse_tmp_4 / cse_tmp_24 ^ 2 + cse_tmp_26 * cse_tmp_6 / cse_tmp_24 ^ 3 + cse_tmp_27 * cse_tmp_8 / cse_tmp_24 ^ 4) * my_piecewise3(cse_tmp_28 <= zeta_threshold || cse_tmp_11 * cse_tmp_28 <= dens_threshold, 0, cse_tmp_33 * my_piecewise3(cse_tmp_11 / cse_tmp_34 ^ 3 <= dens_threshold, 0, -cse_tmp_21 / cse_tmp_34)) + (-cse_tmp_62 * cse_tmp_83 * cse_tmp_84 + cse_tmp_62 * cse_tmp_84 * z ^ 4 * (cse_tmp_82 + cse_tmp_83 + (-cse_tmp_65 - 0.03109) * xc_log1p((cse_tmp_66 + cse_tmp_67 + cse_tmp_68 + cse_tmp_69) ^ (-1))) - cse_tmp_70 - cse_tmp_79 - cse_tmp_82) * (1.296e-9 * cse_tmp_80 ^ 4 * params_a_c_ab_4 / cse_tmp_81 ^ 4 + 2.16e-7 * cse_tmp_80 ^ 3 * params_a_c_ab_3 / cse_tmp_81 ^ 3 + 3.6e-5 * cse_tmp_80 ^ 2 * params_a_c_ab_2 / cse_tmp_81 ^ 2 + 0.006 * cse_tmp_80 * params_a_c_ab_1 / cse_tmp_81 + params_a_c_ab_0)
+    end
+end
+export gga_xc_b97_energy
+
+const gga_xc_b97_defaults = NamedTuple()
+const gga_xc_b97_required = (:dens_threshold, :params_a_c_ab_0, :params_a_c_ab_1, :params_a_c_ab_2, :params_a_c_ab_3, :params_a_c_ab_4, :params_a_c_ss_0, :params_a_c_ss_1, :params_a_c_ss_2, :params_a_c_ss_3, :params_a_c_ss_4, :params_a_c_x_0, :params_a_c_x_1, :params_a_c_x_2, :params_a_c_x_3, :params_a_c_x_4, :zeta_threshold)
+
+function gga_xc_b97(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_defaults, gga_xc_b97_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_b97(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_defaults, gga_xc_b97_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_b97, gga_xc_b97_defaults, gga_xc_b97_required
+
+const gga_xc_b97_3c_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.635047, params_a_c_ab_1 = 5.532103, params_a_c_ab_2 = -15.301575, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.543788, params_a_c_ss_1 = -1.44442, params_a_c_ss_2 = 1.637436, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 1.076616, params_a_c_x_1 = -0.469912, params_a_c_x_2 = 3.322442, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_b97_3c_required = ()
+
+function gga_xc_b97_3c(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_3c_defaults, gga_xc_b97_3c_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_b97_3c(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_3c_defaults, gga_xc_b97_3c_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_b97_3c, gga_xc_b97_3c_defaults, gga_xc_b97_3c_required
+
+const gga_xc_b97_d_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.69041, params_a_c_ab_1 = 6.3027, params_a_c_ab_2 = -14.9712, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.2234, params_a_c_ss_1 = -1.56208, params_a_c_ss_2 = 1.94293, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 1.08662, params_a_c_x_1 = -0.52127, params_a_c_x_2 = 3.25429, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_b97_d_required = ()
+
+function gga_xc_b97_d(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_d_defaults, gga_xc_b97_d_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_b97_d(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_d_defaults, gga_xc_b97_d_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_b97_d, gga_xc_b97_d_defaults, gga_xc_b97_d_required
+
+const gga_xc_b97_gga1_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.7961, params_a_c_ab_1 = 5.706, params_a_c_ab_2 = -14.982, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.4883, params_a_c_ss_1 = -2.117, params_a_c_ss_2 = 2.3235, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 1.1068, params_a_c_x_1 = -0.8765, params_a_c_x_2 = 4.2639, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_b97_gga1_required = ()
+
+function gga_xc_b97_gga1(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_gga1_defaults, gga_xc_b97_gga1_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_b97_gga1(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_b97_gga1_defaults, gga_xc_b97_gga1_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_b97_gga1, gga_xc_b97_gga1_defaults, gga_xc_b97_gga1_required
+
+const gga_xc_dlb97_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 1.0, params_a_c_ab_1 = -9.08688969, params_a_c_ab_2 = -1.23683738, params_a_c_ab_3 = 3.27806838, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 1.0, params_a_c_ss_1 = -12.30309938, params_a_c_ss_2 = 18.77585453, params_a_c_ss_3 = -8.69005644, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 1.0, params_a_c_x_1 = 2.53490826, params_a_c_x_2 = -1.10285303, params_a_c_x_3 = 0.72671204, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_dlb97_required = ()
+
+function gga_xc_dlb97(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_dlb97_defaults, gga_xc_dlb97_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_dlb97(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_dlb97_defaults, gga_xc_dlb97_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_dlb97, gga_xc_dlb97_defaults, gga_xc_dlb97_required
+
+const gga_xc_hcth_120_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.51473, params_a_c_ab_1 = 6.92982, params_a_c_ab_2 = -24.7073, params_a_c_ab_3 = 23.1098, params_a_c_ab_4 = -11.3234, params_a_c_ss_0 = 0.489508, params_a_c_ss_1 = -0.260699, params_a_c_ss_2 = 0.432917, params_a_c_ss_3 = -1.99247, params_a_c_ss_4 = 2.48531, params_a_c_x_0 = 1.09163, params_a_c_x_1 = -0.747215, params_a_c_x_2 = 5.07833, params_a_c_x_3 = -4.10746, params_a_c_x_4 = 1.17173, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hcth_120_required = ()
+
+function gga_xc_hcth_120(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_120_defaults, gga_xc_hcth_120_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hcth_120(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_120_defaults, gga_xc_hcth_120_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hcth_120, gga_xc_hcth_120_defaults, gga_xc_hcth_120_required
+
+const gga_xc_hcth_147_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.542352, params_a_c_ab_1 = 7.01464, params_a_c_ab_2 = -28.3822, params_a_c_ab_3 = 35.0329, params_a_c_ab_4 = -20.4284, params_a_c_ss_0 = 0.562576, params_a_c_ss_1 = 0.0171436, params_a_c_ss_2 = -1.30636, params_a_c_ss_3 = 1.05747, params_a_c_ss_4 = 0.885429, params_a_c_x_0 = 1.09025, params_a_c_x_1 = -0.799194, params_a_c_x_2 = 5.57212, params_a_c_x_3 = -5.8676, params_a_c_x_4 = 3.04544, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hcth_147_required = ()
+
+function gga_xc_hcth_147(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_147_defaults, gga_xc_hcth_147_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hcth_147(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_147_defaults, gga_xc_hcth_147_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hcth_147, gga_xc_hcth_147_defaults, gga_xc_hcth_147_required
+
+const gga_xc_hcth_407_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.589076, params_a_c_ab_1 = 4.42374, params_a_c_ab_2 = -19.2218, params_a_c_ab_3 = 42.5721, params_a_c_ab_4 = -42.0052, params_a_c_ss_0 = 1.18777, params_a_c_ss_1 = -2.40292, params_a_c_ss_2 = 5.61741, params_a_c_ss_3 = -9.17923, params_a_c_ss_4 = 6.24798, params_a_c_x_0 = 1.08184, params_a_c_x_1 = -0.518339, params_a_c_x_2 = 3.42562, params_a_c_x_3 = -2.62901, params_a_c_x_4 = 2.28855, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hcth_407_required = ()
+
+function gga_xc_hcth_407(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_407_defaults, gga_xc_hcth_407_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hcth_407(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_407_defaults, gga_xc_hcth_407_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hcth_407, gga_xc_hcth_407_defaults, gga_xc_hcth_407_required
+
+const gga_xc_hcth_407p_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.73604, params_a_c_ab_1 = 3.027, params_a_c_ab_2 = -10.075, params_a_c_ab_3 = 20.611, params_a_c_ab_4 = -29.418, params_a_c_ss_0 = 0.80302, params_a_c_ss_1 = -1.0479, params_a_c_ss_2 = 4.9807, params_a_c_ss_3 = -12.89, params_a_c_ss_4 = 9.6446, params_a_c_x_0 = 1.08018, params_a_c_x_1 = -0.4117, params_a_c_x_2 = 2.4368, params_a_c_x_3 = 1.389, params_a_c_x_4 = -1.3529, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hcth_407p_required = ()
+
+function gga_xc_hcth_407p(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_407p_defaults, gga_xc_hcth_407p_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hcth_407p(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_407p_defaults, gga_xc_hcth_407p_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hcth_407p, gga_xc_hcth_407p_defaults, gga_xc_hcth_407p_required
+
+const gga_xc_hcth_93_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.729974, params_a_c_ab_1 = 3.35287, params_a_c_ab_2 = -11.543, params_a_c_ab_3 = 8.08564, params_a_c_ab_4 = -4.47857, params_a_c_ss_0 = 0.222601, params_a_c_ss_1 = -0.0338622, params_a_c_ss_2 = -0.012517, params_a_c_ss_3 = -0.802496, params_a_c_ss_4 = 1.55396, params_a_c_x_0 = 1.0932, params_a_c_x_1 = -0.744056, params_a_c_x_2 = 5.5992, params_a_c_x_3 = -6.78549, params_a_c_x_4 = 4.49357, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hcth_93_required = ()
+
+function gga_xc_hcth_93(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_93_defaults, gga_xc_hcth_93_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hcth_93(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_93_defaults, gga_xc_hcth_93_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hcth_93, gga_xc_hcth_93_defaults, gga_xc_hcth_93_required
+
+const gga_xc_hcth_p14_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.0821827, params_a_c_ab_1 = 4.56466, params_a_c_ab_2 = -13.5529, params_a_c_ab_3 = 13.382, params_a_c_ab_4 = -3.17493, params_a_c_ss_0 = 2.82414, params_a_c_ss_1 = 0.0318843, params_a_c_ss_2 = -1.78512, params_a_c_ss_3 = 2.39795, params_a_c_ss_4 = -0.876909, params_a_c_x_0 = 1.03161, params_a_c_x_1 = -0.360781, params_a_c_x_2 = 3.51994, params_a_c_x_3 = -4.95944, params_a_c_x_4 = 2.41165, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hcth_p14_required = ()
+
+function gga_xc_hcth_p14(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_p14_defaults, gga_xc_hcth_p14_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hcth_p14(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_p14_defaults, gga_xc_hcth_p14_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hcth_p14, gga_xc_hcth_p14_defaults, gga_xc_hcth_p14_required
+
+const gga_xc_hcth_p76_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.192949, params_a_c_ab_1 = -5.73335, params_a_c_ab_2 = 50.8757, params_a_c_ab_3 = -135.475, params_a_c_ab_4 = 101.268, params_a_c_ss_0 = -3.92143, params_a_c_ss_1 = -1.10098, params_a_c_ss_2 = -0.091405, params_a_c_ss_3 = -0.859723, params_a_c_ss_4 = 2.07184, params_a_c_x_0 = 1.16525, params_a_c_x_1 = -0.583033, params_a_c_x_2 = 2.51769, params_a_c_x_3 = 3.81278, params_a_c_x_4 = -5.45906, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hcth_p76_required = ()
+
+function gga_xc_hcth_p76(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_p76_defaults, gga_xc_hcth_p76_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hcth_p76(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hcth_p76_defaults, gga_xc_hcth_p76_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hcth_p76, gga_xc_hcth_p76_defaults, gga_xc_hcth_p76_required
+
+const gga_xc_hle16_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.294538, params_a_c_ab_1 = 2.21187, params_a_c_ab_2 = -9.6109, params_a_c_ab_3 = 21.28605, params_a_c_ab_4 = -21.0026, params_a_c_ss_0 = 0.593885, params_a_c_ss_1 = -1.20146, params_a_c_ss_2 = 2.808705, params_a_c_ss_3 = -4.589615, params_a_c_ss_4 = 3.12399, params_a_c_x_0 = 1.3523, params_a_c_x_1 = -0.64792375, params_a_c_x_2 = 4.282025, params_a_c_x_3 = -3.2862625, params_a_c_x_4 = 2.8606875, zeta_threshold = 2.220446049250313e-16)
+const gga_xc_hle16_required = ()
+
+function gga_xc_hle16(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_xc_hle16_defaults, gga_xc_hle16_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function gga_xc_hle16(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_xc_hle16_defaults, gga_xc_hle16_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export gga_xc_hle16, gga_xc_hle16_defaults, gga_xc_hle16_required
+
+const hyb_gga_xc_b97_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.9454, params_a_c_ab_1 = 0.7471, params_a_c_ab_2 = -4.5961, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.1737, params_a_c_ss_1 = 2.3487, params_a_c_ss_2 = -2.4868, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.8094, params_a_c_x_1 = 0.5073, params_a_c_x_2 = 0.7481, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_b97_required = ()
+
+function hyb_gga_xc_b97(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_defaults, hyb_gga_xc_b97_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_b97(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_defaults, hyb_gga_xc_b97_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_b97, hyb_gga_xc_b97_defaults, hyb_gga_xc_b97_required
+
+const hyb_gga_xc_b97_1_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.955689, params_a_c_ab_1 = 0.788552, params_a_c_ab_2 = -5.47869, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.0820011, params_a_c_ss_1 = 2.71681, params_a_c_ss_2 = -2.87103, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.789518, params_a_c_x_1 = 0.573805, params_a_c_x_2 = 0.660975, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_b97_1_required = ()
+
+function hyb_gga_xc_b97_1(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_1_defaults, hyb_gga_xc_b97_1_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_b97_1(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_1_defaults, hyb_gga_xc_b97_1_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_b97_1, hyb_gga_xc_b97_1_defaults, hyb_gga_xc_b97_1_required
+
+const hyb_gga_xc_b97_1p_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.9253, params_a_c_ab_1 = 2.027, params_a_c_ab_2 = -7.3431, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.2228, params_a_c_ss_1 = 1.3678, params_a_c_ss_2 = -1.5068, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.8773, params_a_c_x_1 = 0.2149, params_a_c_x_2 = 1.5204, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_b97_1p_required = ()
+
+function hyb_gga_xc_b97_1p(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_1p_defaults, hyb_gga_xc_b97_1p_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_b97_1p(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_1p_defaults, hyb_gga_xc_b97_1p_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_b97_1p, hyb_gga_xc_b97_1p_defaults, hyb_gga_xc_b97_1p_required
+
+const hyb_gga_xc_b97_2_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.999849, params_a_c_ab_1 = 1.40626, params_a_c_ab_2 = -7.4406, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.585808, params_a_c_ss_1 = -0.691682, params_a_c_ss_2 = 0.394796, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.827642, params_a_c_x_1 = 0.04784, params_a_c_x_2 = 1.76125, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_b97_2_required = ()
+
+function hyb_gga_xc_b97_2(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_2_defaults, hyb_gga_xc_b97_2_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_b97_2(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_2_defaults, hyb_gga_xc_b97_2_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_b97_2, hyb_gga_xc_b97_2_defaults, hyb_gga_xc_b97_2_required
+
+const hyb_gga_xc_b97_3_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 1.13383, params_a_c_ab_1 = -2.811967, params_a_c_ab_2 = 7.431302, params_a_c_ab_3 = -1.969342, params_a_c_ab_4 = -11.74423, params_a_c_ss_0 = 0.5623649, params_a_c_ss_1 = -1.32298, params_a_c_ss_2 = 6.359191, params_a_c_ss_3 = -7.464002, params_a_c_ss_4 = 1.827082, params_a_c_x_0 = 0.7334648, params_a_c_x_1 = 0.292527, params_a_c_x_2 = 3.338789, params_a_c_x_3 = -10.51158, params_a_c_x_4 = 10.60907, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_b97_3_required = ()
+
+function hyb_gga_xc_b97_3(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_3_defaults, hyb_gga_xc_b97_3_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_b97_3(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_3_defaults, hyb_gga_xc_b97_3_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_b97_3, hyb_gga_xc_b97_3_defaults, hyb_gga_xc_b97_3_required
+
+const hyb_gga_xc_b97_k_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 1.58613, params_a_c_ab_1 = -6.20977, params_a_c_ab_2 = 6.46106, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.12355, params_a_c_ss_1 = 2.65399, params_a_c_ss_2 = -3.20694, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.507863, params_a_c_x_1 = 1.46873, params_a_c_x_2 = -1.51301, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_b97_k_required = ()
+
+function hyb_gga_xc_b97_k(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_k_defaults, hyb_gga_xc_b97_k_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_b97_k(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_b97_k_defaults, hyb_gga_xc_b97_k_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_b97_k, hyb_gga_xc_b97_k_defaults, hyb_gga_xc_b97_k_required
+
+const hyb_gga_xc_sb98_1a_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.975483, params_a_c_ab_1 = 0.398379, params_a_c_ab_2 = -3.7354, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = -0.817637, params_a_c_ss_1 = -0.054676, params_a_c_ss_2 = 0.592163, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.845975, params_a_c_x_1 = 0.228183, params_a_c_x_2 = 0.749949, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_sb98_1a_required = ()
+
+function hyb_gga_xc_sb98_1a(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_1a_defaults, hyb_gga_xc_sb98_1a_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_sb98_1a(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_1a_defaults, hyb_gga_xc_sb98_1a_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_sb98_1a, hyb_gga_xc_sb98_1a_defaults, hyb_gga_xc_sb98_1a_required
+
+const hyb_gga_xc_sb98_1b_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.977621, params_a_c_ab_1 = 0.931199, params_a_c_ab_2 = -4.76973, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 1.44946, params_a_c_ss_1 = -2.37073, params_a_c_ss_2 = 2.13564, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.800103, params_a_c_x_1 = -0.084192, params_a_c_x_2 = 1.47742, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_sb98_1b_required = ()
+
+function hyb_gga_xc_sb98_1b(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_1b_defaults, hyb_gga_xc_sb98_1b_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_sb98_1b(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_1b_defaults, hyb_gga_xc_sb98_1b_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_sb98_1b, hyb_gga_xc_sb98_1b_defaults, hyb_gga_xc_sb98_1b_required
+
+const hyb_gga_xc_sb98_1c_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.939269, params_a_c_ab_1 = 0.898121, params_a_c_ab_2 = -4.91276, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.262077, params_a_c_ss_1 = 2.12576, params_a_c_ss_2 = -2.30465, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.810936, params_a_c_x_1 = 0.49609, params_a_c_x_2 = 0.772385, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_sb98_1c_required = ()
+
+function hyb_gga_xc_sb98_1c(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_1c_defaults, hyb_gga_xc_sb98_1c_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_sb98_1c(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_1c_defaults, hyb_gga_xc_sb98_1c_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_sb98_1c, hyb_gga_xc_sb98_1c_defaults, hyb_gga_xc_sb98_1c_required
+
+const hyb_gga_xc_sb98_2a_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.964641, params_a_c_ab_1 = 0.050527, params_a_c_ab_2 = -3.01966, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 1.26686, params_a_c_ss_1 = 1.67146, params_a_c_ss_2 = -1.22565, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.7492, params_a_c_x_1 = 0.402322, params_a_c_x_2 = 0.620779, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_sb98_2a_required = ()
+
+function hyb_gga_xc_sb98_2a(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_2a_defaults, hyb_gga_xc_sb98_2a_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_sb98_2a(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_2a_defaults, hyb_gga_xc_sb98_2a_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_sb98_2a, hyb_gga_xc_sb98_2a_defaults, hyb_gga_xc_sb98_2a_required
+
+const hyb_gga_xc_sb98_2b_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.965362, params_a_c_ab_1 = 0.8633, params_a_c_ab_2 = -4.61778, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = 0.170473, params_a_c_ss_1 = 1.24051, params_a_c_ss_2 = -0.862711, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.770587, params_a_c_x_1 = 0.180767, params_a_c_x_2 = 0.955246, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_sb98_2b_required = ()
+
+function hyb_gga_xc_sb98_2b(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_2b_defaults, hyb_gga_xc_sb98_2b_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_sb98_2b(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_2b_defaults, hyb_gga_xc_sb98_2b_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_sb98_2b, hyb_gga_xc_sb98_2b_defaults, hyb_gga_xc_sb98_2b_required
+
+const hyb_gga_xc_sb98_2c_defaults = (dens_threshold = 1.0e-14, params_a_c_ab_0 = 0.934715, params_a_c_ab_1 = 1.14105, params_a_c_ab_2 = -5.33398, params_a_c_ab_3 = 0.0, params_a_c_ab_4 = 0.0, params_a_c_ss_0 = -0.120163, params_a_c_ss_1 = 2.82332, params_a_c_ss_2 = -2.59412, params_a_c_ss_3 = 0.0, params_a_c_ss_4 = 0.0, params_a_c_x_0 = 0.790194, params_a_c_x_1 = 0.400271, params_a_c_x_2 = 0.832857, params_a_c_x_3 = 0.0, params_a_c_x_4 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_xc_sb98_2c_required = ()
+
+function hyb_gga_xc_sb98_2c(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_2c_defaults, hyb_gga_xc_sb98_2c_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+function hyb_gga_xc_sb98_2c(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_xc_sb98_2c_defaults, hyb_gga_xc_sb98_2c_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_xc_b97_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.params_a_c_ab_0, p.params_a_c_ab_1, p.params_a_c_ab_2, p.params_a_c_ab_3, p.params_a_c_ab_4, p.params_a_c_ss_0, p.params_a_c_ss_1, p.params_a_c_ss_2, p.params_a_c_ss_3, p.params_a_c_ss_4, p.params_a_c_x_0, p.params_a_c_x_1, p.params_a_c_x_2, p.params_a_c_x_3, p.params_a_c_x_4, p.zeta_threshold)
+end
+
+export hyb_gga_xc_sb98_2c, hyb_gga_xc_sb98_2c_defaults, hyb_gga_xc_sb98_2c_required

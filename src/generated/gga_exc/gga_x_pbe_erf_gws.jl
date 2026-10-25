@@ -1,0 +1,91 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_pbe_erf_gws.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, XC_EPSILON, cam_omega, dens_threshold, params_a_ax, params_a_b_PBE, params_a_kappa, zeta_threshold
+const gga_x_pbe_erf_gws_energy = function (rs, z, xt, xs0, xs1, XC_EPSILON, cam_omega, dens_threshold, params_a_ax, params_a_b_PBE, params_a_kappa, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = rs ^ 3
+        cse_tmp_1 = z + 1
+        cse_tmp_2 = (3 // 8) / (pi * cse_tmp_0)
+        cse_tmp_3 = 2 <= zeta_threshold
+        cse_tmp_4 = zeta_threshold - 1
+        cse_tmp_5 = my_piecewise3(cse_tmp_3, NaNMath.pow(zeta_threshold, 0.3333333333333333) - 1, xc_expm1(xc_log1p(my_piecewise3(1 > cse_tmp_4, 1, cse_tmp_4)) / 3)) + 1
+        cse_tmp_6 = 2.080083823051904 * cam_omega ^ 2 * params_a_ax * rs ^ 2 / (9 * 2.1450293971110255 * cse_tmp_5 ^ 2)
+        cse_tmp_7 = 1.4422495703074083
+        cse_tmp_8 = cam_omega * cse_tmp_7 * rs / (3 * 1.4645918875615234 * cse_tmp_5)
+        cse_tmp_9 = cse_tmp_8 / NaNMath.pow(cse_tmp_1, 0.3333333333333333)
+        cse_tmp_10 = cse_tmp_9 > 2
+        cse_tmp_11 = my_piecewise3(cse_tmp_10, cse_tmp_9, 2)
+        cse_tmp_12 = my_piecewise3(cse_tmp_10, 2, cse_tmp_9)
+        cse_tmp_13 = cse_tmp_12 ^ 2
+        cse_tmp_14 = 2 * cse_tmp_13
+        cse_tmp_15 = cse_tmp_12 ^ 4
+        cse_tmp_16 = 4 * cse_tmp_13
+        cse_tmp_17 = -1 / NaNMath.log(XC_EPSILON)
+        cse_tmp_18 = my_piecewise3(cse_tmp_16 <= cse_tmp_17, 0, exp(-1 / my_piecewise3(cse_tmp_17 > cse_tmp_16, cse_tmp_17, cse_tmp_16)))
+        cse_tmp_19 = 1.772453850905516
+        cse_tmp_20 = 8 * cse_tmp_19
+        cse_tmp_21 = 0.2173369174628993
+        cse_tmp_22 = (27 // 56) * 1.8171205928321397 * cse_tmp_21 * params_a_b_PBE
+        cse_tmp_23 = cse_tmp_9 > 1.35
+        cse_tmp_24 = my_piecewise3(cse_tmp_23, cse_tmp_9, 1.35)
+        cse_tmp_25 = my_piecewise3(cse_tmp_23, 1.35, cse_tmp_9)
+        cse_tmp_26 = cse_tmp_25 ^ 2
+        cse_tmp_27 = xc_expm1(-1 / (4 * cse_tmp_26))
+        cse_tmp_28 = 0.0692398843483146 * cse_tmp_21 * cse_tmp_7 * my_piecewise3(cse_tmp_3, NaNMath.pow(zeta_threshold, 1.3333333333333333), 2 * 1.2599210498948732) / rs ^ 4
+        cse_tmp_29 = 1 - z
+        cse_tmp_30 = cse_tmp_8 / NaNMath.pow(cse_tmp_29, 0.3333333333333333)
+        cse_tmp_31 = cse_tmp_30 > 2
+        cse_tmp_32 = my_piecewise3(cse_tmp_31, cse_tmp_30, 2)
+        cse_tmp_33 = my_piecewise3(cse_tmp_31, 2, cse_tmp_30)
+        cse_tmp_34 = cse_tmp_33 ^ 2
+        cse_tmp_35 = 2 * cse_tmp_34
+        cse_tmp_36 = cse_tmp_33 ^ 4
+        cse_tmp_37 = 4 * cse_tmp_34
+        cse_tmp_38 = my_piecewise3(cse_tmp_37 <= cse_tmp_17, 0, exp(-1 / my_piecewise3(cse_tmp_17 > cse_tmp_37, cse_tmp_17, cse_tmp_37)))
+        cse_tmp_39 = cse_tmp_30 > 1.35
+        cse_tmp_40 = my_piecewise3(cse_tmp_39, cse_tmp_30, 1.35)
+        cse_tmp_41 = my_piecewise3(cse_tmp_39, 1.35, cse_tmp_30)
+        cse_tmp_42 = cse_tmp_41 ^ 2
+        cse_tmp_43 = xc_expm1(-1 / (4 * cse_tmp_42))
+        (4 // 3) * pi * cse_tmp_0 * (my_piecewise3(cse_tmp_1 * cse_tmp_2 <= dens_threshold, 0, -NaNMath.pow(cse_tmp_1, 1.3333333333333333) * cse_tmp_28 * (params_a_kappa * (-params_a_kappa / (cse_tmp_22 * xs0 ^ 2 * exp(-cse_tmp_6 / NaNMath.pow(cse_tmp_1, 0.6666666666666666)) * my_piecewise3(cse_tmp_9 >= 2, 1 / (72 * cse_tmp_11 ^ 2) - 1 / (17280 * cse_tmp_11 ^ 4) - 23 // 358400 / cse_tmp_11 ^ 6 + (12791 // 2322432000) / cse_tmp_11 ^ 8 - 11410897 // 42918543360000 / cse_tmp_11 ^ 10 + (128912159 // 14878428364800000) / cse_tmp_11 ^ 12 - 14180177569 // 74987278958592000000 / cse_tmp_11 ^ 14 + (623087515283 // 305948098151055360000000) / cse_tmp_11 ^ 16, (cse_tmp_14 * (72 * cse_tmp_13 - 7) - cse_tmp_18 * (22 * cse_tmp_13 + 144 * cse_tmp_15 + 1)) / (54 * cse_tmp_13 * (cse_tmp_12 * cse_tmp_20 * erf(1 / (2 * cse_tmp_12)) - 24 * cse_tmp_13 + 32 * cse_tmp_15 - 3) - 864 * cse_tmp_15 * cse_tmp_18 * (cse_tmp_14 - 1))) + params_a_kappa) + 1) + 1) * my_piecewise3(cse_tmp_9 >= 1.35, 1 / (36 * cse_tmp_24 ^ 2) - 1 / (960 * cse_tmp_24 ^ 4) + 1 / (26880 * cse_tmp_24 ^ 6) - 1 / (829440 * cse_tmp_24 ^ 8) + 1 / (28385280 * cse_tmp_24 ^ 10) - 1 / (1073479680 * cse_tmp_24 ^ 12) + 1 / (44590694400 * cse_tmp_24 ^ 14), -8 // 3 * cse_tmp_25 * (cse_tmp_19 * erf(1 / (2 * cse_tmp_25)) + 2 * cse_tmp_25 * (-2 * cse_tmp_26 * cse_tmp_27 + cse_tmp_27 - 1 // 2)) + 1)) + my_piecewise3(cse_tmp_2 * cse_tmp_29 <= dens_threshold, 0, -cse_tmp_28 * NaNMath.pow(cse_tmp_29, 1.3333333333333333) * (params_a_kappa * (-params_a_kappa / (cse_tmp_22 * xs1 ^ 2 * exp(-cse_tmp_6 / NaNMath.pow(cse_tmp_29, 0.6666666666666666)) * my_piecewise3(cse_tmp_30 >= 2, 1 / (72 * cse_tmp_32 ^ 2) - 1 / (17280 * cse_tmp_32 ^ 4) - 23 // 358400 / cse_tmp_32 ^ 6 + (12791 // 2322432000) / cse_tmp_32 ^ 8 - 11410897 // 42918543360000 / cse_tmp_32 ^ 10 + (128912159 // 14878428364800000) / cse_tmp_32 ^ 12 - 14180177569 // 74987278958592000000 / cse_tmp_32 ^ 14 + (623087515283 // 305948098151055360000000) / cse_tmp_32 ^ 16, (cse_tmp_35 * (72 * cse_tmp_34 - 7) - cse_tmp_38 * (22 * cse_tmp_34 + 144 * cse_tmp_36 + 1)) / (54 * cse_tmp_34 * (cse_tmp_20 * cse_tmp_33 * erf(1 / (2 * cse_tmp_33)) - 24 * cse_tmp_34 + 32 * cse_tmp_36 - 3) - 864 * cse_tmp_36 * cse_tmp_38 * (cse_tmp_35 - 1))) + params_a_kappa) + 1) + 1) * my_piecewise3(cse_tmp_30 >= 1.35, 1 / (36 * cse_tmp_40 ^ 2) - 1 / (960 * cse_tmp_40 ^ 4) + 1 / (26880 * cse_tmp_40 ^ 6) - 1 / (829440 * cse_tmp_40 ^ 8) + 1 / (28385280 * cse_tmp_40 ^ 10) - 1 / (1073479680 * cse_tmp_40 ^ 12) + 1 / (44590694400 * cse_tmp_40 ^ 14), -8 // 3 * cse_tmp_41 * (cse_tmp_19 * erf(1 / (2 * cse_tmp_41)) + 2 * cse_tmp_41 * (-2 * cse_tmp_42 * cse_tmp_43 + cse_tmp_43 - 1 // 2)) + 1)))
+    end
+end
+export gga_x_pbe_erf_gws_energy
+
+const gga_x_pbe_erf_gws_defaults = (XC_EPSILON = 2.220446049250313e-16, cam_omega = 0.5, dens_threshold = 1.0e-15, params_a_ax = 19.0, params_a_b_PBE = 0.2195149727645171, params_a_kappa = 0.804, zeta_threshold = 2.220446049250313e-16)
+const gga_x_pbe_erf_gws_required = ()
+
+function gga_x_pbe_erf_gws(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_erf_gws_defaults, gga_x_pbe_erf_gws_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_erf_gws_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.cam_omega, p.dens_threshold, p.params_a_ax, p.params_a_b_PBE, p.params_a_kappa, p.zeta_threshold)
+end
+
+function gga_x_pbe_erf_gws(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_pbe_erf_gws_defaults, gga_x_pbe_erf_gws_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_erf_gws_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.cam_omega, p.dens_threshold, p.params_a_ax, p.params_a_b_PBE, p.params_a_kappa, p.zeta_threshold)
+end
+
+export gga_x_pbe_erf_gws, gga_x_pbe_erf_gws_defaults, gga_x_pbe_erf_gws_required
+
+const hyb_gga_x_pbe_erf_gws_defaults = (XC_EPSILON = 2.220446049250313e-16, cam_omega = 0.5, dens_threshold = 1.0e-15, params_a_ax = 19.0, params_a_b_PBE = 0.2195149727645171, params_a_kappa = 0.804, zeta_threshold = 2.220446049250313e-16)
+const hyb_gga_x_pbe_erf_gws_required = ()
+
+function hyb_gga_x_pbe_erf_gws(rho, sigma; params = NamedTuple())
+    p = resolve_params(hyb_gga_x_pbe_erf_gws_defaults, hyb_gga_x_pbe_erf_gws_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_pbe_erf_gws_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.cam_omega, p.dens_threshold, p.params_a_ax, p.params_a_b_PBE, p.params_a_kappa, p.zeta_threshold)
+end
+
+function hyb_gga_x_pbe_erf_gws(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(hyb_gga_x_pbe_erf_gws_defaults, hyb_gga_x_pbe_erf_gws_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_pbe_erf_gws_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.cam_omega, p.dens_threshold, p.params_a_ax, p.params_a_b_PBE, p.params_a_kappa, p.zeta_threshold)
+end
+
+export hyb_gga_x_pbe_erf_gws, hyb_gga_x_pbe_erf_gws_defaults, hyb_gga_x_pbe_erf_gws_required

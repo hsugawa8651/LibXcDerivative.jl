@@ -1,0 +1,119 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_gg99.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, zeta_threshold
+const gga_x_gg99_energy = function (rs, z, xt, xs0, xs1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 0.3183098861837907
+        cse_tmp_2 = (3 // 8) * cse_tmp_1 / rs ^ 3
+        cse_tmp_3 = xs0 ^ 2
+        cse_tmp_4 = 1.8171205928321397
+        cse_tmp_5 = 9.869604401089358
+        cse_tmp_6 = 2 * cse_tmp_4 * cse_tmp_5
+        cse_tmp_7 = 1.7320508075688772
+        cse_tmp_8 = 31.00627668029982
+        cse_tmp_9 = 4 * cse_tmp_7 * cse_tmp_8
+        cse_tmp_10 = xs0 ^ 6
+        cse_tmp_11 = 961.3891935753045
+        cse_tmp_12 = -48 * cse_tmp_11
+        cse_tmp_13 = -cse_tmp_10 - cse_tmp_12
+        cse_tmp_14 = cse_tmp_9 + NaNMath.sqrt(my_piecewise3(cse_tmp_13 > 0, cse_tmp_13, 0))
+        cse_tmp_15 = NaNMath.pow(cse_tmp_14, 0.6666666666666666)
+        cse_tmp_16 = cse_tmp_15 + cse_tmp_3
+        cse_tmp_17 = cse_tmp_7 / cse_tmp_8
+        cse_tmp_18 = cse_tmp_17 * cse_tmp_3
+        cse_tmp_19 = cse_tmp_16 * cse_tmp_18 / (8 * NaNMath.pow(cse_tmp_14, 0.3333333333333333))
+        cse_tmp_20 = xs0 ^ 12
+        cse_tmp_21 = 1.1253880299043025e-09
+        cse_tmp_22 = cse_tmp_21 / 157696
+        cse_tmp_23 = xs0 ^ 8
+        cse_tmp_24 = 1.081935890528998e-06
+        cse_tmp_25 = (9 // 35840) * cse_tmp_24
+        cse_tmp_26 = cse_tmp_11 ^ (-1)
+        cse_tmp_27 = cse_tmp_26 / 64
+        cse_tmp_28 = xs0 ^ 14
+        cse_tmp_29 = cse_tmp_7 / 27551631842.873287
+        cse_tmp_30 = (9 // 14350336) * cse_tmp_29
+        cse_tmp_31 = cse_tmp_7 / 28658145.969387997
+        cse_tmp_32 = cse_tmp_31 / 44800
+        cse_tmp_33 = cse_tmp_7 / 29809.09933344621
+        cse_tmp_34 = cse_tmp_33 / 960
+        cse_tmp_35 = Abs(xs0)
+        cse_tmp_36 = cse_tmp_26 / 48
+        cse_tmp_37 = cse_tmp_10 * cse_tmp_36 - 1
+        cse_tmp_38 = NaNMath.cos(atan(NaNMath.sqrt(my_piecewise3(cse_tmp_37 > 0, cse_tmp_37, 0))) / 3)
+        cse_tmp_39 = cse_tmp_18 * cse_tmp_35 * cse_tmp_38 / 4
+        cse_tmp_40 = cse_tmp_21 / 2464
+        cse_tmp_41 = (9 // 2240) * cse_tmp_24
+        cse_tmp_42 = cse_tmp_26 / 16
+        cse_tmp_43 = (9 // 112112) * cse_tmp_29
+        cse_tmp_44 = cse_tmp_31 / 1400
+        cse_tmp_45 = cse_tmp_33 / 120
+        cse_tmp_46 = my_piecewise3(cse_tmp_3 < cse_tmp_6, my_piecewise3(cse_tmp_19 < 1 // 16, cse_tmp_10 * cse_tmp_16 ^ 3 * cse_tmp_34 / cse_tmp_14 + cse_tmp_19 - cse_tmp_16 ^ 2 * cse_tmp_27 * xs0 ^ 4 / cse_tmp_15 - cse_tmp_16 ^ 6 * cse_tmp_20 * cse_tmp_22 / cse_tmp_14 ^ 2 - cse_tmp_16 ^ 4 * cse_tmp_23 * cse_tmp_25 / NaNMath.pow(cse_tmp_14, 1.3333333333333333) + cse_tmp_16 ^ 5 * cse_tmp_32 * xs0 ^ 10 / NaNMath.pow(cse_tmp_14, 1.6666666666666667) + cse_tmp_16 ^ 7 * cse_tmp_28 * cse_tmp_30 / NaNMath.pow(cse_tmp_14, 2.3333333333333335), xc_asinh(NaNMath.sqrt(my_piecewise3(cse_tmp_19 > 1 // 16, cse_tmp_19, 1 // 16))) ^ 2), my_piecewise3(cse_tmp_39 < 1 // 16, -cse_tmp_10 * cse_tmp_38 ^ 2 * cse_tmp_42 - cse_tmp_20 * cse_tmp_38 ^ 4 * cse_tmp_41 + cse_tmp_23 * cse_tmp_35 * cse_tmp_38 ^ 3 * cse_tmp_45 + cse_tmp_28 * cse_tmp_35 * cse_tmp_38 ^ 5 * cse_tmp_44 + cse_tmp_35 * cse_tmp_38 ^ 7 * cse_tmp_43 * xs0 ^ 20 - cse_tmp_38 ^ 6 * cse_tmp_40 * xs0 ^ 18 + cse_tmp_39, xc_asinh(NaNMath.sqrt(my_piecewise3(cse_tmp_39 > 1 // 16, cse_tmp_39, 1 // 16))) ^ 2))
+        cse_tmp_47 = NaNMath.log(2)
+        cse_tmp_48 = 3.3019272488946267
+        cse_tmp_49 = cse_tmp_1 * cse_tmp_48
+        cse_tmp_50 = cse_tmp_47 * cse_tmp_49
+        cse_tmp_51 = 1.35398839675101 * cse_tmp_50
+        cse_tmp_52 = 0.00752215775972785 * cse_tmp_49
+        cse_tmp_53 = 0.451329465583671 * cse_tmp_1 * cse_tmp_47 * cse_tmp_48 - 0.225664732791835 * cse_tmp_49
+        cse_tmp_54 = -0.000616896535850697 * cse_tmp_49 - 0.000795995530129931 * cse_tmp_50
+        cse_tmp_55 = -9.1381771232865e-5 * cse_tmp_49 - 6.64669668256643e-5 * cse_tmp_50
+        cse_tmp_56 = 0.00107459396567541 * cse_tmp_49 + 0.00334318122654571 * cse_tmp_50
+        cse_tmp_57 = 3.33799868019878e-5 * cse_tmp_49 + 2.0768669156775e-5 * cse_tmp_50
+        cse_tmp_58 = 0.000245190744356689 * cse_tmp_49 + 0.000222878748436381 * cse_tmp_50
+        cse_tmp_59 = NaNMath.sqrt(my_piecewise3(cse_tmp_46 > 1 // 16, cse_tmp_46, 1 // 16))
+        cse_tmp_60 = exp(-2 * cse_tmp_59)
+        cse_tmp_61 = 0.112832366395918 * cse_tmp_49
+        cse_tmp_62 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_63 = zeta_threshold - 1
+        cse_tmp_64 = 1 - z
+        cse_tmp_65 = cse_tmp_64 <= zeta_threshold
+        cse_tmp_66 = -cse_tmp_63
+        cse_tmp_67 = my_piecewise5(cse_tmp_62, cse_tmp_63, cse_tmp_65, cse_tmp_66, z) + 1
+        cse_tmp_68 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_69 = 0.184639691595506 * cse_tmp_4 / (1.4645918875615234 * rs)
+        cse_tmp_70 = xs1 ^ 2
+        cse_tmp_71 = xs1 ^ 6
+        cse_tmp_72 = -cse_tmp_12 - cse_tmp_71
+        cse_tmp_73 = cse_tmp_9 + NaNMath.sqrt(my_piecewise3(cse_tmp_72 > 0, cse_tmp_72, 0))
+        cse_tmp_74 = NaNMath.pow(cse_tmp_73, 0.6666666666666666)
+        cse_tmp_75 = cse_tmp_70 + cse_tmp_74
+        cse_tmp_76 = cse_tmp_17 * cse_tmp_70
+        cse_tmp_77 = cse_tmp_75 * cse_tmp_76 / (8 * NaNMath.pow(cse_tmp_73, 0.3333333333333333))
+        cse_tmp_78 = xs1 ^ 12
+        cse_tmp_79 = xs1 ^ 8
+        cse_tmp_80 = xs1 ^ 14
+        cse_tmp_81 = Abs(xs1)
+        cse_tmp_82 = cse_tmp_36 * cse_tmp_71 - 1
+        cse_tmp_83 = NaNMath.cos(atan(NaNMath.sqrt(my_piecewise3(cse_tmp_82 > 0, cse_tmp_82, 0))) / 3)
+        cse_tmp_84 = cse_tmp_76 * cse_tmp_81 * cse_tmp_83 / 4
+        cse_tmp_85 = my_piecewise3(cse_tmp_70 < cse_tmp_6, my_piecewise3(cse_tmp_77 < 1 // 16, -cse_tmp_22 * cse_tmp_75 ^ 6 * cse_tmp_78 / cse_tmp_73 ^ 2 - cse_tmp_25 * cse_tmp_75 ^ 4 * cse_tmp_79 / NaNMath.pow(cse_tmp_73, 1.3333333333333333) - cse_tmp_27 * cse_tmp_75 ^ 2 * xs1 ^ 4 / cse_tmp_74 + cse_tmp_30 * cse_tmp_75 ^ 7 * cse_tmp_80 / NaNMath.pow(cse_tmp_73, 2.3333333333333335) + cse_tmp_32 * cse_tmp_75 ^ 5 * xs1 ^ 10 / NaNMath.pow(cse_tmp_73, 1.6666666666666667) + cse_tmp_34 * cse_tmp_71 * cse_tmp_75 ^ 3 / cse_tmp_73 + cse_tmp_77, xc_asinh(NaNMath.sqrt(my_piecewise3(cse_tmp_77 > 1 // 16, cse_tmp_77, 1 // 16))) ^ 2), my_piecewise3(cse_tmp_84 < 1 // 16, -cse_tmp_40 * cse_tmp_83 ^ 6 * xs1 ^ 18 - cse_tmp_41 * cse_tmp_78 * cse_tmp_83 ^ 4 - cse_tmp_42 * cse_tmp_71 * cse_tmp_83 ^ 2 + cse_tmp_43 * cse_tmp_81 * cse_tmp_83 ^ 7 * xs1 ^ 20 + cse_tmp_44 * cse_tmp_80 * cse_tmp_81 * cse_tmp_83 ^ 5 + cse_tmp_45 * cse_tmp_79 * cse_tmp_81 * cse_tmp_83 ^ 3 + cse_tmp_84, xc_asinh(NaNMath.sqrt(my_piecewise3(cse_tmp_84 > 1 // 16, cse_tmp_84, 1 // 16))) ^ 2))
+        cse_tmp_86 = NaNMath.sqrt(my_piecewise3(cse_tmp_85 > 1 // 16, cse_tmp_85, 1 // 16))
+        cse_tmp_87 = exp(-2 * cse_tmp_86)
+        cse_tmp_88 = my_piecewise5(cse_tmp_65, cse_tmp_63, cse_tmp_62, cse_tmp_66, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_2 <= dens_threshold, 0, -cse_tmp_69 * my_piecewise3(cse_tmp_67 <= zeta_threshold, cse_tmp_68, NaNMath.pow(cse_tmp_67, 1.3333333333333333)) * my_piecewise3(cse_tmp_46 < 1 // 16, cse_tmp_46 ^ 7 * cse_tmp_57 + cse_tmp_46 ^ 6 * cse_tmp_55 + cse_tmp_46 ^ 5 * cse_tmp_58 + cse_tmp_46 ^ 4 * cse_tmp_54 + cse_tmp_46 ^ 3 * cse_tmp_56 - cse_tmp_46 ^ 2 * cse_tmp_52 + cse_tmp_46 * cse_tmp_53 + cse_tmp_51, cse_tmp_61 * (cse_tmp_5 - 12 * cse_tmp_59 * xc_log1p(cse_tmp_60) + 12 * xc_dilogarithm(-cse_tmp_60)) / (cse_tmp_59 * NaNMath.pow(sech(cse_tmp_59), 0.6666666666666666)))) + my_piecewise3(cse_tmp_2 * cse_tmp_64 <= dens_threshold, 0, -cse_tmp_69 * my_piecewise3(cse_tmp_88 <= zeta_threshold, cse_tmp_68, NaNMath.pow(cse_tmp_88, 1.3333333333333333)) * my_piecewise3(cse_tmp_85 < 1 // 16, cse_tmp_51 - cse_tmp_52 * cse_tmp_85 ^ 2 + cse_tmp_53 * cse_tmp_85 + cse_tmp_54 * cse_tmp_85 ^ 4 + cse_tmp_55 * cse_tmp_85 ^ 6 + cse_tmp_56 * cse_tmp_85 ^ 3 + cse_tmp_57 * cse_tmp_85 ^ 7 + cse_tmp_58 * cse_tmp_85 ^ 5, cse_tmp_61 * (cse_tmp_5 - 12 * cse_tmp_86 * xc_log1p(cse_tmp_87) + 12 * xc_dilogarithm(-cse_tmp_87)) / (cse_tmp_86 * NaNMath.pow(sech(cse_tmp_86), 0.6666666666666666))))
+    end
+end
+export gga_x_gg99_energy
+
+const gga_x_gg99_defaults = (dens_threshold = 5.0e-7, zeta_threshold = 2.220446049250313e-16)
+const gga_x_gg99_required = ()
+
+function gga_x_gg99(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_gg99_defaults, gga_x_gg99_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_gg99_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.zeta_threshold)
+end
+
+function gga_x_gg99(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_gg99_defaults, gga_x_gg99_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_gg99_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.zeta_threshold)
+end
+
+export gga_x_gg99, gga_x_gg99_defaults, gga_x_gg99_required

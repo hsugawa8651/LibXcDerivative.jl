@@ -1,0 +1,40 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_chachiyo.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, params_a_af, params_a_ap, params_a_bf, params_a_bp, params_a_cf, params_a_cp, params_a_h, zeta_threshold
+const gga_c_chachiyo_energy = function (rs, z, xt, xs0, xs1, params_a_af, params_a_ap, params_a_bf, params_a_bp, params_a_cf, params_a_cp, params_a_h, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = rs ^ (-1)
+        cse_tmp_1 = rs ^ (-2)
+        cse_tmp_2 = params_a_ap * xc_log1p(cse_tmp_0 * params_a_bp + cse_tmp_1 * params_a_cp)
+        cse_tmp_3 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_4 = zeta_threshold - 1
+        cse_tmp_5 = my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_3, xc_expm1((2 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_4, z, cse_tmp_4))))
+        cse_tmp_6 = -z
+        cse_tmp_7 = my_piecewise3(1 - z <= zeta_threshold, cse_tmp_3, xc_expm1((2 // 3) * xc_log1p(my_piecewise3(cse_tmp_6 > cse_tmp_4, cse_tmp_6, cse_tmp_4))))
+        cse_tmp_8 = cse_tmp_5 / 2 + cse_tmp_7 / 2
+        cse_tmp_9 = cse_tmp_2 + (-cse_tmp_2 + params_a_af * xc_log1p(cse_tmp_0 * params_a_bf + cse_tmp_1 * params_a_cf)) * (-cse_tmp_5 - cse_tmp_7) * (cse_tmp_8 + (cse_tmp_8 + 1) ^ 2 + 2)
+        cse_tmp_9 * NaNMath.pow(1.2599210498948732 * cse_tmp_0 * xt ^ 2 / 32 + 1, params_a_h / cse_tmp_9)
+    end
+end
+export gga_c_chachiyo_energy
+
+const gga_c_chachiyo_defaults = (params_a_af = -0.007772675, params_a_ap = -0.01554535, params_a_bf = 27.4203609, params_a_bp = 20.4562557, params_a_cf = 27.4203609, params_a_cp = 20.4562557, params_a_h = 0.06672632, zeta_threshold = 2.220446049250313e-16)
+const gga_c_chachiyo_required = ()
+
+function gga_c_chachiyo(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_chachiyo_defaults, gga_c_chachiyo_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_chachiyo_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_af, p.params_a_ap, p.params_a_bf, p.params_a_bp, p.params_a_cf, p.params_a_cp, p.params_a_h, p.zeta_threshold)
+end
+
+function gga_c_chachiyo(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_chachiyo_defaults, gga_c_chachiyo_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_chachiyo_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_af, p.params_a_ap, p.params_a_bf, p.params_a_bp, p.params_a_cf, p.params_a_cp, p.params_a_h, p.zeta_threshold)
+end
+
+export gga_c_chachiyo, gga_c_chachiyo_defaults, gga_c_chachiyo_required

@@ -6,10 +6,12 @@ using LibXcDerivative
 using Test
 using ForwardDiff
 using Libxc
+using SpecialFunctions
 
 @testset "LibXcDerivative.jl" begin
     include("piecewise.jl")
     include("libxc_names.jl")
     include("generated_audit.jl")
     include("generated_lda.jl")
+    include("generated_gga.jl")
 end

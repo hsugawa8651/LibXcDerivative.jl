@@ -1,0 +1,48 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_wi.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, params_a_a, params_a_b, params_a_c, params_a_d, params_a_k
+const gga_c_wi_energy = function (rs, z, xt, xs0, xs1, params_a_a, params_a_b, params_a_c, params_a_d, params_a_k)
+    @inbounds begin
+        cse_tmp_0 = xt ^ 2
+        (cse_tmp_0 * params_a_b * exp(-cse_tmp_0 * params_a_k) + params_a_a) / (params_a_c + rs * (3.3019272488946267 * 1.4645918875615234 * params_a_d * NaNMath.pow(xt, 3.5) / 3 + 1))
+    end
+end
+export gga_c_wi_energy
+
+const gga_c_wi_defaults = (params_a_a = -0.0652, params_a_b = 0.0007, params_a_c = 0.21, params_a_d = 0.001, params_a_k = 0.001)
+const gga_c_wi_required = ()
+
+function gga_c_wi(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_wi_defaults, gga_c_wi_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_wi_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_a, p.params_a_b, p.params_a_c, p.params_a_d, p.params_a_k)
+end
+
+function gga_c_wi(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_wi_defaults, gga_c_wi_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_wi_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_a, p.params_a_b, p.params_a_c, p.params_a_d, p.params_a_k)
+end
+
+export gga_c_wi, gga_c_wi_defaults, gga_c_wi_required
+
+const gga_c_wi0_defaults = (params_a_a = -0.44, params_a_b = 0.0032407, params_a_c = 7.8, params_a_d = 0.0073, params_a_k = 0.000311)
+const gga_c_wi0_required = ()
+
+function gga_c_wi0(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_wi0_defaults, gga_c_wi0_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_wi_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_a, p.params_a_b, p.params_a_c, p.params_a_d, p.params_a_k)
+end
+
+function gga_c_wi0(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_wi0_defaults, gga_c_wi0_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_wi_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_a, p.params_a_b, p.params_a_c, p.params_a_d, p.params_a_k)
+end
+
+export gga_c_wi0, gga_c_wi0_defaults, gga_c_wi0_required

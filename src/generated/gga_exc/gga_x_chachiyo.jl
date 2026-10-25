@@ -1,0 +1,128 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_chachiyo.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, dens_threshold, zeta_threshold
+const gga_x_chachiyo_energy = function (rs, z, xt, xs0, xs1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = xs0 ^ 2
+        cse_tmp_3 = 3.3019272488946267
+        cse_tmp_4 = 2.1450293971110255
+        cse_tmp_5 = (81 // 1024) * cse_tmp_3 / cse_tmp_4
+        cse_tmp_6 = 9.869604401089358
+        cse_tmp_7 = cse_tmp_6 ^ (-1)
+        cse_tmp_8 = (3 // 2) * cse_tmp_7
+        cse_tmp_9 = Abs(xs0)
+        cse_tmp_10 = 0.010265982254684336
+        cse_tmp_11 = 3 - cse_tmp_6 / 2
+        cse_tmp_12 = cse_tmp_10 * cse_tmp_11
+        cse_tmp_13 = 1.4645918875615234
+        cse_tmp_14 = cse_tmp_13 * cse_tmp_3
+        cse_tmp_15 = cse_tmp_14 * (-3 // 2 * cse_tmp_12 - cse_tmp_7) / 27
+        cse_tmp_16 = (3 // 4) * cse_tmp_7
+        cse_tmp_17 = cse_tmp_6 / 3 - 3 // 2
+        cse_tmp_18 = cse_tmp_17 * cse_tmp_7
+        cse_tmp_19 = cse_tmp_10 * cse_tmp_11 ^ 2 - cse_tmp_18
+        cse_tmp_20 = cse_tmp_12 + cse_tmp_16 + cse_tmp_19 * cse_tmp_8
+        cse_tmp_21 = 1.8171205928321397
+        cse_tmp_22 = (2 // 243) * cse_tmp_21 * cse_tmp_4
+        cse_tmp_23 = cse_tmp_2 * cse_tmp_22
+        cse_tmp_24 = (3 // 5) * cse_tmp_7
+        cse_tmp_25 = cse_tmp_19 * cse_tmp_7
+        cse_tmp_26 = 1 // 2 - pi / 4
+        cse_tmp_27 = 2 + pi
+        cse_tmp_28 = cse_tmp_26 * cse_tmp_27
+        cse_tmp_29 = cse_tmp_10 * cse_tmp_11 * cse_tmp_17 - cse_tmp_11 * cse_tmp_25 - cse_tmp_28 * cse_tmp_7
+        cse_tmp_30 = (4 // 2187) * pi * (-3 // 4 * cse_tmp_12 - cse_tmp_24 - cse_tmp_25 + (3 // 2) * cse_tmp_29 * cse_tmp_7)
+        cse_tmp_31 = xs0 ^ 4
+        cse_tmp_32 = cse_tmp_7 / 2
+        cse_tmp_33 = cse_tmp_29 * cse_tmp_7
+        cse_tmp_34 = cse_tmp_6 / 5 - 3 // 4
+        cse_tmp_35 = cse_tmp_34 * cse_tmp_7
+        cse_tmp_36 = cse_tmp_10 * cse_tmp_11 * cse_tmp_26 * cse_tmp_27 - cse_tmp_11 * cse_tmp_33 - cse_tmp_18 * cse_tmp_19 - cse_tmp_35
+        cse_tmp_37 = (4 // 59049) * 4.60115111447049 * cse_tmp_3 * ((3 // 5) * cse_tmp_12 + cse_tmp_16 * cse_tmp_19 + cse_tmp_32 - cse_tmp_33 + cse_tmp_36 * cse_tmp_8)
+        cse_tmp_38 = cse_tmp_21 * cse_tmp_9
+        cse_tmp_39 = (3 // 7) * cse_tmp_7
+        cse_tmp_40 = cse_tmp_36 * cse_tmp_7
+        cse_tmp_41 = 3 // 5 - cse_tmp_6 / 6
+        cse_tmp_42 = cse_tmp_41 * cse_tmp_7
+        cse_tmp_43 = cse_tmp_10 * cse_tmp_11 * cse_tmp_34 - cse_tmp_11 * cse_tmp_40 - cse_tmp_18 * cse_tmp_29 - cse_tmp_25 * cse_tmp_28 - cse_tmp_42
+        cse_tmp_44 = (8 // 531441) * 6.738808595698141 * (-cse_tmp_12 / 2 - cse_tmp_19 * cse_tmp_24 + (3 // 4) * cse_tmp_29 * cse_tmp_7 - cse_tmp_39 - cse_tmp_40 + (3 // 2) * cse_tmp_43 * cse_tmp_7)
+        cse_tmp_45 = xs0 ^ 6
+        cse_tmp_46 = (3 // 8) * cse_tmp_7
+        cse_tmp_47 = cse_tmp_43 * cse_tmp_7
+        cse_tmp_48 = cse_tmp_6 / 7 - 1 // 2
+        cse_tmp_49 = cse_tmp_48 * cse_tmp_7
+        cse_tmp_50 = cse_tmp_10 * cse_tmp_11 * cse_tmp_41 - cse_tmp_11 * cse_tmp_47 - cse_tmp_18 * cse_tmp_36 - cse_tmp_19 * cse_tmp_35 - cse_tmp_28 * cse_tmp_33 - cse_tmp_49
+        cse_tmp_51 = (16 // 4782969) * cse_tmp_6 * ((3 // 7) * cse_tmp_12 + cse_tmp_16 * cse_tmp_36 - cse_tmp_24 * cse_tmp_29 + cse_tmp_25 / 2 + cse_tmp_46 - cse_tmp_47 + cse_tmp_50 * cse_tmp_8)
+        cse_tmp_52 = cse_tmp_50 * cse_tmp_7
+        cse_tmp_53 = 3 // 7 - cse_tmp_6 / 8
+        cse_tmp_54 = cse_tmp_53 * cse_tmp_7
+        cse_tmp_55 = cse_tmp_10 * cse_tmp_11 * cse_tmp_48 - cse_tmp_11 * cse_tmp_52 - cse_tmp_18 * cse_tmp_43 - cse_tmp_19 * cse_tmp_42 - cse_tmp_28 * cse_tmp_40 - cse_tmp_29 * cse_tmp_35 - cse_tmp_54
+        cse_tmp_56 = (16 // 129140163) * 14.454942539276981 * cse_tmp_3 * (-3 // 8 * cse_tmp_12 - cse_tmp_24 * cse_tmp_36 - 3 // 7 * cse_tmp_25 + cse_tmp_29 * cse_tmp_7 / 2 + (3 // 4) * cse_tmp_43 * cse_tmp_7 - cse_tmp_52 + (3 // 2) * cse_tmp_55 * cse_tmp_7 - cse_tmp_7 / 3)
+        cse_tmp_57 = xs0 ^ 8
+        cse_tmp_58 = cse_tmp_55 * cse_tmp_7
+        cse_tmp_59 = cse_tmp_6 / 9 - 3 // 8
+        cse_tmp_60 = cse_tmp_10 * cse_tmp_11 * cse_tmp_53 - cse_tmp_11 * cse_tmp_58 - cse_tmp_18 * cse_tmp_50 - cse_tmp_19 * cse_tmp_49 - cse_tmp_28 * cse_tmp_47 - cse_tmp_29 * cse_tmp_42 - cse_tmp_35 * cse_tmp_36 - cse_tmp_59 * cse_tmp_7
+        cse_tmp_61 = (32 // 1162261467) * 21.170591578193033 * cse_tmp_21 * (cse_tmp_12 / 3 + cse_tmp_16 * cse_tmp_50 + cse_tmp_19 * cse_tmp_46 + cse_tmp_32 * cse_tmp_36 - 3 // 7 * cse_tmp_33 - 3 // 5 * cse_tmp_47 - cse_tmp_58 + cse_tmp_60 * cse_tmp_8 + (3 // 10) * cse_tmp_7)
+        cse_tmp_62 = cse_tmp_60 * cse_tmp_7
+        cse_tmp_63 = 1 // 3 - cse_tmp_6 / 10
+        cse_tmp_64 = cse_tmp_10 * cse_tmp_11 * cse_tmp_59 - cse_tmp_11 * cse_tmp_62 - cse_tmp_18 * cse_tmp_55 - cse_tmp_25 * cse_tmp_53 - cse_tmp_28 * cse_tmp_52 - cse_tmp_29 * cse_tmp_49 - cse_tmp_35 * cse_tmp_43 - cse_tmp_36 * cse_tmp_42 - cse_tmp_63 * cse_tmp_7
+        cse_tmp_65 = (64 // 10460353203) * 31.00627668029982 * (-3 // 10 * cse_tmp_12 - cse_tmp_24 * cse_tmp_50 - cse_tmp_25 / 3 + (3 // 8) * cse_tmp_29 * cse_tmp_7 - cse_tmp_36 * cse_tmp_39 + cse_tmp_43 * cse_tmp_7 / 2 + (3 // 4) * cse_tmp_55 * cse_tmp_7 - cse_tmp_62 + (3 // 2) * cse_tmp_64 * cse_tmp_7 - 3 // 11 * cse_tmp_7)
+        cse_tmp_66 = xs0 ^ 10
+        cse_tmp_67 = cse_tmp_64 * cse_tmp_7
+        cse_tmp_68 = cse_tmp_6 / 11 - 3 // 10
+        cse_tmp_69 = cse_tmp_10 * cse_tmp_11 * cse_tmp_63 - cse_tmp_11 * cse_tmp_67 - cse_tmp_18 * cse_tmp_60 - cse_tmp_25 * cse_tmp_59 - cse_tmp_28 * cse_tmp_58 - cse_tmp_33 * cse_tmp_53 - cse_tmp_35 * cse_tmp_50 - cse_tmp_36 * cse_tmp_49 - cse_tmp_42 * cse_tmp_43 - cse_tmp_68 * cse_tmp_7
+        cse_tmp_70 = (64 // 282429536481) * 45.41154128945516 * cse_tmp_3 * ((3 // 11) * cse_tmp_12 + cse_tmp_16 * cse_tmp_60 - cse_tmp_24 * cse_tmp_55 + (3 // 10) * cse_tmp_25 + cse_tmp_32 * cse_tmp_50 - cse_tmp_33 / 3 + cse_tmp_36 * cse_tmp_46 - 3 // 7 * cse_tmp_47 - cse_tmp_67 + cse_tmp_69 * cse_tmp_8 + cse_tmp_7 / 4)
+        cse_tmp_71 = cse_tmp_69 * cse_tmp_7
+        cse_tmp_72 = (128 // 2541865828329) * 66.50937497420118 * (-cse_tmp_12 / 4 - cse_tmp_24 * cse_tmp_60 - 3 // 11 * cse_tmp_25 + (3 // 10) * cse_tmp_29 * cse_tmp_7 - cse_tmp_39 * cse_tmp_50 - cse_tmp_40 / 3 + (3 // 8) * cse_tmp_43 * cse_tmp_7 + cse_tmp_55 * cse_tmp_7 / 2 + (3 // 4) * cse_tmp_64 * cse_tmp_7 + (3 // 2) * cse_tmp_7 * (cse_tmp_10 * cse_tmp_11 * cse_tmp_68 - cse_tmp_11 * cse_tmp_71 - cse_tmp_18 * cse_tmp_64 - cse_tmp_25 * cse_tmp_63 - cse_tmp_28 * cse_tmp_62 - cse_tmp_33 * cse_tmp_59 - cse_tmp_35 * cse_tmp_55 - cse_tmp_36 * cse_tmp_54 - cse_tmp_42 * cse_tmp_50 - cse_tmp_47 * cse_tmp_48 - cse_tmp_7 * (3 // 11 - cse_tmp_6 / 12)) - 3 // 13 * cse_tmp_7 - cse_tmp_71)
+        cse_tmp_73 = NaNMath.sqrt(my_piecewise3(cse_tmp_2 > cse_tmp_5, cse_tmp_2, cse_tmp_5))
+        cse_tmp_74 = cse_tmp_14 * cse_tmp_73
+        cse_tmp_75 = cse_tmp_74 / 27
+        cse_tmp_76 = cse_tmp_21 / cse_tmp_13
+        cse_tmp_77 = (27 // 2) * cse_tmp_76
+        cse_tmp_78 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_79 = zeta_threshold - 1
+        cse_tmp_80 = 1 - z
+        cse_tmp_81 = cse_tmp_80 <= zeta_threshold
+        cse_tmp_82 = -cse_tmp_79
+        cse_tmp_83 = my_piecewise5(cse_tmp_78, cse_tmp_79, cse_tmp_81, cse_tmp_82, z) + 1
+        cse_tmp_84 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_85 = 0.184639691595506 * cse_tmp_76 / rs
+        cse_tmp_86 = xs1 ^ 2
+        cse_tmp_87 = Abs(xs1)
+        cse_tmp_88 = cse_tmp_22 * cse_tmp_86
+        cse_tmp_89 = xs1 ^ 4
+        cse_tmp_90 = cse_tmp_21 * cse_tmp_87
+        cse_tmp_91 = xs1 ^ 6
+        cse_tmp_92 = xs1 ^ 8
+        cse_tmp_93 = xs1 ^ 10
+        cse_tmp_94 = NaNMath.sqrt(my_piecewise3(cse_tmp_86 > cse_tmp_5, cse_tmp_86, cse_tmp_5))
+        cse_tmp_95 = cse_tmp_14 * cse_tmp_94
+        cse_tmp_96 = cse_tmp_95 / 27
+        cse_tmp_97 = my_piecewise5(cse_tmp_81, cse_tmp_79, cse_tmp_78, cse_tmp_82, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_85 * (cse_tmp_23 * my_piecewise3(cse_tmp_2 < cse_tmp_5, cse_tmp_15 * cse_tmp_9 + cse_tmp_2 * cse_tmp_30 * cse_tmp_9 + cse_tmp_20 * cse_tmp_23 + cse_tmp_31 * cse_tmp_37 + cse_tmp_31 * cse_tmp_38 * cse_tmp_44 + cse_tmp_38 * cse_tmp_66 * cse_tmp_72 + cse_tmp_45 * cse_tmp_51 + cse_tmp_45 * cse_tmp_56 * cse_tmp_9 + cse_tmp_57 * cse_tmp_61 + cse_tmp_57 * cse_tmp_65 * cse_tmp_9 + cse_tmp_66 * cse_tmp_70 + cse_tmp_8, cse_tmp_77 * xc_x_minus_log1p(cse_tmp_75) / (cse_tmp_73 * (cse_tmp_6 + cse_tmp_74 / 9) * xc_log1p(cse_tmp_75))) + 1) * my_piecewise3(cse_tmp_83 <= zeta_threshold, cse_tmp_84, NaNMath.pow(cse_tmp_83, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_80 <= dens_threshold, 0, -cse_tmp_85 * (cse_tmp_88 * my_piecewise3(cse_tmp_86 < cse_tmp_5, cse_tmp_15 * cse_tmp_87 + cse_tmp_20 * cse_tmp_88 + cse_tmp_30 * cse_tmp_86 * cse_tmp_87 + cse_tmp_37 * cse_tmp_89 + cse_tmp_44 * cse_tmp_89 * cse_tmp_90 + cse_tmp_51 * cse_tmp_91 + cse_tmp_56 * cse_tmp_87 * cse_tmp_91 + cse_tmp_61 * cse_tmp_92 + cse_tmp_65 * cse_tmp_87 * cse_tmp_92 + cse_tmp_70 * cse_tmp_93 + cse_tmp_72 * cse_tmp_90 * cse_tmp_93 + cse_tmp_8, cse_tmp_77 * xc_x_minus_log1p(cse_tmp_96) / (cse_tmp_94 * (cse_tmp_6 + cse_tmp_95 / 9) * xc_log1p(cse_tmp_96))) + 1) * my_piecewise3(cse_tmp_97 <= zeta_threshold, cse_tmp_84, NaNMath.pow(cse_tmp_97, 1.3333333333333333)))
+    end
+end
+export gga_x_chachiyo_energy
+
+const gga_x_chachiyo_defaults = (dens_threshold = 1.0e-15, zeta_threshold = 2.220446049250313e-16)
+const gga_x_chachiyo_required = ()
+
+function gga_x_chachiyo(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_chachiyo_defaults, gga_x_chachiyo_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_chachiyo_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.zeta_threshold)
+end
+
+function gga_x_chachiyo(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_chachiyo_defaults, gga_x_chachiyo_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_chachiyo_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.dens_threshold, p.zeta_threshold)
+end
+
+export gga_x_chachiyo, gga_x_chachiyo_defaults, gga_x_chachiyo_required

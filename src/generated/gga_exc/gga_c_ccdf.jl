@@ -1,0 +1,31 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_ccdf.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, params_a_c1, params_a_c2, params_a_c3, params_a_c4, params_a_c5
+const gga_c_ccdf_energy = function (rs, z, xt, xs0, xs1, params_a_c1, params_a_c2, params_a_c3, params_a_c4, params_a_c5)
+    @inbounds begin
+        cse_tmp_0 = 1 + exp(-params_a_c4 * (-params_a_c5 + 2.080083823051904 * xt / (6 * 2.1450293971110255)))
+        params_a_c1 * (cse_tmp_0 - params_a_c3) / (cse_tmp_0 * (3.3019272488946267 * 1.4645918875615234 * params_a_c2 * rs / 3 + 1))
+    end
+end
+export gga_c_ccdf_energy
+
+const gga_c_ccdf_defaults = (params_a_c1 = -0.0468, params_a_c2 = 0.023, params_a_c3 = 0.544, params_a_c4 = 23.401, params_a_c5 = 0.479)
+const gga_c_ccdf_required = ()
+
+function gga_c_ccdf(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_ccdf_defaults, gga_c_ccdf_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_ccdf_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_c1, p.params_a_c2, p.params_a_c3, p.params_a_c4, p.params_a_c5)
+end
+
+function gga_c_ccdf(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_ccdf_defaults, gga_c_ccdf_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_ccdf_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_c1, p.params_a_c2, p.params_a_c3, p.params_a_c4, p.params_a_c5)
+end
+
+export gga_c_ccdf, gga_c_ccdf_defaults, gga_c_ccdf_required

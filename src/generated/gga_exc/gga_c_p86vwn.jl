@@ -1,0 +1,73 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_p86vwn.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, params_a_aa, params_a_bb, params_a_ftilde, params_a_malpha, params_a_mbeta, params_a_mdelta, params_a_mgamma, zeta_threshold
+const gga_c_p86vwn_energy = function (rs, z, xt, xs0, xs1, params_a_aa, params_a_bb, params_a_ftilde, params_a_malpha, params_a_mbeta, params_a_mdelta, params_a_mgamma, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = NaNMath.sqrt(rs)
+        cse_tmp_1 = 7.06042 * cse_tmp_0 + 18.0578
+        cse_tmp_2 = cse_tmp_1 + rs
+        cse_tmp_3 = cse_tmp_2 ^ (-1)
+        cse_tmp_4 = 2 * cse_tmp_0
+        cse_tmp_5 = 3.72744 * cse_tmp_0 + 12.9352
+        cse_tmp_6 = cse_tmp_5 + rs
+        cse_tmp_7 = cse_tmp_6 ^ (-1)
+        cse_tmp_8 = 0.038783294878113 * atan(6.15199081975908 / (cse_tmp_4 + 3.72744)) + 0.0310907 * xc_log1p(-cse_tmp_5 * cse_tmp_7) + 0.000969022771154437 * xc_log1p(cse_tmp_7 * (-cse_tmp_6 + (cse_tmp_0 + 0.10498) ^ 2))
+        cse_tmp_9 = 1.2599210498948732
+        cse_tmp_10 = z + 1
+        cse_tmp_11 = cse_tmp_10 <= zeta_threshold
+        cse_tmp_12 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_13 = zeta_threshold - 1
+        cse_tmp_14 = xc_log1p(my_piecewise3(z > cse_tmp_13, z, cse_tmp_13))
+        cse_tmp_15 = 1 - z
+        cse_tmp_16 = cse_tmp_15 <= zeta_threshold
+        cse_tmp_17 = -z
+        cse_tmp_18 = xc_log1p(my_piecewise3(cse_tmp_17 > cse_tmp_13, cse_tmp_17, cse_tmp_13))
+        cse_tmp_19 = (my_piecewise3(cse_tmp_11, cse_tmp_12, xc_expm1((4 // 3) * cse_tmp_14)) + my_piecewise3(cse_tmp_16, cse_tmp_12, xc_expm1((4 // 3) * cse_tmp_18))) / (2 * cse_tmp_9 - 2)
+        cse_tmp_20 = rs ^ 2
+        cse_tmp_21 = params_a_aa + (cse_tmp_20 * params_a_mbeta + params_a_bb + params_a_malpha * rs) / (cse_tmp_20 * params_a_mdelta + 10000.0 * params_a_mbeta * rs ^ 3 + params_a_mgamma * rs + 1)
+        cse_tmp_22 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_23 = 1.13107 * cse_tmp_0 + 13.0045
+        cse_tmp_24 = cse_tmp_23 + rs
+        cse_tmp_25 = cse_tmp_24 ^ (-1)
+        -cse_tmp_10 * cse_tmp_15 * cse_tmp_19 * ((9 // 4) * cse_tmp_9 - 9 // 4) * (z ^ 2 + 1) * (0.317708004743942 * atan(7.12310891781812 / (cse_tmp_4 + 1.13107)) + xc_log1p(-cse_tmp_23 * cse_tmp_25) + 0.000414033794282063 * xc_log1p(cse_tmp_25 * (-cse_tmp_24 + (cse_tmp_0 + 0.0047584) ^ 2))) / (6 * 9.869604401089358) + cse_tmp_19 * z ^ 4 * (-cse_tmp_8 + 0.0524913931697809 * atan(4.73092690956011 / (cse_tmp_4 + 7.06042)) + 0.01554535 * xc_log1p(-cse_tmp_1 * cse_tmp_3) + 0.00224786709554261 * xc_log1p(cse_tmp_3 * (-cse_tmp_2 + (cse_tmp_0 + 0.325) ^ 2))) + 1.8171205928321397 * cse_tmp_21 * xt ^ 2 * exp(-1.5874010519681994 * 1.2009369551760027 * params_a_ftilde * (params_a_aa + params_a_bb) * Abs(xt) / (2 * 1.2102032422537643 * cse_tmp_0 * cse_tmp_21)) / (2 * 1.4645918875615234 * rs * NaNMath.sqrt(my_piecewise3(cse_tmp_11, cse_tmp_22, xc_expm1((5 // 3) * cse_tmp_14)) / 2 + my_piecewise3(cse_tmp_16, cse_tmp_22, xc_expm1((5 // 3) * cse_tmp_18)) / 2 + 1)) + cse_tmp_8
+    end
+end
+export gga_c_p86vwn_energy
+
+const gga_c_p86vwn_defaults = (params_a_aa = 0.001667, params_a_bb = 0.002568, params_a_ftilde = 0.19195, params_a_malpha = 0.023266, params_a_mbeta = 7.389e-6, params_a_mdelta = 0.472, params_a_mgamma = 8.723, zeta_threshold = 2.220446049250313e-16)
+const gga_c_p86vwn_required = ()
+
+function gga_c_p86vwn(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_p86vwn_defaults, gga_c_p86vwn_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_p86vwn_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+function gga_c_p86vwn(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_p86vwn_defaults, gga_c_p86vwn_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_p86vwn_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+export gga_c_p86vwn, gga_c_p86vwn_defaults, gga_c_p86vwn_required
+
+const gga_c_p86vwn_ft_defaults = (params_a_aa = 0.001667, params_a_bb = 0.002568, params_a_ftilde = 0.19199566167376364, params_a_malpha = 0.023266, params_a_mbeta = 7.389e-6, params_a_mdelta = 0.472, params_a_mgamma = 8.723, zeta_threshold = 2.220446049250313e-16)
+const gga_c_p86vwn_ft_required = ()
+
+function gga_c_p86vwn_ft(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_p86vwn_ft_defaults, gga_c_p86vwn_ft_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_p86vwn_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+function gga_c_p86vwn_ft(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_p86vwn_ft_defaults, gga_c_p86vwn_ft_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_p86vwn_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_aa, p.params_a_bb, p.params_a_ftilde, p.params_a_malpha, p.params_a_mbeta, p.params_a_mdelta, p.params_a_mgamma, p.zeta_threshold)
+end
+
+export gga_c_p86vwn_ft, gga_c_p86vwn_ft_defaults, gga_c_p86vwn_ft_required

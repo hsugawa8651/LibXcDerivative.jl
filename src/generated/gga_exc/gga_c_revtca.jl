@@ -1,0 +1,40 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_c_revtca.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, XC_EPSILON, zeta_threshold
+const gga_c_revtca_energy = function (rs, z, xt, xs0, xs1, XC_EPSILON, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = rs ^ (-1)
+        cse_tmp_1 = z + 1
+        cse_tmp_2 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_3 = zeta_threshold - 1
+        cse_tmp_4 = 1 - z
+        cse_tmp_5 = -z
+        cse_tmp_6 = 1.8171205928321397
+        cse_tmp_7 = 2.1450293971110255 * cse_tmp_0 * cse_tmp_6 * xt / 4
+        cse_tmp_8 = NaNMath.pow(XC_EPSILON, 0.25)
+        cse_tmp_9 = my_piecewise3(cse_tmp_7 > cse_tmp_8, cse_tmp_7, cse_tmp_8)
+        cse_tmp_0 * (0.897889 - 0.655868 * atan(3.177037 * rs + 4.88827)) * (cse_tmp_1 * cse_tmp_4 * (z ^ 2 + 1) + z ^ 4 * my_piecewise3(cse_tmp_7 <= cse_tmp_8, 21.170591578193033 * cse_tmp_6 * xt ^ 4 / (5120 * rs ^ 4) + 1 - 3.3019272488946267 * 4.60115111447049 * xt ^ 2 / (96 * rs ^ 2) - 97.40909103400244 * xt ^ 6 / (573440 * rs ^ 6), NaNMath.sin(cse_tmp_9) / cse_tmp_9) ^ 2) * (my_piecewise3(cse_tmp_1 <= zeta_threshold, cse_tmp_2, xc_expm1((2 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_3, z, cse_tmp_3)))) / 2 + my_piecewise3(cse_tmp_4 <= zeta_threshold, cse_tmp_2, xc_expm1((2 // 3) * xc_log1p(my_piecewise3(cse_tmp_5 > cse_tmp_3, cse_tmp_5, cse_tmp_3)))) / 2 + 1) ^ 3 / (0.12507602928138 * 0.17286359017040734 * NaNMath.pow(xt, 2.3) + 1)
+    end
+end
+export gga_c_revtca_energy
+
+const gga_c_revtca_defaults = (XC_EPSILON = 2.220446049250313e-16, zeta_threshold = 2.220446049250313e-16)
+const gga_c_revtca_required = ()
+
+function gga_c_revtca(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_c_revtca_defaults, gga_c_revtca_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_c_revtca_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.zeta_threshold)
+end
+
+function gga_c_revtca(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_c_revtca_defaults, gga_c_revtca_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_c_revtca_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.XC_EPSILON, p.zeta_threshold)
+end
+
+export gga_c_revtca, gga_c_revtca_defaults, gga_c_revtca_required

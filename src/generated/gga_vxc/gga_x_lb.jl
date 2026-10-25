@@ -1,0 +1,92 @@
+# Auto-generated from the Libxc sources
+# python/gga_vxc/gga_x_lb.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, params_a_alpha, params_a_beta, params_a_gamma
+const gga_x_lb_potential = function (rs, z, xt, xs0, xs1, params_a_alpha, params_a_beta, params_a_gamma)
+    @inbounds begin
+        cse_tmp_0 = xs0 ^ 2
+        cse_tmp_1 = params_a_gamma ^ 2
+        cse_tmp_2 = 1 / (16 * cse_tmp_1)
+        cse_tmp_3 = NaNMath.sqrt(my_piecewise3(cse_tmp_0 > cse_tmp_2, cse_tmp_0, cse_tmp_2))
+        cse_tmp_4 = NaNMath.sqrt(my_piecewise3(cse_tmp_0 > 90000, cse_tmp_0, 90000))
+        1.4422495703074083 * NaNMath.pow(z + 1, 0.3333333333333333) * (-0.984745021842696 * 1.2599210498948732 * params_a_alpha - my_piecewise3(cse_tmp_0 < 90000, cse_tmp_0 * params_a_beta / (3 * params_a_beta * my_piecewise3(cse_tmp_0 * cse_tmp_1 < 1 // 16, cse_tmp_0 * params_a_gamma - 1300075 // 226492416 * params_a_gamma ^ 27 * xs0 ^ 28 + (676039 // 104857600) * params_a_gamma ^ 25 * xs0 ^ 26 - 88179 // 12058624 * params_a_gamma ^ 23 * xs0 ^ 24 + (46189 // 5505024) * params_a_gamma ^ 21 * xs0 ^ 22 - 12155 // 1245184 * params_a_gamma ^ 19 * xs0 ^ 20 + (6435 // 557056) * params_a_gamma ^ 17 * xs0 ^ 18 - 143 // 10240 * params_a_gamma ^ 15 * xs0 ^ 16 + (231 // 13312) * params_a_gamma ^ 13 * xs0 ^ 14 - 63 // 2816 * params_a_gamma ^ 11 * xs0 ^ 12 + (35 // 1152) * params_a_gamma ^ 9 * xs0 ^ 10 - 5 // 112 * params_a_gamma ^ 7 * xs0 ^ 8 + (3 // 40) * params_a_gamma ^ 5 * xs0 ^ 6 - params_a_gamma ^ 3 * xs0 ^ 4 / 6, cse_tmp_3 * xc_asinh(cse_tmp_3 * params_a_gamma)) + 1), cse_tmp_4 / (3 * NaNMath.log(2 * cse_tmp_4 * params_a_gamma)))) / (2 * 1.4645918875615234 * rs)
+    end
+end
+export gga_x_lb_potential
+
+const gga_x_lb_vxc_defaults = (params_a_alpha = 1.0, params_a_beta = 0.05, params_a_gamma = 1.0)
+const gga_x_lb_vxc_required = ()
+
+"""
+    gga_x_lb_vxc(rho, sigma)
+
+The exchange-correlation POTENTIAL, not an energy density.
+
+Libxc files this functional under one of its `*_vxc` families, where the
+maple source is the potential itself: the C carries `#define XC_NO_EXC`,
+and the library reports no `XC_FLAGS_HAVE_EXC` for it. There is no energy
+here to differentiate, and this potential is not the functional derivative
+of one. The functionals Libxc files this way -- LB94, BJ06, TB09, RPP09
+and this one -- were put forward as potentials to begin with, which is why
+Libxc generates them apart from the energies.
+
+So the contract the rest of this package keeps does not hold for this
+name. Everywhere else a name returns an energy density and the caller
+differentiates it to get a potential; here the potential is what comes
+back, and differentiating it gives Libxc's next derivative order.
+
+Checked against the library Libxc.jl vendors for the value and its first
+derivative, which is as far as that library goes. Only `vrho` is
+non-zero -- Libxc returns exactly 0 for `vsigma`, `vlapl` and `vtau`
+here -- so there is no counterpart to those and none is offered.
+
+Spin-resolved arguments are not taken: a potential has one component per
+spin channel, and this kernel returns a single scalar.
+"""
+function gga_x_lb_vxc(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_lb_vxc_defaults, gga_x_lb_vxc_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_lb_potential(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_alpha, p.params_a_beta, p.params_a_gamma)
+end
+
+export gga_x_lb_vxc, gga_x_lb_vxc_defaults, gga_x_lb_vxc_required
+
+const gga_x_lbm_vxc_defaults = (params_a_alpha = 1.19, params_a_beta = 0.01, params_a_gamma = 1.0)
+const gga_x_lbm_vxc_required = ()
+
+"""
+    gga_x_lbm_vxc(rho, sigma)
+
+The exchange-correlation POTENTIAL, not an energy density.
+
+Libxc files this functional under one of its `*_vxc` families, where the
+maple source is the potential itself: the C carries `#define XC_NO_EXC`,
+and the library reports no `XC_FLAGS_HAVE_EXC` for it. There is no energy
+here to differentiate, and this potential is not the functional derivative
+of one. The functionals Libxc files this way -- LB94, BJ06, TB09, RPP09
+and this one -- were put forward as potentials to begin with, which is why
+Libxc generates them apart from the energies.
+
+So the contract the rest of this package keeps does not hold for this
+name. Everywhere else a name returns an energy density and the caller
+differentiates it to get a potential; here the potential is what comes
+back, and differentiating it gives Libxc's next derivative order.
+
+Checked against the library Libxc.jl vendors for the value and its first
+derivative, which is as far as that library goes. Only `vrho` is
+non-zero -- Libxc returns exactly 0 for `vsigma`, `vlapl` and `vtau`
+here -- so there is no counterpart to those and none is offered.
+
+Spin-resolved arguments are not taken: a potential has one component per
+spin channel, and this kernel returns a single scalar.
+"""
+function gga_x_lbm_vxc(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_lbm_vxc_defaults, gga_x_lbm_vxc_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_lb_potential(v.rs, v.z, v.xt, v.xs0, v.xs1, p.params_a_alpha, p.params_a_beta, p.params_a_gamma)
+end
+
+export gga_x_lbm_vxc, gga_x_lbm_vxc_defaults, gga_x_lbm_vxc_required

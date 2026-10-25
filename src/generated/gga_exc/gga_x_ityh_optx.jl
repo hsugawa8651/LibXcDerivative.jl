@@ -1,0 +1,61 @@
+# Auto-generated from the Libxc sources
+# python/gga_exc/gga_x_ityh_optx.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, cam_omega, dens_threshold, params_a_a, params_a_b, zeta_threshold
+const gga_x_ityh_optx_energy = function (rs, z, xt, xs0, xs1, cam_omega, dens_threshold, params_a_a, params_a_b, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = 6 * xs0 ^ 2
+        cse_tmp_3 = (cse_tmp_2 + 1) ^ (-1)
+        cse_tmp_4 = params_a_a + params_a_b * my_piecewise3(cse_tmp_2 <= 1, cse_tmp_2 * cse_tmp_3, 1 - cse_tmp_3) ^ 2
+        cse_tmp_5 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_6 = zeta_threshold - 1
+        cse_tmp_7 = 1 - z
+        cse_tmp_8 = cse_tmp_7 <= zeta_threshold
+        cse_tmp_9 = -cse_tmp_6
+        cse_tmp_10 = my_piecewise5(cse_tmp_5, cse_tmp_6, cse_tmp_8, cse_tmp_9, z) + 1
+        cse_tmp_11 = 0.165390532934988 * 1.5874010519681994 * 1.2009369551760027 * cam_omega * rs / 1.2102032422537643
+        cse_tmp_12 = cse_tmp_11 / (NaNMath.pow(cse_tmp_10, 0.3333333333333333) * NaNMath.sqrt(cse_tmp_4 ^ (-1)))
+        cse_tmp_13 = cse_tmp_12 > 1.35
+        cse_tmp_14 = my_piecewise3(cse_tmp_13, cse_tmp_12, 1.35)
+        cse_tmp_15 = my_piecewise3(cse_tmp_13, 1.35, cse_tmp_12)
+        cse_tmp_16 = 1.772453850905516
+        cse_tmp_17 = cse_tmp_15 ^ 2
+        cse_tmp_18 = xc_expm1(-1 / (4 * cse_tmp_17))
+        cse_tmp_19 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_20 = 0.184639691595506 * 1.8171205928321397 / (1.4645918875615234 * rs)
+        cse_tmp_21 = 6 * xs1 ^ 2
+        cse_tmp_22 = (cse_tmp_21 + 1) ^ (-1)
+        cse_tmp_23 = params_a_a + params_a_b * my_piecewise3(cse_tmp_21 <= 1, cse_tmp_21 * cse_tmp_22, 1 - cse_tmp_22) ^ 2
+        cse_tmp_24 = my_piecewise5(cse_tmp_8, cse_tmp_6, cse_tmp_5, cse_tmp_9, -z) + 1
+        cse_tmp_25 = cse_tmp_11 / (NaNMath.pow(cse_tmp_24, 0.3333333333333333) * NaNMath.sqrt(cse_tmp_23 ^ (-1)))
+        cse_tmp_26 = cse_tmp_25 > 1.35
+        cse_tmp_27 = my_piecewise3(cse_tmp_26, cse_tmp_25, 1.35)
+        cse_tmp_28 = my_piecewise3(cse_tmp_26, 1.35, cse_tmp_25)
+        cse_tmp_29 = cse_tmp_28 ^ 2
+        cse_tmp_30 = xc_expm1(-1 / (4 * cse_tmp_29))
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_20 * cse_tmp_4 * my_piecewise3(cse_tmp_12 >= 1.35, 1 / (36 * cse_tmp_14 ^ 2) - 1 / (960 * cse_tmp_14 ^ 4) + 1 / (26880 * cse_tmp_14 ^ 6) - 1 / (829440 * cse_tmp_14 ^ 8) + 1 / (28385280 * cse_tmp_14 ^ 10) - 1 / (1073479680 * cse_tmp_14 ^ 12) + 1 / (44590694400 * cse_tmp_14 ^ 14), -8 // 3 * cse_tmp_15 * (2 * cse_tmp_15 * (-2 * cse_tmp_17 * cse_tmp_18 + cse_tmp_18 - 1 // 2) + cse_tmp_16 * erf(1 / (2 * cse_tmp_15))) + 1) * my_piecewise3(cse_tmp_10 <= zeta_threshold, cse_tmp_19, NaNMath.pow(cse_tmp_10, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_7 <= dens_threshold, 0, -cse_tmp_20 * cse_tmp_23 * my_piecewise3(cse_tmp_25 >= 1.35, 1 / (36 * cse_tmp_27 ^ 2) - 1 / (960 * cse_tmp_27 ^ 4) + 1 / (26880 * cse_tmp_27 ^ 6) - 1 / (829440 * cse_tmp_27 ^ 8) + 1 / (28385280 * cse_tmp_27 ^ 10) - 1 / (1073479680 * cse_tmp_27 ^ 12) + 1 / (44590694400 * cse_tmp_27 ^ 14), -8 // 3 * cse_tmp_28 * (cse_tmp_16 * erf(1 / (2 * cse_tmp_28)) + 2 * cse_tmp_28 * (-2 * cse_tmp_29 * cse_tmp_30 + cse_tmp_30 - 1 // 2)) + 1) * my_piecewise3(cse_tmp_24 <= zeta_threshold, cse_tmp_19, NaNMath.pow(cse_tmp_24, 1.3333333333333333)))
+    end
+end
+export gga_x_ityh_optx_energy
+
+const gga_x_ityh_optx_defaults = (cam_omega = 0.2, dens_threshold = 1.0e-15, params_a_a = 1.05151, params_a_b = 1.5385818404305593, zeta_threshold = 2.220446049250313e-16)
+const gga_x_ityh_optx_required = ()
+
+function gga_x_ityh_optx(rho, sigma; params = NamedTuple())
+    p = resolve_params(gga_x_ityh_optx_defaults, gga_x_ityh_optx_required, params)
+    v = gga_variables(rho, sigma, Val(3))
+    return gga_x_ityh_optx_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.cam_omega, p.dens_threshold, p.params_a_a, p.params_a_b, p.zeta_threshold)
+end
+
+function gga_x_ityh_optx(na, nb, gaa, gab, gbb; params = NamedTuple())
+    p = resolve_params(gga_x_ityh_optx_defaults, gga_x_ityh_optx_required, params)
+    v = gga_variables(na, nb, gaa, gab, gbb, Val(3))
+    return gga_x_ityh_optx_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, p.cam_omega, p.dens_threshold, p.params_a_a, p.params_a_b, p.zeta_threshold)
+end
+
+export gga_x_ityh_optx, gga_x_ityh_optx_defaults, gga_x_ityh_optx_required
