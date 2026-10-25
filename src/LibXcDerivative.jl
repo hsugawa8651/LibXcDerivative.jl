@@ -9,6 +9,8 @@ using NaNMath
 include("my_piecewise.jl")
 export my_piecewise3, my_piecewise5
 
+include("entrypoint.jl")
+
 include("variables.jl")
 export lda_variables, gga_variables, mgga_variables
 
