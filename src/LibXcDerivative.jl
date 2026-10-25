@@ -6,4 +6,7 @@ module LibXcDerivative
 
 using NaNMath
 
+include("my_piecewise.jl")
+export my_piecewise3, my_piecewise5
+
 end # module LibXcDerivative

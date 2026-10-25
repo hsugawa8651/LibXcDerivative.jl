@@ -6,4 +6,5 @@ using LibXcDerivative
 using Test
 
 @testset "LibXcDerivative.jl" begin
+    include("piecewise.jl")
 end
