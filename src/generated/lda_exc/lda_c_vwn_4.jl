@@ -1,0 +1,49 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_vwn_4.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, zeta_threshold
+const lda_c_vwn_4_energy = function (rs, z, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = NaNMath.sqrt(rs)
+        cse_tmp_1 = 7.06042 * cse_tmp_0 + 18.0578
+        cse_tmp_2 = cse_tmp_1 + rs
+        cse_tmp_3 = cse_tmp_2 ^ (-1)
+        cse_tmp_4 = 2 * cse_tmp_0
+        cse_tmp_5 = 3.72744 * cse_tmp_0 + 12.9352
+        cse_tmp_6 = cse_tmp_5 + rs
+        cse_tmp_7 = cse_tmp_6 ^ (-1)
+        cse_tmp_8 = 0.038783294878113 * atan(6.15199081975908 / (cse_tmp_4 + 3.72744)) + 0.0310907 * xc_log1p(-cse_tmp_5 * cse_tmp_7) + 0.000969022771154437 * xc_log1p(cse_tmp_7 * (-cse_tmp_6 + (cse_tmp_0 + 0.10498) ^ 2))
+        cse_tmp_9 = 1.2599210498948732
+        cse_tmp_10 = z + 1
+        cse_tmp_11 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_12 = zeta_threshold - 1
+        cse_tmp_13 = 1 - z
+        cse_tmp_14 = -z
+        cse_tmp_15 = (my_piecewise3(cse_tmp_10 <= zeta_threshold, cse_tmp_11, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_12, z, cse_tmp_12)))) + my_piecewise3(cse_tmp_13 <= zeta_threshold, cse_tmp_11, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(cse_tmp_14 > cse_tmp_12, cse_tmp_14, cse_tmp_12))))) / (2 * cse_tmp_9 - 2)
+        cse_tmp_16 = 1.06835 * cse_tmp_0 + 11.4813
+        cse_tmp_17 = cse_tmp_16 + rs
+        cse_tmp_18 = cse_tmp_17 ^ (-1)
+        -cse_tmp_10 * cse_tmp_13 * cse_tmp_15 * ((9 // 4) * cse_tmp_9 - 9 // 4) * (z ^ 2 + 1) * (0.323238369060551 * atan(6.69207204664594 / (cse_tmp_4 + 1.06835)) + xc_log1p(-cse_tmp_16 * cse_tmp_18) + 0.0216087103608983 * xc_log1p(cse_tmp_18 * (-cse_tmp_17 + (cse_tmp_0 + 0.228344) ^ 2))) / (6 * 9.869604401089358) + cse_tmp_15 * z ^ 4 * (-cse_tmp_8 + 0.0524913931697809 * atan(4.73092690956011 / (cse_tmp_4 + 7.06042)) + 0.01554535 * xc_log1p(-cse_tmp_1 * cse_tmp_3) + 0.00224786709554261 * xc_log1p(cse_tmp_3 * (-cse_tmp_2 + (cse_tmp_0 + 0.325) ^ 2))) + cse_tmp_8
+    end
+end
+export lda_c_vwn_4_energy
+
+const lda_c_vwn_4_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const lda_c_vwn_4_required = ()
+
+function lda_c_vwn_4(rho; params = NamedTuple())
+    p = resolve_params(lda_c_vwn_4_defaults, lda_c_vwn_4_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_vwn_4_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+function lda_c_vwn_4(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_vwn_4_defaults, lda_c_vwn_4_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_vwn_4_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+export lda_c_vwn_4, lda_c_vwn_4_defaults, lda_c_vwn_4_required

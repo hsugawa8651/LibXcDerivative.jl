@@ -1,0 +1,72 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_pz.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_a_0, params_a_a_1, params_a_b_0, params_a_b_1, params_a_beta1_0, params_a_beta1_1, params_a_beta2_0, params_a_beta2_1, params_a_c_0, params_a_c_1, params_a_d_0, params_a_d_1, params_a_gamma_0, params_a_gamma_1, zeta_threshold
+const lda_c_pz_energy = function (rs, z, params_a_a_0, params_a_a_1, params_a_b_0, params_a_b_1, params_a_beta1_0, params_a_beta1_1, params_a_beta2_0, params_a_beta2_1, params_a_c_0, params_a_c_1, params_a_d_0, params_a_d_1, params_a_gamma_0, params_a_gamma_1, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = rs >= 1
+        cse_tmp_1 = NaNMath.sqrt(rs)
+        cse_tmp_2 = NaNMath.log(rs)
+        cse_tmp_3 = cse_tmp_2 * rs
+        cse_tmp_4 = my_piecewise3(cse_tmp_0, params_a_gamma_0 / (cse_tmp_1 * params_a_beta1_0 + params_a_beta2_0 * rs + 1), cse_tmp_2 * params_a_a_0 + cse_tmp_3 * params_a_c_0 + params_a_b_0 + params_a_d_0 * rs)
+        cse_tmp_5 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_6 = zeta_threshold - 1
+        cse_tmp_7 = -z
+        cse_tmp_4 + (-cse_tmp_4 + my_piecewise3(cse_tmp_0, params_a_gamma_1 / (cse_tmp_1 * params_a_beta1_1 + params_a_beta2_1 * rs + 1), cse_tmp_2 * params_a_a_1 + cse_tmp_3 * params_a_c_1 + params_a_b_1 + params_a_d_1 * rs)) * (my_piecewise3(1 - z <= zeta_threshold, cse_tmp_5, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(cse_tmp_7 > cse_tmp_6, cse_tmp_7, cse_tmp_6)))) + my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_5, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_6, z, cse_tmp_6))))) / (-2 + 2 * 1.2599210498948732)
+    end
+end
+export lda_c_pz_energy
+
+const lda_c_pz_defaults = (params_a_a_0 = 0.0311, params_a_a_1 = 0.01555, params_a_b_0 = -0.048, params_a_b_1 = -0.0269, params_a_beta1_0 = 1.0529, params_a_beta1_1 = 1.3981, params_a_beta2_0 = 0.3334, params_a_beta2_1 = 0.2611, params_a_c_0 = 0.002, params_a_c_1 = 0.0007, params_a_d_0 = -0.0116, params_a_d_1 = -0.0048, params_a_gamma_0 = -0.1423, params_a_gamma_1 = -0.0843, zeta_threshold = 2.220446049250313e-16)
+const lda_c_pz_required = ()
+
+function lda_c_pz(rho; params = NamedTuple())
+    p = resolve_params(lda_c_pz_defaults, lda_c_pz_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pz_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_b_0, p.params_a_b_1, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_c_0, p.params_a_c_1, p.params_a_d_0, p.params_a_d_1, p.params_a_gamma_0, p.params_a_gamma_1, p.zeta_threshold)
+end
+
+function lda_c_pz(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_pz_defaults, lda_c_pz_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pz_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_b_0, p.params_a_b_1, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_c_0, p.params_a_c_1, p.params_a_d_0, p.params_a_d_1, p.params_a_gamma_0, p.params_a_gamma_1, p.zeta_threshold)
+end
+
+export lda_c_pz, lda_c_pz_defaults, lda_c_pz_required
+
+const lda_c_ob_pz_defaults = (params_a_a_0 = 0.031091, params_a_a_1 = 0.015545, params_a_b_0 = -0.046644, params_a_b_1 = -0.025599, params_a_beta1_0 = 0.56371, params_a_beta1_1 = 1.11846, params_a_beta2_0 = 0.27358, params_a_beta2_1 = 0.18797, params_a_c_0 = 0.00419, params_a_c_1 = 0.00329, params_a_d_0 = -0.00983, params_a_d_1 = -0.003, params_a_gamma_0 = -0.103756, params_a_gamma_1 = -0.065951, zeta_threshold = 2.220446049250313e-16)
+const lda_c_ob_pz_required = ()
+
+function lda_c_ob_pz(rho; params = NamedTuple())
+    p = resolve_params(lda_c_ob_pz_defaults, lda_c_ob_pz_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pz_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_b_0, p.params_a_b_1, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_c_0, p.params_a_c_1, p.params_a_d_0, p.params_a_d_1, p.params_a_gamma_0, p.params_a_gamma_1, p.zeta_threshold)
+end
+
+function lda_c_ob_pz(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_ob_pz_defaults, lda_c_ob_pz_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pz_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_b_0, p.params_a_b_1, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_c_0, p.params_a_c_1, p.params_a_d_0, p.params_a_d_1, p.params_a_gamma_0, p.params_a_gamma_1, p.zeta_threshold)
+end
+
+export lda_c_ob_pz, lda_c_ob_pz_defaults, lda_c_ob_pz_required
+
+const lda_c_pz_mod_defaults = (params_a_a_0 = 0.0311, params_a_a_1 = 0.01555, params_a_b_0 = -0.048, params_a_b_1 = -0.0269, params_a_beta1_0 = 1.0529, params_a_beta1_1 = 1.3981, params_a_beta2_0 = 0.3334, params_a_beta2_1 = 0.2611, params_a_c_0 = 0.0020191519406228, params_a_c_1 = 0.00069255121311694, params_a_d_0 = -0.011632066378913, params_a_d_1 = -0.00480126353790614, params_a_gamma_0 = -0.1423, params_a_gamma_1 = -0.0843, zeta_threshold = 2.220446049250313e-16)
+const lda_c_pz_mod_required = ()
+
+function lda_c_pz_mod(rho; params = NamedTuple())
+    p = resolve_params(lda_c_pz_mod_defaults, lda_c_pz_mod_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pz_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_b_0, p.params_a_b_1, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_c_0, p.params_a_c_1, p.params_a_d_0, p.params_a_d_1, p.params_a_gamma_0, p.params_a_gamma_1, p.zeta_threshold)
+end
+
+function lda_c_pz_mod(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_pz_mod_defaults, lda_c_pz_mod_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pz_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_b_0, p.params_a_b_1, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_c_0, p.params_a_c_1, p.params_a_d_0, p.params_a_d_1, p.params_a_gamma_0, p.params_a_gamma_1, p.zeta_threshold)
+end
+
+export lda_c_pz_mod, lda_c_pz_mod_defaults, lda_c_pz_mod_required

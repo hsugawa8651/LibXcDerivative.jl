@@ -1,0 +1,31 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_xc_zlp.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z
+const lda_xc_zlp_energy = function (rs, z)
+    @inbounds begin
+        cse_tmp_0 = 3.3019272488946267
+        -0.0022078745091 * cse_tmp_0 * xc_x_minus_log1p(35.1854236641678 * 1.4645918875615234 * cse_tmp_0 * rs) / (2.1450293971110255 * rs ^ 2)
+    end
+end
+export lda_xc_zlp_energy
+
+const lda_xc_zlp_defaults = NamedTuple()
+const lda_xc_zlp_required = ()
+
+function lda_xc_zlp(rho; params = NamedTuple())
+    p = resolve_params(lda_xc_zlp_defaults, lda_xc_zlp_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_xc_zlp_energy(v.rs, v.z)
+end
+
+function lda_xc_zlp(na, nb; params = NamedTuple())
+    p = resolve_params(lda_xc_zlp_defaults, lda_xc_zlp_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_xc_zlp_energy(v.rs, v.z)
+end
+
+export lda_xc_zlp, lda_xc_zlp_defaults, lda_xc_zlp_required

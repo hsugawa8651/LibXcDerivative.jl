@@ -1,0 +1,82 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_xc_1d_ehwlrg.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_a1, params_a_a2, params_a_a3, params_a_alpha
+const lda_xc_1d_ehwlrg_energy = function (rs, z, params_a_a1, params_a_a2, params_a_a3, params_a_alpha)
+    @inbounds begin
+        cse_tmp_0 = 1 / (2 * rs)
+        NaNMath.pow(cse_tmp_0, params_a_alpha) * (cse_tmp_0 * params_a_a2 + params_a_a1 + params_a_a3 / (4 * rs ^ 2))
+    end
+end
+export lda_xc_1d_ehwlrg_energy
+
+const lda_xc_1d_ehwlrg_defaults = NamedTuple()
+const lda_xc_1d_ehwlrg_required = (:params_a_a1, :params_a_a2, :params_a_a3, :params_a_alpha)
+
+function lda_xc_1d_ehwlrg(rho; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_defaults, lda_xc_1d_ehwlrg_required, params)
+    v = lda_variables(rho, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+function lda_xc_1d_ehwlrg(na, nb; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_defaults, lda_xc_1d_ehwlrg_required, params)
+    v = lda_variables(na, nb, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+export lda_xc_1d_ehwlrg, lda_xc_1d_ehwlrg_defaults, lda_xc_1d_ehwlrg_required
+
+const lda_xc_1d_ehwlrg_1_defaults = (params_a_a1 = -0.803, params_a_a2 = 0.82, params_a_a3 = -0.47, params_a_alpha = 0.638)
+const lda_xc_1d_ehwlrg_1_required = ()
+
+function lda_xc_1d_ehwlrg_1(rho; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_1_defaults, lda_xc_1d_ehwlrg_1_required, params)
+    v = lda_variables(rho, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+function lda_xc_1d_ehwlrg_1(na, nb; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_1_defaults, lda_xc_1d_ehwlrg_1_required, params)
+    v = lda_variables(na, nb, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+export lda_xc_1d_ehwlrg_1, lda_xc_1d_ehwlrg_1_defaults, lda_xc_1d_ehwlrg_1_required
+
+const lda_xc_1d_ehwlrg_2_defaults = (params_a_a1 = -0.74, params_a_a2 = 0.68, params_a_a3 = -0.38, params_a_alpha = 0.604)
+const lda_xc_1d_ehwlrg_2_required = ()
+
+function lda_xc_1d_ehwlrg_2(rho; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_2_defaults, lda_xc_1d_ehwlrg_2_required, params)
+    v = lda_variables(rho, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+function lda_xc_1d_ehwlrg_2(na, nb; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_2_defaults, lda_xc_1d_ehwlrg_2_required, params)
+    v = lda_variables(na, nb, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+export lda_xc_1d_ehwlrg_2, lda_xc_1d_ehwlrg_2_defaults, lda_xc_1d_ehwlrg_2_required
+
+const lda_xc_1d_ehwlrg_3_defaults = (params_a_a1 = -0.77, params_a_a2 = 0.79, params_a_a3 = -0.48, params_a_alpha = 0.61)
+const lda_xc_1d_ehwlrg_3_required = ()
+
+function lda_xc_1d_ehwlrg_3(rho; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_3_defaults, lda_xc_1d_ehwlrg_3_required, params)
+    v = lda_variables(rho, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+function lda_xc_1d_ehwlrg_3(na, nb; params = NamedTuple())
+    p = resolve_params(lda_xc_1d_ehwlrg_3_defaults, lda_xc_1d_ehwlrg_3_required, params)
+    v = lda_variables(na, nb, Val(1))
+    return lda_xc_1d_ehwlrg_energy(v.rs, v.z, p.params_a_a1, p.params_a_a2, p.params_a_a3, p.params_a_alpha)
+end
+
+export lda_xc_1d_ehwlrg_3, lda_xc_1d_ehwlrg_3_defaults, lda_xc_1d_ehwlrg_3_required

@@ -30,7 +30,17 @@ export LambertW, xc_dilogarithm, xc_E1_scaled, xc_e1_scaled_G
 include("source_version.jl")
 export libxc_source_version, libxc_source_commit
 
+# Generated functionals (written offline from Libxc's
+# python/<family>/<name>.py sources; not regenerated at package load time).
+# Each family directory is `include`d once files exist.
 const GENERATED_DIR = joinpath(@__DIR__, "generated")
+for family in ("lda_exc", "lda_vxc", "gga_exc", "gga_vxc", "mgga_exc", "mgga_vxc")
+    dir = joinpath(GENERATED_DIR, family)
+    isdir(dir) || continue
+    for file in sort(readdir(dir))
+        endswith(file, ".jl") && include(joinpath(dir, file))
+    end
+end
 
 # The two constants src/source_version.jl hands out: which Libxc commit the
 # expressions were generated from, and what those sources call themselves.

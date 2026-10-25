@@ -1,0 +1,50 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_k_tf.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_ax, zeta_threshold
+const lda_k_tf_energy = function (rs, z, params_a_ax, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_1 = zeta_threshold - 1
+        cse_tmp_2 = -z
+        params_a_ax * (my_piecewise3(1 - z <= zeta_threshold, cse_tmp_0, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_2 > cse_tmp_1, cse_tmp_2, cse_tmp_1)))) / 2 + my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_0, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_1, z, cse_tmp_1)))) / 2 + 1) / rs ^ 2
+    end
+end
+export lda_k_tf_energy
+
+const lda_k_tf_defaults = (params_a_ax = 1.10495056570586, zeta_threshold = 2.220446049250313e-16)
+const lda_k_tf_required = ()
+
+function lda_k_tf(rho; params = NamedTuple())
+    p = resolve_params(lda_k_tf_defaults, lda_k_tf_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_k_tf_energy(v.rs, v.z, p.params_a_ax, p.zeta_threshold)
+end
+
+function lda_k_tf(na, nb; params = NamedTuple())
+    p = resolve_params(lda_k_tf_defaults, lda_k_tf_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_k_tf_energy(v.rs, v.z, p.params_a_ax, p.zeta_threshold)
+end
+
+export lda_k_tf, lda_k_tf_defaults, lda_k_tf_required
+
+const lda_k_lp_defaults = (params_a_ax = 1.1424277097586666, zeta_threshold = 2.220446049250313e-16)
+const lda_k_lp_required = ()
+
+function lda_k_lp(rho; params = NamedTuple())
+    p = resolve_params(lda_k_lp_defaults, lda_k_lp_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_k_tf_energy(v.rs, v.z, p.params_a_ax, p.zeta_threshold)
+end
+
+function lda_k_lp(na, nb; params = NamedTuple())
+    p = resolve_params(lda_k_lp_defaults, lda_k_lp_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_k_tf_energy(v.rs, v.z, p.params_a_ax, p.zeta_threshold)
+end
+
+export lda_k_lp, lda_k_lp_defaults, lda_k_lp_required

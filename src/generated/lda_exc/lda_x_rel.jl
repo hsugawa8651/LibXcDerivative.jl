@@ -1,0 +1,81 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_x_rel.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, dens_threshold, zeta_threshold
+const lda_x_rel_energy = function (rs, z, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = rs ^ (-3)
+        cse_tmp_1 = z + 1
+        cse_tmp_2 = cse_tmp_0 * cse_tmp_1
+        cse_tmp_3 = (3 // 8) / pi
+        cse_tmp_4 = NaNMath.pow(cse_tmp_1, 1.3333333333333333)
+        cse_tmp_5 = NaNMath.pow(cse_tmp_1, 0.3333333333333333)
+        cse_tmp_6 = 1.4645918875615234
+        cse_tmp_7 = rs ^ (-1)
+        cse_tmp_8 = 1.2599210498948732
+        cse_tmp_9 = 2.080083823051904
+        cse_tmp_10 = cse_tmp_8 * cse_tmp_9
+        cse_tmp_11 = 0.003648676270137523 * cse_tmp_10 * cse_tmp_6 * cse_tmp_7
+        cse_tmp_12 = cse_tmp_11 * cse_tmp_5
+        cse_tmp_13 = 5.828908561398855e-7 * pi
+        cse_tmp_14 = 4.641656658774491e-20 * 31.00627668029982 / rs ^ 9
+        cse_tmp_15 = 1.536891709676756e-32 * 306.01968478528147 / rs ^ 15
+        cse_tmp_16 = 6.899780021122386e-45 * 3020.2932277767923 / rs ^ 21
+        cse_tmp_17 = 3.565205699072875e-57 * 29809.09933344621 / rs ^ 27
+        cse_tmp_18 = 1.998667526478138e-69 * 294204.0179738906 / rs ^ 33
+        cse_tmp_19 = 1.181841332010805e-81 * 2903677.2706132834 / rs ^ 39
+        cse_tmp_20 = 7.256472942743988e-94 * 28658145.969387997 / rs ^ 45
+        cse_tmp_21 = 4.581967484079063e-106 * 282844563.58653307 / rs ^ 51
+        cse_tmp_22 = 2.956509946890435e-118 * 2791563949.5978456 / rs ^ 57
+        cse_tmp_23 = 2.988515817364269e-16 * 14.454942539276981 * cse_tmp_10 / rs ^ 7
+        cse_tmp_24 = 8.073029995575394e-29 * 142.6645645031419 * cse_tmp_10 / rs ^ 13
+        cse_tmp_25 = 3.369623302315222e-41 * 1408.0428136997057 * cse_tmp_10 / rs ^ 19
+        cse_tmp_26 = 1.676673822369364e-53 * 13896.82555101286 * cse_tmp_10 / rs ^ 25
+        cse_tmp_27 = 9.184867375449713e-66 * 137156.17061944757 * cse_tmp_10 / rs ^ 31
+        cse_tmp_28 = 5.347038907417336e-78 * 1353677.1451822629 * cse_tmp_10 / rs ^ 37
+        cse_tmp_29 = 3.246324300315293e-90 * 13360257.909744939 * cse_tmp_10 / rs ^ 43
+        cse_tmp_30 = 2.032480132050884e-102 * 131860460.26570757 * cse_tmp_10 / rs ^ 49
+        cse_tmp_31 = 1.30276544730267e-114 * 1301410578.968096 * cse_tmp_10 / rs ^ 55
+        cse_tmp_32 = 1.5874010519681994 * 1.4422495703074083
+        cse_tmp_33 = 6.983938660554613e-12 * 6.738808595698141 * cse_tmp_32 / rs ^ 5
+        cse_tmp_34 = 1.327158549460428e-24 * 66.50937497420118 * cse_tmp_32 / rs ^ 11
+        cse_tmp_35 = 5.029129759967021e-37 * 656.4212199590784 * cse_tmp_32 / rs ^ 17
+        cse_tmp_36 = 2.390243951242549e-49 * 6478.617761476566 * cse_tmp_32 / rs ^ 23
+        cse_tmp_37 = 1.274702795086595e-61 * 63941.394371644805 * cse_tmp_32 / rs ^ 29
+        cse_tmp_38 = 7.291050165723192e-74 * 631076.2673021759 * cse_tmp_32 / rs ^ 35
+        cse_tmp_39 = 4.371696169664432e-86 * 6228473.1051886 * cse_tmp_32 / rs ^ 41
+        cse_tmp_40 = 2.71173929404691e-98 * 61472565.57103611 * cse_tmp_32 / rs ^ 47
+        cse_tmp_41 = 1.725696046462647e-110 * 606709903.7061521 * cse_tmp_32 / rs ^ 53
+        cse_tmp_42 = 3.9938515572794e-5 * 2.1450293971110255 * cse_tmp_32 / rs ^ 2
+        cse_tmp_43 = 78365728.44085743 * cse_tmp_32 * rs ^ 4 / 4.60115111447049
+        cse_tmp_44 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_45 = 0.184639691595506 * 1.8171205928321397 * cse_tmp_7 / cse_tmp_6
+        cse_tmp_46 = 1 - z
+        cse_tmp_47 = cse_tmp_0 * cse_tmp_46
+        cse_tmp_48 = NaNMath.pow(cse_tmp_46, 1.3333333333333333)
+        cse_tmp_49 = NaNMath.pow(cse_tmp_46, 0.3333333333333333)
+        cse_tmp_50 = cse_tmp_11 * cse_tmp_49
+        my_piecewise3(cse_tmp_2 * cse_tmp_3 <= dens_threshold, 0, -cse_tmp_45 * (1 - cse_tmp_43 * my_piecewise3(cse_tmp_12 < 1 // 2, NaNMath.pow(cse_tmp_1, 18.333333333333332) * cse_tmp_31 - NaNMath.pow(cse_tmp_1, 17.666666666666668) * cse_tmp_41 - NaNMath.pow(cse_tmp_1, 16.333333333333332) * cse_tmp_30 + NaNMath.pow(cse_tmp_1, 15.666666666666666) * cse_tmp_40 + NaNMath.pow(cse_tmp_1, 14.333333333333334) * cse_tmp_29 - NaNMath.pow(cse_tmp_1, 13.666666666666666) * cse_tmp_39 - NaNMath.pow(cse_tmp_1, 12.333333333333334) * cse_tmp_28 + NaNMath.pow(cse_tmp_1, 11.666666666666666) * cse_tmp_38 + NaNMath.pow(cse_tmp_1, 10.333333333333334) * cse_tmp_27 - NaNMath.pow(cse_tmp_1, 9.666666666666666) * cse_tmp_37 - NaNMath.pow(cse_tmp_1, 8.333333333333334) * cse_tmp_26 + NaNMath.pow(cse_tmp_1, 7.666666666666667) * cse_tmp_36 + NaNMath.pow(cse_tmp_1, 6.333333333333333) * cse_tmp_25 - NaNMath.pow(cse_tmp_1, 5.666666666666667) * cse_tmp_35 - NaNMath.pow(cse_tmp_1, 4.333333333333333) * cse_tmp_24 + NaNMath.pow(cse_tmp_1, 3.6666666666666665) * cse_tmp_34 + NaNMath.pow(cse_tmp_1, 2.3333333333333335) * cse_tmp_23 - NaNMath.pow(cse_tmp_1, 1.6666666666666667) * cse_tmp_33 - cse_tmp_1 ^ 19 * cse_tmp_22 + cse_tmp_1 ^ 17 * cse_tmp_21 - cse_tmp_1 ^ 15 * cse_tmp_20 + cse_tmp_1 ^ 13 * cse_tmp_19 - cse_tmp_1 ^ 11 * cse_tmp_18 + cse_tmp_1 ^ 9 * cse_tmp_17 - cse_tmp_1 ^ 7 * cse_tmp_16 + cse_tmp_1 ^ 5 * cse_tmp_15 - cse_tmp_1 ^ 3 * cse_tmp_14 + cse_tmp_13 * cse_tmp_2, 0.003648676270137523 * cse_tmp_5 * cse_tmp_6 * cse_tmp_7 * cse_tmp_8 * cse_tmp_9 * NaNMath.sqrt(NaNMath.pow(cse_tmp_1, 0.6666666666666666) * cse_tmp_42 + 1) - xc_asinh(cse_tmp_12)) ^ 2 / cse_tmp_4) * my_piecewise3(cse_tmp_1 <= zeta_threshold, cse_tmp_44, cse_tmp_4)) + my_piecewise3(cse_tmp_3 * cse_tmp_47 <= dens_threshold, 0, -cse_tmp_45 * (-cse_tmp_43 * my_piecewise3(cse_tmp_50 < 1 // 2, cse_tmp_13 * cse_tmp_47 - cse_tmp_14 * cse_tmp_46 ^ 3 + cse_tmp_15 * cse_tmp_46 ^ 5 - cse_tmp_16 * cse_tmp_46 ^ 7 + cse_tmp_17 * cse_tmp_46 ^ 9 - cse_tmp_18 * cse_tmp_46 ^ 11 + cse_tmp_19 * cse_tmp_46 ^ 13 - cse_tmp_20 * cse_tmp_46 ^ 15 + cse_tmp_21 * cse_tmp_46 ^ 17 - cse_tmp_22 * cse_tmp_46 ^ 19 + cse_tmp_23 * NaNMath.pow(cse_tmp_46, 2.3333333333333335) - cse_tmp_24 * NaNMath.pow(cse_tmp_46, 4.333333333333333) + cse_tmp_25 * NaNMath.pow(cse_tmp_46, 6.333333333333333) - cse_tmp_26 * NaNMath.pow(cse_tmp_46, 8.333333333333334) + cse_tmp_27 * NaNMath.pow(cse_tmp_46, 10.333333333333334) - cse_tmp_28 * NaNMath.pow(cse_tmp_46, 12.333333333333334) + cse_tmp_29 * NaNMath.pow(cse_tmp_46, 14.333333333333334) - cse_tmp_30 * NaNMath.pow(cse_tmp_46, 16.333333333333332) + cse_tmp_31 * NaNMath.pow(cse_tmp_46, 18.333333333333332) - cse_tmp_33 * NaNMath.pow(cse_tmp_46, 1.6666666666666667) + cse_tmp_34 * NaNMath.pow(cse_tmp_46, 3.6666666666666665) - cse_tmp_35 * NaNMath.pow(cse_tmp_46, 5.666666666666667) + cse_tmp_36 * NaNMath.pow(cse_tmp_46, 7.666666666666667) - cse_tmp_37 * NaNMath.pow(cse_tmp_46, 9.666666666666666) + cse_tmp_38 * NaNMath.pow(cse_tmp_46, 11.666666666666666) - cse_tmp_39 * NaNMath.pow(cse_tmp_46, 13.666666666666666) + cse_tmp_40 * NaNMath.pow(cse_tmp_46, 15.666666666666666) - cse_tmp_41 * NaNMath.pow(cse_tmp_46, 17.666666666666668), 0.003648676270137523 * cse_tmp_49 * cse_tmp_6 * cse_tmp_7 * cse_tmp_8 * cse_tmp_9 * NaNMath.sqrt(cse_tmp_42 * NaNMath.pow(cse_tmp_46, 0.6666666666666666) + 1) - xc_asinh(cse_tmp_50)) ^ 2 / cse_tmp_48 + 1) * my_piecewise3(cse_tmp_46 <= zeta_threshold, cse_tmp_44, cse_tmp_48))
+    end
+end
+export lda_x_rel_energy
+
+const lda_x_rel_defaults = (dens_threshold = 1.0e-15, zeta_threshold = 2.220446049250313e-16)
+const lda_x_rel_required = ()
+
+function lda_x_rel(rho; params = NamedTuple())
+    p = resolve_params(lda_x_rel_defaults, lda_x_rel_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_x_rel_energy(v.rs, v.z, p.dens_threshold, p.zeta_threshold)
+end
+
+function lda_x_rel(na, nb; params = NamedTuple())
+    p = resolve_params(lda_x_rel_defaults, lda_x_rel_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_x_rel_energy(v.rs, v.z, p.dens_threshold, p.zeta_threshold)
+end
+
+export lda_x_rel, lda_x_rel_defaults, lda_x_rel_required

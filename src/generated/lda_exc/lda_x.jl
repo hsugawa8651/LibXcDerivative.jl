@@ -1,0 +1,69 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_x.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, dens_threshold, params_a_alpha, zeta_threshold
+const lda_x_energy = function (rs, z, dens_threshold, params_a_alpha, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_3 = 0.184639691595506 * 1.8171205928321397 / (1.4645918875615234 * rs)
+        cse_tmp_4 = 1 - z
+        params_a_alpha * (my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_3 * my_piecewise3(cse_tmp_0 <= zeta_threshold, cse_tmp_2, NaNMath.pow(cse_tmp_0, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_4 <= dens_threshold, 0, -cse_tmp_3 * my_piecewise3(cse_tmp_4 <= zeta_threshold, cse_tmp_2, NaNMath.pow(cse_tmp_4, 1.3333333333333333))))
+    end
+end
+export lda_x_energy
+
+const lda_x_defaults = (dens_threshold = 1.0e-15, params_a_alpha = 1.0, zeta_threshold = 2.220446049250313e-16)
+const lda_x_required = ()
+
+function lda_x(rho; params = NamedTuple())
+    p = resolve_params(lda_x_defaults, lda_x_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_x_energy(v.rs, v.z, p.dens_threshold, p.params_a_alpha, p.zeta_threshold)
+end
+
+function lda_x(na, nb; params = NamedTuple())
+    p = resolve_params(lda_x_defaults, lda_x_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_x_energy(v.rs, v.z, p.dens_threshold, p.params_a_alpha, p.zeta_threshold)
+end
+
+export lda_x, lda_x_defaults, lda_x_required
+
+const lda_c_xalpha_defaults = (dens_threshold = 1.0e-15, params_a_alpha = 0.5, zeta_threshold = 2.220446049250313e-16)
+const lda_c_xalpha_required = ()
+
+function lda_c_xalpha(rho; params = NamedTuple())
+    p = resolve_params(lda_c_xalpha_defaults, lda_c_xalpha_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_x_energy(v.rs, v.z, p.dens_threshold, p.params_a_alpha, p.zeta_threshold)
+end
+
+function lda_c_xalpha(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_xalpha_defaults, lda_c_xalpha_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_x_energy(v.rs, v.z, p.dens_threshold, p.params_a_alpha, p.zeta_threshold)
+end
+
+export lda_c_xalpha, lda_c_xalpha_defaults, lda_c_xalpha_required
+
+const lda_x_rae_defaults = (dens_threshold = 1.0e-15, params_a_alpha = 0.061309082378649155, zeta_threshold = 2.220446049250313e-16)
+const lda_x_rae_required = ()
+
+function lda_x_rae(rho; params = NamedTuple())
+    p = resolve_params(lda_x_rae_defaults, lda_x_rae_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_x_energy(v.rs, v.z, p.dens_threshold, p.params_a_alpha, p.zeta_threshold)
+end
+
+function lda_x_rae(na, nb; params = NamedTuple())
+    p = resolve_params(lda_x_rae_defaults, lda_x_rae_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_x_energy(v.rs, v.z, p.dens_threshold, p.params_a_alpha, p.zeta_threshold)
+end
+
+export lda_x_rae, lda_x_rae_defaults, lda_x_rae_required

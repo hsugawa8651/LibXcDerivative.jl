@@ -1,0 +1,46 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_rpaf.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, zeta_threshold
+const lda_c_rpaf_energy = function (rs, z, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z ^ 2
+        cse_tmp_1 = z ^ 4
+        cse_tmp_2 = NaNMath.log(2)
+        cse_tmp_3 = z + 1
+        cse_tmp_4 = NaNMath.pow(cse_tmp_3, 0.3333333333333333)
+        cse_tmp_5 = 1 - z
+        cse_tmp_6 = NaNMath.pow(cse_tmp_5, 0.3333333333333333)
+        cse_tmp_7 = cse_tmp_4 + cse_tmp_6
+        cse_tmp_8 = cse_tmp_7 ^ (-1)
+        cse_tmp_9 = cse_tmp_8 * NaNMath.log(cse_tmp_7)
+        cse_tmp_10 = 1035.03 * cse_tmp_2 + 149.46 * cse_tmp_4 + 149.46 * cse_tmp_6 - 2070.06 * cse_tmp_9 - 244.37
+        cse_tmp_11 = 1978.19 * cse_tmp_2 + 192.62 * cse_tmp_4 + 192.62 * cse_tmp_6 - 3956.38 * cse_tmp_9 - 294.48
+        cse_tmp_12 = NaNMath.log(cse_tmp_11)
+        cse_tmp_13 = (-1.75 * cse_tmp_12 + 2 * NaNMath.log(cse_tmp_10)) ^ (-1)
+        cse_tmp_14 = (cse_tmp_4 * cse_tmp_6 * cse_tmp_7 + my_piecewise3(cse_tmp_3 <= zeta_threshold, 0, cse_tmp_3 * NaNMath.log(cse_tmp_4 * cse_tmp_8)) + my_piecewise3(cse_tmp_5 <= zeta_threshold, 0, cse_tmp_5 * NaNMath.log(cse_tmp_6 * cse_tmp_8)) - NaNMath.log(4) + 2) / 9.869604401089358
+        cse_tmp_15 = 0.0072 * cse_tmp_0 + cse_tmp_12 * cse_tmp_14 / 2 + 0.3942 * cse_tmp_4 + 0.3942 * cse_tmp_6 - 0.0354 * cse_tmp_7 ^ 3 - 0.0652 * cse_tmp_7 ^ 2 - 0.529
+        rs * (0.00016 * cse_tmp_0 + 0.00808 * cse_tmp_1 - 0.01382) * xc_log1p((NaNMath.pow(rs, 1.5) * (-0.00259 * cse_tmp_0 - 0.00021 * cse_tmp_1 + 0.00364) + rs * (0.05868 * cse_tmp_0 - 0.32923 * cse_tmp_1 + 0.46529)) ^ (-1)) / 2 + (cse_tmp_13 * cse_tmp_15 - 0.803 * rs / cse_tmp_10) * xc_log1p(cse_tmp_10 / NaNMath.pow(rs, 1.75)) / 2 + (-0.875 * cse_tmp_13 * cse_tmp_15 - 0.25 * cse_tmp_14 + rs * (0.1648 * cse_tmp_0 + 0.0432 * cse_tmp_1 + 0.8822) / cse_tmp_11) * xc_log1p(cse_tmp_11 / rs ^ 2) / 2 + 0.02418 / (rs * (-0.05028 * cse_tmp_0 - 0.01283 * cse_tmp_1 + 0.10215) + 1)
+    end
+end
+export lda_c_rpaf_energy
+
+const lda_c_rpaf_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const lda_c_rpaf_required = ()
+
+function lda_c_rpaf(rho; params = NamedTuple())
+    p = resolve_params(lda_c_rpaf_defaults, lda_c_rpaf_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_rpaf_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+function lda_c_rpaf(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_rpaf_defaults, lda_c_rpaf_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_rpaf_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+export lda_c_rpaf, lda_c_rpaf_defaults, lda_c_rpaf_required

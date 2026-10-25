@@ -1,0 +1,37 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_2d_prm.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_c
+const lda_c_2d_prm_energy = function (rs, z, params_a_c)
+    @inbounds begin
+        cse_tmp_0 = params_a_c + 1
+        cse_tmp_1 = rs ^ (-1)
+        cse_tmp_2 = 1.772453850905516
+        cse_tmp_3 = cse_tmp_2 / (7.8548 * cse_tmp_1 / cse_tmp_2 + cse_tmp_2)
+        cse_tmp_4 = cse_tmp_1 * cse_tmp_3
+        cse_tmp_5 = params_a_c + 2
+        cse_tmp_6 = 1 - cse_tmp_3
+        0.0324160230700843 * pi * (-cse_tmp_3 * cse_tmp_6 / cse_tmp_5 - 1.9637 * cse_tmp_4 / NaNMath.sqrt(cse_tmp_5) + 0.0636553445027244 * pi * cse_tmp_6 ^ 2 * rs / NaNMath.pow(cse_tmp_5, 1.5) + cse_tmp_6 / cse_tmp_0 - 3.9274 * cse_tmp_4 / NaNMath.sqrt(cse_tmp_0))
+    end
+end
+export lda_c_2d_prm_energy
+
+const lda_c_2d_prm_defaults = (params_a_c = 0.10183793993557394,)
+const lda_c_2d_prm_required = ()
+
+function lda_c_2d_prm(rho; params = NamedTuple())
+    p = resolve_params(lda_c_2d_prm_defaults, lda_c_2d_prm_required, params)
+    v = lda_variables(rho, Val(2))
+    return lda_c_2d_prm_energy(v.rs, v.z, p.params_a_c)
+end
+
+function lda_c_2d_prm(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_2d_prm_defaults, lda_c_2d_prm_required, params)
+    v = lda_variables(na, nb, Val(2))
+    return lda_c_2d_prm_energy(v.rs, v.z, p.params_a_c)
+end
+
+export lda_c_2d_prm, lda_c_2d_prm_defaults, lda_c_2d_prm_required

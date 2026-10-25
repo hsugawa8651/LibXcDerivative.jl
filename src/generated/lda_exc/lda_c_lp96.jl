@@ -1,0 +1,81 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_lp96.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_C1, params_a_C2, params_a_C3, params_a_C4
+const lda_c_lp96_energy = function (rs, z, params_a_C1, params_a_C2, params_a_C3, params_a_C4)
+    @inbounds begin
+        params_a_C1 + 3.3019272488946267 * 1.4645918875615234 * params_a_C2 * rs / 3 + (2 // 3) * 1.8171205928321397 * 2.1450293971110255 * params_a_C3 * rs ^ 2 + (4 // 3) * pi * params_a_C4 * rs ^ 3
+    end
+end
+export lda_c_lp96_energy
+
+const lda_c_lp96_defaults = (params_a_C1 = -0.0603, params_a_C2 = 0.0175, params_a_C3 = -0.00053, params_a_C4 = 0.0)
+const lda_c_lp96_required = ()
+
+function lda_c_lp96(rho; params = NamedTuple())
+    p = resolve_params(lda_c_lp96_defaults, lda_c_lp96_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+function lda_c_lp96(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_lp96_defaults, lda_c_lp96_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+export lda_c_lp96, lda_c_lp96_defaults, lda_c_lp96_required
+
+const lda_c_lp96_b_defaults = (params_a_C1 = -0.0532, params_a_C2 = 0.0121, params_a_C3 = -0.0003, params_a_C4 = -0.007)
+const lda_c_lp96_b_required = ()
+
+function lda_c_lp96_b(rho; params = NamedTuple())
+    p = resolve_params(lda_c_lp96_b_defaults, lda_c_lp96_b_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+function lda_c_lp96_b(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_lp96_b_defaults, lda_c_lp96_b_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+export lda_c_lp96_b, lda_c_lp96_b_defaults, lda_c_lp96_b_required
+
+const lda_k_lp96_defaults = (params_a_C1 = 0.03777, params_a_C2 = -0.01002, params_a_C3 = 0.00039, params_a_C4 = 0.0)
+const lda_k_lp96_required = ()
+
+function lda_k_lp96(rho; params = NamedTuple())
+    p = resolve_params(lda_k_lp96_defaults, lda_k_lp96_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+function lda_k_lp96(na, nb; params = NamedTuple())
+    p = resolve_params(lda_k_lp96_defaults, lda_k_lp96_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+export lda_k_lp96, lda_k_lp96_defaults, lda_k_lp96_required
+
+const lda_k_lp96_b_defaults = (params_a_C1 = 0.0532, params_a_C2 = -0.0242, params_a_C3 = 0.0009, params_a_C4 = 0.028)
+const lda_k_lp96_b_required = ()
+
+function lda_k_lp96_b(rho; params = NamedTuple())
+    p = resolve_params(lda_k_lp96_b_defaults, lda_k_lp96_b_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+function lda_k_lp96_b(na, nb; params = NamedTuple())
+    p = resolve_params(lda_k_lp96_b_defaults, lda_k_lp96_b_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_lp96_energy(v.rs, v.z, p.params_a_C1, p.params_a_C2, p.params_a_C3, p.params_a_C4)
+end
+
+export lda_k_lp96_b, lda_k_lp96_b_defaults, lda_k_lp96_b_required

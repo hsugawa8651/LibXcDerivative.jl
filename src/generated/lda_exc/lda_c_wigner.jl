@@ -1,0 +1,149 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_wigner.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_a, params_a_b
+const lda_c_wigner_energy = function (rs, z, params_a_a, params_a_b)
+    @inbounds begin
+        params_a_a * (1 - z) * (z + 1) / (params_a_b + rs)
+    end
+end
+export lda_c_wigner_energy
+
+const lda_c_wigner_defaults = (params_a_a = -0.44, params_a_b = 7.8)
+const lda_c_wigner_required = ()
+
+function lda_c_wigner(rho; params = NamedTuple())
+    p = resolve_params(lda_c_wigner_defaults, lda_c_wigner_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_c_wigner(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_wigner_defaults, lda_c_wigner_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_c_wigner, lda_c_wigner_defaults, lda_c_wigner_required
+
+const lda_c_bj89_defaults = (params_a_a = -0.18647, params_a_b = 1.89173)
+const lda_c_bj89_required = ()
+
+function lda_c_bj89(rho; params = NamedTuple())
+    p = resolve_params(lda_c_bj89_defaults, lda_c_bj89_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_c_bj89(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_bj89_defaults, lda_c_bj89_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_c_bj89, lda_c_bj89_defaults, lda_c_bj89_required
+
+const lda_c_br78_defaults = (params_a_a = -0.02893830717448337, params_a_b = 0.2838847933816818)
+const lda_c_br78_required = ()
+
+function lda_c_br78(rho; params = NamedTuple())
+    p = resolve_params(lda_c_br78_defaults, lda_c_br78_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_c_br78(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_br78_defaults, lda_c_br78_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_c_br78, lda_c_br78_defaults, lda_c_br78_required
+
+const lda_c_mcweeny_defaults = (params_a_a = -0.21057382583143244, params_a_b = 2.0324585669249857)
+const lda_c_mcweeny_required = ()
+
+function lda_c_mcweeny(rho; params = NamedTuple())
+    p = resolve_params(lda_c_mcweeny_defaults, lda_c_mcweeny_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_c_mcweeny(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_mcweeny_defaults, lda_c_mcweeny_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_c_mcweeny, lda_c_mcweeny_defaults, lda_c_mcweeny_required
+
+const lda_c_ow_defaults = (params_a_a = -0.09349695077738808, params_a_b = 1.777508569912321)
+const lda_c_ow_required = ()
+
+function lda_c_ow(rho; params = NamedTuple())
+    p = resolve_params(lda_c_ow_defaults, lda_c_ow_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_c_ow(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_ow_defaults, lda_c_ow_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_c_ow, lda_c_ow_defaults, lda_c_ow_required
+
+const lda_c_ow_lyp_defaults = (params_a_a = -0.08741787146828796, params_a_b = 1.777508569912321)
+const lda_c_ow_lyp_required = ()
+
+function lda_c_ow_lyp(rho; params = NamedTuple())
+    p = resolve_params(lda_c_ow_lyp_defaults, lda_c_ow_lyp_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_c_ow_lyp(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_ow_lyp_defaults, lda_c_ow_lyp_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_c_ow_lyp, lda_c_ow_lyp_defaults, lda_c_ow_lyp_required
+
+const lda_xc_lp_a_defaults = (params_a_a = -0.5351143334498224, params_a_b = 0.0)
+const lda_xc_lp_a_required = ()
+
+function lda_xc_lp_a(rho; params = NamedTuple())
+    p = resolve_params(lda_xc_lp_a_defaults, lda_xc_lp_a_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_xc_lp_a(na, nb; params = NamedTuple())
+    p = resolve_params(lda_xc_lp_a_defaults, lda_xc_lp_a_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_xc_lp_a, lda_xc_lp_a_defaults, lda_xc_lp_a_required
+
+const lda_xc_lp_b_defaults = (params_a_a = -0.5620375447548563, params_a_b = 0.013639646243405107)
+const lda_xc_lp_b_required = ()
+
+function lda_xc_lp_b(rho; params = NamedTuple())
+    p = resolve_params(lda_xc_lp_b_defaults, lda_xc_lp_b_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+function lda_xc_lp_b(na, nb; params = NamedTuple())
+    p = resolve_params(lda_xc_lp_b_defaults, lda_xc_lp_b_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_wigner_energy(v.rs, v.z, p.params_a_a, p.params_a_b)
+end
+
+export lda_xc_lp_b, lda_xc_lp_b_defaults, lda_xc_lp_b_required

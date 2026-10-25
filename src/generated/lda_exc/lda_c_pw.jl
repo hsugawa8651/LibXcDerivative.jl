@@ -1,0 +1,123 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_pw.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_a_0, params_a_a_1, params_a_a_2, params_a_alpha1_0, params_a_alpha1_1, params_a_alpha1_2, params_a_beta1_0, params_a_beta1_1, params_a_beta1_2, params_a_beta2_0, params_a_beta2_1, params_a_beta2_2, params_a_beta3_0, params_a_beta3_1, params_a_beta3_2, params_a_beta4_0, params_a_beta4_1, params_a_beta4_2, params_a_fz20, params_a_pp_0, params_a_pp_1, params_a_pp_2, zeta_threshold
+const lda_c_pw_energy = function (rs, z, params_a_a_0, params_a_a_1, params_a_a_2, params_a_alpha1_0, params_a_alpha1_1, params_a_alpha1_2, params_a_beta1_0, params_a_beta1_1, params_a_beta1_2, params_a_beta2_0, params_a_beta2_1, params_a_beta2_2, params_a_beta3_0, params_a_beta3_1, params_a_beta3_2, params_a_beta4_0, params_a_beta4_1, params_a_beta4_2, params_a_fz20, params_a_pp_0, params_a_pp_1, params_a_pp_2, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = NaNMath.sqrt(rs)
+        cse_tmp_1 = NaNMath.pow(rs, 1.5)
+        cse_tmp_2 = -2 * params_a_a_0 * (params_a_alpha1_0 * rs + 1) * xc_log1p(1 / (2 * params_a_a_0 * (cse_tmp_0 * params_a_beta1_0 + cse_tmp_1 * params_a_beta3_0 + params_a_beta2_0 * rs + params_a_beta4_0 * NaNMath.pow(rs, params_a_pp_0 + 1))))
+        cse_tmp_3 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_4 = zeta_threshold - 1
+        cse_tmp_5 = -z
+        cse_tmp_6 = (my_piecewise3(1 - z <= zeta_threshold, cse_tmp_3, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(cse_tmp_5 > cse_tmp_4, cse_tmp_5, cse_tmp_4)))) + my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_3, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_4, z, cse_tmp_4))))) / (-2 + 2 * 1.2599210498948732)
+        cse_tmp_7 = 2 * params_a_a_2 * (params_a_alpha1_2 * rs + 1) * xc_log1p(1 / (2 * params_a_a_2 * (cse_tmp_0 * params_a_beta1_2 + cse_tmp_1 * params_a_beta3_2 + params_a_beta2_2 * rs + params_a_beta4_2 * NaNMath.pow(rs, params_a_pp_2 + 1)))) / params_a_fz20
+        cse_tmp_2 + cse_tmp_6 * cse_tmp_7 + cse_tmp_6 * z ^ 4 * (-cse_tmp_2 - cse_tmp_7 - 2 * params_a_a_1 * (params_a_alpha1_1 * rs + 1) * xc_log1p(1 / (2 * params_a_a_1 * (cse_tmp_0 * params_a_beta1_1 + cse_tmp_1 * params_a_beta3_1 + params_a_beta2_1 * rs + params_a_beta4_1 * NaNMath.pow(rs, params_a_pp_1 + 1)))))
+    end
+end
+export lda_c_pw_energy
+
+const lda_c_pw_defaults = (params_a_a_0 = 0.031091, params_a_a_1 = 0.015545, params_a_a_2 = 0.016887, params_a_alpha1_0 = 0.2137, params_a_alpha1_1 = 0.20548, params_a_alpha1_2 = 0.11125, params_a_beta1_0 = 7.5957, params_a_beta1_1 = 14.1189, params_a_beta1_2 = 10.357, params_a_beta2_0 = 3.5876, params_a_beta2_1 = 6.1977, params_a_beta2_2 = 3.6231, params_a_beta3_0 = 1.6382, params_a_beta3_1 = 3.3662, params_a_beta3_2 = 0.88026, params_a_beta4_0 = 0.49294, params_a_beta4_1 = 0.62517, params_a_beta4_2 = 0.49671, params_a_fz20 = 1.709921, params_a_pp_0 = 1.0, params_a_pp_1 = 1.0, params_a_pp_2 = 1.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_pw_required = ()
+
+function lda_c_pw(rho; params = NamedTuple())
+    p = resolve_params(lda_c_pw_defaults, lda_c_pw_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+function lda_c_pw(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_pw_defaults, lda_c_pw_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+export lda_c_pw, lda_c_pw_defaults, lda_c_pw_required
+
+const lda_c_ob_pw_defaults = (params_a_a_0 = 0.031091, params_a_a_1 = 0.015545, params_a_a_2 = 0.016887, params_a_alpha1_0 = 0.026481, params_a_alpha1_1 = 0.022465, params_a_alpha1_2 = 0.11125, params_a_beta1_0 = 7.5957, params_a_beta1_1 = 14.1189, params_a_beta1_2 = 10.357, params_a_beta2_0 = 3.5876, params_a_beta2_1 = 6.1977, params_a_beta2_2 = 3.6231, params_a_beta3_0 = -0.46647, params_a_beta3_1 = -0.56043, params_a_beta3_2 = 0.88026, params_a_beta4_0 = 0.13354, params_a_beta4_1 = 0.11313, params_a_beta4_2 = 0.49671, params_a_fz20 = 1.709921, params_a_pp_0 = 1.0, params_a_pp_1 = 1.0, params_a_pp_2 = 1.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_ob_pw_required = ()
+
+function lda_c_ob_pw(rho; params = NamedTuple())
+    p = resolve_params(lda_c_ob_pw_defaults, lda_c_ob_pw_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+function lda_c_ob_pw(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_ob_pw_defaults, lda_c_ob_pw_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+export lda_c_ob_pw, lda_c_ob_pw_defaults, lda_c_ob_pw_required
+
+const lda_c_pw_mod_defaults = (params_a_a_0 = 0.0310907, params_a_a_1 = 0.01554535, params_a_a_2 = 0.0168869, params_a_alpha1_0 = 0.2137, params_a_alpha1_1 = 0.20548, params_a_alpha1_2 = 0.11125, params_a_beta1_0 = 7.5957, params_a_beta1_1 = 14.1189, params_a_beta1_2 = 10.357, params_a_beta2_0 = 3.5876, params_a_beta2_1 = 6.1977, params_a_beta2_2 = 3.6231, params_a_beta3_0 = 1.6382, params_a_beta3_1 = 3.3662, params_a_beta3_2 = 0.88026, params_a_beta4_0 = 0.49294, params_a_beta4_1 = 0.62517, params_a_beta4_2 = 0.49671, params_a_fz20 = 1.7099209341613657, params_a_pp_0 = 1.0, params_a_pp_1 = 1.0, params_a_pp_2 = 1.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_pw_mod_required = ()
+
+function lda_c_pw_mod(rho; params = NamedTuple())
+    p = resolve_params(lda_c_pw_mod_defaults, lda_c_pw_mod_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+function lda_c_pw_mod(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_pw_mod_defaults, lda_c_pw_mod_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+export lda_c_pw_mod, lda_c_pw_mod_defaults, lda_c_pw_mod_required
+
+const lda_c_pw_rpa_defaults = (params_a_a_0 = 0.031091, params_a_a_1 = 0.015545, params_a_a_2 = 0.016887, params_a_alpha1_0 = 0.082477, params_a_alpha1_1 = 0.035374, params_a_alpha1_2 = 0.028829, params_a_beta1_0 = 5.1486, params_a_beta1_1 = 6.4869, params_a_beta1_2 = 10.357, params_a_beta2_0 = 1.6483, params_a_beta2_1 = 1.3083, params_a_beta2_2 = 3.6231, params_a_beta3_0 = 0.23647, params_a_beta3_1 = 0.1518, params_a_beta3_2 = 0.4799, params_a_beta4_0 = 0.20614, params_a_beta4_1 = 0.082349, params_a_beta4_2 = 0.12279, params_a_fz20 = 1.709921, params_a_pp_0 = 0.75, params_a_pp_1 = 0.75, params_a_pp_2 = 1.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_pw_rpa_required = ()
+
+function lda_c_pw_rpa(rho; params = NamedTuple())
+    p = resolve_params(lda_c_pw_rpa_defaults, lda_c_pw_rpa_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+function lda_c_pw_rpa(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_pw_rpa_defaults, lda_c_pw_rpa_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+export lda_c_pw_rpa, lda_c_pw_rpa_defaults, lda_c_pw_rpa_required
+
+const lda_c_rpw92_defaults = (params_a_a_0 = 0.0310907, params_a_a_1 = 0.01554535, params_a_a_2 = 0.0168869, params_a_alpha1_0 = 0.2137, params_a_alpha1_1 = 0.266529, params_a_alpha1_2 = 0.11125, params_a_beta1_0 = 7.5957, params_a_beta1_1 = 14.1189, params_a_beta1_2 = 10.357, params_a_beta2_0 = 3.5876, params_a_beta2_1 = 6.1977, params_a_beta2_2 = 3.6231, params_a_beta3_0 = 1.6382, params_a_beta3_1 = 4.86059, params_a_beta3_2 = 0.88026, params_a_beta4_0 = 0.49294, params_a_beta4_1 = 0.750188, params_a_beta4_2 = 0.49671, params_a_fz20 = 1.7099209341613657, params_a_pp_0 = 1.0, params_a_pp_1 = 1.0, params_a_pp_2 = 1.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_rpw92_required = ()
+
+function lda_c_rpw92(rho; params = NamedTuple())
+    p = resolve_params(lda_c_rpw92_defaults, lda_c_rpw92_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+function lda_c_rpw92(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_rpw92_defaults, lda_c_rpw92_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+export lda_c_rpw92, lda_c_rpw92_defaults, lda_c_rpw92_required
+
+const lda_c_upw92_defaults = (params_a_a_0 = 0.0310907, params_a_a_1 = 0.01554535, params_a_a_2 = 0.0168869, params_a_alpha1_0 = 0.227012, params_a_alpha1_1 = 0.264193, params_a_alpha1_2 = 0.11125, params_a_beta1_0 = 7.5957, params_a_beta1_1 = 14.1189, params_a_beta1_2 = 10.357, params_a_beta2_0 = 3.5876, params_a_beta2_1 = 6.1977, params_a_beta2_2 = 3.6231, params_a_beta3_0 = 1.76522, params_a_beta3_1 = 4.78287, params_a_beta3_2 = 0.88026, params_a_beta4_0 = 0.523918, params_a_beta4_1 = 0.750424, params_a_beta4_2 = 0.49671, params_a_fz20 = 1.7099209341613657, params_a_pp_0 = 1.0, params_a_pp_1 = 1.0, params_a_pp_2 = 1.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_upw92_required = ()
+
+function lda_c_upw92(rho; params = NamedTuple())
+    p = resolve_params(lda_c_upw92_defaults, lda_c_upw92_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+function lda_c_upw92(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_upw92_defaults, lda_c_upw92_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_pw_energy(v.rs, v.z, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_alpha1_0, p.params_a_alpha1_1, p.params_a_alpha1_2, p.params_a_beta1_0, p.params_a_beta1_1, p.params_a_beta1_2, p.params_a_beta2_0, p.params_a_beta2_1, p.params_a_beta2_2, p.params_a_beta3_0, p.params_a_beta3_1, p.params_a_beta3_2, p.params_a_beta4_0, p.params_a_beta4_1, p.params_a_beta4_2, p.params_a_fz20, p.params_a_pp_0, p.params_a_pp_1, p.params_a_pp_2, p.zeta_threshold)
+end
+
+export lda_c_upw92, lda_c_upw92_defaults, lda_c_upw92_required

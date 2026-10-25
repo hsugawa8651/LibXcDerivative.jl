@@ -1,0 +1,34 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_k_zlp.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, zeta_threshold
+const lda_k_zlp_energy = function (rs, z, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = 3.3019272488946267
+        cse_tmp_1 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_2 = zeta_threshold - 1
+        cse_tmp_3 = -z
+        0.001586228 * cse_tmp_0 * (my_piecewise3(1 - z <= zeta_threshold, cse_tmp_1, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_3 > cse_tmp_2, cse_tmp_3, cse_tmp_2)))) / 2 + my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_1, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_2, z, cse_tmp_2)))) / 2 + 1) * xc_x_minus_log1p(170.068027210884 * 1.4645918875615234 * cse_tmp_0 * rs) / (2.1450293971110255 * rs ^ 3)
+    end
+end
+export lda_k_zlp_energy
+
+const lda_k_zlp_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const lda_k_zlp_required = ()
+
+function lda_k_zlp(rho; params = NamedTuple())
+    p = resolve_params(lda_k_zlp_defaults, lda_k_zlp_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_k_zlp_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+function lda_k_zlp(na, nb; params = NamedTuple())
+    p = resolve_params(lda_k_zlp_defaults, lda_k_zlp_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_k_zlp_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+export lda_k_zlp, lda_k_zlp_defaults, lda_k_zlp_required

@@ -1,0 +1,100 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_hl.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, params_a_hl_c_0, params_a_hl_c_1, params_a_hl_r_0, params_a_hl_r_1, zeta_threshold
+const lda_c_hl_energy = function (rs, z, params_a_hl_c_0, params_a_hl_c_1, params_a_hl_r_0, params_a_hl_r_1, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = rs / params_a_hl_r_0
+        cse_tmp_1 = rs ^ (-1)
+        cse_tmp_2 = params_a_hl_r_0 ^ 2
+        cse_tmp_3 = rs ^ 2
+        cse_tmp_4 = (3 // 10) / cse_tmp_3
+        cse_tmp_5 = params_a_hl_r_0 ^ 3
+        cse_tmp_6 = rs ^ 3
+        cse_tmp_7 = cse_tmp_6 ^ (-1)
+        cse_tmp_8 = (3 // 28) / rs ^ 4
+        cse_tmp_9 = rs ^ (-5)
+        cse_tmp_10 = 1 / (18 * rs ^ 6)
+        cse_tmp_11 = rs ^ (-7)
+        cse_tmp_12 = (3 // 88) / rs ^ 8
+        cse_tmp_13 = rs ^ (-9)
+        cse_tmp_14 = (3 // 130) / rs ^ 10
+        cse_tmp_15 = rs ^ (-11)
+        cse_tmp_16 = 1 / (60 * rs ^ 12)
+        cse_tmp_17 = rs ^ (-13)
+        cse_tmp_18 = (3 // 238) / rs ^ 14
+        cse_tmp_19 = rs ^ (-15)
+        cse_tmp_20 = (3 // 304) / rs ^ 16
+        cse_tmp_21 = rs ^ (-17)
+        cse_tmp_22 = 1 / (126 * rs ^ 18)
+        cse_tmp_23 = rs ^ (-19)
+        cse_tmp_24 = (3 // 460) / rs ^ 20
+        cse_tmp_25 = rs ^ (-21)
+        cse_tmp_26 = (3 // 550) / rs ^ 22
+        cse_tmp_27 = rs ^ (-23)
+        cse_tmp_28 = 1 / (216 * rs ^ 24)
+        cse_tmp_29 = params_a_hl_c_0 * my_piecewise3(cse_tmp_0 > 4, (3 // 4) * cse_tmp_1 * params_a_hl_r_0 - cse_tmp_10 * params_a_hl_r_0 ^ 6 + (3 // 70) * cse_tmp_11 * params_a_hl_r_0 ^ 7 - cse_tmp_12 * params_a_hl_r_0 ^ 8 + cse_tmp_13 * params_a_hl_r_0 ^ 9 / 36 - cse_tmp_14 * params_a_hl_r_0 ^ 10 + (3 // 154) * cse_tmp_15 * params_a_hl_r_0 ^ 11 - cse_tmp_16 * params_a_hl_r_0 ^ 12 + (3 // 208) * cse_tmp_17 * params_a_hl_r_0 ^ 13 - cse_tmp_18 * params_a_hl_r_0 ^ 14 + cse_tmp_19 * params_a_hl_r_0 ^ 15 / 90 - cse_tmp_2 * cse_tmp_4 - cse_tmp_20 * params_a_hl_r_0 ^ 16 + (3 // 340) * cse_tmp_21 * params_a_hl_r_0 ^ 17 - cse_tmp_22 * params_a_hl_r_0 ^ 18 + (3 // 418) * cse_tmp_23 * params_a_hl_r_0 ^ 19 - cse_tmp_24 * params_a_hl_r_0 ^ 20 + cse_tmp_25 * params_a_hl_r_0 ^ 21 / 168 - cse_tmp_26 * params_a_hl_r_0 ^ 22 + (3 // 598) * cse_tmp_27 * params_a_hl_r_0 ^ 23 - cse_tmp_28 * params_a_hl_r_0 ^ 24 + cse_tmp_5 * cse_tmp_7 / 6 - cse_tmp_8 * params_a_hl_r_0 ^ 4 + (3 // 40) * cse_tmp_9 * params_a_hl_r_0 ^ 5, cse_tmp_0 / 2 + (1 + cse_tmp_6 / cse_tmp_5) * xc_log1p(cse_tmp_1 * params_a_hl_r_0) - 1 // 3 - cse_tmp_3 / cse_tmp_2)
+        cse_tmp_30 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_31 = zeta_threshold - 1
+        cse_tmp_32 = -z
+        cse_tmp_33 = rs / params_a_hl_r_1
+        cse_tmp_34 = params_a_hl_r_1 ^ 2
+        cse_tmp_35 = params_a_hl_r_1 ^ 3
+        -cse_tmp_29 + (cse_tmp_29 - params_a_hl_c_1 * my_piecewise3(cse_tmp_33 > 4, (3 // 4) * cse_tmp_1 * params_a_hl_r_1 - cse_tmp_10 * params_a_hl_r_1 ^ 6 + (3 // 70) * cse_tmp_11 * params_a_hl_r_1 ^ 7 - cse_tmp_12 * params_a_hl_r_1 ^ 8 + cse_tmp_13 * params_a_hl_r_1 ^ 9 / 36 - cse_tmp_14 * params_a_hl_r_1 ^ 10 + (3 // 154) * cse_tmp_15 * params_a_hl_r_1 ^ 11 - cse_tmp_16 * params_a_hl_r_1 ^ 12 + (3 // 208) * cse_tmp_17 * params_a_hl_r_1 ^ 13 - cse_tmp_18 * params_a_hl_r_1 ^ 14 + cse_tmp_19 * params_a_hl_r_1 ^ 15 / 90 - cse_tmp_20 * params_a_hl_r_1 ^ 16 + (3 // 340) * cse_tmp_21 * params_a_hl_r_1 ^ 17 - cse_tmp_22 * params_a_hl_r_1 ^ 18 + (3 // 418) * cse_tmp_23 * params_a_hl_r_1 ^ 19 - cse_tmp_24 * params_a_hl_r_1 ^ 20 + cse_tmp_25 * params_a_hl_r_1 ^ 21 / 168 - cse_tmp_26 * params_a_hl_r_1 ^ 22 + (3 // 598) * cse_tmp_27 * params_a_hl_r_1 ^ 23 - cse_tmp_28 * params_a_hl_r_1 ^ 24 - cse_tmp_34 * cse_tmp_4 + cse_tmp_35 * cse_tmp_7 / 6 - cse_tmp_8 * params_a_hl_r_1 ^ 4 + (3 // 40) * cse_tmp_9 * params_a_hl_r_1 ^ 5, -cse_tmp_3 / cse_tmp_34 + cse_tmp_33 / 2 + (1 + cse_tmp_6 / cse_tmp_35) * xc_log1p(cse_tmp_1 * params_a_hl_r_1) - 1 // 3)) * (my_piecewise3(1 - z <= zeta_threshold, cse_tmp_30, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(cse_tmp_32 > cse_tmp_31, cse_tmp_32, cse_tmp_31)))) + my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_30, xc_expm1((4 // 3) * xc_log1p(my_piecewise3(z > cse_tmp_31, z, cse_tmp_31))))) / (-2 + 2 * 1.2599210498948732)
+    end
+end
+export lda_c_hl_energy
+
+const lda_c_hl_defaults = (params_a_hl_c_0 = 0.0225, params_a_hl_c_1 = 0.0225, params_a_hl_r_0 = 21.0, params_a_hl_r_1 = 21.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_hl_required = ()
+
+function lda_c_hl(rho; params = NamedTuple())
+    p = resolve_params(lda_c_hl_defaults, lda_c_hl_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_hl_energy(v.rs, v.z, p.params_a_hl_c_0, p.params_a_hl_c_1, p.params_a_hl_r_0, p.params_a_hl_r_1, p.zeta_threshold)
+end
+
+function lda_c_hl(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_hl_defaults, lda_c_hl_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_hl_energy(v.rs, v.z, p.params_a_hl_c_0, p.params_a_hl_c_1, p.params_a_hl_r_0, p.params_a_hl_r_1, p.zeta_threshold)
+end
+
+export lda_c_hl, lda_c_hl_defaults, lda_c_hl_required
+
+const lda_c_gl_defaults = (params_a_hl_c_0 = 0.0333, params_a_hl_c_1 = 0.0203, params_a_hl_r_0 = 11.4, params_a_hl_r_1 = 15.9, zeta_threshold = 2.220446049250313e-16)
+const lda_c_gl_required = ()
+
+function lda_c_gl(rho; params = NamedTuple())
+    p = resolve_params(lda_c_gl_defaults, lda_c_gl_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_hl_energy(v.rs, v.z, p.params_a_hl_c_0, p.params_a_hl_c_1, p.params_a_hl_r_0, p.params_a_hl_r_1, p.zeta_threshold)
+end
+
+function lda_c_gl(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_gl_defaults, lda_c_gl_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_hl_energy(v.rs, v.z, p.params_a_hl_c_0, p.params_a_hl_c_1, p.params_a_hl_r_0, p.params_a_hl_r_1, p.zeta_threshold)
+end
+
+export lda_c_gl, lda_c_gl_defaults, lda_c_gl_required
+
+const lda_c_vbh_defaults = (params_a_hl_c_0 = 0.0252, params_a_hl_c_1 = 0.0127, params_a_hl_r_0 = 30.0, params_a_hl_r_1 = 75.0, zeta_threshold = 2.220446049250313e-16)
+const lda_c_vbh_required = ()
+
+function lda_c_vbh(rho; params = NamedTuple())
+    p = resolve_params(lda_c_vbh_defaults, lda_c_vbh_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_hl_energy(v.rs, v.z, p.params_a_hl_c_0, p.params_a_hl_c_1, p.params_a_hl_r_0, p.params_a_hl_r_1, p.zeta_threshold)
+end
+
+function lda_c_vbh(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_vbh_defaults, lda_c_vbh_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_hl_energy(v.rs, v.z, p.params_a_hl_c_0, p.params_a_hl_c_1, p.params_a_hl_r_0, p.params_a_hl_r_1, p.zeta_threshold)
+end
+
+export lda_c_vbh, lda_c_vbh_defaults, lda_c_vbh_required

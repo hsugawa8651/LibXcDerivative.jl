@@ -1,0 +1,31 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_c_gombas.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z
+const lda_c_gombas_energy = function (rs, z)
+    @inbounds begin
+        cse_tmp_0 = 1.4645918875615234
+        -0.0311 * xc_log1p(1.195 * 1.8171205928321397 / (cse_tmp_0 * rs)) - 0.0357 / (0.0187333333333333 * 3.3019272488946267 * cse_tmp_0 * rs + 1)
+    end
+end
+export lda_c_gombas_energy
+
+const lda_c_gombas_defaults = NamedTuple()
+const lda_c_gombas_required = ()
+
+function lda_c_gombas(rho; params = NamedTuple())
+    p = resolve_params(lda_c_gombas_defaults, lda_c_gombas_required, params)
+    v = lda_variables(rho, Val(3))
+    return lda_c_gombas_energy(v.rs, v.z)
+end
+
+function lda_c_gombas(na, nb; params = NamedTuple())
+    p = resolve_params(lda_c_gombas_defaults, lda_c_gombas_required, params)
+    v = lda_variables(na, nb, Val(3))
+    return lda_c_gombas_energy(v.rs, v.z)
+end
+
+export lda_c_gombas, lda_c_gombas_defaults, lda_c_gombas_required

@@ -1,0 +1,33 @@
+# Auto-generated from the Libxc sources
+# python/lda_exc/lda_x_2d.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, zeta_threshold
+const lda_x_2d_energy = function (rs, z, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = NaNMath.pow(zeta_threshold, 1.5) - 1
+        cse_tmp_1 = zeta_threshold - 1
+        cse_tmp_2 = -z
+        -4 // 3 * 1.4142135623730951 * (my_piecewise3(1 - z <= zeta_threshold, cse_tmp_0, xc_expm1((3 // 2) * xc_log1p(my_piecewise3(cse_tmp_2 > cse_tmp_1, cse_tmp_2, cse_tmp_1)))) / 2 + my_piecewise3(z + 1 <= zeta_threshold, cse_tmp_0, xc_expm1((3 // 2) * xc_log1p(my_piecewise3(z > cse_tmp_1, z, cse_tmp_1)))) / 2 + 1) / (pi * rs)
+    end
+end
+export lda_x_2d_energy
+
+const lda_x_2d_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const lda_x_2d_required = ()
+
+function lda_x_2d(rho; params = NamedTuple())
+    p = resolve_params(lda_x_2d_defaults, lda_x_2d_required, params)
+    v = lda_variables(rho, Val(2))
+    return lda_x_2d_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+function lda_x_2d(na, nb; params = NamedTuple())
+    p = resolve_params(lda_x_2d_defaults, lda_x_2d_required, params)
+    v = lda_variables(na, nb, Val(2))
+    return lda_x_2d_energy(v.rs, v.z, p.zeta_threshold)
+end
+
+export lda_x_2d, lda_x_2d_defaults, lda_x_2d_required
