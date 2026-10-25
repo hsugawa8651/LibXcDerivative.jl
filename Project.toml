@@ -1,0 +1,14 @@
+name = "LibXcDerivative"
+uuid = "b2323edf-4daf-44c3-8fba-2ea4f4c647cf"
+authors = ["Hiroharu Sugawara <hsugawa@gmail.com>"]
+license = "MPL-2.0"
+version = "0.1.0"
+
+[deps]
+NaNMath = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+
+[compat]
+NaNMath = "1.1.4"
+SpecialFunctions = "2.9.0"
+julia = "1.10"
