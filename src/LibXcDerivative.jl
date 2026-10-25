@@ -9,6 +9,9 @@ using NaNMath
 include("my_piecewise.jl")
 export my_piecewise3, my_piecewise5
 
+include("variables.jl")
+export lda_variables, gga_variables, mgga_variables
+
 include("libxc_names.jl")
 # Libxc's own spellings of the functions its kernels call. erf and erfc are
 # not among them: they are SpecialFunctions', and exporting them put a name
