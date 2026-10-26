@@ -59,4 +59,10 @@
     end
     @test occursin("lda", sprint(showerror, err))
 
+    # What the extension does take goes to the extension.
+    @test xc_exc_vxc(lda_x, 0.5).zk isa Float64
+    @test slot_names(:lda, 2) === (:v2rho2,)
+    # Three, not one: the width is the spin-polarized one, and an LDA's
+    # second derivative has the (aa, ab, bb) components.
+    @test slot_widths(:lda, 2) === (3,)
 end

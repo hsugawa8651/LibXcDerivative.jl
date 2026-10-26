@@ -8,7 +8,14 @@ version = "0.1.0"
 NaNMath = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
+[weakdeps]
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+
+[extensions]
+LibXcDerivativeForwardDiffExt = "ForwardDiff"
+
 [compat]
+ForwardDiff = "0.10, 1"
 NaNMath = "1.1.4"
 SpecialFunctions = "2.9.0"
 julia = "1.10"

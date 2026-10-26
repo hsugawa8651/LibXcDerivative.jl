@@ -80,6 +80,73 @@
         @test param_point(lda_c_epc18, (params_a_a = 1.0, params_a_b = 2.0,
                                         params_a_c = 3.0)) == [1.0, 2.0, 3.0]
     end
+
+    @testset "param_gradient is named, and is the derivative" begin
+        names = param_names(gga_x_pbe)
+        g = param_gradient(gga_x_pbe, 0.5, 0.05)
+        @test keys(g) == names
+
+        # Against central differences, through the same entry point. The
+        # step is relative, so that a parameter of any size gets a usable
+        # one, and the comparison carries its own noise floor: the two values
+        # agree to the eleventh digit here, so their difference holds about
+        # eps(f)/h of rounding, which is 1e-4 of the kappa derivative at this
+        # point and would otherwise fail a relative tolerance alone.
+        q0 = Float64[gga_x_pbe_defaults[k] for k in names]
+        noise = eps(abs(gga_x_pbe(0.5, 0.05)))
+        for (i, k) in enumerate(names)
+            h = max(abs(q0[i]), 1.0) * 1e-6
+            up = copy(q0); up[i] += h
+            dn = copy(q0); dn[i] -= h
+            fd = (gga_x_pbe(0.5, 0.05; params = params_from(gga_x_pbe, up)) -
+                  gga_x_pbe(0.5, 0.05; params = params_from(gga_x_pbe, dn))) / 2h
+            @test g[k] ≈ fd rtol = 1e-5 atol = 10 * noise / h
+        end
+
+        # And exactly what the hand-written gradient gives: same tool, same
+        # expression, so the convenience cannot have changed the number.
+        dyn = ForwardDiff.gradient(
+            q -> gga_x_pbe(0.5, 0.05;
+                           params = merge(gga_x_pbe_defaults,
+                                          NamedTuple{names}((q[1], q[2])))), q0)
+        @test collect(values(g)) == dyn
+
+        # Every family, at its own arity, polarized as well as not.
+        @test keys(param_gradient(lda_x, 0.5)) == (:params_a_alpha,)
+        @test keys(param_gradient(lda_x, 0.3, 0.2)) == (:params_a_alpha,)
+        @test length(param_gradient(mgga_x_scan, 0.5, 0.05, 0.025, 0.15)) == 4
+        @test length(param_gradient(gga_x_pbe, 0.3, 0.2, 0.05, 0.02, 0.01)) == 2
+
+        # A functional with nothing to fit says so, rather than handing back
+        # an empty tuple that reads like a measurement.
+        @test_throws ArgumentError param_gradient(hyb_gga_xc_b3lyp, 0.5, 0.1)
+        @test_throws ArgumentError param_gradient(lda_c_vwn, 0.5)
+
+        # A parameter with no default has no point to differentiate at until
+        # the caller gives one.
+        @test_throws ArgumentError param_gradient(lda_c_epc18, 0.5)
+        ge = param_gradient(lda_c_epc18, 0.5;
+                            params = (params_a_a = 1.0, params_a_b = 2.0,
+                                      params_a_c = 3.0))
+        @test keys(ge) == (:params_a_a, :params_a_b, :params_a_c)
+        @test all(isfinite, values(ge))
+
+        # `params` moves the point the derivative is taken at, and the
+        # derivative moves with it: params_a_kappa enters through
+        # mu*s^2/(kappa + mu*s^2), whose kappa derivative is not constant.
+        @test param_gradient(gga_x_pbe, 0.5, 0.05).params_a_kappa !=
+              param_gradient(gga_x_pbe, 0.5, 0.05;
+                             params = (params_a_kappa = 1.2,)).params_a_kappa
+
+        # A name that is not a parameter of this functional is refused rather
+        # than merged into a tuple nobody reads: a threshold passed here would
+        # otherwise be accepted and then silently dropped, since the
+        # thresholds come from the defaults.
+        @test_throws ArgumentError param_gradient(gga_x_pbe, 0.5, 0.05;
+                                                  params = (dens_threshold = 1e-10,))
+        @test_throws ArgumentError param_gradient(gga_x_pbe, 0.5, 0.05;
+                                                  params = (params_a_kapa = 0.8,))
+    end
 end
 
 @testset "the parameter entry points name themselves when they refuse" begin

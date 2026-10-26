@@ -84,19 +84,18 @@ Nothing is allocated, in a top-level function or inside a `@testset`, and the
 suite asserts that rather than any of these times, which belong to the
 machine they were taken on. The slots have to be assembled in a method the
 compiler will inline into the caller's loop: where they are not, the entry
-point allocates on every point, which cost the GGA path 755 ns and 384 bytes
-a point for a day, and `test/slots.jl` now pins it at zero bytes.
+point allocates on every point, 755 ns and 384 bytes a point on the GGA
+path. `test/derivatives.jl` pins it at zero bytes.
 
 A functional that reads `tau` carries the input clamp
 [`libxc_clamp`](@ref) describes as well, which asks a table on every point.
-That question answered itself in 88 ns and 32 bytes a point until the same
-reading was taken of it: the clamp received the functional as an argument it
-never calls, for which Julia compiles one instance covering all of them
-rather than one each, so the name was looked up at run time and the lookup's
-union-typed result was boxed. With the functional arriving as a type
-parameter and the table indexed rather than defaulted, the clamp costs 9 ns
-and nothing, and `mgga_x_scan` reads 387 ns a point against 352 with
-`enforce_fhc=false`.
+Measured on 2026-10-24 in the same shape of loop, the functional arrives
+there as a type parameter and the table is indexed rather than defaulted,
+which costs 9 ns and nothing: `mgga_x_scan` reads 387 ns a point against 352
+with `enforce_fhc=false`. Passed instead as an argument the clamp never
+calls, it costs 88 ns and 32 bytes a point, since Julia compiles one
+instance covering every functional rather than one each, so the name is
+looked up at run time and the lookup's union-typed result is boxed.
 
 The scope of the loop matters more than it should and is worth saying. The
 figures above are all from a loop in a function, with the inputs in arrays.
@@ -396,7 +395,7 @@ end
 # than one each. In that single instance `nameof(f)` is a run-time lookup and
 # the predicate below cannot be inlined into the caller's loop, which cost
 # 88 ns a point against 6 ns with the parameter (2026-10-24). The suite
-# asserts the allocation this form avoids, in test/slots.jl.
+# asserts the allocation this form avoids, in test/derivatives.jl.
 function libxc_clamp(f::F, rho::Real, sigma::Real, lapl::Real,
                      tau::Real) where {F}
     _clamps(f) || return (rho, sigma, lapl, tau)
@@ -413,7 +412,7 @@ end
 
 # Whether the clamp applies: the functional needs tau, and this package has a
 # table entry saying so. A caller may pass a function of its own to the slot
-# layer, which has never required the name to be one we ship, so a name with
+# layer, which does not require the name to be one we ship, so a name with
 # no entry gets its arguments back rather than an error.
 @inline function _clamps(f::F) where {F}
     name = f isa Symbol ? f : nameof(f)

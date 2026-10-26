@@ -26,4 +26,7 @@ using TOML
     include("sources.jl")
     include("fallback.jl")
     include("clamp_guard.jl")
+    include("sweeps.jl")
+    include("derivatives.jl")
+    include("licence.jl")
 end
