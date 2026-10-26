@@ -1,0 +1,75 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_x_mbeefvdw.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold
+const mgga_x_mbeefvdw_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = xs0 ^ 2
+        cse_tmp_3 = 1.8171205928321397
+        cse_tmp_4 = cse_tmp_3 / 4.60115111447049
+        cse_tmp_5 = cse_tmp_4 / 24
+        cse_tmp_6 = cse_tmp_2 * cse_tmp_5 + 6.5124
+        cse_tmp_7 = cse_tmp_6 ^ (-4)
+        cse_tmp_8 = cse_tmp_6 ^ (-3)
+        cse_tmp_9 = cse_tmp_6 ^ (-2)
+        cse_tmp_10 = cse_tmp_6 ^ (-1)
+        cse_tmp_11 = (5 // 9) * cse_tmp_4
+        cse_tmp_12 = cse_tmp_11 * (-cse_tmp_2 / 8 + t0)
+        cse_tmp_13 = cse_tmp_12 > 10000.0
+        cse_tmp_14 = my_piecewise3(cse_tmp_13, cse_tmp_12, 10000.0)
+        cse_tmp_15 = my_piecewise3(cse_tmp_13, 10000.0, cse_tmp_12)
+        cse_tmp_16 = cse_tmp_15 ^ 3
+        cse_tmp_17 = my_piecewise3(cse_tmp_12 >= 10000.0, 3 / cse_tmp_14 ^ 2 + cse_tmp_14 ^ (-3), (3 * cse_tmp_15 ^ 4 - 3 * cse_tmp_15 ^ 2 + cse_tmp_16 + 2) / (cse_tmp_16 * (cse_tmp_16 + 1) + 1))
+        cse_tmp_18 = cse_tmp_17 ^ 2
+        cse_tmp_19 = cse_tmp_17 ^ 3
+        cse_tmp_20 = cse_tmp_17 ^ 4
+        cse_tmp_21 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_22 = zeta_threshold - 1
+        cse_tmp_23 = 1 - z
+        cse_tmp_24 = cse_tmp_23 <= zeta_threshold
+        cse_tmp_25 = -cse_tmp_22
+        cse_tmp_26 = my_piecewise5(cse_tmp_21, cse_tmp_22, cse_tmp_24, cse_tmp_25, z) + 1
+        cse_tmp_27 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_28 = 0.184639691595506 * cse_tmp_3 / (1.4645918875615234 * rs)
+        cse_tmp_29 = xs1 ^ 2
+        cse_tmp_30 = cse_tmp_29 * cse_tmp_5 + 6.5124
+        cse_tmp_31 = cse_tmp_30 ^ (-4)
+        cse_tmp_32 = cse_tmp_30 ^ (-3)
+        cse_tmp_33 = cse_tmp_30 ^ (-2)
+        cse_tmp_34 = cse_tmp_30 ^ (-1)
+        cse_tmp_35 = cse_tmp_11 * (-cse_tmp_29 / 8 + t1)
+        cse_tmp_36 = cse_tmp_35 > 10000.0
+        cse_tmp_37 = my_piecewise3(cse_tmp_36, cse_tmp_35, 10000.0)
+        cse_tmp_38 = my_piecewise3(cse_tmp_36, 10000.0, cse_tmp_35)
+        cse_tmp_39 = cse_tmp_38 ^ 3
+        cse_tmp_40 = my_piecewise3(cse_tmp_35 >= 10000.0, 3 / cse_tmp_37 ^ 2 + cse_tmp_37 ^ (-3), (3 * cse_tmp_38 ^ 4 - 3 * cse_tmp_38 ^ 2 + cse_tmp_39 + 2) / (cse_tmp_39 * (cse_tmp_39 + 1) + 1))
+        cse_tmp_41 = cse_tmp_40 ^ 2
+        cse_tmp_42 = cse_tmp_40 ^ 3
+        cse_tmp_43 = cse_tmp_40 ^ 4
+        cse_tmp_44 = my_piecewise5(cse_tmp_24, cse_tmp_22, cse_tmp_21, cse_tmp_25, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_28 * (1.37994983639724 * cse_tmp_10 * cse_tmp_17 + 0.278883252711815 * cse_tmp_10 * cse_tmp_18 - 0.198030598943724 * cse_tmp_10 * cse_tmp_19 - 2.82054404660339e-5 * cse_tmp_10 * cse_tmp_20 + 0.605802706321728 * cse_tmp_10 + 0.0342996229711961 * cse_tmp_17 * cse_tmp_7 + 106.257667317712 * cse_tmp_17 * cse_tmp_8 - 14.8258880072443 * cse_tmp_17 * cse_tmp_9 - 0.0724504718393416 * cse_tmp_17 - 0.0499925681370443 * cse_tmp_18 * cse_tmp_7 + 0.0160295792500325 * cse_tmp_18 * cse_tmp_8 - 1.99356211442488 * cse_tmp_18 * cse_tmp_9 + 0.0302907230383417 * cse_tmp_18 - 0.0105705827244798 * cse_tmp_19 * cse_tmp_7 + 0.00287096342317492 * cse_tmp_19 * cse_tmp_8 - 0.000714513626071515 * cse_tmp_19 * cse_tmp_9 + 0.00921167361599925 * cse_tmp_19 - 0.00187689887097538 * cse_tmp_20 * cse_tmp_7 + 0.000480384377223412 * cse_tmp_20 * cse_tmp_8 + 0.000189988360835094 * cse_tmp_20 * cse_tmp_9 + 0.000619642051254188 * cse_tmp_20 + 178.118639292844 * cse_tmp_7 - 49.8644250639679 * cse_tmp_8 - 16.2500470022936 * cse_tmp_9 + 1.22648450499554) * my_piecewise3(cse_tmp_26 <= zeta_threshold, cse_tmp_27, NaNMath.pow(cse_tmp_26, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_23 <= dens_threshold, 0, -cse_tmp_28 * (0.0342996229711961 * cse_tmp_31 * cse_tmp_40 - 0.0499925681370443 * cse_tmp_31 * cse_tmp_41 - 0.0105705827244798 * cse_tmp_31 * cse_tmp_42 - 0.00187689887097538 * cse_tmp_31 * cse_tmp_43 + 178.118639292844 * cse_tmp_31 + 106.257667317712 * cse_tmp_32 * cse_tmp_40 + 0.0160295792500325 * cse_tmp_32 * cse_tmp_41 + 0.00287096342317492 * cse_tmp_32 * cse_tmp_42 + 0.000480384377223412 * cse_tmp_32 * cse_tmp_43 - 49.8644250639679 * cse_tmp_32 - 14.8258880072443 * cse_tmp_33 * cse_tmp_40 - 1.99356211442488 * cse_tmp_33 * cse_tmp_41 - 0.000714513626071515 * cse_tmp_33 * cse_tmp_42 + 0.000189988360835094 * cse_tmp_33 * cse_tmp_43 - 16.2500470022936 * cse_tmp_33 + 1.37994983639724 * cse_tmp_34 * cse_tmp_40 + 0.278883252711815 * cse_tmp_34 * cse_tmp_41 - 0.198030598943724 * cse_tmp_34 * cse_tmp_42 - 2.82054404660339e-5 * cse_tmp_34 * cse_tmp_43 + 0.605802706321728 * cse_tmp_34 - 0.0724504718393416 * cse_tmp_40 + 0.0302907230383417 * cse_tmp_41 + 0.00921167361599925 * cse_tmp_42 + 0.000619642051254188 * cse_tmp_43 + 1.22648450499554) * my_piecewise3(cse_tmp_44 <= zeta_threshold, cse_tmp_27, NaNMath.pow(cse_tmp_44, 1.3333333333333333)))
+    end
+end
+export mgga_x_mbeefvdw_energy
+
+const mgga_x_mbeefvdw_defaults = (dens_threshold = 1.0e-10, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_mbeefvdw_required = ()
+
+function mgga_x_mbeefvdw(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_mbeefvdw_defaults, mgga_x_mbeefvdw_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_mbeefvdw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+function mgga_x_mbeefvdw(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_mbeefvdw_defaults, mgga_x_mbeefvdw_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_mbeefvdw_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+export mgga_x_mbeefvdw, mgga_x_mbeefvdw_defaults, mgga_x_mbeefvdw_required

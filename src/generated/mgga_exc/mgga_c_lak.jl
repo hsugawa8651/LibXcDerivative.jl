@@ -1,0 +1,113 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_c_lak.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, XC_EPSILON, XC_MIN, zeta_threshold
+const mgga_c_lak_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, XC_EPSILON, XC_MIN, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 1 - z
+        cse_tmp_2 = z ^ 4
+        cse_tmp_3 = (0.205601 * rs + 1) ^ (-1)
+        cse_tmp_4 = 0.0468 * cse_tmp_3
+        cse_tmp_5 = xt ^ 2
+        cse_tmp_6 = 1.4422495703074083
+        cse_tmp_7 = cse_tmp_6 / 4.60115111447049
+        cse_tmp_8 = cse_tmp_5 * cse_tmp_7
+        cse_tmp_9 = -xc_expm1(1.0 * cse_tmp_3) * xc_expm1(-xc_log1p(0.517813333333333 * cse_tmp_8) / 4) + 1
+        cse_tmp_10 = 1.2599210498948732
+        cse_tmp_11 = (2 * cse_tmp_10 - 2) ^ (-1)
+        cse_tmp_12 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_13 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_14 = zeta_threshold - 1
+        cse_tmp_15 = xc_log1p(my_piecewise3(z > cse_tmp_14, z, cse_tmp_14))
+        cse_tmp_16 = cse_tmp_1 <= zeta_threshold
+        cse_tmp_17 = -z
+        cse_tmp_18 = xc_log1p(my_piecewise3(cse_tmp_17 > cse_tmp_14, cse_tmp_17, cse_tmp_14))
+        cse_tmp_19 = cse_tmp_11 * (my_piecewise3(cse_tmp_12, cse_tmp_13, xc_expm1((4 // 3) * cse_tmp_15)) + my_piecewise3(cse_tmp_16, cse_tmp_13, xc_expm1((4 // 3) * cse_tmp_18)))
+        cse_tmp_20 = cse_tmp_0 * cse_tmp_1 * (-cse_tmp_4 + 0.0468 * NaNMath.log(my_piecewise3(XC_MIN > cse_tmp_9, XC_MIN, cse_tmp_9))) * (-cse_tmp_19 * (2.3631 * cse_tmp_10 - 2.3631) + 1) * (cse_tmp_2 + z ^ 10 + z ^ 8 + z ^ 6 + z ^ 2 + 1)
+        cse_tmp_21 = cse_tmp_8 / 300
+        cse_tmp_22 = -1 / NaNMath.log(XC_EPSILON)
+        cse_tmp_23 = 9.869604401089358
+        cse_tmp_24 = cse_tmp_23 ^ (-1)
+        cse_tmp_25 = 1 <= zeta_threshold
+        cse_tmp_26 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_27 = xc_log1p(my_piecewise3(0 > cse_tmp_14, 0, cse_tmp_14))
+        cse_tmp_28 = my_piecewise3(cse_tmp_25, cse_tmp_26, xc_expm1((2 // 3) * cse_tmp_27)) + 1
+        cse_tmp_29 = 6.738808595698141 * cse_tmp_6 * (0.1 * NaNMath.pow(rs, 0.65) + 1) / ((0.065 * NaNMath.pow(rs, 0.9) + 1) * (0.03 * NaNMath.pow(rs, 1.2) + 1))
+        cse_tmp_30 = 0.0320227425608736 - 0.0223202631025606 * cse_tmp_29
+        cse_tmp_31 = cse_tmp_28 ^ 2 * cse_tmp_30
+        cse_tmp_32 = 1 - NaNMath.log(2)
+        cse_tmp_33 = cse_tmp_32 ^ (-1)
+        cse_tmp_34 = my_piecewise3(cse_tmp_12, cse_tmp_26, xc_expm1((2 // 3) * cse_tmp_15)) / 2 + my_piecewise3(cse_tmp_16, cse_tmp_26, xc_expm1((2 // 3) * cse_tmp_18)) / 2 + 1
+        cse_tmp_35 = cse_tmp_34 ^ 3
+        cse_tmp_36 = NaNMath.sqrt(rs)
+        cse_tmp_37 = NaNMath.pow(rs, 1.5)
+        cse_tmp_38 = rs ^ 2
+        cse_tmp_39 = (-0.01328816518 * rs - 0.0621814) * xc_log1p((0.47231125998 * cse_tmp_36 + 0.10186556948 * cse_tmp_37 + 0.030651699316 * cse_tmp_38 + 0.22308199064 * rs) ^ (-1))
+        cse_tmp_40 = (-0.00375733525 * rs - 0.0337738) * xc_log1p((0.3497952466 * cse_tmp_36 + 0.029729725188 * cse_tmp_37 + 0.016775784198 * cse_tmp_38 + 0.12236585478 * rs) ^ (-1))
+        cse_tmp_41 = 0.5848223622634646207262238663759 * cse_tmp_40
+        cse_tmp_42 = cse_tmp_19 * cse_tmp_2 * (-cse_tmp_39 + cse_tmp_41 + (-0.006388517036 * rs - 0.0310907) * xc_log1p((0.43896648423 * cse_tmp_36 + 0.10465751434 * cse_tmp_37 + 0.019436972919 * cse_tmp_38 + 0.19269083139 * rs) ^ (-1))) - cse_tmp_19 * cse_tmp_41 + cse_tmp_39
+        cse_tmp_43 = xc_expm1(-cse_tmp_23 * cse_tmp_33 * cse_tmp_42 / cse_tmp_35)
+        cse_tmp_44 = cse_tmp_10 * cse_tmp_31 * cse_tmp_33 * cse_tmp_5 / (cse_tmp_34 ^ 2 * cse_tmp_43 * rs)
+        cse_tmp_45 = (3 // 8) * cse_tmp_44
+        cse_tmp_46 = 1.5874010519681994
+        cse_tmp_47 = cse_tmp_38 ^ (-1)
+        cse_tmp_48 = xt ^ 4
+        cse_tmp_49 = cse_tmp_32 ^ (-2)
+        cse_tmp_50 = cse_tmp_28 ^ 4
+        cse_tmp_51 = cse_tmp_30 ^ 2
+        cse_tmp_52 = cse_tmp_34 ^ (-4)
+        cse_tmp_53 = cse_tmp_43 ^ (-2)
+        cse_tmp_54 = (9 // 1024) * cse_tmp_46 * cse_tmp_47 * cse_tmp_48 * cse_tmp_49 * cse_tmp_50 * cse_tmp_51 * cse_tmp_52 * cse_tmp_53
+        cse_tmp_55 = (cse_tmp_54 + 1) ^ (-1)
+        cse_tmp_56 = 1 - 15 // 16 * cse_tmp_44
+        cse_tmp_57 = -cse_tmp_43 * (cse_tmp_54 * cse_tmp_55 + my_piecewise3(cse_tmp_56 > XC_EPSILON, cse_tmp_56, XC_EPSILON) ^ (-1)) * xc_expm1(-xc_log1p(-cse_tmp_45) / 4) + 1
+        cse_tmp_58 = cse_tmp_24 * cse_tmp_32 * cse_tmp_35
+        cse_tmp_59 = cse_tmp_45 + 1
+        cse_tmp_60 = (3 // 32) * cse_tmp_44 * (cse_tmp_43 + 2.85) + 1
+        cse_tmp_61 = cse_tmp_43 * (1 - 1 / NaNMath.pow(my_piecewise3(cse_tmp_59 > XC_EPSILON, cse_tmp_59, XC_EPSILON), 0.25)) * ((9 // 1024) * cse_tmp_46 * cse_tmp_47 * cse_tmp_48 * cse_tmp_49 * cse_tmp_50 * cse_tmp_51 * cse_tmp_52 * cse_tmp_53 * cse_tmp_55 - 1 / my_piecewise3(cse_tmp_60 > XC_EPSILON, cse_tmp_60, XC_EPSILON)) + 1
+        cse_tmp_62 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_63 = my_piecewise3(cse_tmp_12, cse_tmp_62, xc_expm1((5 // 3) * cse_tmp_15))
+        cse_tmp_64 = my_piecewise3(cse_tmp_16, cse_tmp_62, xc_expm1((5 // 3) * cse_tmp_18))
+        cse_tmp_65 = (20 // 9) * cse_tmp_7 * (cse_tmp_10 * (t0 * (cse_tmp_63 + 1) + t1 * (cse_tmp_64 + 1)) / 4 - cse_tmp_5 / 8) / (cse_tmp_63 + cse_tmp_64 + 2)
+        cse_tmp_66 = cse_tmp_65 * rs
+        cse_tmp_67 = (cse_tmp_65 - 1) / my_piecewise3(cse_tmp_66 > XC_EPSILON, cse_tmp_66, XC_EPSILON)
+        cse_tmp_68 = -1.169644724526929241452447732752 * cse_tmp_11 * cse_tmp_40 * my_piecewise3(cse_tmp_25, cse_tmp_13, xc_expm1((4 // 3) * cse_tmp_27)) + cse_tmp_39 + cse_tmp_4
+        cse_tmp_69 = -XC_EPSILON
+        cse_tmp_70 = (3 // 8) * 2.6207413942088964 * (0.209897369123846 - 0.0116427551884568 * cse_tmp_29) / (2.1450293971110255 * my_piecewise3(cse_tmp_68 > cse_tmp_69, cse_tmp_69, cse_tmp_68))
+        cse_tmp_71 = cse_tmp_70 * my_piecewise3(cse_tmp_67 >= 0, cse_tmp_67, -cse_tmp_67)
+        cse_tmp_72 = XC_EPSILON ^ (-1)
+        cse_tmp_73 = cse_tmp_71 > cse_tmp_72
+        cse_tmp_74 = my_piecewise3(cse_tmp_73, cse_tmp_71, cse_tmp_72)
+        cse_tmp_75 = (64 // 5) / 961.3891935753045
+        cse_tmp_76 = (16 // 3) / 97.40909103400244
+        cse_tmp_77 = 4 * cse_tmp_24
+        cse_tmp_78 = pi / 2
+        cse_tmp_79 = 2 / pi
+        cse_tmp_80 = cse_tmp_67 * cse_tmp_70
+        cse_tmp_81 = cse_tmp_80 > cse_tmp_72
+        cse_tmp_82 = my_piecewise3(cse_tmp_81, cse_tmp_80, cse_tmp_72)
+        cse_tmp_20 + (1 - my_piecewise3(cse_tmp_65 < 0, my_piecewise3(cse_tmp_71 >= cse_tmp_72, 1 - cse_tmp_77 / cse_tmp_74 + cse_tmp_76 / cse_tmp_74 ^ 3 - cse_tmp_75 / cse_tmp_74 ^ 5, cse_tmp_79 * atan(cse_tmp_78 * my_piecewise3(cse_tmp_73, cse_tmp_72, cse_tmp_71))) + 2, my_piecewise3(cse_tmp_80 >= cse_tmp_72, -cse_tmp_75 / cse_tmp_82 ^ 5 + cse_tmp_76 / cse_tmp_82 ^ 3 - cse_tmp_77 / cse_tmp_82 + 1, cse_tmp_79 * atan(cse_tmp_78 * my_piecewise3(cse_tmp_81, cse_tmp_72, cse_tmp_80))))) * (-cse_tmp_20 + cse_tmp_42 + my_piecewise3(-3 * cse_tmp_24 * cse_tmp_31 >= 0, cse_tmp_58 * NaNMath.log(my_piecewise3(cse_tmp_57 > XC_MIN, cse_tmp_57, XC_MIN)), cse_tmp_58 * NaNMath.log(my_piecewise3(cse_tmp_61 > XC_MIN, cse_tmp_61, XC_MIN)))) * my_piecewise3(cse_tmp_21 <= cse_tmp_22, 1, -xc_expm1(-1 / my_piecewise3(cse_tmp_22 > cse_tmp_21, cse_tmp_22, cse_tmp_21)))
+    end
+end
+export mgga_c_lak_energy
+
+const mgga_c_lak_defaults = (XC_EPSILON = 2.220446049250313e-16, XC_MIN = 2.2250738585072014e-308, zeta_threshold = 2.220446049250313e-16)
+const mgga_c_lak_required = ()
+
+function mgga_c_lak(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_c_lak_defaults, mgga_c_lak_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_c_lak_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.XC_EPSILON, p.XC_MIN, p.zeta_threshold)
+end
+
+function mgga_c_lak(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_c_lak_defaults, mgga_c_lak_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_c_lak_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.XC_EPSILON, p.XC_MIN, p.zeta_threshold)
+end
+
+export mgga_c_lak, mgga_c_lak_defaults, mgga_c_lak_required

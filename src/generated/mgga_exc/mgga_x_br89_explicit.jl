@@ -1,0 +1,87 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_x_br89_explicit.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_gamma, zeta_threshold
+const mgga_x_br89_explicit_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_gamma, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = (2 // 3) * params_a_gamma
+        cse_tmp_3 = params_a_gamma / 12
+        cse_tmp_4 = -cse_tmp_2 * t0 + cse_tmp_3 * xs0 ^ 2 + u0 / 6
+        cse_tmp_5 = (2 // 3) * 2.1450293971110255
+        cse_tmp_6 = cse_tmp_5 / my_piecewise3(my_piecewise3(cse_tmp_4 >= 0, cse_tmp_4, -cse_tmp_4) < 5.0e-13, my_piecewise3(cse_tmp_4 > 0, 5.0e-13, -5.0e-13), cse_tmp_4)
+        cse_tmp_7 = my_piecewise3(cse_tmp_6 > -5.0e-13, -5.0e-13, cse_tmp_6)
+        cse_tmp_8 = cse_tmp_7 ^ 2
+        cse_tmp_9 = cse_tmp_7 ^ 3
+        cse_tmp_10 = cse_tmp_7 ^ 4
+        cse_tmp_11 = cse_tmp_7 ^ 5
+        cse_tmp_12 = my_piecewise3(cse_tmp_6 > 5.0e-13, cse_tmp_6, 5.0e-13)
+        cse_tmp_13 = cse_tmp_12 ^ 2
+        cse_tmp_14 = cse_tmp_12 ^ 3
+        cse_tmp_15 = cse_tmp_12 ^ 4
+        cse_tmp_16 = cse_tmp_12 ^ 5
+        cse_tmp_17 = my_piecewise3(cse_tmp_6 <= 0, (0.4292036732051034 - atan(1.525525181200953 * cse_tmp_7 + 0.4576575543602858)) * (4.125058472512136 * cse_tmp_10 - 30.42513395716384 * cse_tmp_11 - 2.636397787137096 * cse_tmp_7 + 5.474515996423288 * cse_tmp_8 - 12.65730812710829 * cse_tmp_9 + 0.7566445420735584) / (2.173018028591672 * cse_tmp_10 - 30.42513385160366 * cse_tmp_11 - 1.779981349455627 * cse_tmp_7 + 3.843384186230215 * cse_tmp_8 - 9.591205088051849 * cse_tmp_9 + 0.4771976183772063), (acsch(2.085749716493756 * cse_tmp_12) + 2) * (0.5812865360445791 * cse_tmp_12 + 66.74276451594061 * cse_tmp_13 + 434.2678089722977 * cse_tmp_14 + 824.7765766052239 * cse_tmp_15 + 1657.965273158212 * cse_tmp_16 + 4.435009886795587e-5) / (0.4791793102397135 * cse_tmp_12 + 62.39226833857424 * cse_tmp_13 + 463.1481642793812 * cse_tmp_14 + 785.2360350104029 * cse_tmp_15 + 1657.962968223273 * cse_tmp_16 + 3.347285060926091e-5))
+        cse_tmp_18 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_19 = zeta_threshold - 1
+        cse_tmp_20 = 1 - z
+        cse_tmp_21 = cse_tmp_20 <= zeta_threshold
+        cse_tmp_22 = -cse_tmp_19
+        cse_tmp_23 = my_piecewise5(cse_tmp_18, cse_tmp_19, cse_tmp_21, cse_tmp_22, z) + 1
+        cse_tmp_24 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_25 = 1.4422495703074083 / (4 * rs)
+        cse_tmp_26 = -cse_tmp_2 * t1 + cse_tmp_3 * xs1 ^ 2 + u1 / 6
+        cse_tmp_27 = cse_tmp_5 / my_piecewise3(my_piecewise3(cse_tmp_26 >= 0, cse_tmp_26, -cse_tmp_26) < 5.0e-13, my_piecewise3(cse_tmp_26 > 0, 5.0e-13, -5.0e-13), cse_tmp_26)
+        cse_tmp_28 = my_piecewise3(cse_tmp_27 > -5.0e-13, -5.0e-13, cse_tmp_27)
+        cse_tmp_29 = cse_tmp_28 ^ 2
+        cse_tmp_30 = cse_tmp_28 ^ 3
+        cse_tmp_31 = cse_tmp_28 ^ 4
+        cse_tmp_32 = cse_tmp_28 ^ 5
+        cse_tmp_33 = my_piecewise3(cse_tmp_27 > 5.0e-13, cse_tmp_27, 5.0e-13)
+        cse_tmp_34 = cse_tmp_33 ^ 2
+        cse_tmp_35 = cse_tmp_33 ^ 3
+        cse_tmp_36 = cse_tmp_33 ^ 4
+        cse_tmp_37 = cse_tmp_33 ^ 5
+        cse_tmp_38 = my_piecewise3(cse_tmp_27 <= 0, (0.4292036732051034 - atan(1.525525181200953 * cse_tmp_28 + 0.4576575543602858)) * (-2.636397787137096 * cse_tmp_28 + 5.474515996423288 * cse_tmp_29 - 12.65730812710829 * cse_tmp_30 + 4.125058472512136 * cse_tmp_31 - 30.42513395716384 * cse_tmp_32 + 0.7566445420735584) / (-1.779981349455627 * cse_tmp_28 + 3.843384186230215 * cse_tmp_29 - 9.591205088051849 * cse_tmp_30 + 2.173018028591672 * cse_tmp_31 - 30.42513385160366 * cse_tmp_32 + 0.4771976183772063), (acsch(2.085749716493756 * cse_tmp_33) + 2) * (0.5812865360445791 * cse_tmp_33 + 66.74276451594061 * cse_tmp_34 + 434.2678089722977 * cse_tmp_35 + 824.7765766052239 * cse_tmp_36 + 1657.965273158212 * cse_tmp_37 + 4.435009886795587e-5) / (0.4791793102397135 * cse_tmp_33 + 62.39226833857424 * cse_tmp_34 + 463.1481642793812 * cse_tmp_35 + 785.2360350104029 * cse_tmp_36 + 1657.962968223273 * cse_tmp_37 + 3.347285060926091e-5))
+        cse_tmp_39 = my_piecewise5(cse_tmp_21, cse_tmp_19, cse_tmp_18, cse_tmp_22, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_25 * (-1 // 2 - (cse_tmp_17 / 2 + 1) * xc_expm1(-cse_tmp_17) / cse_tmp_17) * exp(cse_tmp_17 / 3) * my_piecewise3(cse_tmp_23 <= zeta_threshold, cse_tmp_24, NaNMath.pow(cse_tmp_23, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_20 <= dens_threshold, 0, -cse_tmp_25 * (-1 // 2 - (cse_tmp_38 / 2 + 1) * xc_expm1(-cse_tmp_38) / cse_tmp_38) * exp(cse_tmp_38 / 3) * my_piecewise3(cse_tmp_39 <= zeta_threshold, cse_tmp_24, NaNMath.pow(cse_tmp_39, 1.3333333333333333)))
+    end
+end
+export mgga_x_br89_explicit_energy
+
+const mgga_x_br89_explicit_defaults = (dens_threshold = 1.0e-12, params_a_gamma = 0.8, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_br89_explicit_required = ()
+
+function mgga_x_br89_explicit(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_br89_explicit_defaults, mgga_x_br89_explicit_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_br89_explicit_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_gamma, p.zeta_threshold)
+end
+
+function mgga_x_br89_explicit(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_br89_explicit_defaults, mgga_x_br89_explicit_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_br89_explicit_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_gamma, p.zeta_threshold)
+end
+
+export mgga_x_br89_explicit, mgga_x_br89_explicit_defaults, mgga_x_br89_explicit_required
+
+const mgga_x_br89_explicit_1_defaults = (dens_threshold = 1.0e-12, params_a_gamma = 1.0, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_br89_explicit_1_required = ()
+
+function mgga_x_br89_explicit_1(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_br89_explicit_1_defaults, mgga_x_br89_explicit_1_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_br89_explicit_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_gamma, p.zeta_threshold)
+end
+
+function mgga_x_br89_explicit_1(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_br89_explicit_1_defaults, mgga_x_br89_explicit_1_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_br89_explicit_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_gamma, p.zeta_threshold)
+end
+
+export mgga_x_br89_explicit_1, mgga_x_br89_explicit_1_defaults, mgga_x_br89_explicit_1_required

@@ -1,0 +1,210 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_x_m11.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, cam_omega, dens_threshold, params_a_a_0, params_a_a_1, params_a_a_2, params_a_a_3, params_a_a_4, params_a_a_5, params_a_a_6, params_a_a_7, params_a_a_8, params_a_a_9, params_a_a_10, params_a_a_11, params_a_b_0, params_a_b_1, params_a_b_2, params_a_b_3, params_a_b_4, params_a_b_5, params_a_b_6, params_a_b_7, params_a_b_8, params_a_b_9, params_a_b_10, params_a_b_11, zeta_threshold
+const mgga_x_m11_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, cam_omega, dens_threshold, params_a_a_0, params_a_a_1, params_a_a_2, params_a_a_3, params_a_a_4, params_a_a_5, params_a_a_6, params_a_a_7, params_a_a_8, params_a_a_9, params_a_a_10, params_a_a_11, params_a_b_0, params_a_b_1, params_a_b_2, params_a_b_3, params_a_b_4, params_a_b_5, params_a_b_6, params_a_b_7, params_a_b_8, params_a_b_9, params_a_b_10, params_a_b_11, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = 1.8171205928321397
+        cse_tmp_3 = 4.60115111447049
+        cse_tmp_4 = cse_tmp_2 / cse_tmp_3
+        cse_tmp_5 = cse_tmp_4 * xs0 ^ 2
+        cse_tmp_6 = -120 * params_a_b_10
+        cse_tmp_7 = 165 * params_a_b_11
+        cse_tmp_8 = -4 * params_a_b_4
+        cse_tmp_9 = 10 * params_a_b_5
+        cse_tmp_10 = 35 * params_a_b_7
+        cse_tmp_11 = -56 * params_a_b_8
+        cse_tmp_12 = 84 * params_a_b_9
+        cse_tmp_13 = cse_tmp_10 + cse_tmp_11 + cse_tmp_12 + cse_tmp_6 + cse_tmp_7 + cse_tmp_8 + cse_tmp_9 + params_a_b_3 - 20 * params_a_b_6
+        cse_tmp_14 = 3.3019272488946267
+        cse_tmp_15 = cse_tmp_14 * cse_tmp_3
+        cse_tmp_16 = (3 // 10) * cse_tmp_15
+        cse_tmp_17 = cse_tmp_16 + t0
+        cse_tmp_18 = (972 // 125) * 97.40909103400244
+        cse_tmp_19 = cse_tmp_18 / cse_tmp_17 ^ 3
+        cse_tmp_20 = 210 * params_a_b_10
+        cse_tmp_21 = 462 * params_a_b_11
+        cse_tmp_22 = 7 * params_a_b_7
+        cse_tmp_23 = 28 * params_a_b_8
+        cse_tmp_24 = -cse_tmp_12 + cse_tmp_20 - cse_tmp_21 - cse_tmp_22 + cse_tmp_23 + params_a_b_6
+        cse_tmp_25 = (944784 // 15625) * 9488.531016070574
+        cse_tmp_26 = cse_tmp_25 / cse_tmp_17 ^ 6
+        cse_tmp_27 = -10 * params_a_b_10
+        cse_tmp_28 = 55 * params_a_b_11
+        cse_tmp_29 = cse_tmp_27 + cse_tmp_28 + params_a_b_9
+        cse_tmp_30 = (918330048 // 1953125) * 924269.1815233742
+        cse_tmp_31 = cse_tmp_30 / cse_tmp_17 ^ 9
+        cse_tmp_32 = 11 * params_a_b_11
+        cse_tmp_33 = 3 * params_a_b_3
+        cse_tmp_34 = 5 * params_a_b_5
+        cse_tmp_35 = -6 * params_a_b_6
+        cse_tmp_36 = -8 * params_a_b_8
+        cse_tmp_37 = 9 * params_a_b_9
+        cse_tmp_38 = cse_tmp_22 + cse_tmp_27 + cse_tmp_32 + cse_tmp_33 + cse_tmp_34 + cse_tmp_35 + cse_tmp_36 + cse_tmp_37 + cse_tmp_8 + params_a_b_1 - 2 * params_a_b_2
+        cse_tmp_39 = (3 // 5) * cse_tmp_15
+        cse_tmp_40 = cse_tmp_39 / cse_tmp_17
+        cse_tmp_41 = 45 * params_a_b_10
+        cse_tmp_42 = 15 * params_a_b_6
+        cse_tmp_43 = 21 * params_a_b_7
+        cse_tmp_44 = 36 * params_a_b_9
+        cse_tmp_45 = cse_tmp_23 - cse_tmp_28 - cse_tmp_33 + cse_tmp_41 + cse_tmp_42 - cse_tmp_43 - cse_tmp_44 - cse_tmp_9 + params_a_b_2 + 6 * params_a_b_4
+        cse_tmp_46 = (54 // 25) * 21.170591578193033 * cse_tmp_2
+        cse_tmp_47 = cse_tmp_46 / cse_tmp_17 ^ 2
+        cse_tmp_48 = 330 * params_a_b_11
+        cse_tmp_49 = 126 * params_a_b_9
+        cse_tmp_50 = -cse_tmp_10 + cse_tmp_20 - cse_tmp_34 + cse_tmp_42 - cse_tmp_48 - cse_tmp_49 + params_a_b_4 + 70 * params_a_b_8
+        cse_tmp_51 = (2916 // 625) * 448.1939477706577 * cse_tmp_14
+        cse_tmp_52 = cse_tmp_51 / cse_tmp_17 ^ 4
+        cse_tmp_53 = cse_tmp_11 + cse_tmp_21 + cse_tmp_35 + cse_tmp_43 + cse_tmp_49 - 252 * params_a_b_10 + params_a_b_5
+        cse_tmp_54 = (52488 // 3125) * 2062.2080822838902 * cse_tmp_2
+        cse_tmp_55 = cse_tmp_54 / cse_tmp_17 ^ 5
+        cse_tmp_56 = cse_tmp_36 + cse_tmp_44 + cse_tmp_48 + cse_tmp_6 + params_a_b_7
+        cse_tmp_57 = (2834352 // 78125) * 43658.16505928093 * cse_tmp_14
+        cse_tmp_58 = cse_tmp_57 / cse_tmp_17 ^ 7
+        cse_tmp_59 = -cse_tmp_37 + cse_tmp_41 - cse_tmp_7 + params_a_b_8
+        cse_tmp_60 = (51018336 // 390625) * 200877.81481824708 * cse_tmp_2
+        cse_tmp_61 = cse_tmp_60 / cse_tmp_17 ^ 8
+        cse_tmp_62 = -cse_tmp_32 + params_a_b_10
+        cse_tmp_63 = (2754990144 // 9765625) * 4252702.174637001 * cse_tmp_14
+        cse_tmp_64 = cse_tmp_63 / cse_tmp_17 ^ 10
+        cse_tmp_65 = (49589822592 // 48828125) * 19567325.350342114 * cse_tmp_2
+        cse_tmp_66 = cse_tmp_65 / cse_tmp_17 ^ 11
+        cse_tmp_67 = params_a_b_0 - params_a_b_1 + params_a_b_10 - params_a_b_11 + params_a_b_2 - params_a_b_3 + params_a_b_4 - params_a_b_5 + params_a_b_6 - params_a_b_7 + params_a_b_8 - params_a_b_9
+        cse_tmp_68 = -120 * params_a_a_10
+        cse_tmp_69 = 165 * params_a_a_11
+        cse_tmp_70 = -4 * params_a_a_4
+        cse_tmp_71 = 10 * params_a_a_5
+        cse_tmp_72 = 35 * params_a_a_7
+        cse_tmp_73 = -56 * params_a_a_8
+        cse_tmp_74 = 84 * params_a_a_9
+        cse_tmp_75 = cse_tmp_68 + cse_tmp_69 + cse_tmp_70 + cse_tmp_71 + cse_tmp_72 + cse_tmp_73 + cse_tmp_74 + params_a_a_3 - 20 * params_a_a_6
+        cse_tmp_76 = 210 * params_a_a_10
+        cse_tmp_77 = 462 * params_a_a_11
+        cse_tmp_78 = 7 * params_a_a_7
+        cse_tmp_79 = 28 * params_a_a_8
+        cse_tmp_80 = -cse_tmp_74 + cse_tmp_76 - cse_tmp_77 - cse_tmp_78 + cse_tmp_79 + params_a_a_6
+        cse_tmp_81 = -10 * params_a_a_10
+        cse_tmp_82 = 55 * params_a_a_11
+        cse_tmp_83 = cse_tmp_81 + cse_tmp_82 + params_a_a_9
+        cse_tmp_84 = 11 * params_a_a_11
+        cse_tmp_85 = 3 * params_a_a_3
+        cse_tmp_86 = 5 * params_a_a_5
+        cse_tmp_87 = -6 * params_a_a_6
+        cse_tmp_88 = -8 * params_a_a_8
+        cse_tmp_89 = 9 * params_a_a_9
+        cse_tmp_90 = cse_tmp_70 + cse_tmp_78 + cse_tmp_81 + cse_tmp_84 + cse_tmp_85 + cse_tmp_86 + cse_tmp_87 + cse_tmp_88 + cse_tmp_89 + params_a_a_1 - 2 * params_a_a_2
+        cse_tmp_91 = 45 * params_a_a_10
+        cse_tmp_92 = 15 * params_a_a_6
+        cse_tmp_93 = 21 * params_a_a_7
+        cse_tmp_94 = 36 * params_a_a_9
+        cse_tmp_95 = -cse_tmp_71 + cse_tmp_79 - cse_tmp_82 - cse_tmp_85 + cse_tmp_91 + cse_tmp_92 - cse_tmp_93 - cse_tmp_94 + params_a_a_2 + 6 * params_a_a_4
+        cse_tmp_96 = 330 * params_a_a_11
+        cse_tmp_97 = 126 * params_a_a_9
+        cse_tmp_98 = -cse_tmp_72 + cse_tmp_76 - cse_tmp_86 + cse_tmp_92 - cse_tmp_96 - cse_tmp_97 + params_a_a_4 + 70 * params_a_a_8
+        cse_tmp_99 = cse_tmp_73 + cse_tmp_77 + cse_tmp_87 + cse_tmp_93 + cse_tmp_97 - 252 * params_a_a_10 + params_a_a_5
+        cse_tmp_100 = cse_tmp_68 + cse_tmp_88 + cse_tmp_94 + cse_tmp_96 + params_a_a_7
+        cse_tmp_101 = -cse_tmp_69 - cse_tmp_89 + cse_tmp_91 + params_a_a_8
+        cse_tmp_102 = -cse_tmp_84 + params_a_a_10
+        cse_tmp_103 = params_a_a_0 - params_a_a_1 + params_a_a_10 - params_a_a_11 + params_a_a_2 - params_a_a_3 + params_a_a_4 - params_a_a_5 + params_a_a_6 - params_a_a_7 + params_a_a_8 - params_a_a_9
+        cse_tmp_104 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_105 = zeta_threshold - 1
+        cse_tmp_106 = 1 - z
+        cse_tmp_107 = cse_tmp_106 <= zeta_threshold
+        cse_tmp_108 = -cse_tmp_105
+        cse_tmp_109 = my_piecewise5(cse_tmp_104, cse_tmp_105, cse_tmp_107, cse_tmp_108, z)
+        cse_tmp_110 = cse_tmp_109 + 1
+        cse_tmp_111 = cse_tmp_110 <= zeta_threshold
+        cse_tmp_112 = NaNMath.pow(zeta_threshold, 0.3333333333333333) - 1
+        cse_tmp_113 = 0.6827840632552957
+        cse_tmp_114 = 1.5874010519681994 * 1.4422495703074083 * cam_omega * cse_tmp_113 * rs / 6
+        cse_tmp_115 = cse_tmp_114 / (my_piecewise3(cse_tmp_111, cse_tmp_112, xc_expm1(xc_log1p(my_piecewise3(cse_tmp_109 > cse_tmp_105, cse_tmp_109, cse_tmp_105)) / 3)) + 1)
+        cse_tmp_116 = cse_tmp_115 > 1.35
+        cse_tmp_117 = my_piecewise3(cse_tmp_116, cse_tmp_115, 1.35)
+        cse_tmp_118 = my_piecewise3(cse_tmp_116, 1.35, cse_tmp_115)
+        cse_tmp_119 = 1.772453850905516
+        cse_tmp_120 = cse_tmp_118 ^ 2
+        cse_tmp_121 = xc_expm1(-1 / (4 * cse_tmp_120))
+        cse_tmp_122 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_123 = 0.184639691595506 * cse_tmp_113 * cse_tmp_2 / rs
+        cse_tmp_124 = cse_tmp_4 * xs1 ^ 2
+        cse_tmp_125 = cse_tmp_16 + t1
+        cse_tmp_126 = cse_tmp_18 / cse_tmp_125 ^ 3
+        cse_tmp_127 = cse_tmp_25 / cse_tmp_125 ^ 6
+        cse_tmp_128 = cse_tmp_30 / cse_tmp_125 ^ 9
+        cse_tmp_129 = cse_tmp_39 / cse_tmp_125
+        cse_tmp_130 = cse_tmp_46 / cse_tmp_125 ^ 2
+        cse_tmp_131 = cse_tmp_51 / cse_tmp_125 ^ 4
+        cse_tmp_132 = cse_tmp_54 / cse_tmp_125 ^ 5
+        cse_tmp_133 = cse_tmp_57 / cse_tmp_125 ^ 7
+        cse_tmp_134 = cse_tmp_60 / cse_tmp_125 ^ 8
+        cse_tmp_135 = cse_tmp_63 / cse_tmp_125 ^ 10
+        cse_tmp_136 = cse_tmp_65 / cse_tmp_125 ^ 11
+        cse_tmp_137 = my_piecewise5(cse_tmp_107, cse_tmp_105, cse_tmp_104, cse_tmp_108, -z)
+        cse_tmp_138 = cse_tmp_137 + 1
+        cse_tmp_139 = cse_tmp_138 <= zeta_threshold
+        cse_tmp_140 = cse_tmp_114 / (my_piecewise3(cse_tmp_139, cse_tmp_112, xc_expm1(xc_log1p(my_piecewise3(cse_tmp_137 > cse_tmp_105, cse_tmp_137, cse_tmp_105)) / 3)) + 1)
+        cse_tmp_141 = cse_tmp_140 > 1.35
+        cse_tmp_142 = my_piecewise3(cse_tmp_141, cse_tmp_140, 1.35)
+        cse_tmp_143 = my_piecewise3(cse_tmp_141, 1.35, cse_tmp_140)
+        cse_tmp_144 = cse_tmp_143 ^ 2
+        cse_tmp_145 = xc_expm1(-1 / (4 * cse_tmp_144))
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_123 * ((1 - 0.552 * xc_expm1(-0.00931890022067156 * cse_tmp_5)) * (cse_tmp_13 * cse_tmp_19 + cse_tmp_24 * cse_tmp_26 + cse_tmp_29 * cse_tmp_31 + cse_tmp_38 * cse_tmp_40 + cse_tmp_45 * cse_tmp_47 + cse_tmp_50 * cse_tmp_52 + cse_tmp_53 * cse_tmp_55 + cse_tmp_56 * cse_tmp_58 + cse_tmp_59 * cse_tmp_61 + cse_tmp_62 * cse_tmp_64 + cse_tmp_66 * params_a_b_11 + cse_tmp_67) + (0.007353585 * cse_tmp_5 / (0.00914625 * cse_tmp_5 + 0.804) + 1) * (cse_tmp_100 * cse_tmp_58 + cse_tmp_101 * cse_tmp_61 + cse_tmp_102 * cse_tmp_64 + cse_tmp_103 + cse_tmp_19 * cse_tmp_75 + cse_tmp_26 * cse_tmp_80 + cse_tmp_31 * cse_tmp_83 + cse_tmp_40 * cse_tmp_90 + cse_tmp_47 * cse_tmp_95 + cse_tmp_52 * cse_tmp_98 + cse_tmp_55 * cse_tmp_99 + cse_tmp_66 * params_a_a_11)) * my_piecewise3(cse_tmp_111, cse_tmp_122, NaNMath.pow(cse_tmp_110, 1.3333333333333333)) * my_piecewise3(cse_tmp_115 >= 1.35, 1 / (36 * cse_tmp_117 ^ 2) - 1 / (960 * cse_tmp_117 ^ 4) + 1 / (26880 * cse_tmp_117 ^ 6) - 1 / (829440 * cse_tmp_117 ^ 8) + 1 / (28385280 * cse_tmp_117 ^ 10) - 1 / (1073479680 * cse_tmp_117 ^ 12) + 1 / (44590694400 * cse_tmp_117 ^ 14), -8 // 3 * cse_tmp_118 * (2 * cse_tmp_118 * (-2 * cse_tmp_120 * cse_tmp_121 + cse_tmp_121 - 1 // 2) + cse_tmp_119 * erf(1 / (2 * cse_tmp_118))) + 1)) + my_piecewise3(cse_tmp_1 * cse_tmp_106 <= dens_threshold, 0, -cse_tmp_123 * ((1 - 0.552 * xc_expm1(-0.00931890022067156 * cse_tmp_124)) * (cse_tmp_126 * cse_tmp_13 + cse_tmp_127 * cse_tmp_24 + cse_tmp_128 * cse_tmp_29 + cse_tmp_129 * cse_tmp_38 + cse_tmp_130 * cse_tmp_45 + cse_tmp_131 * cse_tmp_50 + cse_tmp_132 * cse_tmp_53 + cse_tmp_133 * cse_tmp_56 + cse_tmp_134 * cse_tmp_59 + cse_tmp_135 * cse_tmp_62 + cse_tmp_136 * params_a_b_11 + cse_tmp_67) + (0.007353585 * cse_tmp_124 / (0.00914625 * cse_tmp_124 + 0.804) + 1) * (cse_tmp_100 * cse_tmp_133 + cse_tmp_101 * cse_tmp_134 + cse_tmp_102 * cse_tmp_135 + cse_tmp_103 + cse_tmp_126 * cse_tmp_75 + cse_tmp_127 * cse_tmp_80 + cse_tmp_128 * cse_tmp_83 + cse_tmp_129 * cse_tmp_90 + cse_tmp_130 * cse_tmp_95 + cse_tmp_131 * cse_tmp_98 + cse_tmp_132 * cse_tmp_99 + cse_tmp_136 * params_a_a_11)) * my_piecewise3(cse_tmp_139, cse_tmp_122, NaNMath.pow(cse_tmp_138, 1.3333333333333333)) * my_piecewise3(cse_tmp_140 >= 1.35, 1 / (36 * cse_tmp_142 ^ 2) - 1 / (960 * cse_tmp_142 ^ 4) + 1 / (26880 * cse_tmp_142 ^ 6) - 1 / (829440 * cse_tmp_142 ^ 8) + 1 / (28385280 * cse_tmp_142 ^ 10) - 1 / (1073479680 * cse_tmp_142 ^ 12) + 1 / (44590694400 * cse_tmp_142 ^ 14), -8 // 3 * cse_tmp_143 * (cse_tmp_119 * erf(1 / (2 * cse_tmp_143)) + 2 * cse_tmp_143 * (-2 * cse_tmp_144 * cse_tmp_145 + cse_tmp_145 - 1 // 2)) + 1))
+    end
+end
+export mgga_x_m11_energy
+
+const mgga_x_m11_defaults = NamedTuple()
+const mgga_x_m11_required = (:cam_omega, :dens_threshold, :params_a_a_0, :params_a_a_1, :params_a_a_2, :params_a_a_3, :params_a_a_4, :params_a_a_5, :params_a_a_6, :params_a_a_7, :params_a_a_8, :params_a_a_9, :params_a_a_10, :params_a_a_11, :params_a_b_0, :params_a_b_1, :params_a_b_2, :params_a_b_3, :params_a_b_4, :params_a_b_5, :params_a_b_6, :params_a_b_7, :params_a_b_8, :params_a_b_9, :params_a_b_10, :params_a_b_11, :zeta_threshold)
+
+function mgga_x_m11(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_m11_defaults, mgga_x_m11_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_m11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.cam_omega, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_a_6, p.params_a_a_7, p.params_a_a_8, p.params_a_a_9, p.params_a_a_10, p.params_a_a_11, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_b_6, p.params_a_b_7, p.params_a_b_8, p.params_a_b_9, p.params_a_b_10, p.params_a_b_11, p.zeta_threshold)
+end
+
+function mgga_x_m11(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_m11_defaults, mgga_x_m11_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_m11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.cam_omega, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_a_6, p.params_a_a_7, p.params_a_a_8, p.params_a_a_9, p.params_a_a_10, p.params_a_a_11, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_b_6, p.params_a_b_7, p.params_a_b_8, p.params_a_b_9, p.params_a_b_10, p.params_a_b_11, p.zeta_threshold)
+end
+
+export mgga_x_m11, mgga_x_m11_defaults, mgga_x_m11_required
+
+const hyb_mgga_x_m11_defaults = (cam_omega = 0.25, dens_threshold = 1.0e-11, params_a_a_0 = -0.183999, params_a_a_1 = -13.9046703, params_a_a_2 = 11.8206837, params_a_a_3 = 31.0098465, params_a_a_4 = -51.9625696, params_a_a_5 = 15.5750312, params_a_a_6 = -6.9477573, params_a_a_7 = -158.465014, params_a_a_8 = -1.48447565, params_a_a_9 = 55.1042124, params_a_a_10 = -13.4714184, params_a_a_11 = 0.0, params_a_b_0 = 0.755999, params_a_b_1 = 13.7137944, params_a_b_2 = -12.7998304, params_a_b_3 = -29.3428814, params_a_b_4 = 59.1075674, params_a_b_5 = -22.7604866, params_a_b_6 = -10.276934, params_a_b_7 = 164.752731, params_a_b_8 = 18.5349258, params_a_b_9 = -55.6825639, params_a_b_10 = 7.47980859, params_a_b_11 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_mgga_x_m11_required = ()
+
+function hyb_mgga_x_m11(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(hyb_mgga_x_m11_defaults, hyb_mgga_x_m11_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_m11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.cam_omega, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_a_6, p.params_a_a_7, p.params_a_a_8, p.params_a_a_9, p.params_a_a_10, p.params_a_a_11, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_b_6, p.params_a_b_7, p.params_a_b_8, p.params_a_b_9, p.params_a_b_10, p.params_a_b_11, p.zeta_threshold)
+end
+
+function hyb_mgga_x_m11(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(hyb_mgga_x_m11_defaults, hyb_mgga_x_m11_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_m11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.cam_omega, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_a_6, p.params_a_a_7, p.params_a_a_8, p.params_a_a_9, p.params_a_a_10, p.params_a_a_11, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_b_6, p.params_a_b_7, p.params_a_b_8, p.params_a_b_9, p.params_a_b_10, p.params_a_b_11, p.zeta_threshold)
+end
+
+export hyb_mgga_x_m11, hyb_mgga_x_m11_defaults, hyb_mgga_x_m11_required
+
+const hyb_mgga_x_revm11_defaults = (cam_omega = 0.4, dens_threshold = 1.0e-11, params_a_a_0 = -0.3288860885, params_a_a_1 = -8.3888150476, params_a_a_2 = 0.7123891057, params_a_a_3 = 3.6196212952, params_a_a_4 = 4.3941708207, params_a_a_5 = 5.0453345584, params_a_a_6 = 7.8667061191, params_a_a_7 = 0.0, params_a_a_8 = 0.0, params_a_a_9 = 0.0, params_a_a_10 = 0.0, params_a_a_11 = 0.0, params_a_b_0 = 1.1038860885, params_a_b_1 = 8.0476369587, params_a_b_2 = -0.7353624773, params_a_b_3 = -2.473527555, params_a_b_4 = -4.7319060355, params_a_b_5 = -5.8502502096, params_a_b_6 = -7.5059975327, params_a_b_7 = 0.0, params_a_b_8 = 0.0, params_a_b_9 = 0.0, params_a_b_10 = 0.0, params_a_b_11 = 0.0, zeta_threshold = 2.220446049250313e-16)
+const hyb_mgga_x_revm11_required = ()
+
+function hyb_mgga_x_revm11(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(hyb_mgga_x_revm11_defaults, hyb_mgga_x_revm11_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_m11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.cam_omega, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_a_6, p.params_a_a_7, p.params_a_a_8, p.params_a_a_9, p.params_a_a_10, p.params_a_a_11, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_b_6, p.params_a_b_7, p.params_a_b_8, p.params_a_b_9, p.params_a_b_10, p.params_a_b_11, p.zeta_threshold)
+end
+
+function hyb_mgga_x_revm11(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(hyb_mgga_x_revm11_defaults, hyb_mgga_x_revm11_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_m11_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.cam_omega, p.dens_threshold, p.params_a_a_0, p.params_a_a_1, p.params_a_a_2, p.params_a_a_3, p.params_a_a_4, p.params_a_a_5, p.params_a_a_6, p.params_a_a_7, p.params_a_a_8, p.params_a_a_9, p.params_a_a_10, p.params_a_a_11, p.params_a_b_0, p.params_a_b_1, p.params_a_b_2, p.params_a_b_3, p.params_a_b_4, p.params_a_b_5, p.params_a_b_6, p.params_a_b_7, p.params_a_b_8, p.params_a_b_9, p.params_a_b_10, p.params_a_b_11, p.zeta_threshold)
+end
+
+export hyb_mgga_x_revm11, hyb_mgga_x_revm11_defaults, hyb_mgga_x_revm11_required

@@ -1,0 +1,55 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_x_pkzb.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold
+const mgga_x_pkzb_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = 1.8171205928321397
+        cse_tmp_3 = 0.2173369174628993
+        cse_tmp_4 = cse_tmp_2 * cse_tmp_3
+        cse_tmp_5 = cse_tmp_4 * xs0 ^ 2
+        cse_tmp_6 = 3.3019272488946267 / 21.170591578193033
+        cse_tmp_7 = cse_tmp_6 * xs0 ^ 4
+        cse_tmp_8 = (cse_tmp_2 * cse_tmp_3 * t0 / 4 - cse_tmp_5 / 18 - 9 // 20) ^ 2
+        cse_tmp_9 = 0.0063980508977745 * cse_tmp_5 + 0.000041681494561920132258983047606 * cse_tmp_7 + 0.0896750813832074 * cse_tmp_8
+        cse_tmp_10 = (cse_tmp_9 + 1) ^ (-1)
+        cse_tmp_11 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_12 = zeta_threshold - 1
+        cse_tmp_13 = 1 - z
+        cse_tmp_14 = cse_tmp_13 <= zeta_threshold
+        cse_tmp_15 = -cse_tmp_12
+        cse_tmp_16 = my_piecewise5(cse_tmp_11, cse_tmp_12, cse_tmp_14, cse_tmp_15, z) + 1
+        cse_tmp_17 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_18 = 0.184639691595506 * cse_tmp_2 / (1.4645918875615234 * rs)
+        cse_tmp_19 = cse_tmp_4 * xs1 ^ 2
+        cse_tmp_20 = cse_tmp_6 * xs1 ^ 4
+        cse_tmp_21 = (-cse_tmp_19 / 18 + cse_tmp_2 * cse_tmp_3 * t1 / 4 - 9 // 20) ^ 2
+        cse_tmp_22 = 0.0063980508977745 * cse_tmp_19 + 0.000041681494561920132258983047606 * cse_tmp_20 + 0.0896750813832074 * cse_tmp_21
+        cse_tmp_23 = (cse_tmp_22 + 1) ^ (-1)
+        cse_tmp_24 = my_piecewise5(cse_tmp_14, cse_tmp_12, cse_tmp_11, cse_tmp_15, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_18 * (0.804 * my_piecewise3(cse_tmp_9 <= 1, 1.24378109452736 * cse_tmp_10 * ((5 // 972) * cse_tmp_5 + 0.0000335119216277837893126789295232 * cse_tmp_7 + (146 // 2025) * cse_tmp_8), 1 - cse_tmp_10) + 1) * my_piecewise3(cse_tmp_16 <= zeta_threshold, cse_tmp_17, NaNMath.pow(cse_tmp_16, 1.3333333333333333))) + my_piecewise3(cse_tmp_1 * cse_tmp_13 <= dens_threshold, 0, -cse_tmp_18 * (0.804 * my_piecewise3(cse_tmp_22 <= 1, 1.24378109452736 * cse_tmp_23 * ((5 // 972) * cse_tmp_19 + 0.0000335119216277837893126789295232 * cse_tmp_20 + (146 // 2025) * cse_tmp_21), 1 - cse_tmp_23) + 1) * my_piecewise3(cse_tmp_24 <= zeta_threshold, cse_tmp_17, NaNMath.pow(cse_tmp_24, 1.3333333333333333)))
+    end
+end
+export mgga_x_pkzb_energy
+
+const mgga_x_pkzb_defaults = (dens_threshold = 1.0e-15, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_pkzb_required = ()
+
+function mgga_x_pkzb(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_pkzb_defaults, mgga_x_pkzb_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_pkzb_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+function mgga_x_pkzb(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_pkzb_defaults, mgga_x_pkzb_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_pkzb_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+export mgga_x_pkzb, mgga_x_pkzb_defaults, mgga_x_pkzb_required

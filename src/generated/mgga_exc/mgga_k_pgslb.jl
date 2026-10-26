@@ -1,0 +1,64 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_k_pgslb.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_pgslb_beta, params_a_pgslb_mu, zeta_threshold
+const mgga_k_pgslb_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_pgslb_beta, params_a_pgslb_mu, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_3 = zeta_threshold - 1
+        cse_tmp_4 = 1 - z
+        cse_tmp_5 = cse_tmp_4 <= zeta_threshold
+        cse_tmp_6 = -cse_tmp_3
+        cse_tmp_7 = my_piecewise5(cse_tmp_2, cse_tmp_3, cse_tmp_5, cse_tmp_6, z)
+        cse_tmp_8 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_9 = xs0 ^ 2
+        cse_tmp_10 = 1.8171205928321397 / 4.60115111447049
+        cse_tmp_11 = (5 // 72) * cse_tmp_10
+        cse_tmp_12 = 3.3019272488946267 * params_a_pgslb_beta / (576 * 21.170591578193033)
+        cse_tmp_13 = cse_tmp_10 * params_a_pgslb_mu / 24
+        cse_tmp_14 = (9 // 80) * 2.2894284851066637 * 2.1450293971110255 / rs ^ 2
+        cse_tmp_15 = my_piecewise5(cse_tmp_5, cse_tmp_3, cse_tmp_2, cse_tmp_6, -z)
+        cse_tmp_16 = xs1 ^ 2
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, cse_tmp_14 * (my_piecewise3(cse_tmp_7 + 1 <= zeta_threshold, cse_tmp_8, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_7 > cse_tmp_3, cse_tmp_7, cse_tmp_3)))) + 1) * (cse_tmp_11 * cse_tmp_9 + cse_tmp_12 * u0 ^ 2 + exp(-cse_tmp_13 * cse_tmp_9))) + my_piecewise3(cse_tmp_1 * cse_tmp_4 <= dens_threshold, 0, cse_tmp_14 * (my_piecewise3(cse_tmp_15 + 1 <= zeta_threshold, cse_tmp_8, xc_expm1((5 // 3) * xc_log1p(my_piecewise3(cse_tmp_15 > cse_tmp_3, cse_tmp_15, cse_tmp_3)))) + 1) * (cse_tmp_11 * cse_tmp_16 + cse_tmp_12 * u1 ^ 2 + exp(-cse_tmp_13 * cse_tmp_16)))
+    end
+end
+export mgga_k_pgslb_energy
+
+const mgga_k_pgslb_defaults = NamedTuple()
+const mgga_k_pgslb_required = (:dens_threshold, :params_a_pgslb_beta, :params_a_pgslb_mu, :zeta_threshold)
+
+function mgga_k_pgslb(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_k_pgslb_defaults, mgga_k_pgslb_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_k_pgslb_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_pgslb_beta, p.params_a_pgslb_mu, p.zeta_threshold)
+end
+
+function mgga_k_pgslb(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_k_pgslb_defaults, mgga_k_pgslb_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_k_pgslb_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_pgslb_beta, p.params_a_pgslb_mu, p.zeta_threshold)
+end
+
+export mgga_k_pgslb, mgga_k_pgslb_defaults, mgga_k_pgslb_required
+
+const mgga_k_pgsl025_defaults = (dens_threshold = 1.0e-15, params_a_pgslb_beta = 0.25, params_a_pgslb_mu = 1.4814814814814814, zeta_threshold = 2.220446049250313e-16)
+const mgga_k_pgsl025_required = ()
+
+function mgga_k_pgsl025(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_k_pgsl025_defaults, mgga_k_pgsl025_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_k_pgslb_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_pgslb_beta, p.params_a_pgslb_mu, p.zeta_threshold)
+end
+
+function mgga_k_pgsl025(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_k_pgsl025_defaults, mgga_k_pgsl025_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_k_pgslb_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_pgslb_beta, p.params_a_pgslb_mu, p.zeta_threshold)
+end
+
+export mgga_k_pgsl025, mgga_k_pgsl025_defaults, mgga_k_pgsl025_required

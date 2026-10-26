@@ -1,0 +1,61 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_c_b94.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_cab, params_a_css, params_a_gamma, zeta_threshold
+const mgga_c_b94_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_cab, params_a_css, params_a_gamma, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 0.3183098861837907
+        cse_tmp_2 = rs ^ (-3)
+        cse_tmp_3 = (3 // 8) * cse_tmp_1 * cse_tmp_2
+        cse_tmp_4 = cse_tmp_0 * cse_tmp_3 <= dens_threshold
+        cse_tmp_5 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_6 = zeta_threshold - 1
+        cse_tmp_7 = 1 - z
+        cse_tmp_8 = cse_tmp_7 <= zeta_threshold
+        cse_tmp_9 = -cse_tmp_6
+        cse_tmp_10 = my_piecewise5(cse_tmp_5, cse_tmp_6, cse_tmp_8, cse_tmp_9, z) + 1
+        cse_tmp_11 = (2 // 3) * params_a_gamma
+        cse_tmp_12 = xs0 ^ 2
+        cse_tmp_13 = params_a_gamma / 12
+        cse_tmp_14 = -cse_tmp_11 * t0 + cse_tmp_12 * cse_tmp_13 + u0 / 6
+        cse_tmp_15 = br89_x(my_piecewise3(my_piecewise3(cse_tmp_14 >= 0, cse_tmp_14, -cse_tmp_14) < 5.0e-13, my_piecewise3(cse_tmp_14 > 0, 5.0e-13, -5.0e-13), cse_tmp_14))
+        cse_tmp_16 = -cse_tmp_15
+        cse_tmp_17 = -1 // 2 - (cse_tmp_15 / 2 + 1) * xc_expm1(cse_tmp_16) / cse_tmp_15
+        cse_tmp_18 = 2.080083823051904
+        cse_tmp_19 = cse_tmp_18 * rs / 3
+        cse_tmp_20 = cse_tmp_19 * exp(-cse_tmp_15 / 3) / (NaNMath.pow(cse_tmp_10, 0.3333333333333333) * cse_tmp_17)
+        cse_tmp_21 = 0.0025 * cse_tmp_18 * params_a_css ^ 3 / (6.738808595698141 * rs ^ 2)
+        cse_tmp_22 = cse_tmp_3 * cse_tmp_7 <= dens_threshold
+        cse_tmp_23 = my_piecewise5(cse_tmp_8, cse_tmp_6, cse_tmp_5, cse_tmp_9, -z) + 1
+        cse_tmp_24 = xs1 ^ 2
+        cse_tmp_25 = -cse_tmp_11 * t1 + cse_tmp_13 * cse_tmp_24 + u1 / 6
+        cse_tmp_26 = br89_x(my_piecewise3(my_piecewise3(cse_tmp_25 >= 0, cse_tmp_25, -cse_tmp_25) < 5.0e-13, my_piecewise3(cse_tmp_25 > 0, 5.0e-13, -5.0e-13), cse_tmp_25))
+        cse_tmp_27 = -cse_tmp_26
+        cse_tmp_28 = -1 // 2 - (cse_tmp_26 / 2 + 1) * xc_expm1(cse_tmp_27) / cse_tmp_26
+        cse_tmp_29 = cse_tmp_19 * exp(-cse_tmp_26 / 3) / (NaNMath.pow(cse_tmp_23, 0.3333333333333333) * cse_tmp_28)
+        cse_tmp_30 = params_a_cab * (my_piecewise3(cse_tmp_22, 0, cse_tmp_29) + my_piecewise3(cse_tmp_4, 0, cse_tmp_20))
+        -0.15 * cse_tmp_0 * cse_tmp_1 * cse_tmp_2 * cse_tmp_30 * cse_tmp_7 * xc_x_minus_log1p(cse_tmp_30) + my_piecewise3(cse_tmp_22, 0, -cse_tmp_21 * NaNMath.pow(cse_tmp_23, 1.6666666666666667) * (-cse_tmp_24 / 4 + 2 * t1) * xc_x_minus_log1p(cse_tmp_29 * params_a_css) * exp(cse_tmp_27) / cse_tmp_28 ^ 3) + my_piecewise3(cse_tmp_4, 0, -NaNMath.pow(cse_tmp_10, 1.6666666666666667) * cse_tmp_21 * (-cse_tmp_12 / 4 + 2 * t0) * xc_x_minus_log1p(cse_tmp_20 * params_a_css) * exp(cse_tmp_16) / cse_tmp_17 ^ 3)
+    end
+end
+export mgga_c_b94_energy
+
+const mgga_c_b94_defaults = (dens_threshold = 1.0e-14, params_a_cab = 0.63, params_a_css = 0.88, params_a_gamma = 1.0, zeta_threshold = 2.220446049250313e-16)
+const mgga_c_b94_required = ()
+
+function mgga_c_b94(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_c_b94_defaults, mgga_c_b94_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_c_b94_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_cab, p.params_a_css, p.params_a_gamma, p.zeta_threshold)
+end
+
+function mgga_c_b94(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_c_b94_defaults, mgga_c_b94_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_c_b94_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_cab, p.params_a_css, p.params_a_gamma, p.zeta_threshold)
+end
+
+export mgga_c_b94, mgga_c_b94_defaults, mgga_c_b94_required

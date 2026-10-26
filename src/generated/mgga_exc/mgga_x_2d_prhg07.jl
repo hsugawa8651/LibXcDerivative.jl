@@ -1,0 +1,45 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_x_2d_prhg07.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold
+const mgga_x_2d_prhg07_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 0.3183098861837907
+        cse_tmp_2 = cse_tmp_1 / (2 * rs ^ 2)
+        cse_tmp_3 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_4 = zeta_threshold - 1
+        cse_tmp_5 = 1 - z
+        cse_tmp_6 = cse_tmp_5 <= zeta_threshold
+        cse_tmp_7 = -cse_tmp_4
+        cse_tmp_8 = my_piecewise5(cse_tmp_3, cse_tmp_4, cse_tmp_6, cse_tmp_7, z)
+        cse_tmp_9 = NaNMath.pow(zeta_threshold, 1.5) - 1
+        cse_tmp_10 = exp(-1)
+        cse_tmp_11 = cse_tmp_1 * (-t0 + u0 / 4 + xs0 ^ 2 / 8)
+        cse_tmp_12 = 1.4142135623730951 * 1.772453850905516 / (8 * rs)
+        cse_tmp_13 = my_piecewise5(cse_tmp_6, cse_tmp_4, cse_tmp_3, cse_tmp_7, -z)
+        cse_tmp_14 = cse_tmp_1 * (-t1 + u1 / 4 + xs1 ^ 2 / 8)
+        my_piecewise3(cse_tmp_0 * cse_tmp_2 <= dens_threshold, 0, -cse_tmp_12 * (my_piecewise3(cse_tmp_8 + 1 <= zeta_threshold, cse_tmp_9, xc_expm1((3 // 2) * xc_log1p(my_piecewise3(cse_tmp_8 > cse_tmp_4, cse_tmp_8, cse_tmp_4)))) + 1) * BesselI(0, LambertW(cse_tmp_10 * my_piecewise3(cse_tmp_11 > -0.9999999999, cse_tmp_11, -0.9999999999)) / 2 + 1 // 2)) + my_piecewise3(cse_tmp_2 * cse_tmp_5 <= dens_threshold, 0, -cse_tmp_12 * (my_piecewise3(cse_tmp_13 + 1 <= zeta_threshold, cse_tmp_9, xc_expm1((3 // 2) * xc_log1p(my_piecewise3(cse_tmp_13 > cse_tmp_4, cse_tmp_13, cse_tmp_4)))) + 1) * BesselI(0, LambertW(cse_tmp_10 * my_piecewise3(cse_tmp_14 > -0.9999999999, cse_tmp_14, -0.9999999999)) / 2 + 1 // 2))
+    end
+end
+export mgga_x_2d_prhg07_energy
+
+const mgga_x_2d_prhg07_defaults = (dens_threshold = 1.0e-12, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_2d_prhg07_required = ()
+
+function mgga_x_2d_prhg07(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_2d_prhg07_defaults, mgga_x_2d_prhg07_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(2))
+    return mgga_x_2d_prhg07_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+function mgga_x_2d_prhg07(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_2d_prhg07_defaults, mgga_x_2d_prhg07_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(2))
+    return mgga_x_2d_prhg07_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+export mgga_x_2d_prhg07, mgga_x_2d_prhg07_defaults, mgga_x_2d_prhg07_required

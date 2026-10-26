@@ -1,0 +1,130 @@
+# Auto-generated from the Libxc sources
+# python/mgga_vxc/mgga_x_tb09.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, XC_EPSILON, params_a_alpha, params_a_c
+const mgga_x_tb09_potential = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, XC_EPSILON, params_a_alpha, params_a_c)
+    @inbounds begin
+        cse_tmp_0 = 1.4645918875615234
+        cse_tmp_1 = xs0 ^ 2
+        cse_tmp_2 = -cse_tmp_1 * params_a_alpha / 8 + t0
+        cse_tmp_3 = NaNMath.pow(XC_EPSILON, 0.6666666666666666)
+        cse_tmp_4 = 0.0666666666666667 * cse_tmp_1 - 0.533333333333333 * t0 + u0 / 6
+        cse_tmp_5 = br89_x(my_piecewise3(my_piecewise3(cse_tmp_4 >= 0, cse_tmp_4, -cse_tmp_4) < 5.0e-13, my_piecewise3(cse_tmp_4 > 0, 5.0e-13, -5.0e-13), cse_tmp_4))
+        1.4422495703074083 * NaNMath.pow(z + 1, 0.3333333333333333) * (-2 * cse_tmp_0 * params_a_c * (-1 // 2 - (cse_tmp_5 / 2 + 1) * xc_expm1(-cse_tmp_5) / cse_tmp_5) * exp(cse_tmp_5 / 3) + 5.477225575051661 * (3 * params_a_c - 2) * NaNMath.sqrt(my_piecewise3(cse_tmp_2 > cse_tmp_3, cse_tmp_2, cse_tmp_3)) / (6 * pi)) / (2 * cse_tmp_0 * rs)
+    end
+end
+export mgga_x_tb09_potential
+
+const mgga_x_tb09_vxc_defaults = (XC_EPSILON = 2.220446049250313e-16, params_a_alpha = 0.0, params_a_c = 1.0)
+const mgga_x_tb09_vxc_required = ()
+
+"""
+    mgga_x_tb09_vxc(rho, sigma, lapl, tau)
+
+The exchange-correlation POTENTIAL, not an energy density.
+
+Libxc files this functional under one of its `*_vxc` families, where the
+maple source is the potential itself: the C carries `#define XC_NO_EXC`,
+and the library reports no `XC_FLAGS_HAVE_EXC` for it. There is no energy
+here to differentiate, and this potential is not the functional derivative
+of one. The functionals Libxc files this way -- LB94, BJ06, TB09, RPP09
+and this one -- were put forward as potentials to begin with, which is why
+Libxc generates them apart from the energies.
+
+So the contract the rest of this package keeps does not hold for this
+name. Everywhere else a name returns an energy density and the caller
+differentiates it to get a potential; here the potential is what comes
+back, and differentiating it gives Libxc's next derivative order.
+
+Checked against the library Libxc.jl vendors for the value and its first
+derivative, which is as far as that library goes. Only `vrho` is
+non-zero -- Libxc returns exactly 0 for `vsigma`, `vlapl` and `vtau`
+here -- so there is no counterpart to those and none is offered.
+
+Spin-resolved arguments are not taken: a potential has one component per
+spin channel, and this kernel returns a single scalar.
+"""
+function mgga_x_tb09_vxc(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_tb09_vxc_defaults, mgga_x_tb09_vxc_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_tb09_potential(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.XC_EPSILON, p.params_a_alpha, p.params_a_c)
+end
+
+export mgga_x_tb09_vxc, mgga_x_tb09_vxc_defaults, mgga_x_tb09_vxc_required
+
+const mgga_x_bj06_vxc_defaults = (XC_EPSILON = 2.220446049250313e-16, params_a_alpha = 0.0, params_a_c = 1.0)
+const mgga_x_bj06_vxc_required = ()
+
+"""
+    mgga_x_bj06_vxc(rho, sigma, lapl, tau)
+
+The exchange-correlation POTENTIAL, not an energy density.
+
+Libxc files this functional under one of its `*_vxc` families, where the
+maple source is the potential itself: the C carries `#define XC_NO_EXC`,
+and the library reports no `XC_FLAGS_HAVE_EXC` for it. There is no energy
+here to differentiate, and this potential is not the functional derivative
+of one. The functionals Libxc files this way -- LB94, BJ06, TB09, RPP09
+and this one -- were put forward as potentials to begin with, which is why
+Libxc generates them apart from the energies.
+
+So the contract the rest of this package keeps does not hold for this
+name. Everywhere else a name returns an energy density and the caller
+differentiates it to get a potential; here the potential is what comes
+back, and differentiating it gives Libxc's next derivative order.
+
+Checked against the library Libxc.jl vendors for the value and its first
+derivative, which is as far as that library goes. Only `vrho` is
+non-zero -- Libxc returns exactly 0 for `vsigma`, `vlapl` and `vtau`
+here -- so there is no counterpart to those and none is offered.
+
+Spin-resolved arguments are not taken: a potential has one component per
+spin channel, and this kernel returns a single scalar.
+"""
+function mgga_x_bj06_vxc(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_bj06_vxc_defaults, mgga_x_bj06_vxc_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_tb09_potential(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.XC_EPSILON, p.params_a_alpha, p.params_a_c)
+end
+
+export mgga_x_bj06_vxc, mgga_x_bj06_vxc_defaults, mgga_x_bj06_vxc_required
+
+const mgga_x_rpp09_vxc_defaults = (XC_EPSILON = 2.220446049250313e-16, params_a_alpha = 1.0, params_a_c = 1.0)
+const mgga_x_rpp09_vxc_required = ()
+
+"""
+    mgga_x_rpp09_vxc(rho, sigma, lapl, tau)
+
+The exchange-correlation POTENTIAL, not an energy density.
+
+Libxc files this functional under one of its `*_vxc` families, where the
+maple source is the potential itself: the C carries `#define XC_NO_EXC`,
+and the library reports no `XC_FLAGS_HAVE_EXC` for it. There is no energy
+here to differentiate, and this potential is not the functional derivative
+of one. The functionals Libxc files this way -- LB94, BJ06, TB09, RPP09
+and this one -- were put forward as potentials to begin with, which is why
+Libxc generates them apart from the energies.
+
+So the contract the rest of this package keeps does not hold for this
+name. Everywhere else a name returns an energy density and the caller
+differentiates it to get a potential; here the potential is what comes
+back, and differentiating it gives Libxc's next derivative order.
+
+Checked against the library Libxc.jl vendors for the value and its first
+derivative, which is as far as that library goes. Only `vrho` is
+non-zero -- Libxc returns exactly 0 for `vsigma`, `vlapl` and `vtau`
+here -- so there is no counterpart to those and none is offered.
+
+Spin-resolved arguments are not taken: a potential has one component per
+spin channel, and this kernel returns a single scalar.
+"""
+function mgga_x_rpp09_vxc(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_rpp09_vxc_defaults, mgga_x_rpp09_vxc_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_tb09_potential(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.XC_EPSILON, p.params_a_alpha, p.params_a_c)
+end
+
+export mgga_x_rpp09_vxc, mgga_x_rpp09_vxc_defaults, mgga_x_rpp09_vxc_required

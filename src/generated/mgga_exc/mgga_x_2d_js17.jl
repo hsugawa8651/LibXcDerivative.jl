@@ -1,0 +1,49 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_x_2d_js17.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold
+const mgga_x_2d_js17_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 0.3183098861837907
+        cse_tmp_2 = cse_tmp_1 / (2 * rs ^ 2)
+        cse_tmp_3 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_4 = zeta_threshold - 1
+        cse_tmp_5 = 1 - z
+        cse_tmp_6 = cse_tmp_5 <= zeta_threshold
+        cse_tmp_7 = -cse_tmp_4
+        cse_tmp_8 = my_piecewise5(cse_tmp_3, cse_tmp_4, cse_tmp_6, cse_tmp_7, z)
+        cse_tmp_9 = NaNMath.pow(zeta_threshold, 1.5) - 1
+        cse_tmp_10 = 0.0062208 / 9.869604401089358
+        cse_tmp_11 = cse_tmp_1 * xs0 ^ 2
+        cse_tmp_12 = cse_tmp_10 * xs0 ^ 4 + 1.296 * cse_tmp_11 + 1
+        cse_tmp_13 = -0.3088 * pi
+        cse_tmp_14 = cse_tmp_1 / 4
+        cse_tmp_15 = (2 // 3) * 1.4142135623730951 * cse_tmp_1 / rs
+        cse_tmp_16 = my_piecewise5(cse_tmp_6, cse_tmp_4, cse_tmp_3, cse_tmp_7, -z)
+        cse_tmp_17 = cse_tmp_1 * xs1 ^ 2
+        cse_tmp_18 = cse_tmp_10 * xs1 ^ 4 + 1.296 * cse_tmp_17 + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_2 <= dens_threshold, 0, -cse_tmp_15 * ((2 // 5) * (0.0877714285714286 * cse_tmp_11 + cse_tmp_14 * (-cse_tmp_13 - 0.0772 * t0)) / NaNMath.pow(cse_tmp_12, 0.2) + NaNMath.pow(cse_tmp_12, -0.06666666666666667)) * (my_piecewise3(cse_tmp_8 + 1 <= zeta_threshold, cse_tmp_9, xc_expm1((3 // 2) * xc_log1p(my_piecewise3(cse_tmp_8 > cse_tmp_4, cse_tmp_8, cse_tmp_4)))) + 1)) + my_piecewise3(cse_tmp_2 * cse_tmp_5 <= dens_threshold, 0, -cse_tmp_15 * ((2 // 5) * (cse_tmp_14 * (-cse_tmp_13 - 0.0772 * t1) + 0.0877714285714286 * cse_tmp_17) / NaNMath.pow(cse_tmp_18, 0.2) + NaNMath.pow(cse_tmp_18, -0.06666666666666667)) * (my_piecewise3(cse_tmp_16 + 1 <= zeta_threshold, cse_tmp_9, xc_expm1((3 // 2) * xc_log1p(my_piecewise3(cse_tmp_16 > cse_tmp_4, cse_tmp_16, cse_tmp_4)))) + 1))
+    end
+end
+export mgga_x_2d_js17_energy
+
+const mgga_x_2d_js17_defaults = (dens_threshold = 1.0e-15, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_2d_js17_required = ()
+
+function mgga_x_2d_js17(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_2d_js17_defaults, mgga_x_2d_js17_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(2))
+    return mgga_x_2d_js17_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+function mgga_x_2d_js17(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_2d_js17_defaults, mgga_x_2d_js17_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(2))
+    return mgga_x_2d_js17_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+export mgga_x_2d_js17, mgga_x_2d_js17_defaults, mgga_x_2d_js17_required

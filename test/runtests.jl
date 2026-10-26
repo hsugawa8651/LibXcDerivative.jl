@@ -14,4 +14,5 @@ using SpecialFunctions
     include("generated_audit.jl")
     include("generated_lda.jl")
     include("generated_gga.jl")
+    include("generated_mgga.jl")
 end

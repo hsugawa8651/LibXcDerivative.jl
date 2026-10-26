@@ -1,0 +1,50 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_xc_cc06.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold
+const mgga_xc_cc06_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_2 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_3 = zeta_threshold - 1
+        cse_tmp_4 = xc_log1p(my_piecewise3(z > cse_tmp_3, z, cse_tmp_3))
+        cse_tmp_5 = 1 - z
+        cse_tmp_6 = cse_tmp_5 <= zeta_threshold
+        cse_tmp_7 = -z
+        cse_tmp_8 = xc_log1p(my_piecewise3(cse_tmp_7 > cse_tmp_3, cse_tmp_7, cse_tmp_3))
+        cse_tmp_9 = 2.080083823051904 * (u0 * (my_piecewise3(cse_tmp_1, cse_tmp_2, xc_expm1((5 // 3) * cse_tmp_4)) + 1) + u1 * (my_piecewise3(cse_tmp_6, cse_tmp_2, xc_expm1((5 // 3) * cse_tmp_8)) + 1)) / 2.1450293971110255
+        cse_tmp_10 = NaNMath.sqrt(rs)
+        cse_tmp_11 = NaNMath.pow(rs, 1.5)
+        cse_tmp_12 = rs ^ 2
+        cse_tmp_13 = (-0.0132882934 * rs - 0.062182) * xc_log1p((0.4723158174 * cse_tmp_10 + 0.1018665524 * cse_tmp_11 + 0.03065199508 * cse_tmp_12 + 0.2230841432 * rs) ^ (-1))
+        cse_tmp_14 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_15 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_16 = 0.184639691595506 * 1.8171205928321397 / (1.4645918875615234 * rs)
+        cse_tmp_17 = 0.58482233974552 * (-0.0037573575 * rs - 0.033774) * xc_log1p((0.349797318 * cse_tmp_10 + 0.02972990124 * cse_tmp_11 + 0.01677588354 * cse_tmp_12 + 0.1223665794 * rs) ^ (-1))
+        cse_tmp_18 = cse_tmp_15 - 1
+        cse_tmp_19 = (my_piecewise3(cse_tmp_1, cse_tmp_18, xc_expm1((4 // 3) * cse_tmp_4)) + my_piecewise3(cse_tmp_6, cse_tmp_18, xc_expm1((4 // 3) * cse_tmp_8))) / (-2 + 2 * 1.2599210498948732)
+        ((0.001 * cse_tmp_9 - 0.0007) / (0.00325 * cse_tmp_9 + 1) + 1) * (cse_tmp_13 - cse_tmp_17 * cse_tmp_19 + cse_tmp_19 * z ^ 4 * (-cse_tmp_13 + cse_tmp_17 + (-0.0063883732 * rs - 0.03109) * xc_log1p((0.438956601 * cse_tmp_10 + 0.104655158 * cse_tmp_11 + 0.0194365353 * cse_tmp_12 + 0.192686493 * rs) ^ (-1))) + my_piecewise3(cse_tmp_0 * cse_tmp_14 <= dens_threshold, 0, -cse_tmp_16 * my_piecewise3(cse_tmp_1, cse_tmp_15, NaNMath.pow(cse_tmp_0, 1.3333333333333333))) + my_piecewise3(cse_tmp_14 * cse_tmp_5 <= dens_threshold, 0, -cse_tmp_16 * my_piecewise3(cse_tmp_6, cse_tmp_15, NaNMath.pow(cse_tmp_5, 1.3333333333333333))))
+    end
+end
+export mgga_xc_cc06_energy
+
+const mgga_xc_cc06_defaults = (dens_threshold = 1.0e-15, zeta_threshold = 2.220446049250313e-16)
+const mgga_xc_cc06_required = ()
+
+function mgga_xc_cc06(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_xc_cc06_defaults, mgga_xc_cc06_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_xc_cc06_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+function mgga_xc_cc06(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_xc_cc06_defaults, mgga_xc_cc06_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_xc_cc06_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.zeta_threshold)
+end
+
+export mgga_xc_cc06, mgga_xc_cc06_defaults, mgga_xc_cc06_required

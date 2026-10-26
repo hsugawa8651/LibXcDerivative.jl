@@ -1,0 +1,43 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_c_cs.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, zeta_threshold
+const mgga_c_cs_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 1 - z
+        cse_tmp_2 = 3.3019272488946267 * 1.4645918875615234 * rs
+        cse_tmp_3 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_4 = NaNMath.pow(zeta_threshold, 2.6666666666666665) - 1
+        cse_tmp_5 = zeta_threshold - 1
+        cse_tmp_6 = xc_log1p(my_piecewise3(z > cse_tmp_5, z, cse_tmp_5))
+        cse_tmp_7 = 1.2599210498948732
+        cse_tmp_8 = cse_tmp_7 / 8
+        cse_tmp_9 = cse_tmp_1 <= zeta_threshold
+        cse_tmp_10 = -z
+        cse_tmp_11 = xc_log1p(my_piecewise3(cse_tmp_10 > cse_tmp_5, cse_tmp_10, cse_tmp_5))
+        cse_tmp_12 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        -0.04918 * cse_tmp_0 * cse_tmp_1 * (0.264 * (cse_tmp_7 * (u0 * (my_piecewise3(cse_tmp_3, cse_tmp_12, xc_expm1((5 // 3) * cse_tmp_6)) + 1) + u1 * (my_piecewise3(cse_tmp_9, cse_tmp_12, xc_expm1((5 // 3) * cse_tmp_11)) + 1)) / 32 + cse_tmp_8 * (t0 - u0 / 8) * (my_piecewise3(cse_tmp_3, cse_tmp_4, xc_expm1((8 // 3) * cse_tmp_6)) + 1) + cse_tmp_8 * (t1 - u1 / 8) * (my_piecewise3(cse_tmp_9, cse_tmp_4, xc_expm1((8 // 3) * cse_tmp_11)) + 1) - xt ^ 2 / 8) * exp(-0.0844333333333333 * cse_tmp_2) + 1) / (0.116333333333333 * cse_tmp_2 + 1)
+    end
+end
+export mgga_c_cs_energy
+
+const mgga_c_cs_defaults = (zeta_threshold = 2.220446049250313e-16,)
+const mgga_c_cs_required = ()
+
+function mgga_c_cs(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_c_cs_defaults, mgga_c_cs_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_c_cs_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.zeta_threshold)
+end
+
+function mgga_c_cs(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_c_cs_defaults, mgga_c_cs_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_c_cs_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.zeta_threshold)
+end
+
+export mgga_c_cs, mgga_c_cs_defaults, mgga_c_cs_required

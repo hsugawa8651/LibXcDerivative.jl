@@ -1,0 +1,505 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_x_ktbm.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_a2b, params_a_a2t, params_a_ab, params_a_at, params_a_b2b, params_a_b2t, params_a_bb, params_a_bt, params_a_cb, params_a_ct, params_a_xb, params_a_xt, zeta_threshold
+const mgga_x_ktbm_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, dens_threshold, params_a_a2b, params_a_a2t, params_a_ab, params_a_at, params_a_b2b, params_a_b2t, params_a_bb, params_a_bt, params_a_cb, params_a_ct, params_a_xb, params_a_xt, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = (3 // 8) / (pi * rs ^ 3)
+        cse_tmp_2 = 1.8171205928321397
+        cse_tmp_3 = cse_tmp_2 / 4.60115111447049
+        cse_tmp_4 = (5 // 9) * cse_tmp_3
+        cse_tmp_5 = cse_tmp_4 * t0
+        cse_tmp_6 = xs0 ^ 2
+        cse_tmp_7 = cse_tmp_3 / 24
+        cse_tmp_8 = cse_tmp_6 * cse_tmp_7
+        cse_tmp_9 = 3.3019272488946267 / 21.170591578193033
+        cse_tmp_10 = cse_tmp_9 / 576
+        cse_tmp_11 = cse_tmp_10 * xs0 ^ 4
+        cse_tmp_12 = (25 // 81) * cse_tmp_9
+        cse_tmp_13 = cse_tmp_12 * t0 ^ 2
+        cse_tmp_14 = (5 // 216) * cse_tmp_9
+        cse_tmp_15 = cse_tmp_14 * params_a_xb
+        cse_tmp_16 = cse_tmp_6 * t0
+        cse_tmp_17 = cse_tmp_14 * params_a_xt
+        cse_tmp_18 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_19 = zeta_threshold - 1
+        cse_tmp_20 = 1 - z
+        cse_tmp_21 = cse_tmp_20 <= zeta_threshold
+        cse_tmp_22 = -cse_tmp_19
+        cse_tmp_23 = my_piecewise5(cse_tmp_18, cse_tmp_19, cse_tmp_21, cse_tmp_22, z) + 1
+        cse_tmp_24 = NaNMath.pow(zeta_threshold, 1.3333333333333333)
+        cse_tmp_25 = 0.184639691595506 * cse_tmp_2 / (1.4645918875615234 * rs)
+        cse_tmp_26 = cse_tmp_4 * t1
+        cse_tmp_27 = xs1 ^ 2
+        cse_tmp_28 = cse_tmp_27 * cse_tmp_7
+        cse_tmp_29 = cse_tmp_10 * xs1 ^ 4
+        cse_tmp_30 = cse_tmp_12 * t1 ^ 2
+        cse_tmp_31 = cse_tmp_27 * t1
+        cse_tmp_32 = my_piecewise5(cse_tmp_21, cse_tmp_19, cse_tmp_18, cse_tmp_22, -z) + 1
+        my_piecewise3(cse_tmp_0 * cse_tmp_1 <= dens_threshold, 0, -cse_tmp_25 * (cse_tmp_11 * params_a_a2t + cse_tmp_13 * params_a_b2t + cse_tmp_16 * cse_tmp_17 + cse_tmp_5 * params_a_bt + cse_tmp_8 * params_a_at + params_a_ct) * my_piecewise3(cse_tmp_23 <= zeta_threshold, cse_tmp_24, NaNMath.pow(cse_tmp_23, 1.3333333333333333)) / (cse_tmp_11 * params_a_a2b + cse_tmp_13 * params_a_b2b + cse_tmp_15 * cse_tmp_16 + cse_tmp_5 * params_a_bb + cse_tmp_8 * params_a_ab + params_a_cb)) + my_piecewise3(cse_tmp_1 * cse_tmp_20 <= dens_threshold, 0, -cse_tmp_25 * (cse_tmp_17 * cse_tmp_31 + cse_tmp_26 * params_a_bt + cse_tmp_28 * params_a_at + cse_tmp_29 * params_a_a2t + cse_tmp_30 * params_a_b2t + params_a_ct) * my_piecewise3(cse_tmp_32 <= zeta_threshold, cse_tmp_24, NaNMath.pow(cse_tmp_32, 1.3333333333333333)) / (cse_tmp_15 * cse_tmp_31 + cse_tmp_26 * params_a_bb + cse_tmp_28 * params_a_ab + cse_tmp_29 * params_a_a2b + cse_tmp_30 * params_a_b2b + params_a_cb))
+    end
+end
+export mgga_x_ktbm_energy
+
+const mgga_x_ktbm_defaults = (dens_threshold = 1.0e-15, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_required = (:params_a_a2b, :params_a_a2t, :params_a_ab, :params_a_at, :params_a_b2b, :params_a_b2t, :params_a_bb, :params_a_bt, :params_a_cb, :params_a_ct, :params_a_xb, :params_a_xt)
+
+function mgga_x_ktbm(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_defaults, mgga_x_ktbm_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_defaults, mgga_x_ktbm_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm, mgga_x_ktbm_defaults, mgga_x_ktbm_required
+
+const mgga_x_ktbm_0_defaults = (dens_threshold = 1.0e-15, params_a_a2b = 0.012695765733790497, params_a_a2t = 0.00636399057259787, params_a_ab = -0.10143676314780245, params_a_at = 0.29069155191166346, params_a_b2b = 0.2120228194062504, params_a_b2t = 0.2338605637430116, params_a_bb = 0.23304589272011897, params_a_bt = 0.09376131500450102, params_a_cb = 0.912960806906729, params_a_ct = 1.0304076402855855, params_a_xb = 0.030228093216799572, params_a_xt = 0.05905616176610306, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_0_required = ()
+
+function mgga_x_ktbm_0(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_0_defaults, mgga_x_ktbm_0_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_0(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_0_defaults, mgga_x_ktbm_0_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_0, mgga_x_ktbm_0_defaults, mgga_x_ktbm_0_required
+
+const mgga_x_ktbm_1_defaults = (dens_threshold = 1.0e-15, params_a_a2b = 0.012457017995909028, params_a_a2t = 0.0068639720458172964, params_a_ab = -0.09990334644850286, params_a_at = 0.2899411592708853, params_a_b2b = 0.21278962441196217, params_a_b2t = 0.23290915428403358, params_a_bb = 0.23248452710436812, params_a_bt = 0.09527007147746959, params_a_cb = 0.9092803457608484, params_a_ct = 1.0263752715156753, params_a_xb = 0.029719442546683742, params_a_xt = 0.05947813667117197, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_1_required = ()
+
+function mgga_x_ktbm_1(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_1_defaults, mgga_x_ktbm_1_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_1(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_1_defaults, mgga_x_ktbm_1_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_1, mgga_x_ktbm_1_defaults, mgga_x_ktbm_1_required
+
+const mgga_x_ktbm_10_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.010401252152213812, params_a_a2t = 0.01761185351449011, params_a_ab = -0.12160989477866269, params_a_at = 0.30912912129708214, params_a_b2b = 0.23278035355354837, params_a_b2t = 0.2556727204970185, params_a_bb = 0.25118301876427696, params_a_bt = 0.08488944601171224, params_a_cb = 0.8899242792435056, params_a_ct = 1.0333254850526004, params_a_xb = 0.04218521572257066, params_a_xt = 0.04186658887299335, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_10_required = ()
+
+function mgga_x_ktbm_10(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_10_defaults, mgga_x_ktbm_10_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_10(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_10_defaults, mgga_x_ktbm_10_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_10, mgga_x_ktbm_10_defaults, mgga_x_ktbm_10_required
+
+const mgga_x_ktbm_11_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.011153234776641766, params_a_a2t = 0.017493092157697374, params_a_ab = -0.12654391613327828, params_a_at = 0.31542069088069363, params_a_b2b = 0.2405626239749416, params_a_b2t = 0.2568451832465198, params_a_bb = 0.2529563857261435, params_a_bt = 0.0846516506524305, params_a_cb = 0.8852633605618385, params_a_ct = 1.0372855363639735, params_a_xb = 0.04247456513199206, params_a_xt = 0.04166294140424092, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_11_required = ()
+
+function mgga_x_ktbm_11(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_11_defaults, mgga_x_ktbm_11_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_11(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_11_defaults, mgga_x_ktbm_11_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_11, mgga_x_ktbm_11_defaults, mgga_x_ktbm_11_required
+
+const mgga_x_ktbm_12_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.014708120975318316, params_a_a2t = 0.01911189167574323, params_a_ab = -0.13719467942712382, params_a_at = 0.32507944455155824, params_a_b2b = 0.2562711986900481, params_a_b2t = 0.25267236609857674, params_a_bb = 0.25010201689281614, params_a_bt = 0.08867013038404557, params_a_cb = 0.8678685739668615, params_a_ct = 1.0328992930671033, params_a_xb = 0.044664146022155224, params_a_xt = 0.03776897033885063, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_12_required = ()
+
+function mgga_x_ktbm_12(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_12_defaults, mgga_x_ktbm_12_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_12(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_12_defaults, mgga_x_ktbm_12_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_12, mgga_x_ktbm_12_defaults, mgga_x_ktbm_12_required
+
+const mgga_x_ktbm_13_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.0188712715300085, params_a_a2t = 0.020209081896366766, params_a_ab = -0.1558957723810475, params_a_at = 0.34088085237213217, params_a_b2b = 0.27323183568634224, params_a_b2t = 0.24135718732652808, params_a_bb = 0.23686926225137386, params_a_bt = 0.09899449457477784, params_a_cb = 0.8526876327199046, params_a_ct = 1.0224370487563148, params_a_xb = 0.046972503043861545, params_a_xt = 0.032017852777980665, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_13_required = ()
+
+function mgga_x_ktbm_13(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_13_defaults, mgga_x_ktbm_13_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_13(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_13_defaults, mgga_x_ktbm_13_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_13, mgga_x_ktbm_13_defaults, mgga_x_ktbm_13_required
+
+const mgga_x_ktbm_14_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.022330162076107284, params_a_a2t = 0.019271713973666525, params_a_ab = -0.18372997898145776, params_a_at = 0.3712618902901585, params_a_b2b = 0.2813712594156585, params_a_b2t = 0.22767099588537568, params_a_bb = 0.22348685551621814, params_a_bt = 0.11446342331107544, params_a_cb = 0.8471031407239273, params_a_ct = 1.0098268364593528, params_a_xb = 0.05447119556682036, params_a_xt = 0.0186613282501236, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_14_required = ()
+
+function mgga_x_ktbm_14(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_14_defaults, mgga_x_ktbm_14_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_14(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_14_defaults, mgga_x_ktbm_14_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_14, mgga_x_ktbm_14_defaults, mgga_x_ktbm_14_required
+
+const mgga_x_ktbm_15_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.02308922048967118, params_a_a2t = 0.02080638881254861, params_a_ab = -0.15393192486729823, params_a_at = 0.3355002717573432, params_a_b2b = 0.25324767423389083, params_a_b2t = 0.2711168697258796, params_a_bb = 0.26741916973273905, params_a_bt = 0.08130545277413916, params_a_cb = 0.8620530992475534, params_a_ct = 1.0302976207141643, params_a_xb = 0.05061099133357915, params_a_xt = 0.026644005087231207, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_15_required = ()
+
+function mgga_x_ktbm_15(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_15_defaults, mgga_x_ktbm_15_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_15(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_15_defaults, mgga_x_ktbm_15_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_15, mgga_x_ktbm_15_defaults, mgga_x_ktbm_15_required
+
+const mgga_x_ktbm_16_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.020841203345624244, params_a_a2t = 0.01826796628619182, params_a_ab = -0.16440139191706984, params_a_at = 0.34785279555635895, params_a_b2b = 0.2624707939098512, params_a_b2t = 0.26926390331174666, params_a_bb = 0.26668246758222863, params_a_bt = 0.08267108106108388, params_a_cb = 0.8517262574698339, params_a_ct = 1.028944534589083, params_a_xb = 0.05140925571333686, params_a_xt = 0.025488532321196775, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_16_required = ()
+
+function mgga_x_ktbm_16(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_16_defaults, mgga_x_ktbm_16_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_16(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_16_defaults, mgga_x_ktbm_16_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_16, mgga_x_ktbm_16_defaults, mgga_x_ktbm_16_required
+
+const mgga_x_ktbm_17_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.02525015720470474, params_a_a2t = 0.02049145174816412, params_a_ab = -0.17690897486541043, params_a_at = 0.35683459177209, params_a_b2b = 0.275797970614049, params_a_b2t = 0.25979318901002013, params_a_bb = 0.2573678273967677, params_a_bt = 0.09012873503547454, params_a_cb = 0.8460317965240975, params_a_ct = 1.0292756704894197, params_a_xb = 0.05316989878402506, params_a_xt = 0.020938264897749744, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_17_required = ()
+
+function mgga_x_ktbm_17(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_17_defaults, mgga_x_ktbm_17_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_17(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_17_defaults, mgga_x_ktbm_17_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_17, mgga_x_ktbm_17_defaults, mgga_x_ktbm_17_required
+
+const mgga_x_ktbm_18_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.02916253719139352, params_a_a2t = 0.021389207645624835, params_a_ab = -0.19156566837384478, params_a_at = 0.3695840036000602, params_a_b2b = 0.2853068266325876, params_a_b2t = 0.24635839037940996, params_a_bb = 0.24286563818174003, params_a_bt = 0.10424651498067275, params_a_cb = 0.8463238571977623, params_a_ct = 1.023891416652007, params_a_xb = 0.05439786485037524, params_a_xt = 0.016303682950443012, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_18_required = ()
+
+function mgga_x_ktbm_18(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_18_defaults, mgga_x_ktbm_18_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_18(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_18_defaults, mgga_x_ktbm_18_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_18, mgga_x_ktbm_18_defaults, mgga_x_ktbm_18_required
+
+const mgga_x_ktbm_19_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.02652803375774664, params_a_a2t = 0.01734660257009398, params_a_ab = -0.19970878946385107, params_a_at = 0.3886482506196606, params_a_b2b = 0.2883152641191594, params_a_b2t = 0.23364313875476078, params_a_bb = 0.23265545875876809, params_a_bt = 0.11958299056773851, params_a_cb = 0.8500063400271057, params_a_ct = 1.0177509335825339, params_a_xb = 0.05563460230305794, params_a_xt = 0.013006344527878945, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_19_required = ()
+
+function mgga_x_ktbm_19(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_19_defaults, mgga_x_ktbm_19_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_19(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_19_defaults, mgga_x_ktbm_19_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_19, mgga_x_ktbm_19_defaults, mgga_x_ktbm_19_required
+
+const mgga_x_ktbm_2_defaults = (dens_threshold = 1.0e-15, params_a_a2b = 0.011998579529446734, params_a_a2t = 0.007755128286066295, params_a_ab = -0.09977324697775652, params_a_at = 0.29058410317853406, params_a_b2b = 0.21706408635922794, params_a_b2t = 0.23023677039428692, params_a_bb = 0.22943895674906856, params_a_bt = 0.0978868238219999, params_a_cb = 0.9112142206259968, params_a_ct = 1.0295936695180066, params_a_xb = 0.028442891502834692, params_a_xt = 0.06068632690160595, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_2_required = ()
+
+function mgga_x_ktbm_2(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_2_defaults, mgga_x_ktbm_2_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_2(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_2_defaults, mgga_x_ktbm_2_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_2, mgga_x_ktbm_2_defaults, mgga_x_ktbm_2_required
+
+const mgga_x_ktbm_20_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.022982606699085847, params_a_a2t = 0.014607712335708758, params_a_ab = -0.1835191673802379, params_a_at = 0.3650072557466966, params_a_b2b = 0.27472726796218805, params_a_b2t = 0.2632247589374224, params_a_bb = 0.26577701274857213, params_a_bt = 0.08954496562037528, params_a_cb = 0.8287842058666036, params_a_ct = 1.0165187620195661, params_a_xb = 0.05379265178854256, params_a_xt = 0.01786607619990434, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_20_required = ()
+
+function mgga_x_ktbm_20(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_20_defaults, mgga_x_ktbm_20_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_20(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_20_defaults, mgga_x_ktbm_20_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_20, mgga_x_ktbm_20_defaults, mgga_x_ktbm_20_required
+
+const mgga_x_ktbm_21_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.027512731460753635, params_a_a2t = 0.017187315664980975, params_a_ab = -0.19334218741581838, params_a_at = 0.37178251147192115, params_a_b2b = 0.28028398998736687, params_a_b2t = 0.25854265737744203, params_a_bb = 0.261609289869405, params_a_bt = 0.09417966281307585, params_a_cb = 0.8369879914727829, params_a_ct = 1.0261589511390368, params_a_xb = 0.05529346995551265, params_a_xt = 0.014141308840385008, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_21_required = ()
+
+function mgga_x_ktbm_21(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_21_defaults, mgga_x_ktbm_21_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_21(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_21_defaults, mgga_x_ktbm_21_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_21, mgga_x_ktbm_21_defaults, mgga_x_ktbm_21_required
+
+const mgga_x_ktbm_22_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.030259689597518808, params_a_a2t = 0.01845516499149008, params_a_ab = -0.1986302049502704, params_a_at = 0.3753257423779244, params_a_b2b = 0.2837277428008583, params_a_b2t = 0.25282812241932845, params_a_bb = 0.25728153005661014, params_a_bt = 0.09970148467691746, params_a_cb = 0.842951890093288, params_a_ct = 1.0314315558545104, params_a_xb = 0.05549196058928848, params_a_xt = 0.012331220162193516, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_22_required = ()
+
+function mgga_x_ktbm_22(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_22_defaults, mgga_x_ktbm_22_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_22(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_22_defaults, mgga_x_ktbm_22_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_22, mgga_x_ktbm_22_defaults, mgga_x_ktbm_22_required
+
+const mgga_x_ktbm_23_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.024245285244768995, params_a_a2t = 0.012475919846263022, params_a_ab = -0.1999873028058896, params_a_at = 0.3834598731754155, params_a_b2b = 0.2858306647480424, params_a_b2t = 0.2414188532038928, params_a_bb = 0.24921422369400187, params_a_bt = 0.1134601725160894, params_a_cb = 0.8493931293985715, params_a_ct = 1.0295589921206336, params_a_xb = 0.05112243276201573, params_a_xt = 0.01732362062811347, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_23_required = ()
+
+function mgga_x_ktbm_23(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_23_defaults, mgga_x_ktbm_23_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_23(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_23_defaults, mgga_x_ktbm_23_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_23, mgga_x_ktbm_23_defaults, mgga_x_ktbm_23_required
+
+const mgga_x_ktbm_24_defaults = (dens_threshold = 1.0e-15, params_a_a2b = 0.02878611571628562, params_a_a2t = -0.03442867975153089, params_a_ab = -0.16852485787284124, params_a_at = 0.3920773179999707, params_a_b2b = 0.2821872346741235, params_a_b2t = 0.20859113727030637, params_a_bb = 0.23913780777316324, params_a_bt = 0.13989350865860764, params_a_cb = 0.8500009175699887, params_a_ct = 1.0228413140883612, params_a_xb = 0.027565652585576854, params_a_xt = 0.05898500700761443, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_24_required = ()
+
+function mgga_x_ktbm_24(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_24_defaults, mgga_x_ktbm_24_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_24(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_24_defaults, mgga_x_ktbm_24_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_24, mgga_x_ktbm_24_defaults, mgga_x_ktbm_24_required
+
+const mgga_x_ktbm_3_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.004498791216677266, params_a_a2t = 0.02256386879999913, params_a_ab = -0.09530345147869335, params_a_at = 0.28263576038064064, params_a_b2b = 0.23786606766032575, params_a_b2t = 0.21951785356175765, params_a_bb = 0.22208016646397852, params_a_bt = 0.1086528703236551, params_a_cb = 0.9062056523248283, params_a_ct = 1.0379811625637196, params_a_xb = 0.03123136106174504, params_a_xt = 0.05535090451568734, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_3_required = ()
+
+function mgga_x_ktbm_3(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_3_defaults, mgga_x_ktbm_3_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_3(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_3_defaults, mgga_x_ktbm_3_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_3, mgga_x_ktbm_3_defaults, mgga_x_ktbm_3_required
+
+const mgga_x_ktbm_4_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.02461830223135286, params_a_a2t = 0.03916064018939278, params_a_ab = -0.03878570821939097, params_a_at = 0.21643762279081258, params_a_b2b = 0.2420890191752141, params_a_b2t = 0.218782148009531, params_a_bb = 0.2223103939373648, params_a_bt = 0.11205441240705669, params_a_cb = 0.9111626565768056, params_a_ct = 1.0447255092727967, params_a_xb = 0.03357824594821441, params_a_xt = 0.049173374763561505, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_4_required = ()
+
+function mgga_x_ktbm_4(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_4_defaults, mgga_x_ktbm_4_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_4(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_4_defaults, mgga_x_ktbm_4_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_4, mgga_x_ktbm_4_defaults, mgga_x_ktbm_4_required
+
+const mgga_x_ktbm_5_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.00866483099804667, params_a_a2t = 0.023315761058191182, params_a_ab = -0.07902833543247754, params_a_at = 0.2675776296196626, params_a_b2b = 0.2196560728349573, params_a_b2t = 0.24640960606519824, params_a_bb = 0.23072509312940534, params_a_bt = 0.09913936134558513, params_a_cb = 0.9077280787511512, params_a_ct = 1.0125602773047306, params_a_xb = 0.03412753589546748, params_a_xt = 0.053160334695376496, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_5_required = ()
+
+function mgga_x_ktbm_5(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_5_defaults, mgga_x_ktbm_5_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_5(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_5_defaults, mgga_x_ktbm_5_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_5, mgga_x_ktbm_5_defaults, mgga_x_ktbm_5_required
+
+const mgga_x_ktbm_6_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.0038997050285408835, params_a_a2t = 0.018516584221964772, params_a_ab = -0.09162327508843797, params_a_at = 0.2831195698499447, params_a_b2b = 0.2236142908190176, params_a_b2t = 0.24643091238118955, params_a_bb = 0.23505067511245098, params_a_bt = 0.09419986422549517, params_a_cb = 0.8927648294054159, params_a_ct = 1.0107990187301998, params_a_xb = 0.03491565811591121, params_a_xt = 0.053222207515855054, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_6_required = ()
+
+function mgga_x_ktbm_6(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_6_defaults, mgga_x_ktbm_6_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_6(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_6_defaults, mgga_x_ktbm_6_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_6, mgga_x_ktbm_6_defaults, mgga_x_ktbm_6_required
+
+const mgga_x_ktbm_7_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.003155319989664977, params_a_a2t = 0.017553715624560488, params_a_ab = -0.09955165062796137, params_a_at = 0.29135357108065124, params_a_b2b = 0.23357541396032006, params_a_b2t = 0.2389845612385746, params_a_bb = 0.24024623770293027, params_a_bt = 0.08982076954655123, params_a_cb = 0.8796968988601903, params_a_ct = 1.0247132197383149, params_a_xb = 0.034965668999510056, params_a_xt = 0.052873026336855665, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_7_required = ()
+
+function mgga_x_ktbm_7(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_7_defaults, mgga_x_ktbm_7_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_7(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_7_defaults, mgga_x_ktbm_7_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_7, mgga_x_ktbm_7_defaults, mgga_x_ktbm_7_required
+
+const mgga_x_ktbm_8_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.014660499819366934, params_a_a2t = 0.025487794684463046, params_a_ab = -0.10964831528933401, params_a_at = 0.29673875703834085, params_a_b2b = 0.2521438820727313, params_a_b2t = 0.22807264244165595, params_a_bb = 0.22538195411613346, params_a_bt = 0.10350110708250126, params_a_cb = 0.8923983637114028, params_a_ct = 1.0383504503761103, params_a_xb = 0.03770293882466388, params_a_xt = 0.046836991399129155, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_8_required = ()
+
+function mgga_x_ktbm_8(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_8_defaults, mgga_x_ktbm_8_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_8(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_8_defaults, mgga_x_ktbm_8_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_8, mgga_x_ktbm_8_defaults, mgga_x_ktbm_8_required
+
+const mgga_x_ktbm_9_defaults = (dens_threshold = 1.0e-15, params_a_a2b = -0.020769127848149577, params_a_a2t = 0.028253873924966876, params_a_ab = -0.11135236999860085, params_a_at = 0.29520765557119005, params_a_b2b = 0.263916870673348, params_a_b2t = 0.2193558860545767, params_a_bb = 0.22146942269020795, params_a_bt = 0.10931801428639576, params_a_cb = 0.8856159764767498, params_a_ct = 1.0423283694993333, params_a_xb = 0.04302665117695169, params_a_xt = 0.038107713046421104, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_9_required = ()
+
+function mgga_x_ktbm_9(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_9_defaults, mgga_x_ktbm_9_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_9(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_9_defaults, mgga_x_ktbm_9_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_9, mgga_x_ktbm_9_defaults, mgga_x_ktbm_9_required
+
+const mgga_x_ktbm_gap_defaults = (dens_threshold = 1.0e-15, params_a_a2b = 0.07947893639728304, params_a_a2t = -0.00672327251988611, params_a_ab = -0.17459201010028683, params_a_at = 0.4354020787275538, params_a_b2b = 0.29944523452939364, params_a_b2t = 0.1285175238165055, params_a_bb = 0.15992157285736205, params_a_bt = 0.181093570244884, params_a_cb = 0.9723866568932589, params_a_ct = 1.122142370218625, params_a_xb = 0.012402724366764269, params_a_xt = 0.111067440834648, zeta_threshold = 2.220446049250313e-16)
+const mgga_x_ktbm_gap_required = ()
+
+function mgga_x_ktbm_gap(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_gap_defaults, mgga_x_ktbm_gap_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+function mgga_x_ktbm_gap(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_x_ktbm_gap_defaults, mgga_x_ktbm_gap_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_x_ktbm_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.dens_threshold, p.params_a_a2b, p.params_a_a2t, p.params_a_ab, p.params_a_at, p.params_a_b2b, p.params_a_b2t, p.params_a_bb, p.params_a_bt, p.params_a_cb, p.params_a_ct, p.params_a_xb, p.params_a_xt, p.zeta_threshold)
+end
+
+export mgga_x_ktbm_gap, mgga_x_ktbm_gap_defaults, mgga_x_ktbm_gap_required

@@ -1,0 +1,114 @@
+# Auto-generated from the Libxc sources
+# python/mgga_exc/mgga_c_r2scan.py -- do not edit by hand.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# args: rs, z, xt, xs0, xs1, u0, u1, t0, t1, params_a_eta, zeta_threshold
+const mgga_c_r2scan_energy = function (rs, z, xt, xs0, xs1, u0, u1, t0, t1, params_a_eta, zeta_threshold)
+    @inbounds begin
+        cse_tmp_0 = z + 1
+        cse_tmp_1 = 1 - z
+        cse_tmp_2 = z ^ 4
+        cse_tmp_3 = cse_tmp_2 + z ^ 10 + z ^ 8 + z ^ 6 + z ^ 2 + 1
+        cse_tmp_4 = NaNMath.sqrt(rs)
+        cse_tmp_5 = 0.0889 * cse_tmp_4 + 0.125541 * rs + 1
+        cse_tmp_6 = cse_tmp_5 ^ (-1)
+        cse_tmp_7 = 0.0285764 * cse_tmp_6
+        cse_tmp_8 = 4.60115111447049
+        cse_tmp_9 = xt ^ 2
+        cse_tmp_10 = 1.4422495703074083 * cse_tmp_9
+        cse_tmp_11 = 1.2599210498948732
+        cse_tmp_12 = (2 * cse_tmp_11 - 2) ^ (-1)
+        cse_tmp_13 = cse_tmp_0 <= zeta_threshold
+        cse_tmp_14 = NaNMath.pow(zeta_threshold, 1.3333333333333333) - 1
+        cse_tmp_15 = zeta_threshold - 1
+        cse_tmp_16 = xc_log1p(my_piecewise3(z > cse_tmp_15, z, cse_tmp_15))
+        cse_tmp_17 = cse_tmp_1 <= zeta_threshold
+        cse_tmp_18 = -z
+        cse_tmp_19 = xc_log1p(my_piecewise3(cse_tmp_18 > cse_tmp_15, cse_tmp_18, cse_tmp_15))
+        cse_tmp_20 = my_piecewise3(cse_tmp_13, cse_tmp_14, xc_expm1((4 // 3) * cse_tmp_16)) + my_piecewise3(cse_tmp_17, cse_tmp_14, xc_expm1((4 // 3) * cse_tmp_19))
+        cse_tmp_21 = cse_tmp_12 * cse_tmp_20
+        cse_tmp_22 = -cse_tmp_21 * (2.363 * cse_tmp_11 - 2.363) + 1
+        cse_tmp_23 = 9.869604401089358
+        cse_tmp_24 = 1 - NaNMath.log(2)
+        cse_tmp_25 = NaNMath.pow(zeta_threshold, 0.6666666666666666) - 1
+        cse_tmp_26 = my_piecewise3(cse_tmp_13, cse_tmp_25, xc_expm1((2 // 3) * cse_tmp_16)) / 2 + my_piecewise3(cse_tmp_17, cse_tmp_25, xc_expm1((2 // 3) * cse_tmp_19)) / 2 + 1
+        cse_tmp_27 = cse_tmp_26 ^ 3
+        cse_tmp_28 = cse_tmp_27 ^ (-1)
+        cse_tmp_29 = -0.01328816518 * rs - 0.0621814
+        cse_tmp_30 = NaNMath.pow(rs, 1.5)
+        cse_tmp_31 = rs ^ 2
+        cse_tmp_32 = 0.10186556948 * cse_tmp_30 + 0.030651699316 * cse_tmp_31 + 0.47231125998 * cse_tmp_4 + 0.22308199064 * rs
+        cse_tmp_33 = cse_tmp_32 ^ (-1)
+        cse_tmp_34 = xc_log1p(cse_tmp_33)
+        cse_tmp_35 = cse_tmp_29 * cse_tmp_34
+        cse_tmp_36 = 0.029729725188 * cse_tmp_30 + 0.016775784198 * cse_tmp_31 + 0.3497952466 * cse_tmp_4 + 0.12236585478 * rs
+        cse_tmp_37 = cse_tmp_36 ^ (-1)
+        cse_tmp_38 = xc_log1p(cse_tmp_37)
+        cse_tmp_39 = -0.00375733525 * rs - 0.0337738
+        cse_tmp_40 = 0.5848223622634646207262238663759 * cse_tmp_38 * cse_tmp_39
+        cse_tmp_41 = -0.006388517036 * rs - 0.0310907
+        cse_tmp_42 = 0.10465751434 * cse_tmp_30 + 0.019436972919 * cse_tmp_31 + 0.43896648423 * cse_tmp_4 + 0.19269083139 * rs
+        cse_tmp_43 = cse_tmp_42 ^ (-1)
+        cse_tmp_44 = xc_log1p(cse_tmp_43)
+        cse_tmp_45 = cse_tmp_2 * cse_tmp_21
+        cse_tmp_46 = -cse_tmp_21 * cse_tmp_40 + cse_tmp_35 + cse_tmp_45 * (-cse_tmp_35 + cse_tmp_40 + cse_tmp_41 * cse_tmp_44)
+        cse_tmp_47 = cse_tmp_24 ^ (-1)
+        cse_tmp_48 = cse_tmp_23 * cse_tmp_47
+        cse_tmp_49 = xc_expm1(-cse_tmp_28 * cse_tmp_46 * cse_tmp_48)
+        cse_tmp_50 = cse_tmp_49 ^ (-1)
+        cse_tmp_51 = cse_tmp_9 / 8
+        cse_tmp_52 = NaNMath.pow(zeta_threshold, 1.6666666666666667) - 1
+        cse_tmp_53 = my_piecewise3(cse_tmp_13, cse_tmp_52, xc_expm1((5 // 3) * cse_tmp_16))
+        cse_tmp_54 = my_piecewise3(cse_tmp_17, cse_tmp_52, xc_expm1((5 // 3) * cse_tmp_19))
+        cse_tmp_55 = 0.002197373676720785389193547336775 * cse_tmp_38
+        cse_tmp_56 = cse_tmp_4 ^ (-1)
+        cse_tmp_57 = -0.044594587782 * cse_tmp_4 - 0.1748976233 * cse_tmp_56 - 0.033551568396 * rs - 0.12236585478
+        cse_tmp_58 = cse_tmp_36 ^ (-2)
+        cse_tmp_59 = (cse_tmp_37 + 1) ^ (-1)
+        cse_tmp_60 = cse_tmp_29 * (-0.15279835422 * cse_tmp_4 - 0.23615562999 * cse_tmp_56 - 0.061303398632 * rs - 0.22308199064) / (cse_tmp_32 ^ 2 * (cse_tmp_33 + 1)) - 0.01328816518 * cse_tmp_34
+        cse_tmp_61 = 2.080083823051904
+        cse_tmp_62 = cse_tmp_46 + cse_tmp_24 * cse_tmp_27 * xc_log1p(-cse_tmp_49 * xc_expm1(-xc_log1p(0.00878274486776541 * 2.1450293971110255 * cse_tmp_10 * cse_tmp_28 * cse_tmp_47 * cse_tmp_50 * (-45 * params_a_eta * (-cse_tmp_0 * cse_tmp_1 * cse_tmp_22 * cse_tmp_3 * cse_tmp_7 - cse_tmp_46) + 20 * rs * (cse_tmp_0 * cse_tmp_1 * cse_tmp_22 * cse_tmp_3 * cse_tmp_56 * (0.0035875098324 * cse_tmp_4 + 0.00127022098) / cse_tmp_5 ^ 2 + 0.5848223622634646207262238663759 * cse_tmp_12 * cse_tmp_20 * cse_tmp_39 * cse_tmp_57 * cse_tmp_58 * cse_tmp_59 - cse_tmp_21 * cse_tmp_55 - cse_tmp_45 * (0.5848223622634646207262238663759 * cse_tmp_39 * cse_tmp_57 * cse_tmp_58 * cse_tmp_59 + cse_tmp_41 * (-0.15698627151 * cse_tmp_4 - 0.219483242115 * cse_tmp_56 - 0.038873945838 * rs - 0.19269083139) / (cse_tmp_42 ^ 2 * (cse_tmp_43 + 1)) - 0.006388517036 * cse_tmp_44 - cse_tmp_55 - cse_tmp_60) - cse_tmp_60)) * exp(-0.408892081577927 * cse_tmp_61 * xt ^ 4 / 21.170591578193033) / (cse_tmp_53 / 2 + cse_tmp_54 / 2 + 1) + cse_tmp_11 * cse_tmp_48 * cse_tmp_50 * cse_tmp_51 * (0.0066724550603149224 * rs + 0.06672455060314922) / (cse_tmp_26 ^ 2 * rs * (0.1778 * rs + 1))) / 4)) / cse_tmp_23
+        cse_tmp_63 = (cse_tmp_11 * (t0 * (cse_tmp_53 + 1) + t1 * (cse_tmp_54 + 1)) / 4 - cse_tmp_51) / (cse_tmp_51 * params_a_eta + (3 // 20) * cse_tmp_61 * cse_tmp_8 * (cse_tmp_53 + cse_tmp_54 + 2))
+        cse_tmp_64 = my_piecewise3(cse_tmp_63 > 0, 0, cse_tmp_63)
+        cse_tmp_65 = cse_tmp_63 > 2.5
+        cse_tmp_66 = my_piecewise3(cse_tmp_65, 2.5, cse_tmp_63)
+        cse_tmp_62 + (cse_tmp_0 * cse_tmp_1 * cse_tmp_22 * cse_tmp_3 * (-cse_tmp_7 + 0.0285764 * xc_log1p(-xc_expm1(1.0 * cse_tmp_6) * xc_expm1(-xc_log1p(0.042675284208752717 * cse_tmp_10 / cse_tmp_8) / 4))) - cse_tmp_62) * my_piecewise5(cse_tmp_63 <= 0, exp(-0.64 * cse_tmp_64 / (1 - cse_tmp_64)), cse_tmp_63 <= 2.5, -0.051848879792 * cse_tmp_66 ^ 7 + 0.516884468372 * cse_tmp_66 ^ 6 - 1.915710236206 * cse_tmp_66 ^ 5 + 3.061560252175 * cse_tmp_66 ^ 4 - 1.535685604549 * cse_tmp_66 ^ 3 - 0.4352 * cse_tmp_66 ^ 2 - 0.64 * cse_tmp_66 + 1, -0.7 * exp(1.5 / (1 - my_piecewise3(cse_tmp_65, cse_tmp_63, 2.5))))
+    end
+end
+export mgga_c_r2scan_energy
+
+const mgga_c_r2scan_defaults = (params_a_eta = 0.001, zeta_threshold = 2.220446049250313e-16)
+const mgga_c_r2scan_required = ()
+
+function mgga_c_r2scan(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_c_r2scan_defaults, mgga_c_r2scan_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_c_r2scan_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.params_a_eta, p.zeta_threshold)
+end
+
+function mgga_c_r2scan(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_c_r2scan_defaults, mgga_c_r2scan_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_c_r2scan_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.params_a_eta, p.zeta_threshold)
+end
+
+export mgga_c_r2scan, mgga_c_r2scan_defaults, mgga_c_r2scan_required
+
+const mgga_c_r2scan01_defaults = (params_a_eta = 0.01, zeta_threshold = 2.220446049250313e-16)
+const mgga_c_r2scan01_required = ()
+
+function mgga_c_r2scan01(rho, sigma, lapl, tau; params = NamedTuple())
+    p = resolve_params(mgga_c_r2scan01_defaults, mgga_c_r2scan01_required, params)
+    v = mgga_variables(rho, sigma, lapl, tau, Val(3))
+    return mgga_c_r2scan_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.params_a_eta, p.zeta_threshold)
+end
+
+function mgga_c_r2scan01(na, nb, gaa, gab, gbb, la, lb, ta, tb; params = NamedTuple())
+    p = resolve_params(mgga_c_r2scan01_defaults, mgga_c_r2scan01_required, params)
+    v = mgga_variables(na, nb, gaa, gab, gbb, la, lb, ta, tb, Val(3))
+    return mgga_c_r2scan_energy(v.rs, v.z, v.xt, v.xs0, v.xs1, v.u0, v.u1, v.t0, v.t1, p.params_a_eta, p.zeta_threshold)
+end
+
+export mgga_c_r2scan01, mgga_c_r2scan01_defaults, mgga_c_r2scan01_required
