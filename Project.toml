@@ -10,14 +10,19 @@ SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [weakdeps]
 ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+ComponentArrays = "b0b7db55-cfe3-40fc-9ded-d10e2dbeff66"
+DftFunctionals = "6bd331d2-b28d-4fd3-880e-1a1c7f37947f"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 
 [extensions]
 LibXcDerivativeChainRulesCoreExt = "ChainRulesCore"
+LibXcDerivativeDftFunctionalsExt = ["DftFunctionals", "ComponentArrays"]
 LibXcDerivativeForwardDiffExt = "ForwardDiff"
 
 [compat]
 ChainRulesCore = "1"
+ComponentArrays = "0.15"
+DftFunctionals = "0.3"
 ForwardDiff = "0.10, 1"
 NaNMath = "1.1.4"
 SpecialFunctions = "2.9.0"

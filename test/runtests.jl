@@ -5,6 +5,8 @@
 using LibXcDerivative
 using Test
 using ChainRulesCore
+using ComponentArrays
+using DftFunctionals
 using ForwardDiff
 using Libxc
 using NaNMath
@@ -32,5 +34,6 @@ using Zygote
     include("sweeps.jl")
     include("derivatives.jl")
     include("reverse.jl")
+    include("dft_functionals.jl")
     include("licence.jl")
 end
