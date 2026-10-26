@@ -25,4 +25,5 @@ using TOML
     include("agreement.jl")
     include("sources.jl")
     include("fallback.jl")
+    include("clamp_guard.jl")
 end
