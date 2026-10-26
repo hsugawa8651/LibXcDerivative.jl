@@ -25,6 +25,11 @@ export xc_log1p, xc_expm1, xc_asinh, xc_atanh, xc_x_minus_log1p, atan2,
        BesselI, br89_x, mbrxc_x
 export LambertW, xc_dilogarithm, xc_E1_scaled, xc_e1_scaled_G
 
+# The parameters as a vector, for a caller fitting a functional rather than
+# evaluating one. `param_gradient` needs ForwardDiff and is an extension.
+include("parameters.jl")
+export param_names, param_defaults, params_from, param_point, param_gradient
+
 # What Libxc keeps beside a functional rather than inside a kernel: the
 # exact-exchange fraction of a hybrid and the two VV10 constants. The table
 # itself is generated and included below, after the functionals it is keyed on.

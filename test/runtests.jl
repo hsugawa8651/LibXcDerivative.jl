@@ -20,4 +20,5 @@ using TOML
     include("manifest.jl")
     include("facts.jl")
     include("mixing.jl")
+    include("parameters.jl")
 end
