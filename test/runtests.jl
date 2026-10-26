@@ -11,6 +11,7 @@ using ForwardDiff
 using Libxc
 using NaNMath
 using SpecialFunctions
+using Symbolics
 using TOML
 using Zygote
 
@@ -35,5 +36,6 @@ using Zygote
     include("derivatives.jl")
     include("reverse.jl")
     include("dft_functionals.jl")
+    include("symbolic.jl")
     include("licence.jl")
 end
