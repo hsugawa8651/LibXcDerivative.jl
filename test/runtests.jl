@@ -23,4 +23,6 @@ using TOML
     include("parameters.jl")
     include("corrected_after_7_0_0.jl")
     include("agreement.jl")
+    include("sources.jl")
+    include("fallback.jl")
 end

@@ -29,6 +29,13 @@ export LambertW, xc_dilogarithm, xc_E1_scaled, xc_e1_scaled_G
 # both the test suite and the generator.
 include("tolerance.jl")
 
+# Libxc's output slots by name, for callers porting from its array interface.
+# Needs ForwardDiff, which is a weak dependency: the slot functions are the
+# only thing here that differentiates on the caller's behalf.
+include("slots.jl")
+export xc_exc_vxc, xc_fxc, xc_kxc, xc_lxc, slot_names, slot_widths
+export libxc_clamp
+
 # The parameters as a vector, for a caller fitting a functional rather than
 # evaluating one. `param_gradient` needs ForwardDiff and is an extension.
 include("parameters.jl")
