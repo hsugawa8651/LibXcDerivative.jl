@@ -19,4 +19,5 @@ using TOML
     include("generated_values.jl")
     include("manifest.jl")
     include("facts.jl")
+    include("mixing.jl")
 end

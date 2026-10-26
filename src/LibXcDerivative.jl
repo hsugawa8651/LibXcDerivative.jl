@@ -25,6 +25,10 @@ export xc_log1p, xc_expm1, xc_asinh, xc_atanh, xc_x_minus_log1p, atan2,
        BesselI, br89_x, mbrxc_x
 export LambertW, xc_dilogarithm, xc_E1_scaled, xc_e1_scaled_G
 
+# What Libxc keeps beside a functional rather than inside a kernel: the
+# exact-exchange fraction of a hybrid and the two VV10 constants. The table
+# itself is generated and included below, after the functionals it is keyed on.
+include("hybrids.jl")
 # What a caller has to know before it can call a functional: family, kind,
 # which arguments it reads, whether it has an energy. Generated table included
 # below. The accessors carry a libxc_ prefix where DftFunctionals.jl exports
@@ -34,6 +38,16 @@ export IdentifierFacts, identifier_facts, libxc_family, libxc_kind
 export has_exc, needs_tau, needs_laplacian, dft_functional
 export LibxcReference, IdentifierText, identifier_text, functional_name
 export libxc_flags, libxc_derivatives, libxc_references, available_identifiers
+# The four predicates Libxc.jl also exports (is_hybrid, is_range_separated,
+# is_global_hybrid, is_vv10) are deliberately NOT exported here: a caller
+# doing `using LibXcDerivative, Libxc`, which is exactly what someone porting
+# does, would then have to disambiguate every use of them. They are reachable
+# as LibXcDerivative.is_hybrid and friends. The rest of the surface does not
+# collide: Libxc.jl offers cam_alpha and the others as properties of a
+# Functional, not as functions of its own.
+export MixingParameters, mixing_parameters
+export exx_coefficient, cam_alpha, cam_beta, cam_omega, nlc_b, nlc_C
+export xc_hyb_exx_coef, xc_hyb_cam_coef
 
 # Which Libxc the expressions came from. The constants it reads are generated
 # and included below; the accessors are here.
@@ -59,7 +73,9 @@ end
 isfile(joinpath(GENERATED_DIR, "mixes.jl")) &&
     include(joinpath(GENERATED_DIR, "mixes.jl"))
 
-# Keyed on the functionals above, so it goes last.
+# Keyed on the functionals above and on the mix entry points, so it goes last.
+isfile(joinpath(GENERATED_DIR, "mixing_parameters.jl")) &&
+    include(joinpath(GENERATED_DIR, "mixing_parameters.jl"))
 isfile(joinpath(GENERATED_DIR, "identifier_facts.jl")) &&
     include(joinpath(GENERATED_DIR, "identifier_facts.jl"))
 isfile(joinpath(GENERATED_DIR, "identifier_text.jl")) &&
