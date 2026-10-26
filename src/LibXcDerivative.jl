@@ -42,6 +42,13 @@ for family in ("lda_exc", "lda_vxc", "gga_exc", "gga_vxc", "mgga_exc", "mgga_vxc
     end
 end
 
+# The functionals Libxc evaluates by mixing others, written as the weighted
+# sum of the kernels above. Included last because that is the order they read
+# in; Julia resolves the names they call when they are called, so the order
+# does not decide whether they work.
+isfile(joinpath(GENERATED_DIR, "mixes.jl")) &&
+    include(joinpath(GENERATED_DIR, "mixes.jl"))
+
 # The two constants src/source_version.jl hands out: which Libxc commit the
 # expressions were generated from, and what those sources call themselves.
 isfile(joinpath(GENERATED_DIR, "source_version.jl")) &&

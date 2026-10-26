@@ -2,4 +2,6 @@
 *.jl.*.cov
 *.jl.mem
 Manifest.toml
+# Tracked on purpose: the pattern above is matched without regard to case.
+!src/generated/manifest.toml
 /docs/build/

@@ -7,6 +7,7 @@ using Test
 using ForwardDiff
 using Libxc
 using SpecialFunctions
+using TOML
 
 @testset "LibXcDerivative.jl" begin
     include("piecewise.jl")
@@ -15,4 +16,6 @@ using SpecialFunctions
     include("generated_lda.jl")
     include("generated_gga.jl")
     include("generated_mgga.jl")
+    include("generated_values.jl")
+    include("manifest.jl")
 end
