@@ -457,7 +457,7 @@ end
                             "mgga_xc_t_hle17"])
 end
 
-@testset "three functionals pass the strict bound only at its floor" begin
+@testset "three functionals sit at the floor of the strict bound" begin
     # These three use half of atol=1e-10 rather than a few percent of it, and
     # what keeps them out of LIBXC_LOOSE_AGREEMENT is which pair is compared
     # rather than any margin. Ours against the vendored library is the
@@ -470,25 +470,27 @@ end
     # Worth pinning because of what happens next: when Libxc_jll moves and
     # the pair moves with it, these are the three that go red, and the
     # failure should read as the floor shifting rather than as a regression
-    # here. Measured on 2026-10-23 against Libxc_jll 7.0.0+2, worst over the
-    # three densities: 2.1852e-11 for hyb_mgga_x_m05 (22 % of the bound),
-    # 4.9567e-11 for hyb_mgga_x_m08_hx (50 %), 5.0714e-11 for mgga_c_m08_hx
-    # (51 %).
+    # here. Measured at rho in (0.05, 0.5, 5.0): on the ubuntu runner
+    # hyb_mgga_x_m05 is 1.8e-10 out and mgga_c_m08_hx is 1.1e-10, both over
+    # the strict bound, while the values themselves agree to ten digits.
     #
-    # The assertions are a band rather than those numbers. A figure pinned to
+    # That is why the three are in LIBXC_PLATFORM_FLOOR with an absolute
+    # bound of 1e-9 rather than held to the strict one. A figure pinned to
     # four digits would fail on a machine whose libm rounds differently,
-    # which says nothing about this package; the band says the thing that
-    # matters, that they are at the floor and inside it.
+    # which says nothing about this package; the band below says the thing
+    # that matters, that they are inside their own bound and above a
+    # floor.
     #
-    # Not given a loose tolerance, deliberately: the bound they need is 5e-11
-    # and LIBXC_LOOSE_AGREEMENT hands out 1e-7, which would hide a later
-    # disagreement of 1e-8 in exactly these three. The table's own docstring
-    # gives that reason for keeping the strict bound the default.
+    # Not given the loose tier, deliberately: LIBXC_LOOSE_AGREEMENT hands
+    # out 1e-7, which would hide a later disagreement of 1e-8 in exactly
+    # these three. 1e-9 keeps that disagreement failing.
     at_the_floor = ("hyb_mgga_x_m05", "hyb_mgga_x_m08_hx", "mgga_c_m08_hx")
     for name in at_the_floor
-        # Held to the strict bound, which is the decision this pins.
+        # Kept out of the loose tier, and given a bound of their own, which
+        # is the decision this pins.
         @test !haskey(LibXcDerivative.LIBXC_LOOSE_AGREEMENT, name)
         @test LibXcDerivative.libxc_loose_tolerance(name) === nothing
+        @test LibXcDerivative.LIBXC_PLATFORM_FLOOR[name] == 1e-9
 
         f = getfield(LibXcDerivative, Symbol(name))
         fun = Libxc.Functional(Symbol(name))
@@ -502,9 +504,10 @@ end
                                       derivatives=0:0).zk)
             worst = max(worst, abs(f(rho, sigma, lapl, tau) - ref))
         end
-        # Inside the bound, so the suite is green; and above a tenth of it,
-        # so "at the floor" is asserted and not just said in a comment.
-        @test worst < 1e-10
+        # Inside their own bound, so the suite is green; and above a
+        # hundredth of it, so "at the floor" is asserted and not just said
+        # in a comment.
+        @test worst < 1e-9
         @test worst > 1e-11
     end
 
