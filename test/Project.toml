@@ -1,7 +1,10 @@
 [deps]
+ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 LibXcDerivative = "b2323edf-4daf-44c3-8fba-2ea4f4c647cf"
 Libxc = "66e17ffc-8502-11e9-23b5-c9248d0eb96d"
+NaNMath = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"

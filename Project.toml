@@ -9,12 +9,15 @@ NaNMath = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [weakdeps]
+ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 
 [extensions]
+LibXcDerivativeChainRulesCoreExt = "ChainRulesCore"
 LibXcDerivativeForwardDiffExt = "ForwardDiff"
 
 [compat]
+ChainRulesCore = "1"
 ForwardDiff = "0.10, 1"
 NaNMath = "1.1.4"
 SpecialFunctions = "2.9.0"

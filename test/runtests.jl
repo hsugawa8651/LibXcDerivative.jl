@@ -4,10 +4,13 @@
 
 using LibXcDerivative
 using Test
+using ChainRulesCore
 using ForwardDiff
 using Libxc
+using NaNMath
 using SpecialFunctions
 using TOML
+using Zygote
 
 @testset "LibXcDerivative.jl" begin
     include("piecewise.jl")
@@ -28,5 +31,6 @@ using TOML
     include("clamp_guard.jl")
     include("sweeps.jl")
     include("derivatives.jl")
+    include("reverse.jl")
     include("licence.jl")
 end
