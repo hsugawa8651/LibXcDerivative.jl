@@ -25,6 +25,16 @@ export xc_log1p, xc_expm1, xc_asinh, xc_atanh, xc_x_minus_log1p, atan2,
        BesselI, br89_x, mbrxc_x
 export LambertW, xc_dilogarithm, xc_E1_scaled, xc_e1_scaled_G
 
+# What a caller has to know before it can call a functional: family, kind,
+# which arguments it reads, whether it has an energy. Generated table included
+# below. The accessors carry a libxc_ prefix where DftFunctionals.jl exports
+# the same word.
+include("identifiers.jl")
+export IdentifierFacts, identifier_facts, libxc_family, libxc_kind
+export has_exc, needs_tau, needs_laplacian, dft_functional
+export LibxcReference, IdentifierText, identifier_text, functional_name
+export libxc_flags, libxc_derivatives, libxc_references, available_identifiers
+
 # Which Libxc the expressions came from. The constants it reads are generated
 # and included below; the accessors are here.
 include("source_version.jl")
@@ -48,6 +58,12 @@ end
 # does not decide whether they work.
 isfile(joinpath(GENERATED_DIR, "mixes.jl")) &&
     include(joinpath(GENERATED_DIR, "mixes.jl"))
+
+# Keyed on the functionals above, so it goes last.
+isfile(joinpath(GENERATED_DIR, "identifier_facts.jl")) &&
+    include(joinpath(GENERATED_DIR, "identifier_facts.jl"))
+isfile(joinpath(GENERATED_DIR, "identifier_text.jl")) &&
+    include(joinpath(GENERATED_DIR, "identifier_text.jl"))
 
 # The two constants src/source_version.jl hands out: which Libxc commit the
 # expressions were generated from, and what those sources call themselves.
