@@ -25,6 +25,10 @@ export xc_log1p, xc_expm1, xc_asinh, xc_atanh, xc_x_minus_log1p, atan2,
        BesselI, br89_x, mbrxc_x
 export LambertW, xc_dilogarithm, xc_E1_scaled, xc_e1_scaled_G
 
+# What this package claims about how closely it reproduces Libxc, read by
+# both the test suite and the generator.
+include("tolerance.jl")
+
 # The parameters as a vector, for a caller fitting a functional rather than
 # evaluating one. `param_gradient` needs ForwardDiff and is an extension.
 include("parameters.jl")
