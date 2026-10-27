@@ -161,10 +161,20 @@ four. What the form does buy there is reachability rather than speed: one
 fourth-order slot of that functional returns in 194 to 298 s, where the whole
 tuple does not finish in twelve minutes.
 
-Once compiled, every one of these is microseconds, so the cost is
-compilation and nothing else. A caller who needs a particular functional and
-slot can therefore move it to their own build with `PrecompileTools`, and pay
-it once rather than once per session.
+Once compiled, every one of these is microseconds rather than seconds, but
+compilation is not the whole cost: above the first derivative these calls
+allocate. Measured on 2026-10-27 and alike under 1.10, 1.11 and 1.12, per
+point: 2064 bytes for an unpolarized third derivative of a meta-GGA, the same
+for each of the four measured, 5840 for `mgga_x_scan`'s fourth, 2720 for its
+spin-polarized second, and 1168 for a spin-polarized third derivative of
+`gga_x_pbe`. Under 1.11 and 1.12 the other orders above the first derivative
+are zero, as is everything at and below it, which is where the suite pins it;
+under 1.10 two of those others are not. What accounts for any of this is not
+established here, and `bench/allocation.jl` takes all of the figures again.
+
+A caller who needs a particular functional and slot can move the compilation
+to their own build with `PrecompileTools`, and pay it once rather than once
+per session.
 
 ## Above the order Libxc generates, for the kernels it caps
 
