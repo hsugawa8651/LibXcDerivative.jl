@@ -14,6 +14,19 @@
 lda_x_call(; rs, z, dens_threshold=1e-15, params_a_alpha=1.0, zeta_threshold=1e-15) =
     lda_x_energy(rs, z, dens_threshold, params_a_alpha, zeta_threshold)
 
+# At file scope and reading its input from an array, the way the sweep
+# helpers in test/sweeps.jl are written and for the same two reasons: a
+# function written in a testset body is a closure over that scope, and a
+# call on a literal is constant-folded, which would leave the figure below
+# measuring nothing.
+function call_pk09(r)
+    acc = 0.0
+    for i in eachindex(r)
+        acc += lda_c_pk09(r[i])
+    end
+    return acc
+end
+
 @testset "lda_x_energy matches the closed-form Dirac exchange energy density" begin
     # Unpolarized (z=0): epsilon_x(rs) = -(3/(4*pi)) * (9*pi/4)^(1/3) / rs,
     # with alpha=1 (standard LDA) and thresholds set far below any rs/z
@@ -178,12 +191,10 @@ end
     # The properties the NamedTuple form was chosen for, checked through
     # the generated entry point rather than on a hand-written stand-in.
     @test (@inferred lda_c_pk09(0.5)) isa Float64
-    # Measured inside a function on purpose: @allocated on a call written
-    # directly in a testset body reports the scope's own boxing, not the
-    # call's, and reads as a 16-byte allocation that is not there.
-    call_pk09() = lda_c_pk09(0.5)
-    call_pk09()
-    @test @allocated(call_pk09()) == 0
+    # Warmed first: the first call compiles, and a compile allocates.
+    rho_pk09 = collect(range(0.05, 5.0, length = 100))
+    call_pk09(rho_pk09)
+    @test (@allocated call_pk09(rho_pk09)) == 0
     @test ForwardDiff.derivative(lda_c_pk09, 0.5) isa Float64
 end
 
