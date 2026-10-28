@@ -271,12 +271,9 @@ end
         # of the package anyway, so "ok" is the expected status. One hold
         # is not of that kind: hyb_gga_xc_case21's own recorded reason
         # says its body references cbspline/xbspline, which the generator
-        # does not resolve, so it fails at printing. Its manifest entry
-        # read "ok" with an elapsed time of 25.7 s until the corpus was
-        # regenerated on 2026-10-09: a figure left from before the move
-        # to printing tightened which names a kernel may call. Named here
-        # rather than allowed in general, so a second hold that stops
-        # generating has to be looked at.
+        # does not resolve, so it fails at printing. Named here rather
+        # than allowed in general, so a second hold that stops generating
+        # has to be looked at.
         if (family, name) == ("gga_exc", "hyb_gga_xc_case21")
             @test entry["status"] == "failed"
         else
@@ -401,9 +398,8 @@ end
 end
 
 @testset "gga_x_wpbeh follows the correction made after 7.0.0" begin
-    # The one functional in Libxc that could not be generated here at
-    # all until 2026-10-09: four budgets ended in a kill, the last after
-    # four hours, and the cause was never the mathematics: Libxc's
+    # The one functional in Libxc that four budgets ended in a kill for,
+    # the last after four hours. The cause was not the mathematics: Libxc's
     # code generator differentiates every helper body eagerly to fourth
     # order, which this package pays for and throws away, and the hole
     # model's series is a body of a million operations. With the table

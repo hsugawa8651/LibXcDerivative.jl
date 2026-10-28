@@ -338,16 +338,15 @@ end
     @test (@allocated slot_sweep_mgga_spin(mgga_x_scan, rho, sigma, lapl, tau;
                                            enforce_fhc = false)) == 0
 
-    # And with the clamp in the way, which it is by default. This read 32
-    # bytes a point until 2026-10-24, from two causes that had to be
-    # removed together: `libxc_clamp` and the predicate inside it took the
-    # functional with no type annotation and never called it, so Julia
-    # compiled one generic instance for all functionals and looked the name
-    # up at run time, and the table lookup that predicate ended in returned
-    # a union of `Nothing` and a struct holding two `Symbol`s, which is not
-    # an `isbits` type and is therefore boxed. A type parameter alone took
-    # the predicate from 88 to 10 ns a point and kept the box; the lookup
-    # alone changed neither figure.
+    # And with the clamp in the way, which it is by default. Zero here
+    # needs two things removed together: `libxc_clamp` and the predicate
+    # inside it took the functional with no type annotation and never
+    # called it, so Julia compiled one generic instance for all functionals
+    # and looked the name up at run time, and the table lookup that
+    # predicate ended in returned a union of `Nothing` and a struct holding
+    # two `Symbol`s, which is not an `isbits` type and is therefore boxed.
+    # A type parameter alone took the predicate from 88 to 10 ns a point
+    # and kept the box; the lookup alone changed neither figure.
     slot_sweep_mgga(mgga_x_scan, rho, sigma, lapl, tau)
     @test (@allocated slot_sweep_mgga(mgga_x_scan, rho, sigma, lapl, tau)) == 0
 

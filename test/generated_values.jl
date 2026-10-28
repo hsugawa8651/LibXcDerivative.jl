@@ -181,13 +181,11 @@ end
 end
 
 @testset "three more follow the corrections made after 7.0.0" begin
-    # These three sat held from 2026-10-06 as "disagrees with the pinned
-    # library" by 36 %, 4.7 % and 1.1e-6, with three hypotheses spent on
-    # the first. The reason named the wrong library: the comparison ran
-    # against the 7.0.0 Libxc.jl vendors, and against the pinned 7.1.2
-    # they were generated from all three agree to 5e-16 or better. What
-    # settled it was putting both libraries in the same table rather than
-    # looking for a mechanism.
+    # These three differ from the 7.0.0 Libxc.jl vendors by 36 %, 4.7 %
+    # and 1.1e-6, and agree with the pinned 7.1.2 they were generated
+    # from to 5e-16 or better. A reason that does not name which library
+    # it was measured against cannot tell those two apart, which is what
+    # putting both in the same table is for.
     #
     # References from the pinned 7.1.2 build (2026-10-08, sigma = 0.1 rho,
     # lapl = 0.05 rho, tau = 0.3 rho, unpolarized).

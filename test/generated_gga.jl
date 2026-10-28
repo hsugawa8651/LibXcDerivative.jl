@@ -96,8 +96,7 @@ end
 # x2,x1)`), so no new Julia registration should be needed: deep_inline
 # flattens them into ordinary my_piecewise3 calls like everything else.
 #
-# Scope, precisely (tightened after review, codex:rescue 2026-09-03:
-# the original wording overclaimed this): `pbepow_f0_large`'s
+# Scope, precisely: `pbepow_f0_large`'s
 # "instability" for small s2 is a *precision-loss* concern (as s2 -> 0+,
 # kappa/(m*mu*s2) -> +Inf, xc_log1p(+Inf) = +Inf, xc_expm1(-Inf) = -1:
 # a well-defined finite limit in plain IEEE double arithmetic, not a
@@ -118,9 +117,7 @@ end
     # (pbepow_s2_cut = 1); X2S = (1/2)*(6*pi^2)^(-1/3)
     # (python/libxc_codegen.py:92). Solving xs0(rho, sigma)'s own definition
     # for the sigma that lands exactly on s2 = 1, rather than a
-    # hand-picked round sigma value that only approximately brackets it
-    # (flagged in review: none of the previous sigma choices actually
-    # hit the boundary despite the testset's name claiming they did).
+    # hand-picked round sigma value that only approximately brackets it.
     X2S = (1 / 2) * (6π^2)^(-1 / 3)
     ρ0 = 0.1
     xs0_at_cut = 1 / X2S
