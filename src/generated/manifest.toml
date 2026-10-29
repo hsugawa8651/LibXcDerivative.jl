@@ -1,6 +1,6 @@
 # Generated functionals: what was produced, from which upstream
 # commit, and in what positional argument order. Written by
-# the generator -- do not edit by hand.
+# gen/generate.jl -- do not edit by hand.
 generated_at = "2026-10-13T10:33:26"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 upstream_version = "7.1.2"
