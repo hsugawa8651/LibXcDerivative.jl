@@ -30,13 +30,29 @@
             has_notice(f) || push!(missing_header, relpath(f, root))
         end
     end
-    # The generator is not shipped here. Where it is present it is under the
-    # same licence and audited with the rest, as the README's reason covers it
-    # too: it transcribes constants from util.h.
-    if isdir(joinpath(root, "gen"))
-        for f in readdir(joinpath(root, "gen"); join=true)
-            (endswith(f, ".jl") || endswith(f, ".py") || endswith(f, ".c")) || continue
-            has_notice(f) || push!(missing_header, relpath(f, root))
+    # The generator and the reference-comparison scripts are under the same
+    # licence and audited with the rest, as the README's reason covers them
+    # too: the generator transcribes constants from util.h. Both are
+    # tracked, so an installed copy carries them; the guard is there so
+    # that a directory which is absent is skipped rather than raising.
+    #
+    # Walked down rather than read one directory deep, so that a file put in
+    # a subdirectory of its own is checked as well. gen/libxc-upstream is
+    # left out: it is Libxc's own tree under Libxc's own notice, and this
+    # package's notice does not belong in it. A directory named build is left
+    # out for the same reason: it holds what that tree was compiled into.
+    is_source(p) = endswith(p, ".jl") || endswith(p, ".py") || endswith(p, ".c")
+    for top in ("gen", "reftest")
+        isdir(joinpath(root, top)) || continue
+        queue = [joinpath(root, top)]
+        while !isempty(queue)
+            for e in readdir(popfirst!(queue); join=true)
+                if isdir(e)
+                    basename(e) in ("libxc-upstream", "build") || push!(queue, e)
+                elseif is_source(e)
+                    has_notice(e) || push!(missing_header, relpath(e, root))
+                end
+            end
         end
     end
     @test isempty(missing_header)

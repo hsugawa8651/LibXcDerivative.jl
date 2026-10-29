@@ -73,6 +73,14 @@ On the ubuntu runner hyb_mgga_x_m05 is 1.8e-10 out and mgga_c_m08_hx is
 ten digits. 1e-9 is five times the larger of those, one bound for the three
 rather than one fitted to each; another machine may move it, and moving it
 is this one line.
+
+Moving it moves more than the suite. `agrees_with_libxc` is also what
+`reftest/test_corrections.jl` uses to decide whether two libraries differ,
+and these three names are there under `AT_THE_FLOOR` because this bound is
+what makes them agree. That script is not run by the suite or in CI, so
+widening or dropping an entry here leaves it failing with nothing to
+report it; `reftest/README.md` lists the other tables it reads for the
+same reason.
 """
 const LIBXC_PLATFORM_FLOOR = Dict(
     "hyb_mgga_x_m05" => 1e-9,

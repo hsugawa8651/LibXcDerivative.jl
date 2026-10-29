@@ -133,9 +133,25 @@ reach into code that merely uses this package.
 Libxc is copyright M. A. L. Marques and the other authors listed in its own
 `AUTHORS`. Its sources are not redistributed here.
 
-## What is not in this release
+## Generating
 
-The generator that produced the expressions, and the tools that compare them
-against a build of Libxc, are not part of this release. What ships is the
-generated functionals, the hand-written surface around them, and the test
-suite.
+`gen/` is tracked in this repository and comes along with it, but nothing in
+it is loaded: `using LibXcDerivative` reads `src/` and the extensions only,
+and `gen/` has an environment of its own whose dependencies, PyCall above
+all, are not this package's. It is here so that the expressions in
+`src/generated/`, which no one wrote by hand, can be read next to the scripts
+that wrote them.
+
+Running it needs Python with SymPy (through PyCall), CMake, and a C compiler,
+and Libxc's own sources, which are not tracked here. The generator reads them
+from `gen/libxc-upstream`, a directory git ignores, so a copy installed with
+`Pkg.add` has the generator's scripts without the sources they read:
+regenerating means cloning Libxc into that directory at the commit
+`src/generated/manifest.toml` names. See `gen/README.md` for the workflow and
+for what is known not to work yet.
+
+Verifying is separate and cheaper. `reftest/` compares the shipped kernels
+against a build of the pinned sources and imports no PyCall, so a Python
+install that has stopped working does not stop anyone checking what is
+shipped; it still needs that clone and a C toolchain, because it builds
+Libxc to compare against.

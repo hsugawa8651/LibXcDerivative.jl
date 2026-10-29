@@ -259,8 +259,24 @@ One functional also genuinely disagrees: `mgga_x_2d_prhg07_prp10` is computed
 as a different function by the library `Libxc.jl` vendors. This package
 follows the pinned sources.
 
-## The generator and the reference-comparison tools are not here
+## The generator ships, but cannot be run from an installed copy
 
-The generator and the reference-comparison tools are not part of this
-release. What ships is the expressions, the manifest that records which Libxc
-they came from, and the suite that holds them to it.
+`gen/` is in the repository and tracked, so `Pkg.add` brings it along with
+everything else. What it is not is part of the *loaded* package: `using
+LibXcDerivative` reads `src/` and the extensions and nothing else, and `gen/`
+has an environment of its own whose dependencies, PyCall above all, are not
+this package's. It is here to be read against `src/generated/`, not to be
+run as part of using the package.
+
+Running it needs Python with SymPy through PyCall, CMake, a C compiler, and
+Libxc's own sources, which are **not tracked here**. The generator reads
+them from `gen/libxc-upstream`, a directory git ignores, so an installed
+copy has the generator's scripts and not the sources they read:
+regenerating means cloning Libxc into that directory at the commit
+`src/generated/manifest.toml` names.
+
+Verifying is a separate matter and deliberately cheaper. `reftest/` compares
+the shipped kernels against a build of the pinned sources and imports no
+PyCall, so a Python install that has stopped working does not stop anyone
+checking what is shipped. It still needs that clone and a C toolchain,
+because it builds Libxc to compare against.

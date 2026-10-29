@@ -5,3 +5,6 @@ Manifest.toml
 # Tracked on purpose: the pattern above is matched without regard to case.
 !src/generated/manifest.toml
 /docs/build/
+/gen/build/
+/gen/__pycache__/
+/gen/libxc-upstream/
