@@ -9,10 +9,10 @@ Generated kernels call it for every square root, because
 `Symbolics.build_function` lowers `sqrt` to it.
 
 For `Float64`, NaNMath 1.1.4 takes the square root with the LLVM intrinsic
-directly (`src/NaNMath.jl:60`). Zygote cannot differentiate through an
-intrinsic, and ChainRules has no rules for NaNMath, so without these a
-gradient of any kernel with a square root stops there. ForwardDiff is
-unaffected: it uses DiffRules, which does have NaNMath's rules.
+directly (`NaNMath/src/NaNMath.jl:60`). Zygote cannot differentiate
+through an intrinsic, and ChainRules has no rules for NaNMath, so without
+these a gradient of any kernel with a square root stops there. ForwardDiff
+is unaffected: it uses DiffRules, which does have NaNMath's rules.
 
 The rules are those of `Base.sqrt`, with NaN in place of a `DomainError`
 below zero, as for the value, and with two edges stated outright: a zero

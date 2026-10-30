@@ -73,8 +73,8 @@ is_hybrid(f) = mixing_parameters(f).hybrid
 Return whether `f` splits its exact exchange by range.
 
 Decided by Libxc's range-separation flags (`XC_FLAGS_HYB_CAM`, `_CAMY`,
-`_LC`, `_LCY`, `src/hybrids.c:20-32`) and not by the name:
-`hyb_gga_xc_pbeh` is a hybrid that is not range-separated, and
+`_LC`, `_LCY`, `libxc-upstream/src/hybrids.c:20-32`) and not by the
+name: `hyb_gga_xc_pbeh` is a hybrid that is not range-separated, and
 `hyb_gga_x_pbe_erf_gws` is one that is.
 """
 is_range_separated(f) = (p = mixing_parameters(f); p.hybrid && p.range_separated)
@@ -165,8 +165,9 @@ nlc_C(f::Union{Function,Symbol}) = (p = mixing_parameters(f); p.vv10 ? p.nlc_C :
 
 Return `cam_alpha` as Libxc's own accessor does, with no policy applied.
 
-Named after `src/hybrids.c:63`. Zero for a functional that has no hybrid
-parameters, which is the number `xc_func_type` holds for one.
+Named after `libxc-upstream/src/hybrids.c:63`. Zero for a functional
+that has no hybrid parameters, which is the number `xc_func_type` holds
+for one.
 
 Use `exx_coefficient` to be told, instead, when the quantity does not apply.
 """
@@ -177,9 +178,10 @@ xc_hyb_exx_coef(f::Union{Function,Symbol}) = mixing_parameters(f).cam_alpha
 
 Return `omega`, `alpha` and `beta` as Libxc's other accessor does.
 
-Named after `src/hybrids.c:70`, which fills three `double *` out parameters
-there and returns the three values here in that same order. Plain reads of
-`cam_omega`, `cam_alpha` and `cam_beta`, with no policy applied.
+Named after `libxc-upstream/src/hybrids.c:70`, which fills three `double *`
+out parameters there and returns the three values here in that same order.
+Plain reads of `cam_omega`, `cam_alpha` and `cam_beta`, with no policy
+applied.
 """
 function xc_hyb_cam_coef(f::Union{Function,Symbol})
     p = mixing_parameters(f)

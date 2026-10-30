@@ -218,8 +218,8 @@ The names follow Libxc's rule rather than a transcribed list: for order `n`,
 the multisets of `(rho, sigma, lapl, tau)` in lexicographic order, each
 variable followed by its multiplicity where that is above one: `v3rho2sigma`,
 `v3rhosigmalapl`, `v4rho2lapltau`. The rule reproduces every `v3`/`v4` name
-Libxc's `src/xc.h` declares, 66 of them, and the suite checks that
-against the header rather than against a copy of it.
+Libxc's `libxc-upstream/src/xc.h` declares, 66 of them, and the suite checks
+that against the header rather than against a copy of it.
 
 Each is a derivative of `rho * zk`, as the lower slots are, taken with
 `ForwardDiff` on the one expression this package ships. Libxc generates C for

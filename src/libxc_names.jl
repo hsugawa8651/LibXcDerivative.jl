@@ -21,11 +21,11 @@ would `log1p`/`expm1` directly, with no custom rule to get wrong. The tests
 check both; other AD systems are not tested.
 
 `xc_log1p` passes through to `NaNMath.log1p` rather than Base's. Libxc
-defines it as the C library's `log1p` (`src/util.h:347`), which returns NaN
-below -1; Base's throws a `DomainError` there. Generated kernels select
-branches with `ifelse`, which evaluates the discarded branch too, so a throw
-there would stop an evaluation that Libxc completes. `expm1` is defined on
-all reals and needs no such care.
+defines it as the C library's `log1p` (`libxc-upstream/src/util.h:347`),
+which returns NaN below -1; Base's throws a `DomainError` there. Generated
+kernels select branches with `ifelse`, which evaluates the discarded branch
+too, so a throw there would stop an evaluation that Libxc completes. `expm1`
+is defined on all reals and needs no such care.
 """
 xc_log1p(x) = NaNMath.log1p(x)
 
@@ -46,11 +46,11 @@ xc_expm1(x) = expm1(x)
 Return `asinh(x)`, under the name Libxc's kernels call it by.
 
 Libxc renames it only so its code
-generator emits a direct `asinh()` call (`src/util.h:348` is literally
-`#define xc_asinh(x) asinh((double)(x))`), so this is a pass-through like
-`xc_log1p`/`xc_expm1`, and `python/libxc_codegen.py`'s `fdiff` for it
-(`1/sqrt(1 + y^2)`) is exactly `asinh`'s own derivative, so no custom rule is
-needed. Used by `lda_x_rel`.
+generator emits a direct `asinh()` call (`libxc-upstream/src/util.h:348` is
+literally `#define xc_asinh(x) asinh((double)(x))`), so this is a
+pass-through like `xc_log1p`/`xc_expm1`, and `python/libxc_codegen.py`'s
+`fdiff` for it (`1/sqrt(1 + y^2)`) is exactly `asinh`'s own derivative, so no
+custom rule is needed. Used by `lda_x_rel`.
 """
 xc_asinh(x) = asinh(x)
 
@@ -116,9 +116,9 @@ That is the `x` solving
     x * exp(-2x/3) = rhs * (x - 2),    rhs = (2/3) * pi^(2/3) / Q
 
 which Libxc obtains with Brent's method over a bracket chosen from the sign
-of `rhs` (`xc_mgga_x_br89_get_x`, `src/mgga_x_br89.c:49`). `Q` below the
-tolerance C tests against returns 2 exactly, the value the equation
-degenerates to.
+of `rhs` (`xc_mgga_x_br89_get_x`, `libxc-upstream/src/mgga_x_br89.c:49`).
+`Q` below the tolerance C tests against returns 2 exactly, the value the
+equation degenerates to.
 
 Solved by Newton rather than by bisection, for the reason `LambertW` is: a
 bracketing method decides with comparisons, which carry no derivative, and
@@ -153,7 +153,8 @@ That is the `x` solving
     (1 + x)^(5/3) * exp(-2x/3) = rhs * (x - 3),   rhs = (32*pi)^(2/3) / (6Q)
 
 for the modified Becke-Roussel exchange (`xc_mgga_x_mbrxc_get_x`,
-`src/mgga_x_mbrxc_bg.c:24`), by Newton for the reason `br89_x` is.
+`libxc-upstream/src/mgga_x_mbrxc_bg.c:24`), by Newton for the
+reason `br89_x` is.
 
 The lower bracket is -1 rather than 0, which is where `(1 + x)^(5/3)`
 vanishes; the power is written through `cbrt` so that it stays real for every
@@ -183,7 +184,8 @@ Used by `lda_c_pk09`'s Q_3ud. A pass-through like [`xc_asinh`](@ref):
 `atanh`'s own derivative.
 
 To `NaNMath.atanh`, for the reason given for `xc_log1p`: Libxc's is the C
-library's `atanh` (`src/util.h:349`), NaN for `|x| > 1`, where Base's throws.
+library's `atanh` (`libxc-upstream/src/util.h:349`), NaN for `|x| > 1`, where
+Base's throws.
 """
 xc_atanh(x) = NaNMath.atanh(x)
 
@@ -202,11 +204,11 @@ Written directly, `x - log1p(x)` subtracts two nearly equal quantities at
 small `x` to produce a result of order `x^2/2`.
 
 This is **not** a pass-through: Libxc implements it as a real function
-(`src/util.c:39`), switching to the Taylor series for `|x| < 0.25` and
-falling back to the direct evaluation outside that regime. That branch
-structure is ported here rather than simplified away, because writing
-`x - log1p(x)` directly would silently lose the precision this function
-exists to preserve.
+(`libxc-upstream/src/util.c:39`), switching to the Taylor series for
+`|x| < 0.25` and falling back to the direct evaluation outside that
+regime. That branch structure is ported here rather than simplified
+away, because writing `x - log1p(x)` directly would silently lose the
+precision this function exists to preserve.
 
 Written branchlessly with `ifelse` for the same reason `my_piecewise3` is: a
 branch taken on a value does not survive being traced into straight-line
@@ -252,20 +254,22 @@ Libxc gives it a name of its own because the two factors leave the range of a
 double long before their product does: at `x = 30` the naive form is
 `exp(900) * 0`, which is `Inf * 0` and so `NaN`, while the function it stands
 for is perfectly ordinary there and decays like `1/(x*sqrt(pi))`. Libxc
-carries Steven G. Johnson's Faddeeva routine for it (`src/faddeeva.c`); here
-it is a pass-through to `SpecialFunctions.erfcx`, which agrees with a
-higher-precision reference to rounding.
+carries Steven G. Johnson's Faddeeva routine for it
+(`libxc-upstream/src/faddeeva.c`); here it is a pass-through to
+`SpecialFunctions.erfcx`, which agrees with a higher-precision reference to
+rounding.
 
 `gga_x_wpbeh` is what needs it: the omega-PBE exchange hole is built out of
 it, and that kernel is the one Libxc functional whose generation stops for a
 missing name rather than for anything about the mathematics.
 
 No derivative rule of its own. Libxc declares four
-(`xc_erfcx_jet`, `xc_erfcx_d1` .. `_d4`, `src/util.h:393-398`) because its C
-path has to emit each order as a function it can call; `libxc_codegen`'s
-`fdiff` for the first is `2*y*xc_erfcx(y) - 2/sqrt(pi)`, which is what
-`SpecialFunctions` differentiates by as well, so ForwardDiff and Zygote both
-reproduce it and the second order with it.
+(`xc_erfcx_jet`, `xc_erfcx_d1` .. `_d4`,
+`libxc-upstream/src/util.h:393-398`) because its C path has to emit each
+order as a function it can call; `libxc_codegen`'s `fdiff` for the first is
+`2*y*xc_erfcx(y) - 2/sqrt(pi)`, which is what `SpecialFunctions`
+differentiates by as well, so ForwardDiff and Zygote both reproduce it and
+the second order with it.
 """
 xc_erfcx(x) = erfcx(x)
 
@@ -276,10 +280,11 @@ Return the principal branch of the Lambert W function.
 
 The `w` with `w exp(w) = z`, for `z >= -1/e`. Used by `gga_x_am05`.
 
-Ported from Libxc's `src/special_functions.c:20`, which adapts Rickard
-Armiento's Fortran, following Corless, Gonnet, Hare, Jeffrey and Knuth,
-*Adv. in Comp. Math.* **5**(4):329-359 (1996): a series for small `z`, one of
-three initial guesses, then Halley's iteration, which converges cubically.
+Ported from Libxc's `libxc-upstream/src/special_functions.c:20`, which adapts
+Rickard Armiento's Fortran, following Corless, Gonnet, Hare, Jeffrey and
+Knuth, *Adv. in Comp. Math.* **5**(4):329-359 (1996): a series for small `z`,
+one of three initial guesses, then Halley's iteration, which converges
+cubically.
 
 Outside the domain Libxc prints and calls `abort()`. Here the answer is `NaN`,
 for the reason given for `xc_log1p`: generated kernels select branches with
@@ -319,8 +324,8 @@ end
 Chebyshev coefficients for Spence's function.
 
 Transcribed from Libxc's
-`src/special_functions.c:136` (`spencs`), which takes them from the SLATEC
-routine by W. Fullerton.
+`libxc-upstream/src/special_functions.c:136` (`spencs`), which takes them
+from the SLATEC routine by W. Fullerton.
 """
 const _SPENCE_COEFFS = (
     0.1527365598892405872946684910028e+0, 0.8169658058051014403501838185271e-1,
@@ -361,9 +366,9 @@ end
 
 Return the dilogarithm `Li_2(x) = -\\int_0^x log(1 - t)/t dt`, real argument.
 
-Ported from Libxc's `src/special_functions.c:181`, which follows the SLATEC
-routine by W. Fullerton: six ranges, each reduced to the same Chebyshev
-series by a functional equation. Used by `gga_x_gg99`.
+Ported from Libxc's `libxc-upstream/src/special_functions.c:181`, which
+follows the SLATEC routine by W. Fullerton: six ranges, each reduced to the
+same Chebyshev series by a functional equation. Used by `gga_x_gg99`.
 
 Its derivative, `-log(1 - x)/x`, is what `libxc_codegen` emits for it, and
 differentiating this port gives the same thing; Libxc carries no derivative
@@ -405,9 +410,9 @@ end
 """
 Chebyshev coefficients for the exponential integral `E1`, one table per range.
 
-Transcribed from Libxc's `src/expint_e1.c:28` (`AE11_data` through
-`AE14_data`), which takes them from the SLATEC routine by W. Fullerton via
-the GSL.
+Transcribed from Libxc's `libxc-upstream/src/expint_e1.c:28` (`AE11_data`
+through `AE14_data`), which takes them from the SLATEC routine by W.
+Fullerton via the GSL.
 """
 const _AE11 = (
     0.121503239716065790, -0.065088778513550150, 0.004897651357459670,
@@ -486,14 +491,14 @@ const _AE14 = (
 Return `exp(x) E1(x)`, the exponential integral scaled so it stays finite.
 
 Libxc's `xc_E1_scaled`, which is `xc_expint_e1_impl(x, 1)`
-(`src/util.h:334`).
-Forming `exp(x)` and `E1(x)` separately would overflow and underflow long
-before their product, which only decays like `1/x`, becomes small. For
-negative `x` the value is the Cauchy principal value. Used by `gga_c_ft97`.
+(`libxc-upstream/src/util.h:334`). Forming `exp(x)` and `E1(x)` separately
+would overflow and underflow long before their product, which only decays
+like `1/x`, becomes small. For negative `x` the value is the Cauchy
+principal value. Used by `gga_c_ft97`.
 
-Ported from `src/expint_e1.c:85`, keeping its six Chebyshev ranges. At the
-origin `E1` diverges; Libxc prints there and returns zero, while this returns
-the limit, `Inf`.
+Ported from `libxc-upstream/src/expint_e1.c:85`, keeping its six Chebyshev
+ranges. At the origin `E1` diverges; Libxc prints there and returns zero,
+while this returns the limit, `Inf`.
 
 Its derivative is `exp(x) E1(x) - 1/x`, which is what `libxc_codegen` emits
 for it (`python/libxc_codegen.py:801`), and differentiating this port gives

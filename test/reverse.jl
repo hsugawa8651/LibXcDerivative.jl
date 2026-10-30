@@ -4,11 +4,11 @@
 
 @testset "Zygote differentiates NaNMath.sqrt and the kernels that use it" begin
     # NaNMath.sqrt calls the LLVM intrinsic directly for Float64
-    # (NaNMath.jl 1.1.4, src/NaNMath.jl:60), which Zygote cannot see
-    # through, and ChainRules has no rules for NaNMath. Generated kernels
-    # take every square root through it, 307 calls, so without the rules
-    # the extension defines a gradient of one of them stops with
-    # "Non-differentiable function Core.Intrinsics.sqrt_llvm", while
+    # (NaNMath.jl 1.1.4, NaNMath/src/NaNMath.jl:60), which Zygote cannot
+    # see through, and ChainRules has no rules for NaNMath. Generated
+    # kernels take every square root through it, 307 calls, so without
+    # the rules the extension defines a gradient of one of them stops
+    # with "Non-differentiable function Core.Intrinsics.sqrt_llvm", while
     # ForwardDiff, which has DiffRules' NaNMath rules, returns a number.
     for x in (0.3, 4.0)
         @test only(Zygote.gradient(NaNMath.sqrt, x)) ≈ 1 / (2 * sqrt(x)) rtol=1e-15
@@ -67,7 +67,8 @@ end
 
 @testset "LambertW solves w exp(w) = z, and differentiates" begin
     # The references are from the pinned 7.1.2 build (2026-09-20), which
-    # ports Rickard Armiento's Fortran (src/special_functions.c:20).
+    # ports Rickard Armiento's Fortran
+    # (libxc-upstream/src/special_functions.c:20).
     refs = ((-0.3140862435046707, -0.5377777364075198),   # sqrt/Taylor switch
             (-0.1, -0.11183255915896298),
             (-1e-6, -1.0000010000015e-6),                 # series branch
@@ -112,8 +113,9 @@ end
 
 @testset "xc_dilogarithm matches the pinned libxc on every branch" begin
     # References from the pinned 7.1.2 build (2026-09-20). The points
-    # cover all six branches of src/special_functions.c:181, including
-    # the ones that only differ past FLT_RADIX/DBL_EPSILON ~ 9e15.
+    # cover all six branches of
+    # libxc-upstream/src/special_functions.c:181, including the ones
+    # that only differ past FLT_RADIX/DBL_EPSILON ~ 9e15.
     refs = ((-1e17, -767.7692110309767),
             (-1e3, -25.502475813889966),
             (-1.0, -0.8224670334241131),
@@ -159,7 +161,7 @@ end
     # exp(x) E1(x), which stays finite where exp(x), and E1(x) separately
     # overflow and underflow. References from the pinned 7.1.2 build
     # (2026-09-20); the points cover all six Chebyshev ranges of
-    # src/expint_e1.c:85, on both sides of the origin.
+    # libxc-upstream/src/expint_e1.c:85, on both sides of the origin.
     refs = ((-20.0, -0.05279779527964813),
             (-10.0, -0.1131470204734108),
             (-6.0, -0.2131473100815936),
@@ -200,10 +202,11 @@ end
 
 @testset "xc_erfcx is the scaled complementary error function" begin
     # exp(x^2) * erfc(x), which Libxc gives a name of its own
-    # (src/faddeeva.c, Steven G. Johnson's port of Faddeeva) because the
-    # two factors overflow and underflow long before their product does.
-    # gga_x_wpbeh is what needs it: the omega-PBE exchange hole is built
-    # out of it, and the kernel cannot be printed without it.
+    # (libxc-upstream/src/faddeeva.c, Steven G. Johnson's port of
+    # Faddeeva) because the two factors overflow and underflow long
+    # before their product does. gga_x_wpbeh is what needs it: the
+    # omega-PBE exchange hole is built out of it, and the kernel cannot
+    # be printed without it.
     #
     # A pass-through to SpecialFunctions.erfcx, which this package
     # already depends on for erf and erfc.
@@ -243,10 +246,11 @@ end
     # that ratio times eps rather than staying at eps.
     #
     # This is why Libxc ships hand-written derivatives for this function
-    # and calls them cancellation-free (xc_erfcx_jet, src/util.h:393).
-    # A caller differentiating through xc_erfcx at large argument gets
-    # the naive rule and should know it; the gate here is that the loss
-    # is bounded by the cancellation and no worse.
+    # and calls them cancellation-free (xc_erfcx_jet,
+    # libxc-upstream/src/util.h:393). A caller differentiating through
+    # xc_erfcx at large argument gets the naive rule and should know it;
+    # the gate here is that the loss is bounded by the cancellation and
+    # no worse.
     for x in (0.5, 2.0, 4.0, 8.0, 30.0)
         exact = 2 * big(x) * exp(big(x)^2) * erfc(big(x)) - 2 / sqrt(big(pi))
         cancellation = max(abs(2x * xc_erfcx(x)), 2 / sqrt(pi)) / abs(Float64(exact))

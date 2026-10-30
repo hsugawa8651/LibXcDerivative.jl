@@ -3,11 +3,12 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 @testset "xc_log1p and xc_atanh return NaN outside their domain, as in C" begin
-    # Libxc defines both as the C library functions (src/util.h:347,349),
-    # which return NaN outside the domain. Base's log1p and atanh throw a
-    # DomainError there instead. Generated kernels select branches with
-    # ifelse, which evaluates the branch it discards too, so a throw
-    # there stopped a whole evaluation that Libxc completes.
+    # Libxc defines both as the C library functions
+    # (libxc-upstream/src/util.h:347,349), which return NaN outside the
+    # domain. Base's log1p and atanh throw a DomainError there instead.
+    # Generated kernels select branches with ifelse, which evaluates the
+    # branch it discards too, so a throw there stopped a whole evaluation
+    # that Libxc completes.
     @test isnan(xc_log1p(-2.0))
     @test isnan(xc_atanh(1.5))
     @test isnan(xc_atanh(-1.5))
@@ -62,13 +63,14 @@ end
 
 @testset "xc_x_minus_log1p keeps full precision where the direct form cancels" begin
     # xc_x_minus_log1p is the one Libxc-renamed function ported here as a
-    # real implementation rather than a pass-through (src/util.c:39): at
-    # small x, `x - log1p(x)` subtracts two nearly equal quantities to
-    # produce a result of order x^2/2, and loses most of its significant
-    # digits doing so. This checks the ported Taylor branch actually buys
-    # that precision back, against a BigFloat reference: writing
-    # `x - log1p(x)` and calling it done would pass a Libxc cross-check at
-    # ordinary densities while being badly wrong here.
+    # real implementation rather than a pass-through
+    # (libxc-upstream/src/util.c:39): at small x, `x - log1p(x)` subtracts
+    # two nearly equal quantities to produce a result of order x^2/2, and
+    # loses most of its significant digits doing so. This checks the
+    # ported Taylor branch actually buys that precision back, against a
+    # BigFloat reference: writing `x - log1p(x)` and calling it done would
+    # pass a Libxc cross-check at ordinary densities while being badly
+    # wrong here.
     exact(x) = Float64(big(x) - log1p(big(x)))
 
     for x in (1e-10, 1e-8, 1e-6, 1e-3, 0.1, -0.1, -0.2)

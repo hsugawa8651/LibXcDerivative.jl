@@ -189,11 +189,12 @@ functional_name(f::Union{Function,Symbol}) = identifier_text(f).name
 
 Return every flag Libxc sets for `f`, as symbols.
 
-The names are the ones Libxc gives each bit (`src/xc.h:54-80`): `:have_exc`,
-`:dim3`, `:needs_tau`, `:hyb_cam`, `:development` and the rest.
-[`identifier_facts`](@ref) picks five of these out as fields; this is the
-whole set. Read it only if those five are not enough: three of the twenty
-bits do not say what they appear to, as below.
+The names are the ones Libxc gives each bit
+(`libxc-upstream/src/xc.h:54-80`): `:have_exc`, `:dim3`, `:needs_tau`,
+`:hyb_cam`, `:development` and the rest. [`identifier_facts`](@ref) picks
+five of these out as fields; this is the whole set. Read it only if those
+five are not enough: three of the twenty bits do not say what they appear
+to, as below.
 
 Read from a `MAXORDER=4` build of the pinned sources, as
 [`libxc_derivatives`](@ref) is. Five of the twenty bits are the
@@ -214,13 +215,13 @@ fails a test.
 Three of the eight are not facts about the functional:
 
   * `:on_host` and `:on_device` come from a default in Libxc's
-    `src/func_info.c:14-16`, chosen by whether the library was built with
-    CUDA or HIP. Libxc does support both (`-DENABLE_CUDA`, `-DENABLE_HIP`,
-    with `GPU_FUNCTION` compiling the kernels for the device and
-    `work_lda_inc.c` branching on these bits at run time), but the pinned
-    build has neither, so **every** functional here carries `:on_host` and
-    none carries `:on_device`. That says nothing about which functionals
-    Libxc can run on a GPU.
+    `libxc-upstream/src/func_info.c:14-16`, chosen by whether the library
+    was built with CUDA or HIP. Libxc does support both (`-DENABLE_CUDA`,
+    `-DENABLE_HIP`, with `GPU_FUNCTION` compiling the kernels for the
+    device and `work_lda_inc.c` branching on these bits at run time), but
+    the pinned build has neither, so **every** functional here carries
+    `:on_host` and none carries `:on_device`. That says nothing about
+    which functionals Libxc can run on a GPU.
   * `:enforce_fhc` is carried by all 697, down to the LDAs, which have no
     `tau` to form a Fermi hole curvature from. `functionals.c:355` ORs the
     bit into every functional as it is initialised, under `#ifdef

@@ -105,8 +105,9 @@ end
 @testset "three lda_exc functionals with a screening parameter match Libxc.jl" begin
     # The screening parameters are Libxc's own defaults, which is what
     # Libxc.Functional hands the C code being compared against:
-    # 0.3 for pmgb06 (src/lda_c_pmgb06.c:22) and 0.5 for pw_erf
-    # (src/lda_c_pw_erf.c:26). w20 takes no external parameters.
+    # 0.3 for pmgb06 (libxc-upstream/src/lda_c_pmgb06.c:22) and 0.5
+    # for pw_erf (libxc-upstream/src/lda_c_pw_erf.c:26). w20 takes no
+    # external parameters.
     zt = 1e-15
 
     cases = (

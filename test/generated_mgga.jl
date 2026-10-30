@@ -5,9 +5,9 @@
 @testset "br89_x inverts Becke-Roussel's equation, and differentiates" begin
     # x(Q) solves x*exp(-2x/3) = rhs*(x - 2) with rhs = (2/3)*pi^(2/3)/Q,
     # which Libxc gets from Brent's method (xc_mgga_x_br89_get_x,
-    # src/mgga_x_br89.c:49). References from the pinned 7.1.2 build
-    # (2026-10-06), spanning both brackets: Q < 0 puts the root below 2
-    # and Q > 0 above it.
+    # libxc-upstream/src/mgga_x_br89.c:49). References from the pinned
+    # 7.1.2 build (2026-10-06), spanning both brackets: Q < 0 puts the
+    # root below 2 and Q > 0 above it.
     refs = ((-10.0, 0.29685329933267046),
             (-1.0, 1.6151991380209472),
             (-0.1, 1.962911639826339),
@@ -56,9 +56,10 @@ end
     # The same shape as br89_x one equation over: x solves
     # (1 + x)^(5/3) * exp(-2x/3) = rhs * (x - 3) with
     # rhs = (32*pi)^(2/3)/(6Q) (xc_mgga_x_mbrxc_get_x,
-    # src/mgga_x_mbrxc_bg.c:24). References from the pinned 7.1.2 build
-    # (2026-10-06); the lower bracket reaches -1, where (1 + x)^(5/3)
-    # vanishes, so the negative side is sampled down to Q = -100.
+    # libxc-upstream/src/mgga_x_mbrxc_bg.c:24). References from the
+    # pinned 7.1.2 build (2026-10-06); the lower bracket reaches -1,
+    # where (1 + x)^(5/3) vanishes, so the negative side is sampled
+    # down to Q = -100.
     refs = ((-100.0, -0.778603526239921),
             (-10.0, 0.060476953413372225),
             (-1.0, 2.5840069078333863),

@@ -159,9 +159,10 @@ mgga_variables
 ## 7. Libxc's mathematical functions
 
 Libxc's kernels call helpers under Libxc's own spellings, declared in
-Libxc's `src/util.h` rather than in its public `xc.h`. This package's kernels call them
-under the same names, so they are exported under the same names, which is also
-what makes a generated file readable next to the `.py` it came from.
+Libxc's `libxc-upstream/src/util.h` rather than in its public `xc.h`. This
+package's kernels call them under the same names, so they are exported under
+the same names, which is also what makes a generated file readable next to the
+`.py` it came from.
 
 ```@docs
 xc_log1p

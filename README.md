@@ -122,9 +122,9 @@ That is not confined to the generated files, though they are the clearest case:
 each one says in its own header which upstream source it was translated from.
 The hand-written parts are transcriptions too: `src/variables.jl` follows
 `libxc_codegen.py`'s definitions of the reduced variables, `src/libxc_names.jl`
-ports `xc_x_minus_log1p` from `src/util.c` including the Taylor branch that
-makes it accurate, and `src/my_piecewise.jl` mirrors Libxc's own piecewise
-semantics.
+ports `xc_x_minus_log1p` from `libxc-upstream/src/util.c` including the Taylor
+branch that makes it accurate, and `src/my_piecewise.jl` mirrors Libxc's own
+piecewise semantics.
 
 Licensing the package as a whole under MPL-2.0 avoids having to draw and then
 maintain a line between those. MPL-2.0's copyleft is per file and does not

@@ -308,8 +308,9 @@ end
     # check is what says the decomposed output is still the right
     # function, not just a faster-to-produce one.
     # cam_omega = 0.3 is Libxc's own default for both screened
-    # functionals (src/lda_x_erf.c:26, src/lda_x_yukawa.c:24); the
-    # threshold values mirror the lda_x reference test above.
+    # functionals (libxc-upstream/src/lda_x_erf.c:26,
+    # libxc-upstream/src/lda_x_yukawa.c:24); the threshold values mirror
+    # the lda_x reference test above.
     zt, dt, ω = 1e-15, 1e-15, 0.3
 
     cases = (
@@ -440,8 +441,8 @@ end
 
     # The screening parameter is what the HSE family varies, and the
     # kernel takes it where Libxc keeps it, as cam_omega. Libxc's own
-    # default is zero (src/gga_x_wpbeh.c:46), which is the value HSE's
-    # first term uses.
+    # default is zero (libxc-upstream/src/gga_x_wpbeh.c:46), which is
+    # the value HSE's first term uses.
     @test LibXcDerivative.gga_x_wpbeh_defaults.cam_omega == 0.0
     # Screening removes the long-range part of exchange, so the energy
     # density loses magnitude: -0.527 at omega = 0.11 against -0.587 at
@@ -465,8 +466,8 @@ end
     # you that HSEsol wants a quarter of its exchange short-range exact,
     # screened at omega = 0.11. Libxc answers that from xc_func_type
     # rather than from any kernel (xc_hyb_exx_coef and xc_hyb_cam_coef,
-    # src/hybrids.c:63-77), and a caller that evaluates through this
-    # package instead had nowhere to ask.
+    # libxc-upstream/src/hybrids.c:63-77), and a caller that evaluates
+    # through this package instead had nowhere to ask.
     #
     # The numbers are read from the pinned library at generation time, so
     # these are the library's values rather than a paper's.
@@ -541,7 +542,8 @@ end
     @test LibXcDerivative.exx_coefficient(:hyb_gga_xc_hse06) === nothing
     # HSE03 keeps the two screening parameters the 2003 paper actually
     # used, omega_HF = 0.15/sqrt(2); HSE06 is where they were set equal
-    # (src/hyb_gga_xc_hse.c:31-44). The one Libxc reports is omega_HF.
+    # (libxc-upstream/src/hyb_gga_xc_hse.c:31-44). The one Libxc
+    # reports is omega_HF.
     @test LibXcDerivative.cam_omega(:hyb_gga_xc_hse03) ≈ 0.15 / sqrt(2) rtol=1e-12
     @test LibXcDerivative.cam_omega(:hyb_gga_xc_hse03) !=
           LibXcDerivative.cam_omega(:hyb_gga_xc_hse06)
