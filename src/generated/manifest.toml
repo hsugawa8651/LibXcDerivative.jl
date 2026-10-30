@@ -1,7 +1,7 @@
 # Generated functionals: what was produced, from which upstream
 # commit, and in what positional argument order. Written by
 # gen/generate.jl -- do not edit by hand.
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 upstream_version = "7.1.2"
 
@@ -6668,8 +6668,8 @@ variants = ["gga_x_lbm"]
 [lda_exc.hyb_lda_xc_bn05]
 argnames = ["rs", "z"]
 args = ["rs", "z", "cam_omega", "zeta_threshold"]
-elapsed_s = 4.2
-generated_at = "2026-10-09T20:05:52"
+elapsed_s = 11.2
+generated_at = "2026-10-30T13:55:12"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6696,8 +6696,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_1d_css]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_ferro_0", "params_a_ferro_1", "params_a_ferro_2", "params_a_ferro_3", "params_a_ferro_4", "params_a_ferro_5", "params_a_ferro_6", "params_a_ferro_7", "params_a_ferro_8", "params_a_ferro_9", "params_a_para_0", "params_a_para_1", "params_a_para_2", "params_a_para_3", "params_a_para_4", "params_a_para_5", "params_a_para_6", "params_a_para_7", "params_a_para_8", "params_a_para_9"]
-elapsed_s = 4.4
-generated_at = "2026-10-13T10:32:57"
+elapsed_s = 13.7
+generated_at = "2026-10-30T13:55:26"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6724,8 +6724,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_1d_loos]
 argnames = ["rs", "z"]
 args = ["rs", "z"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:06:00"
+elapsed_s = 13.3
+generated_at = "2026-10-30T13:55:40"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6752,8 +6752,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_2d_amgb]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:06:04"
+elapsed_s = 10.5
+generated_at = "2026-10-30T13:55:51"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6780,8 +6780,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_2d_prm]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_c"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:06:08"
+elapsed_s = 11.6
+generated_at = "2026-10-30T13:56:03"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6808,8 +6808,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_chachiyo]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_af", "params_a_ap", "params_a_bf", "params_a_bp", "params_a_cf", "params_a_cp", "zeta_threshold"]
-elapsed_s = 3.9
-generated_at = "2026-10-09T20:06:12"
+elapsed_s = 8.8
+generated_at = "2026-10-30T13:56:12"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6846,8 +6846,8 @@ variants = ["lda_c_karasiev"]
 [lda_exc.lda_c_chachiyo_mod]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_af", "params_a_ap", "params_a_bf", "params_a_bp", "params_a_cf", "params_a_cp", "zeta_threshold"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:06:16"
+elapsed_s = 8.2
+generated_at = "2026-10-30T13:56:20"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6884,8 +6884,8 @@ variants = ["lda_c_karasiev_mod"]
 [lda_exc.lda_c_epc17]
 argnames = ["rs", "z"]
 args = ["rs", "z", "dens_threshold", "params_a_a", "params_a_b", "params_a_c", "zeta_threshold"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:06:19"
+elapsed_s = 10.0
+generated_at = "2026-10-30T13:56:30"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6922,8 +6922,8 @@ variants = ["lda_c_epc17_2"]
 [lda_exc.lda_c_epc18]
 argnames = ["rs", "z"]
 args = ["rs", "z", "dens_threshold", "params_a_a", "params_a_b", "params_a_c", "zeta_threshold"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:06:23"
+elapsed_s = 8.9
+generated_at = "2026-10-30T13:56:40"
 required = ["params_a_a", "params_a_b", "params_a_c"]
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6960,8 +6960,8 @@ variants = ["lda_c_epc18_1", "lda_c_epc18_2"]
 [lda_exc.lda_c_gk72]
 argnames = ["rs", "z"]
 args = ["rs", "z"]
-elapsed_s = 3.5
-generated_at = "2026-10-09T20:06:27"
+elapsed_s = 6.3
+generated_at = "2026-10-30T13:56:46"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -6988,8 +6988,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_gombas]
 argnames = ["rs", "z"]
 args = ["rs", "z"]
-elapsed_s = 3.6
-generated_at = "2026-10-09T20:06:31"
+elapsed_s = 5.6
+generated_at = "2026-10-30T13:56:52"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7016,8 +7016,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_hl]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_hl_c_0", "params_a_hl_c_1", "params_a_hl_r_0", "params_a_hl_r_1", "zeta_threshold"]
-elapsed_s = 3.9
-generated_at = "2026-10-09T20:06:34"
+elapsed_s = 5.6
+generated_at = "2026-10-30T13:56:58"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7063,8 +7063,8 @@ variants = ["lda_c_gl", "lda_c_vbh"]
 [lda_exc.lda_c_lp96]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_C1", "params_a_C2", "params_a_C3", "params_a_C4"]
-elapsed_s = 3.9
-generated_at = "2026-10-09T20:06:38"
+elapsed_s = 4.7
+generated_at = "2026-10-30T13:57:03"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7119,8 +7119,8 @@ variants = ["lda_c_lp96_b", "lda_k_lp96", "lda_k_lp96_b"]
 [lda_exc.lda_c_ml1]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_fc", "params_a_q", "zeta_threshold"]
-elapsed_s = 3.9
-generated_at = "2026-10-09T20:06:42"
+elapsed_s = 6.2
+generated_at = "2026-10-30T13:57:09"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7157,8 +7157,8 @@ variants = ["lda_c_ml2"]
 [lda_exc.lda_c_pk09]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 5.6
-generated_at = "2026-10-09T20:06:48"
+elapsed_s = 8.9
+generated_at = "2026-10-30T13:57:18"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7184,8 +7184,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_pmgb06]
 argnames = ["rs", "z"]
 args = ["rs", "z", "cam_omega", "zeta_threshold"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:06:52"
+elapsed_s = 5.5
+generated_at = "2026-10-30T13:57:24"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7212,8 +7212,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_pw]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_a_0", "params_a_a_1", "params_a_a_2", "params_a_alpha1_0", "params_a_alpha1_1", "params_a_alpha1_2", "params_a_beta1_0", "params_a_beta1_1", "params_a_beta1_2", "params_a_beta2_0", "params_a_beta2_1", "params_a_beta2_2", "params_a_beta3_0", "params_a_beta3_1", "params_a_beta3_2", "params_a_beta4_0", "params_a_beta4_1", "params_a_beta4_2", "params_a_fz20", "params_a_pp_0", "params_a_pp_1", "params_a_pp_2", "zeta_threshold"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:06:56"
+elapsed_s = 5.4
+generated_at = "2026-10-30T13:57:30"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7286,8 +7286,8 @@ variants = ["lda_c_ob_pw", "lda_c_pw_mod", "lda_c_pw_rpa", "lda_c_rpw92", "lda_c
 [lda_exc.lda_c_pw_erf]
 argnames = ["rs", "z"]
 args = ["rs", "z", "cam_omega", "zeta_threshold"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:07:00"
+elapsed_s = 4.7
+generated_at = "2026-10-30T13:57:34"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7314,8 +7314,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_pz]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_a_0", "params_a_a_1", "params_a_b_0", "params_a_b_1", "params_a_beta1_0", "params_a_beta1_1", "params_a_beta2_0", "params_a_beta2_1", "params_a_c_0", "params_a_c_1", "params_a_d_0", "params_a_d_1", "params_a_gamma_0", "params_a_gamma_1", "zeta_threshold"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:07:03"
+elapsed_s = 5.2
+generated_at = "2026-10-30T13:57:40"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7361,8 +7361,8 @@ variants = ["lda_c_ob_pz", "lda_c_pz_mod"]
 [lda_exc.lda_c_rc04]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.6
-generated_at = "2026-10-09T20:07:07"
+elapsed_s = 7.7
+generated_at = "2026-10-30T13:57:48"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7389,8 +7389,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_rpa]
 argnames = ["rs", "z"]
 args = ["rs", "z"]
-elapsed_s = 3.6
-generated_at = "2026-10-09T20:07:11"
+elapsed_s = 4.4
+generated_at = "2026-10-30T13:57:52"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7417,8 +7417,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_rpaf]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.9
-generated_at = "2026-10-09T20:07:15"
+elapsed_s = 5.5
+generated_at = "2026-10-30T13:57:58"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7445,8 +7445,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_vwn]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.6
-generated_at = "2026-10-09T20:07:18"
+elapsed_s = 4.9
+generated_at = "2026-10-30T13:58:03"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7473,8 +7473,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_vwn_1]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:07:22"
+elapsed_s = 5.5
+generated_at = "2026-10-30T13:58:08"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7501,8 +7501,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_vwn_2]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:07:26"
+elapsed_s = 4.9
+generated_at = "2026-10-30T13:58:14"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7529,8 +7529,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_vwn_3]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.8
-generated_at = "2026-10-09T20:07:30"
+elapsed_s = 4.9
+generated_at = "2026-10-30T13:58:19"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7557,8 +7557,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_vwn_4]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:07:34"
+elapsed_s = 5.1
+generated_at = "2026-10-30T13:58:24"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7585,8 +7585,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_vwn_rpa]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 4.0
-generated_at = "2026-10-09T20:07:38"
+elapsed_s = 4.7
+generated_at = "2026-10-30T13:58:29"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7613,8 +7613,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_w20]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 4.3
-generated_at = "2026-10-09T20:07:42"
+elapsed_s = 4.7
+generated_at = "2026-10-30T13:58:34"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7641,8 +7641,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_c_wigner]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_a", "params_a_b"]
-elapsed_s = 4.1
-generated_at = "2026-10-09T20:07:46"
+elapsed_s = 4.7
+generated_at = "2026-10-30T13:58:39"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7733,8 +7733,8 @@ variants = ["lda_c_bj89", "lda_c_br78", "lda_c_mcweeny", "lda_c_ow", "lda_c_ow_l
 [lda_exc.lda_k_tf]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_ax", "zeta_threshold"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:07:50"
+elapsed_s = 4.8
+generated_at = "2026-10-30T13:58:44"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7771,8 +7771,8 @@ variants = ["lda_k_lp"]
 [lda_exc.lda_k_zlp]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.6
-generated_at = "2026-10-09T20:07:54"
+elapsed_s = 4.5
+generated_at = "2026-10-30T13:58:48"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7799,8 +7799,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_x]
 argnames = ["rs", "z"]
 args = ["rs", "z", "dens_threshold", "params_a_alpha", "zeta_threshold"]
-elapsed_s = 3.6
-generated_at = "2026-10-09T20:07:57"
+elapsed_s = 4.4
+generated_at = "2026-10-30T13:58:53"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7845,14 +7845,14 @@ variants = ["lda_c_xalpha", "lda_x_rae"]
 
 [lda_exc.lda_x_1d_exponential]
 elapsed_s = 0.0
-generated_at = "2026-10-09T20:07:57"
-message = "int1/int2 are runtime numerical quadrature (xc_integrate, src/lda_x_1d_exponential.c:32), not a closed form; supporting it needs a quadrature layer this package does not have"
+generated_at = "2026-10-30T13:58:53"
+message = "int1/int2 are runtime numerical quadrature (xc_integrate, libxc-upstream/src/lda_x_1d_exponential.c:32), not a closed form; supporting it needs a quadrature layer this package does not have"
 status = "skipped"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
 [lda_exc.lda_x_1d_soft]
 elapsed_s = 0.0
-generated_at = "2026-10-09T20:07:57"
+generated_at = "2026-10-30T13:58:53"
 message = "int1/int2 are runtime numerical quadrature (xc_integrate), not a closed form; the derivative path additionally needs Bessel K0/K1"
 status = "skipped"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7860,8 +7860,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_x_2d]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:08:01"
+elapsed_s = 5.4
+generated_at = "2026-10-30T13:58:59"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7888,8 +7888,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_x_erf]
 argnames = ["rs", "z"]
 args = ["rs", "z", "cam_omega", "zeta_threshold"]
-elapsed_s = 4.3
-generated_at = "2026-10-09T20:08:06"
+elapsed_s = 5.0
+generated_at = "2026-10-30T13:59:04"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7926,8 +7926,8 @@ variants = ["hyb_lda_x_erf"]
 [lda_exc.lda_x_rel]
 argnames = ["rs", "z"]
 args = ["rs", "z", "dens_threshold", "zeta_threshold"]
-elapsed_s = 4.1
-generated_at = "2026-10-09T20:08:10"
+elapsed_s = 5.0
+generated_at = "2026-10-30T13:59:09"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7954,8 +7954,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_x_sloc]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_a", "params_a_b", "zeta_threshold"]
-elapsed_s = 4.0
-generated_at = "2026-10-09T20:08:14"
+elapsed_s = 5.0
+generated_at = "2026-10-30T13:59:14"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -7992,8 +7992,8 @@ variants = ["lda_x_t_sloc"]
 [lda_exc.lda_x_yukawa]
 argnames = ["rs", "z"]
 args = ["rs", "z", "cam_omega", "zeta_threshold"]
-elapsed_s = 4.1
-generated_at = "2026-10-09T20:08:18"
+elapsed_s = 5.7
+generated_at = "2026-10-30T13:59:20"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -8020,8 +8020,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_xc_1d_ehwlrg]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_a1", "params_a_a2", "params_a_a3", "params_a_alpha"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:08:22"
+elapsed_s = 5.9
+generated_at = "2026-10-30T13:59:26"
 required = ["params_a_a1", "params_a_a2", "params_a_a3", "params_a_alpha"]
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -8067,8 +8067,8 @@ variants = ["lda_xc_1d_ehwlrg_1", "lda_xc_1d_ehwlrg_2", "lda_xc_1d_ehwlrg_3"]
 [lda_exc.lda_xc_ksdt]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_T", "params_a_b_0__0", "params_a_b_0__1", "params_a_b_0__2", "params_a_b_0__3", "params_a_b_0__4", "params_a_b_1__0", "params_a_b_1__1", "params_a_b_1__2", "params_a_b_1__3", "params_a_b_1__4", "params_a_c_0__0", "params_a_c_0__1", "params_a_c_0__2", "params_a_c_1__0", "params_a_c_1__1", "params_a_c_1__2", "params_a_d_0__0", "params_a_d_0__1", "params_a_d_0__2", "params_a_d_0__3", "params_a_d_0__4", "params_a_d_1__0", "params_a_d_1__1", "params_a_d_1__2", "params_a_d_1__3", "params_a_d_1__4", "params_a_e_0__0", "params_a_e_0__1", "params_a_e_0__2", "params_a_e_0__3", "params_a_e_0__4", "params_a_e_1__0", "params_a_e_1__1", "params_a_e_1__2", "params_a_e_1__3", "params_a_e_1__4", "params_a_thetaParam", "zeta_threshold"]
-elapsed_s = 4.7
-generated_at = "2026-10-09T20:08:27"
+elapsed_s = 7.3
+generated_at = "2026-10-30T13:59:33"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -8114,8 +8114,8 @@ variants = ["lda_xc_corrksdt", "lda_xc_gdsmfb"]
 [lda_exc.lda_xc_teter93]
 argnames = ["rs", "z"]
 args = ["rs", "z", "zeta_threshold"]
-elapsed_s = 3.6
-generated_at = "2026-10-09T20:08:30"
+elapsed_s = 4.9
+generated_at = "2026-10-30T13:59:39"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -8142,8 +8142,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_xc_th_fl]
 argnames = ["rs", "z"]
 args = ["rs", "z", "params_a_omega_0", "params_a_omega_1", "params_a_omega_2", "params_a_omega_3"]
-elapsed_s = 3.7
-generated_at = "2026-10-09T20:08:34"
+elapsed_s = 5.4
+generated_at = "2026-10-30T13:59:44"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -8170,8 +8170,8 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [lda_exc.lda_xc_zlp]
 argnames = ["rs", "z"]
 args = ["rs", "z"]
-elapsed_s = 3.4
-generated_at = "2026-10-09T20:08:38"
+elapsed_s = 7.0
+generated_at = "2026-10-30T13:59:51"
 required = []
 status = "ok"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
@@ -21961,7 +21961,7 @@ variants = ["mgga_x_bj06", "mgga_x_rpp09"]
 [mix.gga_x_kgg99]
 components = [[-0.05050908122584938, "lda_x"], [1.0, "gga_x_gg99"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_x_kgg99.overrides]]
@@ -21970,7 +21970,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_x_optpbe_vdw]
 components = [[0.945268, "gga_x_pbe"], [0.054732, "gga_x_rpbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_x_optpbe_vdw.overrides]]
@@ -21983,7 +21983,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_x_revssb_d]
 components = [[-1.0, "lda_x"], [1.0, "gga_x_ssb_sw"], [1.0, "gga_x_kt1"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_x_revssb_d.overrides]]
@@ -21999,7 +21999,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_x_sogga]
 components = [[0.5, "gga_x_pbe"], [0.5, "gga_x_rpbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_x_sogga.overrides]]
@@ -22012,7 +22012,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_x_ssb]
 components = [[-1.0, "lda_x"], [1.0, "gga_x_ssb_sw"], [1.0, "gga_x_kt1"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_x_ssb.overrides]]
@@ -22028,7 +22028,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_x_ssb_d]
 components = [[-1.0, "lda_x"], [1.0, "gga_x_ssb_sw"], [1.0, "gga_x_kt1"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_x_ssb_d.overrides]]
@@ -22044,7 +22044,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_beefvdw]
 components = [[1.0, "gga_x_beefvdw"], [0.6001664769, "lda_c_pw_mod"], [0.3998335231, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_beefvdw.overrides]]
@@ -22054,7 +22054,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_edf1]
 components = [[-0.9228179999999995, "lda_x"], [10.4017, "gga_x_b88"], [-8.44793, "gga_x_b88"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_edf1.overrides]]
@@ -22070,7 +22070,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_kt1]
 components = [[1.0, "gga_x_kt1"], [1.0, "lda_c_vwn"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_kt1.overrides]]
@@ -22079,7 +22079,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_kt2]
 components = [[0.07173000000000007, "lda_x"], [1.0, "gga_x_kt1"], [0.576727, "lda_c_vwn"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_kt2.overrides]]
@@ -22089,7 +22089,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_kt3]
 components = [[-0.5877016340967667, "lda_x"], [0.864409, "gga_c_lyp"], [1.0, "gga_x_kt1"], [0.6464052972361336, "gga_x_optx"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_kt3.overrides]]
@@ -22101,7 +22101,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_mohlyp]
 components = [[1.0, "gga_x_optx"], [0.5, "lda_c_vwn"], [0.5, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_mohlyp.overrides]]
@@ -22113,7 +22113,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_mohlyp2]
 components = [[1.0, "gga_x_optx"], [0.5, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_mohlyp2.overrides]]
@@ -22123,7 +22123,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_mpwlyp1w]
 components = [[0.12, "lda_c_vwn"], [1.0, "gga_x_mpw91"], [0.88, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_mpwlyp1w.overrides]]
@@ -22133,7 +22133,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_ncap]
 components = [[1.0, "gga_x_ncap"], [1.0, "gga_c_p86"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_ncap.overrides]]
@@ -22142,7 +22142,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_oblyp_d]
 components = [[1.0, "gga_x_b88"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_oblyp_d.overrides]]
@@ -22156,7 +22156,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_opbe_d]
 components = [[1.0, "gga_x_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_opbe_d.overrides]]
@@ -22168,7 +22168,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_opwlyp_d]
 components = [[1.0, "gga_x_mpw91"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_opwlyp_d.overrides]]
@@ -22187,7 +22187,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_pbe1w]
 components = [[0.26, "lda_c_vwn"], [1.0, "gga_x_pbe"], [0.74, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_pbe1w.overrides]]
@@ -22197,7 +22197,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_pbelyp1w]
 components = [[0.26, "lda_c_vwn"], [1.0, "gga_x_pbe"], [0.74, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_pbelyp1w.overrides]]
@@ -22207,7 +22207,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_vv10]
 components = [[1.0, "gga_x_rpw86"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_vv10.overrides]]
@@ -22216,7 +22216,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.gga_xc_xlyp]
 components = [[-0.06899999999999995, "lda_x"], [0.722, "gga_x_b88"], [0.347, "gga_x_pw91"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.gga_xc_xlyp.overrides]]
@@ -22227,7 +22227,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_apbe0]
 components = [[0.75, "gga_x_apbe"], [1.0, "gga_c_apbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_apbe0.overrides]]
@@ -22236,7 +22236,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_apf]
 components = [[0.03288000000000003, "lda_x"], [0.29591999999999996, "gga_x_b88"], [0.07808999999999998, "lda_c_pw"], [0.33291, "gga_c_pw91"], [0.44175, "gga_x_pbe"], [0.589, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_apf.overrides]]
@@ -22249,7 +22249,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b1lyp]
 components = [[0.75, "gga_x_b88"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b1lyp.overrides]]
@@ -22258,7 +22258,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b1pw91]
 components = [[0.75, "gga_x_b88"], [1.0, "gga_c_pw91"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b1pw91.overrides]]
@@ -22267,7 +22267,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b1wc]
 components = [[0.84, "gga_x_wc"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b1wc.overrides]]
@@ -22276,7 +22276,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3lyp]
 components = [[0.08000000000000007, "lda_x"], [0.72, "gga_x_b88"], [0.18999999999999995, "lda_c_vwn_rpa"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3lyp.overrides]]
@@ -22287,7 +22287,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3lyp3]
 components = [[0.08000000000000007, "lda_x"], [0.72, "gga_x_b88"], [0.18999999999999995, "lda_c_vwn_3"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3lyp3.overrides]]
@@ -22298,7 +22298,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3lyp5]
 components = [[0.08000000000000007, "lda_x"], [0.72, "gga_x_b88"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3lyp5.overrides]]
@@ -22309,7 +22309,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3lyp_mcm1]
 components = [[0.1319999999999999, "lda_x"], [0.6709, "gga_x_b88"], [-0.17790000000000006, "lda_c_vwn_rpa"], [1.1383, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3lyp_mcm1.overrides]]
@@ -22320,7 +22320,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3lyp_mcm2]
 components = [[0.07900000000000007, "lda_x"], [0.729, "gga_x_b88"], [0.016799999999999926, "lda_c_vwn_rpa"], [0.9421, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3lyp_mcm2.overrides]]
@@ -22331,7 +22331,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3lyps]
 components = [[0.13, "lda_x"], [0.72, "gga_x_b88"], [0.18999999999999995, "lda_c_vwn_rpa"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3lyps.overrides]]
@@ -22342,7 +22342,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3p86]
 components = [[0.08000000000000007, "lda_x"], [0.72, "gga_x_b88"], [0.18999999999999995, "lda_c_vwn_rpa"], [0.81, "gga_c_p86"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3p86.overrides]]
@@ -22353,7 +22353,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3p86_nwchem]
 components = [[0.08, "lda_x"], [0.72, "gga_x_b88"], [1.0, "lda_c_vwn_rpa"], [0.81, "gga_c_p86"], [-0.81, "lda_c_pz"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3p86_nwchem.overrides]]
@@ -22365,7 +22365,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b3pw91]
 components = [[0.08000000000000007, "lda_x"], [0.72, "gga_x_b88"], [0.18999999999999995, "lda_c_pw"], [0.81, "gga_c_pw91"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b3pw91.overrides]]
@@ -22376,7 +22376,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_b5050lyp]
 components = [[0.08000000000000002, "lda_x"], [0.42, "gga_x_b88"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_b5050lyp.overrides]]
@@ -22387,7 +22387,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_bhandh]
 components = [[0.5, "lda_x"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_bhandh.overrides]]
@@ -22396,7 +22396,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_bhandhlyp]
 components = [[0.5, "gga_x_b88"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_bhandhlyp.overrides]]
@@ -22405,7 +22405,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_blyp35]
 components = [[0.65, "gga_x_b88"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_blyp35.overrides]]
@@ -22414,7 +22414,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cam_b3lyp]
 components = [[0.35, "gga_x_b88"], [0.46, "gga_x_ityh"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cam_b3lyp.overrides]]
@@ -22426,7 +22426,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cam_o3lyp]
 components = [[0.07100691700000006, "lda_x_erf"], [0.8133, "gga_x_ityh_optx"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cam_o3lyp.overrides]]
@@ -22439,7 +22439,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cam_pbeh]
 components = [[0.8, "gga_x_pbe"], [-0.8, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cam_pbeh.overrides]]
@@ -22450,7 +22450,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cam_qtp_00]
 components = [[0.08999999999999997, "gga_x_b88"], [0.37, "gga_x_ityh"], [0.19999999999999996, "lda_c_vwn"], [0.8, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cam_qtp_00.overrides]]
@@ -22462,7 +22462,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cam_qtp_01]
 components = [[0.0, "gga_x_b88"], [0.77, "gga_x_ityh"], [0.19999999999999996, "lda_c_vwn"], [0.8, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cam_qtp_01.overrides]]
@@ -22474,7 +22474,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cam_qtp_02]
 components = [[0.0, "gga_x_b88"], [0.72, "gga_x_ityh"], [0.0, "lda_c_vwn"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cam_qtp_02.overrides]]
@@ -22486,7 +22486,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_camh_b3lyp]
 components = [[0.5, "gga_x_b88"], [0.31, "gga_x_ityh"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_camh_b3lyp.overrides]]
@@ -22498,7 +22498,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_camy_b3lyp]
 components = [[0.35, "gga_x_b88"], [0.46, "gga_x_sfat"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_camy_b3lyp.overrides]]
@@ -22510,7 +22510,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_camy_blyp]
 components = [[0.0, "gga_x_b88"], [0.8, "gga_x_sfat"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_camy_blyp.overrides]]
@@ -22520,7 +22520,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_camy_pbeh]
 components = [[0.8, "gga_x_pbe"], [-0.8, "gga_x_sfat"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_camy_pbeh.overrides]]
@@ -22531,7 +22531,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cap0]
 components = [[0.75, "gga_x_cap"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cap0.overrides]]
@@ -22541,7 +22541,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_cqtp25]
 components = [[0.0, "gga_x_b88"], [0.4948, "gga_x_ityh"], [0.4102, "lda_c_vwn"], [0.5898, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_cqtp25.overrides]]
@@ -22553,7 +22553,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_edf2]
 components = [[0.2811, "lda_x"], [0.6227, "gga_x_b88"], [-0.0551, "gga_x_b88"], [0.3029, "lda_c_vwn"], [0.5998, "gga_c_lyp"], [-0.0053, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_edf2.overrides]]
@@ -22571,7 +22571,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hapbe]
 components = [[0.8, "gga_x_apbe"], [0.8, "gga_c_apbe"], [0.2, "gga_c_zvpbeloc"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hapbe.overrides]]
@@ -22581,7 +22581,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hflyp]
 components = [[1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hflyp.overrides]]
@@ -22589,7 +22589,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hjs_b88]
 components = [[1.0, "gga_x_hjs_b88"], [-0.25, "gga_x_hjs_b88"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hjs_b88.overrides]]
@@ -22600,7 +22600,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hjs_b97x]
 components = [[1.0, "gga_x_hjs_b97x"], [-0.25, "gga_x_hjs_b97x"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hjs_b97x.overrides]]
@@ -22611,7 +22611,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hjs_pbe]
 components = [[1.0, "gga_x_hjs_pbe"], [-0.25, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hjs_pbe.overrides]]
@@ -22622,7 +22622,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hjs_pbe_sol]
 components = [[1.0, "gga_x_hjs_pbe_sol"], [-0.25, "gga_x_hjs_pbe_sol"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hjs_pbe_sol.overrides]]
@@ -22633,7 +22633,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hpbeint]
 components = [[0.8333333333333334, "gga_x_pbeint"], [1.0, "gga_c_pbeint"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hpbeint.overrides]]
@@ -22642,7 +22642,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hse03]
 components = [[1.0, "gga_x_wpbeh"], [-0.25, "gga_x_wpbeh"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hse03.overrides]]
@@ -22653,7 +22653,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hse06]
 components = [[1.0, "gga_x_wpbeh"], [-0.25, "gga_x_wpbeh"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hse06.overrides]]
@@ -22664,7 +22664,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hse12]
 components = [[1.0, "gga_x_wpbeh"], [-0.313, "gga_x_wpbeh"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hse12.overrides]]
@@ -22675,7 +22675,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hse12s]
 components = [[1.0, "gga_x_wpbeh"], [-0.425, "gga_x_wpbeh"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hse12s.overrides]]
@@ -22686,7 +22686,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_hse_sol]
 components = [[1.0, "gga_x_hjs_pbe_sol"], [-0.25, "gga_x_hjs_pbe_sol"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_hse_sol.overrides]]
@@ -22697,7 +22697,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_kmlyp]
 components = [[0.44299999999999995, "lda_x"], [0.552, "lda_c_vwn_rpa"], [0.448, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_kmlyp.overrides]]
@@ -22707,7 +22707,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lb07]
 components = [[0.9, "lda_x_erf"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lb07.overrides]]
@@ -22717,7 +22717,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_blyp]
 components = [[1.0, "gga_x_ityh"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_blyp.overrides]]
@@ -22727,7 +22727,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_blyp_ea]
 components = [[1.0, "gga_x_ityh"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_blyp_ea.overrides]]
@@ -22737,7 +22737,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_blypr]
 components = [[1.0, "gga_x_ityh"], [1.0, "gga_c_lypr"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_blypr.overrides]]
@@ -22747,7 +22747,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_bop]
 components = [[1.0, "gga_x_ityh"], [1.0, "gga_c_op_b88"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_bop.overrides]]
@@ -22757,7 +22757,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_pbeop]
 components = [[1.0, "gga_x_ityh_pbe"], [1.0, "gga_c_op_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_pbeop.overrides]]
@@ -22766,7 +22766,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_qtp]
 components = [[0.0, "gga_x_b88"], [1.0, "gga_x_ityh"], [0.0, "lda_c_vwn"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_qtp.overrides]]
@@ -22778,7 +22778,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_vv10]
 components = [[1.0, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_vv10.overrides]]
@@ -22788,7 +22788,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_wpbe]
 components = [[1.0, "gga_x_wpbeh"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_wpbe.overrides]]
@@ -22798,7 +22798,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_wpbe08_whs]
 components = [[1.0, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_wpbe08_whs.overrides]]
@@ -22808,7 +22808,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_wpbe_whs]
 components = [[1.0, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_wpbe_whs.overrides]]
@@ -22818,7 +22818,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_wpbeh_whs]
 components = [[0.75, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_wpbeh_whs.overrides]]
@@ -22828,7 +22828,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lc_wpbesol_whs]
 components = [[1.0, "gga_x_hjs_pbe_sol"], [1.0, "gga_c_pbe_sol"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lc_wpbesol_whs.overrides]]
@@ -22838,7 +22838,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lcy_blyp]
 components = [[1.0, "gga_x_sfat"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lcy_blyp.overrides]]
@@ -22848,7 +22848,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lcy_pbe]
 components = [[1.0, "gga_x_sfat_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lcy_pbe.overrides]]
@@ -22858,7 +22858,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lrc_wpbe]
 components = [[1.0, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lrc_wpbe.overrides]]
@@ -22868,7 +22868,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_lrc_wpbeh]
 components = [[0.8, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_lrc_wpbeh.overrides]]
@@ -22878,7 +22878,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mb3lyp_rc04]
 components = [[0.08000000000000007, "lda_x"], [0.72, "gga_x_b88"], [0.5383, "lda_c_rc04"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mb3lyp_rc04.overrides]]
@@ -22889,7 +22889,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mcam_b3lyp]
 components = [[0.62, "gga_x_b88"], [0.19, "gga_x_ityh"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mcam_b3lyp.overrides]]
@@ -22901,7 +22901,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mpw1k]
 components = [[0.5720000000000001, "gga_x_mpw91"], [1.0, "gga_c_pw91"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mpw1k.overrides]]
@@ -22910,7 +22910,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mpw1lyp]
 components = [[0.75, "gga_x_mpw91"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mpw1lyp.overrides]]
@@ -22919,7 +22919,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mpw1pbe]
 components = [[0.75, "gga_x_mpw91"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mpw1pbe.overrides]]
@@ -22928,7 +22928,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mpw1pw]
 components = [[0.75, "gga_x_mpw91"], [1.0, "gga_c_pw91"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mpw1pw.overrides]]
@@ -22937,7 +22937,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mpw3lyp]
 components = [[0.07300000000000006, "lda_x"], [0.709, "gga_x_mpw91"], [0.129, "lda_c_vwn_rpa"], [0.871, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mpw3lyp.overrides]]
@@ -22948,7 +22948,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mpw3pw]
 components = [[0.08000000000000007, "lda_x"], [0.72, "gga_x_mpw91"], [0.18999999999999995, "lda_c_vwn_rpa"], [0.81, "gga_c_pw91"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mpw3pw.overrides]]
@@ -22959,7 +22959,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_mpwlyp1m]
 components = [[0.95, "gga_x_mpw91"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_mpwlyp1m.overrides]]
@@ -22968,7 +22968,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_o3lyp]
 components = [[0.07100691700000006, "lda_x"], [0.8133, "gga_x_optx"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_o3lyp.overrides]]
@@ -22979,7 +22979,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbe0_13]
 components = [[0.6666666666666667, "gga_x_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbe0_13.overrides]]
@@ -22988,7 +22988,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbe38]
 components = [[0.625, "gga_x_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbe38.overrides]]
@@ -22997,7 +22997,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbe50]
 components = [[0.5, "gga_x_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbe50.overrides]]
@@ -23006,7 +23006,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbe_2x]
 components = [[0.43999999999999995, "gga_x_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbe_2x.overrides]]
@@ -23015,7 +23015,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbe_mol0]
 components = [[0.75, "gga_x_pbe_mol"], [1.0, "gga_c_pbe_mol"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbe_mol0.overrides]]
@@ -23024,7 +23024,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbe_molb0]
 components = [[0.75, "gga_x_pbe_mol"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbe_molb0.overrides]]
@@ -23034,7 +23034,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbe_sol0]
 components = [[0.75, "gga_x_pbe_sol"], [1.0, "gga_c_pbe_sol"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbe_sol0.overrides]]
@@ -23043,7 +23043,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbeb0]
 components = [[0.75, "gga_x_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbeb0.overrides]]
@@ -23053,7 +23053,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_pbeh]
 components = [[0.75, "gga_x_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_pbeh.overrides]]
@@ -23062,7 +23062,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_qtp17]
 components = [[0.38, "lda_x"], [0.19999999999999996, "lda_c_vwn_rpa"], [0.8, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_qtp17.overrides]]
@@ -23072,7 +23072,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_rcam_b3lyp]
 components = [[-0.13590000000000002, "lda_x"], [0.002589999999999981, "gga_x_b88"], [0.94979, "gga_x_ityh"], [1.0, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_rcam_b3lyp.overrides]]
@@ -23084,7 +23084,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_relpbe0]
 components = [[0.768813450922013, "gga_x_pbe"], [0.39051822098129085, "gga_c_pbe"], [0.2189635580374183, "lda_c_pw_mod"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_relpbe0.overrides]]
@@ -23097,7 +23097,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_revb3lyp]
 components = [[0.13, "lda_x"], [0.67, "gga_x_b88"], [0.16000000000000003, "lda_c_vwn_rpa"], [0.84, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_revb3lyp.overrides]]
@@ -23108,7 +23108,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_tuned_cam_b3lyp]
 components = [[0.0, "gga_x_b88"], [0.9201, "gga_x_ityh"], [0.18999999999999995, "lda_c_vwn"], [0.81, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_tuned_cam_b3lyp.overrides]]
@@ -23120,7 +23120,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_wc04]
 components = [[-0.9998, "lda_x"], [0.9999, "gga_x_b88"], [0.9998, "lda_c_vwn_rpa"], [0.0001, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_wc04.overrides]]
@@ -23131,7 +23131,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_whpbe0]
 components = [[0.25, "gga_x_hjs_pbe"], [1.0, "gga_c_pbe"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_whpbe0.overrides]]
@@ -23141,7 +23141,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_wp04]
 components = [[0.03849999999999998, "lda_x"], [0.9614, "gga_x_b88"], [0.9998, "lda_c_vwn_rpa"], [0.0001, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_wp04.overrides]]
@@ -23152,7 +23152,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_gga_xc_x3lyp]
 components = [[0.07300000000000006, "lda_x"], [0.542385, "gga_x_b88"], [0.16661499999999999, "gga_x_pw91"], [0.129, "lda_c_vwn_rpa"], [0.871, "gga_c_lyp"]]
 family = "gga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_gga_xc_x3lyp.overrides]]
@@ -23164,7 +23164,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_lda_xc_b93]
 components = [[0.5, "lda_x"], [0.5, "lda_c_pw_mod"]]
 family = "lda_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_lda_xc_b93.overrides]]
@@ -23173,7 +23173,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_lda_xc_cam_lda0]
 components = [[0.5, "lda_x"], [0.25, "lda_x_erf"], [1.0, "lda_c_pw_mod"]]
 family = "lda_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_lda_xc_cam_lda0.overrides]]
@@ -23184,7 +23184,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_lda_xc_lda0]
 components = [[0.75, "lda_x"], [0.75, "lda_c_pw_mod"]]
 family = "lda_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_lda_xc_lda0.overrides]]
@@ -23193,7 +23193,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_x_ms2h]
 components = [[0.91, "mgga_x_ms2"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_x_ms2h.overrides]]
@@ -23201,7 +23201,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_x_mvsh]
 components = [[0.75, "mgga_x_mvs"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_x_mvsh.overrides]]
@@ -23209,7 +23209,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_x_revscan0]
 components = [[0.75, "mgga_x_revscan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_x_revscan0.overrides]]
@@ -23217,7 +23217,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_x_scan0]
 components = [[0.75, "mgga_x_scan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_x_scan0.overrides]]
@@ -23225,7 +23225,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_b0kcis]
 components = [[0.75, "gga_x_b88"], [1.0, "mgga_c_kcis"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_b0kcis.overrides]]
@@ -23234,7 +23234,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_b86b95]
 components = [[0.72, "gga_x_b86"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_b86b95.overrides]]
@@ -23243,7 +23243,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_b88b95]
 components = [[0.72, "gga_x_b88"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_b88b95.overrides]]
@@ -23252,7 +23252,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_b94_hyb]
 components = [[0.846, "mgga_x_br89"], [1.0, "mgga_c_b94"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_b94_hyb.overrides]]
@@ -23263,7 +23263,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_bb1k]
 components = [[0.5800000000000001, "gga_x_b88"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_bb1k.overrides]]
@@ -23272,7 +23272,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_br3p86]
 components = [[0.10999999999999999, "lda_x"], [0.67, "mgga_x_br89_1"], [0.15000000000000002, "lda_c_vwn"], [0.85, "gga_c_p86vwn"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_br3p86.overrides]]
@@ -23283,7 +23283,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_edmggah]
 components = [[0.78, "mgga_x_edmgga"], [1.0, "mgga_c_cs"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_edmggah.overrides]]
@@ -23292,7 +23292,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_lc_tmlyp]
 components = [[1.0, "hyb_mgga_x_pjs18"], [1.0, "gga_c_lyp"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_lc_tmlyp.overrides]]
@@ -23302,7 +23302,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_mpw1b95]
 components = [[0.69, "gga_x_mpw91"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_mpw1b95.overrides]]
@@ -23311,7 +23311,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_mpw1kcis]
 components = [[0.85, "gga_x_mpw91"], [1.0, "mgga_c_kcis"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_mpw1kcis.overrides]]
@@ -23320,7 +23320,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_mpwb1k]
 components = [[0.56, "gga_x_mpw91"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_mpwb1k.overrides]]
@@ -23329,7 +23329,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_mpwkcis1k]
 components = [[0.5900000000000001, "gga_x_mpw91"], [1.0, "mgga_c_kcis"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_mpwkcis1k.overrides]]
@@ -23338,7 +23338,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_pbe1kcis]
 components = [[0.78, "gga_x_pbe"], [1.0, "mgga_c_kcis"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_pbe1kcis.overrides]]
@@ -23347,7 +23347,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_pw6b95]
 components = [[0.72, "gga_x_mpw91"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_pw6b95.overrides]]
@@ -23364,7 +23364,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_pw86b95]
 components = [[0.71, "gga_x_pw86"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_pw86b95.overrides]]
@@ -23373,7 +23373,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_pwb6k]
 components = [[0.54, "gga_x_mpw91"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_pwb6k.overrides]]
@@ -23390,7 +23390,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_r2scan0]
 components = [[0.75, "mgga_x_r2scan"], [1.0, "mgga_c_r2scan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_r2scan0.overrides]]
@@ -23399,7 +23399,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_r2scan50]
 components = [[0.5, "mgga_x_r2scan"], [1.0, "mgga_c_r2scan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_r2scan50.overrides]]
@@ -23408,7 +23408,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_r2scanh]
 components = [[0.9, "mgga_x_r2scan"], [1.0, "mgga_c_r2scan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_r2scanh.overrides]]
@@ -23417,7 +23417,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_revtpssh]
 components = [[0.9, "mgga_x_revtpss"], [1.0, "mgga_c_revtpss"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_revtpssh.overrides]]
@@ -23426,7 +23426,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_tpss0]
 components = [[0.75, "mgga_x_tpss"], [1.0, "mgga_c_tpss"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_tpss0.overrides]]
@@ -23435,7 +23435,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_tpss1kcis]
 components = [[0.87, "mgga_x_tpss"], [1.0, "mgga_c_kcis"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_tpss1kcis.overrides]]
@@ -23444,7 +23444,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_tpssh]
 components = [[0.9, "mgga_x_tpss"], [1.0, "mgga_c_tpss"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_tpssh.overrides]]
@@ -23453,7 +23453,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_x1b95]
 components = [[0.5355, "gga_x_b88"], [0.16449999999999998, "gga_x_pw91"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_x1b95.overrides]]
@@ -23463,7 +23463,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.hyb_mgga_xc_xb1k]
 components = [[0.43605000000000005, "gga_x_b88"], [0.13395, "gga_x_pw91"], [1.0, "mgga_c_bc95"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.hyb_mgga_xc_xb1k.overrides]]
@@ -23473,7 +23473,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_c_revscan_vv10]
 components = [[1.0, "mgga_c_revscan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_c_revscan_vv10.overrides]]
@@ -23481,7 +23481,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_c_scan_rvv10]
 components = [[1.0, "mgga_c_scan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_c_scan_rvv10.overrides]]
@@ -23489,7 +23489,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_c_scan_vv10]
 components = [[1.0, "mgga_c_scan"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_c_scan_vv10.overrides]]
@@ -23497,7 +23497,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_c_scanl_rvv10]
 components = [[1.0, "mgga_c_scanl"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_c_scanl_rvv10.overrides]]
@@ -23505,7 +23505,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_c_scanl_vv10]
 components = [[1.0, "mgga_c_scanl"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_c_scanl_vv10.overrides]]
@@ -23513,7 +23513,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_x_mk00b]
 components = [[-1.0, "lda_x"], [1.0, "gga_x_b88"], [1.0, "mgga_x_gp86"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_x_mk00b.overrides]]
@@ -23524,7 +23524,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_xc_hle17]
 components = [[1.25, "mgga_x_tpss"], [0.5, "mgga_c_tpss"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_xc_hle17.overrides]]
@@ -23533,7 +23533,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_xc_otpss_d]
 components = [[1.0, "mgga_x_tpss"], [1.0, "mgga_c_tpss"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_xc_otpss_d.overrides]]
@@ -23549,7 +23549,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_xc_t_hle17]
 components = [[1.35, "mgga_x_tpss"], [1.0, "mgga_c_tpss"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_xc_t_hle17.overrides]]
@@ -23558,7 +23558,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_xc_tpsslyp1w]
 components = [[0.26, "lda_c_vwn"], [1.0, "mgga_x_tpss"], [0.74, "gga_c_lyp"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_xc_tpsslyp1w.overrides]]
@@ -23568,7 +23568,7 @@ upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 [mix.mgga_xc_vcml_rvv10]
 components = [[1.0, "mgga_x_vcml"], [1.0, "gga_c_regtpss"]]
 family = "mgga_exc"
-generated_at = "2026-10-13T10:33:26"
+generated_at = "2026-10-30T14:00:03"
 upstream_commit = "5d5076f478ada04ca9c076ec3be788ca8e0efc7a"
 
     [[mix.mgga_xc_vcml_rvv10.overrides]]

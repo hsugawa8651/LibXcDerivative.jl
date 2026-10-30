@@ -21,6 +21,13 @@ using LibXcDerivative
 
 include("generate.jl")  # main() is guarded, so this only defines functions/constants
 
+# Read before any testset runs, because testsets below regenerate lda_x in
+# place: a baseline read inside one of them would be whatever the last run
+# wrote, which turns a comparison against the shipped file into a comparison
+# of one run against another.
+const SHIPPED_LDA_X_PATH = joinpath(GENERATED_DIR, "lda_exc", "lda_x.jl")
+const SHIPPED_LDA_X = read(SHIPPED_LDA_X_PATH)
+
 @testset "gen/generate.jl helpers" begin
 
     @testset "natural_lt" begin
@@ -548,6 +555,32 @@ include("generate.jl")  # main() is guarded, so this only defines functions/cons
         cmd = child_command("lda_exc", "lda_x", ["rs", "z"], tempname())
         @test cmd.env !== nothing
         @test "PYTHONHASHSEED=0" in cmd.env
+    end
+
+    @testset "a shipped file regenerates into the same bytes" begin
+        # README.md beside this file says the shipped set regenerates byte
+        # for byte. Nothing made that claim fail when it stopped being true:
+        # the suite the package ships includes nothing from gen/, and the
+        # seed test above pins an input to reproducibility rather than the
+        # result of it.
+        #
+        # The generation runs in a child, as a batch runs it, because the
+        # seed has to be fixed for the comparison to mean anything; calling
+        # generate_functional here would inherit whichever seed this process
+        # drew. lda_x is the cheapest shipped functional to regenerate.
+        #
+        # Generation writes in place, so the shipped bytes are put back
+        # afterwards: a run that does not reproduce leaves the finding in the
+        # assertion rather than in the working tree. The baseline is the
+        # constant read at the top of this file, not the file as it stands
+        # here, which an earlier testset has already regenerated.
+        try
+            result = generate_one_subprocess("lda_exc", "lda_x", ["rs", "z"])
+            @test result.status === :ok
+            @test read(SHIPPED_LDA_X_PATH) == SHIPPED_LDA_X
+        finally
+            write(SHIPPED_LDA_X_PATH, SHIPPED_LDA_X)
+        end
     end
 
     @testset "parameter defaults come from the initialised params struct" begin

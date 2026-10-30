@@ -839,14 +839,27 @@ precompilation notices printed earlier from crowding the reason out.
 Output with no `ERROR:` line has nothing to anchor on, so both its beginning
 and its end are kept.
 """
+const TRACE_START = r"^(?:Stacktrace:|\s*\[\d+\]|\s*File \")"
+const MACHINE_PATH = r"(?:~|/(?:Users|home))/[^/\s\"]+/[^\s\"]*"
+const NO_USABLE_REASON =
+    "the child failed and printed no reason that does not name a path on the " *
+    "machine it ran on"
+
 function error_excerpt(captured::AbstractString, limit::Integer)
-    length(captured) <= limit && return String(captured)
     at = findfirst(r"(?m)^ERROR:", captured)
     if at !== nothing
-        from_error = SubString(captured, first(at))
-        length(from_error) <= limit && return String(from_error)
-        return first(from_error, limit) * ERROR_EXCERPT_MARKER
+        kept = String[]
+        for line in split(SubString(captured, first(at)), '\n')
+            occursin(TRACE_START, line) && break
+            s = strip(line)
+            (isempty(s) || occursin(MACHINE_PATH, s)) && continue
+            push!(kept, s)
+        end
+        reason = isempty(kept) ? NO_USABLE_REASON : join(kept, " ")
+        return length(reason) <= limit ? reason :
+               first(reason, limit) * ERROR_EXCERPT_MARKER
     end
+    length(captured) <= limit && return String(captured)
     head = limit ÷ 2
     return first(captured, head) * ERROR_EXCERPT_MARKER * last(captured, limit - head)
 end
